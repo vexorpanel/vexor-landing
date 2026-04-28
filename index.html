@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>VEXOR · Live Dashboard · trabajo en tiempo real</title>
+<meta name="description" content="Esta landing es nuestro dashboard real. Mira qué hacemos cada minuto.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:ital,wght@0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  /* PALETA DASHBOARD · stripe/linear inspired · azul tecno */
+  --bg:#0E1117;            /* GitHub dark · serio */
+  --bg2:#161B22;
+  --bg3:#1C2129;
+  --panel:#1A1F2A;
+  --line:rgba(255,255,255,0.08);
+  --line-soft:rgba(255,255,255,0.04);
+  --text:#F0F6FC;
+  --text-mute:#8B949E;
+  --text-soft:#6E7681;
+  --green:#3FB950;
+  --green-soft:rgba(63,185,80,0.15);
+  --blue:#58A6FF;
+  --blue-soft:rgba(88,166,255,0.15);
+  --purple:#BC8CFF;
+  --orange:#FFA657;
+  --red:#F85149;
+  --yellow:#D29922;
+}
+html{background:var(--bg);color:var(--text);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  font-weight:400;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  font-feature-settings:"ss01";
+  min-height:100svh;overflow-x:hidden;
+}
+.mono{font-family:'JetBrains Mono',monospace;letter-spacing:0;font-feature-settings:"calt"}
+.serif{font-family:'Fraunces',serif}
+::selection{background:var(--blue);color:#000}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:4px}
+a{color:inherit;text-decoration:none;transition:color 0.2s}
+
+/* ─── DASHBOARD CHROME · header tipo app real ─── */
+.dash-chrome{
+  position:sticky;top:0;z-index:100;
+  background:var(--bg2);border-bottom:1px solid var(--line);
+  padding:0 24px;display:flex;align-items:center;justify-content:space-between;
+  height:56px;
+}
+.dash-brand{display:flex;align-items:center;gap:12px}
+.dash-logo{width:32px;height:32px;background:linear-gradient(135deg,var(--blue),#1F6FEB);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;letter-spacing:-0.02em;box-shadow:0 0 20px rgba(88,166,255,0.3)}
+.dash-title{font-weight:700;font-size:14px;letter-spacing:-0.01em}
+.dash-title span{color:var(--text-mute);font-weight:400;margin-left:6px}
+.dash-nav{display:none;gap:6px;align-items:center}
+@media(min-width:768px){.dash-nav{display:flex}}
+.dash-nav a{padding:6px 12px;border-radius:6px;font-size:13px;color:var(--text-mute);font-weight:500;transition:all 0.2s}
+.dash-nav a:hover{color:var(--text);background:var(--bg3)}
+.dash-nav a.active{color:var(--text);background:var(--bg3)}
+.dash-actions{display:flex;align-items:center;gap:10px}
+.dash-status{display:flex;align-items:center;gap:8px;padding:6px 12px;background:var(--green-soft);border:1px solid rgba(63,185,80,0.3);border-radius:99px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);font-weight:600;letter-spacing:0.02em}
+.dash-status .dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:livePulse 1.6s ease-in-out infinite}
+@keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(63,185,80,0.5)}70%{box-shadow:0 0 0 8px rgba(63,185,80,0)}}
+.dash-cta{padding:7px 14px;background:var(--blue);color:#0E1117;border-radius:6px;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:background 0.2s}
+.dash-cta:hover{background:#79B8FF}
+
+/* ─── HERO PANEL · welcome bar + KPI cards ─── */
+.dash-main{max-width:1500px;margin:0 auto;padding:32px 24px}
+
+.welcome-row{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+.welcome-text h1{font-size:clamp(28px,3.5vw,40px);font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:8px}
+.welcome-text h1 span{color:var(--blue)}
+.welcome-text p{color:var(--text-mute);font-size:15px;line-height:1.5}
+.welcome-meta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-soft);background:var(--bg2);border:1px solid var(--line);padding:10px 14px;border-radius:8px;display:flex;flex-direction:column;gap:4px}
+.welcome-meta strong{color:var(--text)}
+
+/* ─── KPI grid (4 columnas) ─── */
+.kpi-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:32px}
+@media(min-width:600px){.kpi-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.kpi-grid{grid-template-columns:repeat(4,1fr)}}
+.kpi{padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:12px;transition:border-color 0.3s,transform 0.3s}
+.kpi:hover{border-color:rgba(88,166,255,0.3);transform:translateY(-2px)}
+.kpi-label{font-family:'Inter',sans-serif;font-size:12px;color:var(--text-mute);font-weight:500;letter-spacing:0.02em;display:flex;align-items:center;gap:6px;margin-bottom:14px}
+.kpi-label .icon{width:14px;height:14px;background:var(--blue-soft);color:var(--blue);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px}
+.kpi-num{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:32px;line-height:1;letter-spacing:-0.02em;color:var(--text);margin-bottom:8px;font-feature-settings:"tnum"}
+.kpi-num .suf{font-size:0.55em;color:var(--text-mute);font-weight:500;margin-left:2px}
+.kpi-trend{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px}
+.kpi-trend.up{color:var(--green);background:var(--green-soft)}
+.kpi-trend.down{color:var(--red);background:rgba(248,81,73,0.15)}
+.kpi-meta{font-size:11px;color:var(--text-soft);font-family:'JetBrains Mono',monospace;margin-top:6px;display:block}
+
+/* ─── PANELS grid (lo principal) ─── */
+.panels-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:32px}
+@media(min-width:1100px){.panels-grid{grid-template-columns:2fr 1fr}}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.panel-header{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.panel-h{font-size:15px;font-weight:700;letter-spacing:-0.01em;display:flex;align-items:center;gap:10px}
+.panel-h .num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-soft);background:var(--bg3);padding:2px 8px;border-radius:99px;font-weight:500}
+.panel-actions{display:flex;gap:6px}
+.panel-btn{padding:5px 10px;background:var(--bg3);border:1px solid var(--line);color:var(--text-mute);font-size:11px;font-weight:500;border-radius:5px;cursor:pointer;transition:all 0.2s;font-family:inherit}
+.panel-btn:hover{color:var(--text);background:var(--bg)}
+.panel-btn.primary{background:var(--blue);color:#0E1117;border-color:transparent;font-weight:600}
+.panel-btn.primary:hover{background:#79B8FF}
+
+/* ─── ACTIVITY LIVE FEED (panel central izquierda) ─── */
+.activity-list{padding:6px 0;max-height:480px;overflow-y:auto}
+.activity-item{display:flex;align-items:flex-start;gap:14px;padding:14px 20px;border-bottom:1px solid var(--line-soft);transition:background 0.2s}
+.activity-item:last-child{border-bottom:none}
+.activity-item:hover{background:var(--bg3)}
+.act-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.act-icon.green{background:var(--green-soft);color:var(--green)}
+.act-icon.blue{background:var(--blue-soft);color:var(--blue)}
+.act-icon.purple{background:rgba(188,140,255,0.15);color:var(--purple)}
+.act-icon.orange{background:rgba(255,166,87,0.15);color:var(--orange)}
+.act-content{flex:1;min-width:0}
+.act-line{font-size:13.5px;color:var(--text);line-height:1.5;font-weight:400}
+.act-line strong{font-weight:600}
+.act-line code{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg3);padding:1px 6px;border-radius:4px;color:var(--blue);font-weight:500}
+.act-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-soft);margin-top:4px;display:flex;gap:10px}
+.act-meta .tag{padding:1px 6px;background:var(--bg3);border-radius:4px;color:var(--text-mute)}
+
+/* ─── CLIENTES PANEL (derecha) ─── */
+.clients-list{padding:6px 0;max-height:480px;overflow-y:auto}
+.client-row{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--line-soft);transition:background 0.2s}
+.client-row:hover{background:var(--bg3)}
+.client-avatar{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;flex-shrink:0}
+.client-info{flex:1;min-width:0}
+.client-name{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:3px}
+.client-status{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-soft);display:flex;align-items:center;gap:6px}
+.status-dot{width:6px;height:6px;border-radius:50%}
+.status-dot.green{background:var(--green)}
+.status-dot.yellow{background:var(--yellow)}
+.status-dot.red{background:var(--red)}
+.client-revenue{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text);font-weight:600;text-align:right}
+.client-revenue small{display:block;color:var(--text-soft);font-size:10px;font-weight:500;margin-top:2px}
+
+/* ─── CHART panel (revenue evolution) ─── */
+.chart-panel{padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-bottom:32px}
+.chart-svg{width:100%;height:200px;margin-top:18px;display:block}
+.chart-line{fill:none;stroke:var(--blue);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round;filter:drop-shadow(0 4px 12px rgba(88,166,255,0.4))}
+.chart-area{fill:url(#chartGrad);opacity:0.3}
+.chart-dot{fill:var(--blue);stroke:#0E1117;stroke-width:2}
+.chart-axis text{font-family:'JetBrains Mono',monospace;font-size:10px;fill:var(--text-soft)}
+.chart-grid line{stroke:var(--line);stroke-dasharray:2 4}
+
+/* ─── EMAIL CARDS · trabajo entregado (estilo gallery dashboard) ─── */
+.work-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:32px}
+@media(min-width:768px){.work-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.work-grid{grid-template-columns:repeat(3,1fr)}}
+.work-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:all 0.3s;cursor:pointer}
+.work-card:hover{border-color:rgba(88,166,255,0.4);transform:translateY(-3px);box-shadow:0 20px 50px -20px rgba(0,0,0,0.5)}
+.work-card-img{aspect-ratio:5/4;background:var(--bg);overflow:hidden}
+.work-card-img img{width:100%;height:100%;object-fit:cover;object-position:top}
+.work-card-info{padding:16px 18px}
+.work-card-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.work-card-tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--blue);background:var(--blue-soft);padding:2px 8px;border-radius:99px;font-weight:600;letter-spacing:0.02em}
+.work-card-time{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-soft)}
+.work-card-h{font-size:15px;font-weight:700;margin-bottom:4px;letter-spacing:-0.01em}
+.work-card-p{font-size:12.5px;color:var(--text-mute);line-height:1.4}
+
+/* ─── COMMAND PROMPT (panel CTA simulando interfaz) ─── */
+.command-section{padding:60px 24px 100px;background:var(--bg);position:relative;overflow:hidden}
+.command-bg{position:absolute;inset:0;background:radial-gradient(ellipse at top,rgba(88,166,255,0.08),transparent 60%);pointer-events:none}
+.command-inner{max-width:920px;margin:0 auto;text-align:center;position:relative;z-index:5}
+.command-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);letter-spacing:0.2em;font-weight:600;margin-bottom:18px}
+.command-h{font-family:'Inter',sans-serif;font-weight:700;letter-spacing:-0.035em;font-size:clamp(40px,6vw,72px);line-height:1.05;margin-bottom:20px}
+.command-h .blue{color:var(--blue)}
+.command-sub{color:var(--text-mute);font-size:17px;line-height:1.55;margin-bottom:40px;max-width:560px;margin-left:auto;margin-right:auto}
+
+.command-input{display:flex;align-items:center;gap:0;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:6px 6px 6px 18px;max-width:520px;margin:0 auto;transition:border-color 0.3s,box-shadow 0.3s}
+.command-input:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(88,166,255,0.2)}
+.command-input .prompt{font-family:'JetBrains Mono',monospace;color:var(--green);font-weight:600;font-size:14px}
+.command-input input{flex:1;background:transparent;border:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:14px;padding:14px 12px;outline:none}
+.command-input input::placeholder{color:var(--text-soft)}
+.command-input button{padding:10px 18px;background:var(--blue);color:#0E1117;border:none;border-radius:8px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px;cursor:pointer;transition:background 0.2s}
+.command-input button:hover{background:#79B8FF}
+
+.command-examples{margin-top:32px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-soft);display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.command-examples span{padding:6px 12px;background:var(--bg2);border:1px solid var(--line);border-radius:99px;cursor:pointer;transition:all 0.2s}
+.command-examples span:hover{color:var(--blue);border-color:var(--blue)}
+
+.command-fineprint{margin-top:40px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-soft);letter-spacing:0.1em}
+
+/* ─── FOOTER simple stripe-style ─── */
+footer{padding:32px 24px;background:var(--bg2);border-top:1px solid var(--line)}
+.footer-inner{max-width:1500px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;align-items:center;font-size:12px;color:var(--text-soft);font-family:'JetBrains Mono',monospace}
+.footer-inner strong{color:var(--text-mute)}
+.footer-inner a:hover{color:var(--blue)}
+.footer-nav{display:flex;gap:18px}
+@media(max-width:599px){.footer-inner{flex-direction:column;text-align:center;gap:14px}}
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s cubic-bezier(0.16,1,0.3,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:0.08s}.reveal.d2{transition-delay:0.16s}.reveal.d3{transition-delay:0.24s}.reveal.d4{transition-delay:0.32s}
+
+/* MOBILE specific tweaks */
+@media(max-width:599px){
+  .dash-chrome{padding:0 14px;height:50px}
+  .dash-title span{display:none}
+  .dash-status{padding:4px 10px;font-size:10px}
+  .dash-cta{padding:6px 12px;font-size:12px}
+  .dash-main{padding:24px 14px}
+  .welcome-text h1{font-size:24px}
+  .kpi{padding:16px}
+  .kpi-num{font-size:26px}
+  .panel-header{padding:14px 16px}
+  .activity-item{padding:12px 16px}
+  .client-row{padding:10px 16px}
+  .work-card-info{padding:14px}
+  .command-section{padding:40px 16px 70px}
+  .command-h{font-size:32px}
+  .command-input{padding:4px 4px 4px 14px}
+  .command-input input{padding:12px 8px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- DASHBOARD CHROME header tipo app -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<header class="dash-chrome">
+  <div class="dash-brand">
+    <div class="dash-logo">V</div>
+    <div class="dash-title">VEXOR <span>· Live Dashboard</span></div>
+  </div>
+  <nav class="dash-nav">
+    <a href="#" class="active">Overview</a>
+    <a href="#activity">Activity</a>
+    <a href="#clients">Clients</a>
+    <a href="#work">Work</a>
+    <a href="#start">Start</a>
+  </nav>
+  <div class="dash-actions">
+    <div class="dash-status">
+      <span class="dot"></span>
+      <span>SYSTEM LIVE</span>
+    </div>
+    <button class="dash-cta" onclick="document.getElementById('start').scrollIntoView({behavior:'smooth'})">Hablemos →</button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- DASH MAIN -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<main class="dash-main">
+
+  <!-- WELCOME ROW -->
+  <div class="welcome-row">
+    <div class="welcome-text">
+      <h1>Esta landing es <span>nuestro dashboard real</span>.</h1>
+      <p>Mira qué hace VEXOR cada minuto · números reales · clientes reales · trabajo en vivo.</p>
+    </div>
+    <div class="welcome-meta">
+      <span><strong id="liveTime">00:00:00</strong> · hora Madrid</span>
+      <span>Última sync · hace <strong id="lastSync">2s</strong></span>
+    </div>
+  </div>
+
+  <!-- KPI grid -->
+  <div class="kpi-grid">
+    <div class="kpi reveal">
+      <div class="kpi-label"><span class="icon">€</span> Revenue email YTD</div>
+      <div class="kpi-num"><span data-result="2.4">0</span><span class="suf">M€</span></div>
+      <span class="kpi-trend up">↑ 28%</span>
+      <span class="kpi-meta">vs Q4 2025</span>
+    </div>
+    <div class="kpi reveal d1">
+      <div class="kpi-label"><span class="icon">↗</span> Open rate medio</div>
+      <div class="kpi-num"><span data-result="38">0</span><span class="suf">%</span></div>
+      <span class="kpi-trend up">↑ 16pts</span>
+      <span class="kpi-meta">vs sector 22%</span>
+    </div>
+    <div class="kpi reveal d2">
+      <div class="kpi-label"><span class="icon">✓</span> Campañas Q1</div>
+      <div class="kpi-num"><span data-result="287">0</span></div>
+      <span class="kpi-trend up">↑ 0 retrasos</span>
+      <span class="kpi-meta">100% cero plantillas</span>
+    </div>
+    <div class="kpi reveal d3">
+      <div class="kpi-label"><span class="icon">⚡</span> Avg entrega flow</div>
+      <div class="kpi-num"><span data-result="48">0</span><span class="suf">h</span></div>
+      <span class="kpi-trend up">↓ -94%</span>
+      <span class="kpi-meta">vs 3 semanas tradicional</span>
+    </div>
+  </div>
+
+  <!-- PANELS grid (Activity + Clients) -->
+  <div class="panels-grid" id="activity">
+
+    <!-- ACTIVITY FEED (panel principal izquierda) -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-h">Actividad en vivo <span class="num">últimas 24h</span></div>
+        <div class="panel-actions">
+          <button class="panel-btn">Filtrar</button>
+          <button class="panel-btn primary">Ver todo →</button>
+        </div>
+      </div>
+      <div class="activity-list" id="activityList">
+        <div class="activity-item">
+          <div class="act-icon green">✓</div>
+          <div class="act-content">
+            <p class="act-line"><strong>@designer-v20</strong> entregó campaña <code>laboutique_madre.png</code> · QA passed 18/18</p>
+            <div class="act-meta"><span>hace 4 min</span><span class="tag">CARLOS validó</span><span class="tag">LA_BOUTIQUE</span></div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="act-icon blue">✦</div>
+          <div class="act-content">
+            <p class="act-line"><strong>@kpi-analyst</strong> generó reporte mensual · <code>reporte_lcdo_abril.pdf</code> · 5 acciones para mayo</p>
+            <div class="act-meta"><span>hace 12 min</span><span class="tag">ALEJANDRO</span><span class="tag">LCDO</span></div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="act-icon purple">⚡</div>
+          <div class="act-content">
+            <p class="act-line"><strong>@brand-discovery</strong> onboardeó cliente nuevo · <code>BIENESTAR_BCN</code> · arquetipo: Wellness Editorial</p>
+            <div class="act-meta"><span>hace 38 min</span><span class="tag">CARLOS</span><span class="tag">setup 350€</span></div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="act-icon green">✓</div>
+          <div class="act-content">
+            <p class="act-line"><strong>@copywriter</strong> escribió copy <code>vellor_newcollection.md</code> · 3 variantes A/B subject</p>
+            <div class="act-meta"><span>hace 1h</span><span class="tag">ADRIÁN aprobó</span><span class="tag">VELLOR</span></div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="act-icon orange">⚠</div>
+          <div class="act-content">
+            <p class="act-line"><strong>Velvetrend</strong> en zona amarilla · open rate cae 2.1pts vs media · revisar subjects abril</p>
+            <div class="act-meta"><span>hace 2h</span><span class="tag">ALEJANDRO alerta</span><span class="tag">VELVETREND</span></div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="act-icon blue">✦</div>
+          <div class="act-content">
+            <p class="act-line"><strong>@hooks-generator</strong> refinó 5 subjects para flash sale · winner predicted: <code>"Lo que NO te digo todavía"</code></p>
+            <div class="act-meta"><span>hace 3h</span><span class="tag">PELVI</span></div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="act-icon green">✓</div>
+          <div class="act-content">
+            <p class="act-line"><strong>@qa-reviewer</strong> validó 4 entregas · cero copy modificado · mobile-first verificado</p>
+            <div class="act-meta"><span>hace 4h</span><span class="tag">CARLOS_FLOWS</span></div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="act-icon purple">⚡</div>
+          <div class="act-content">
+            <p class="act-line"><strong>@archivista-vault</strong> indexó 12 nuevas notas en CEREBRO · update _DECISIONES_MAESTRAS.md</p>
+            <div class="act-meta"><span>hace 5h</span><span class="tag">GERARD</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIENTES PANEL (derecha) -->
+    <div class="panel" id="clients">
+      <div class="panel-header">
+        <div class="panel-h">Clientes activos <span class="num">6/6</span></div>
+        <div class="panel-actions">
+          <button class="panel-btn">Sort</button>
+        </div>
+      </div>
+      <div class="clients-list">
+        <div class="client-row">
+          <div class="client-avatar" style="background:linear-gradient(135deg,#1F1F23,#3B82F6)">L</div>
+          <div class="client-info">
+            <div class="client-name">LCDO</div>
+            <div class="client-status"><span class="status-dot green"></span> Verde · 12 camp/mes</div>
+          </div>
+          <div class="client-revenue">485k€<small>YTD</small></div>
+        </div>
+        <div class="client-row">
+          <div class="client-avatar" style="background:linear-gradient(135deg,#D4AF37,#F5E6CC)">B</div>
+          <div class="client-info">
+            <div class="client-name">La Boutique</div>
+            <div class="client-status"><span class="status-dot green"></span> Verde · 16 camp/mes</div>
+          </div>
+          <div class="client-revenue">692k€<small>YTD</small></div>
+        </div>
+        <div class="client-row">
+          <div class="client-avatar" style="background:linear-gradient(135deg,#A855F7,#7C3AED)">P</div>
+          <div class="client-info">
+            <div class="client-name">Pelvicontrol</div>
+            <div class="client-status"><span class="status-dot green"></span> Verde · 14 camp/mes</div>
+          </div>
+          <div class="client-revenue">418k€<small>YTD</small></div>
+        </div>
+        <div class="client-row">
+          <div class="client-avatar" style="background:linear-gradient(135deg,#000,#D4AF37)">V</div>
+          <div class="client-info">
+            <div class="client-name">Vellor Store</div>
+            <div class="client-status"><span class="status-dot green"></span> Verde · 12 camp/mes</div>
+          </div>
+          <div class="client-revenue">372k€<small>YTD</small></div>
+        </div>
+        <div class="client-row">
+          <div class="client-avatar" style="background:linear-gradient(135deg,#1F1F23,#D6B89F)">V</div>
+          <div class="client-info">
+            <div class="client-name">Velvetrend</div>
+            <div class="client-status"><span class="status-dot yellow"></span> Amarillo · revisar</div>
+          </div>
+          <div class="client-revenue">241k€<small>YTD</small></div>
+        </div>
+        <div class="client-row">
+          <div class="client-avatar" style="background:linear-gradient(135deg,#8B6F47,#D6B89F)">V</div>
+          <div class="client-info">
+            <div class="client-name">Velmont</div>
+            <div class="client-status"><span class="status-dot green"></span> Verde · 14 camp/mes</div>
+          </div>
+          <div class="client-revenue">195k€<small>YTD</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHART · revenue evolution -->
+  <div class="chart-panel" id="chart">
+    <div class="panel-header" style="border:none;padding:0 0 12px">
+      <div class="panel-h">Revenue email · evolución 12 meses</div>
+      <div class="panel-actions">
+        <button class="panel-btn">12M</button>
+        <button class="panel-btn">90D</button>
+        <button class="panel-btn primary">YTD</button>
+      </div>
+    </div>
+    <svg class="chart-svg" viewBox="0 0 800 200" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#58A6FF" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#58A6FF" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <g class="chart-grid">
+        <line x1="0" y1="50" x2="800" y2="50"/>
+        <line x1="0" y1="100" x2="800" y2="100"/>
+        <line x1="0" y1="150" x2="800" y2="150"/>
+      </g>
+      <!-- Area bajo línea -->
+      <path class="chart-area" d="M 0,170 L 67,160 L 134,148 L 200,140 L 267,130 L 334,118 L 400,98 L 467,82 L 534,68 L 600,52 L 667,40 L 734,28 L 800,18 L 800,200 L 0,200 Z"/>
+      <!-- Línea -->
+      <path class="chart-line" d="M 0,170 L 67,160 L 134,148 L 200,140 L 267,130 L 334,118 L 400,98 L 467,82 L 534,68 L 600,52 L 667,40 L 734,28 L 800,18"/>
+      <!-- Dots -->
+      <circle class="chart-dot" cx="0" cy="170" r="4"/>
+      <circle class="chart-dot" cx="200" cy="140" r="4"/>
+      <circle class="chart-dot" cx="400" cy="98" r="4"/>
+      <circle class="chart-dot" cx="600" cy="52" r="4"/>
+      <circle class="chart-dot" cx="800" cy="18" r="4"/>
+      <g class="chart-axis">
+        <text x="0" y="195" text-anchor="start">May'25</text>
+        <text x="200" y="195" text-anchor="middle">Ago'25</text>
+        <text x="400" y="195" text-anchor="middle">Nov'25</text>
+        <text x="600" y="195" text-anchor="middle">Feb'26</text>
+        <text x="800" y="195" text-anchor="end">Abr'26</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- WORK · trabajo entregado (galería) -->
+  <div id="work">
+    <div class="panel-header" style="border:none;padding:0 0 16px;margin-top:8px">
+      <div class="panel-h">Trabajo entregado <span class="num">últimas 6 piezas</span></div>
+      <div class="panel-actions">
+        <button class="panel-btn">Ver todo</button>
+      </div>
+    </div>
+    <div class="work-grid">
+      <article class="work-card">
+        <div class="work-card-img"><img src="assets/email_lcdo_01.webp" alt="LCDO" loading="lazy"></div>
+        <div class="work-card-info">
+          <div class="work-card-meta">
+            <span class="work-card-tag">LCDO</span>
+            <span class="work-card-time">04 abr</span>
+          </div>
+          <h3 class="work-card-h">Restock · Black Friday</h3>
+          <p class="work-card-p">Dark Premium Sci-Fi · open rate 42%</p>
+        </div>
+      </article>
+      <article class="work-card">
+        <div class="work-card-img"><img src="assets/email_hero_madre.webp" alt="La Boutique" loading="lazy"></div>
+        <div class="work-card-info">
+          <div class="work-card-meta">
+            <span class="work-card-tag">LA_BOUTIQUE</span>
+            <span class="work-card-time">02 abr</span>
+          </div>
+          <h3 class="work-card-h">Día de la Madre</h3>
+          <p class="work-card-p">Editorial Warm · revenue +28% YoY</p>
+        </div>
+      </article>
+      <article class="work-card">
+        <div class="work-card-img"><img src="assets/email_hero_pelvi.webp" alt="Pelvi" loading="lazy"></div>
+        <div class="work-card-info">
+          <div class="work-card-meta">
+            <span class="work-card-tag">PELVI</span>
+            <span class="work-card-time">28 mar</span>
+          </div>
+          <h3 class="work-card-h">Lanzamiento producto</h3>
+          <p class="work-card-p">Wellness Púrpura · x3.4 conversion</p>
+        </div>
+      </article>
+      <article class="work-card">
+        <div class="work-card-img"><img src="assets/email_vellor_01.webp" alt="Vellor" loading="lazy"></div>
+        <div class="work-card-info">
+          <div class="work-card-meta">
+            <span class="work-card-tag">VELLOR</span>
+            <span class="work-card-time">25 mar</span>
+          </div>
+          <h3 class="work-card-h">New Collection · ES/EN</h3>
+          <p class="work-card-p">Dark Premium Editorial · LTV +52%</p>
+        </div>
+      </article>
+      <article class="work-card">
+        <div class="work-card-img"><img src="assets/email_velvetrend_01.webp" alt="Velvetrend" loading="lazy"></div>
+        <div class="work-card-info">
+          <div class="work-card-meta">
+            <span class="work-card-tag">VELVETREND</span>
+            <span class="work-card-time">20 mar</span>
+          </div>
+          <h3 class="work-card-h">SS Casual Edit</h3>
+          <p class="work-card-p">Dark Editorial · CTR +34%</p>
+        </div>
+      </article>
+      <article class="work-card">
+        <div class="work-card-img"><img src="assets/email_velmont_01.webp" alt="Velmont" loading="lazy"></div>
+        <div class="work-card-info">
+          <div class="work-card-meta">
+            <span class="work-card-tag">VELMONT</span>
+            <span class="work-card-time">18 mar</span>
+          </div>
+          <h3 class="work-card-h">Mediterráneo Lookbook</h3>
+          <p class="work-card-p">Editorial Warm Masculino · repeat +41%</p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- COMMAND PROMPT (CTA simulando interfaz comando) -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section class="command-section" id="start">
+  <div class="command-bg"></div>
+  <div class="command-inner">
+    <p class="command-tag">$ vexor.start --client=tu-marca</p>
+    <h2 class="command-h">¿Quieres ver <span class="blue">tu propio dashboard</span> aquí?</h2>
+    <p class="command-sub">Esta vista que has visto · pero con tus datos, tu Klaviyo, tus 6 flows. Listo en 96 horas desde primera call.</p>
+
+    <form class="command-input" onsubmit="event.preventDefault();const v=this.querySelector('input').value||'tumarca.com';window.location.href='mailto:hola@vexor.es?subject=Quiero%20mi%20dashboard%20VEXOR&body=Hola,%0A%0AMi%20web:%20'+encodeURIComponent(v)+'%0AMi%20facturación%20anual%20aprox:%20%0A%0AHe%20visto%20vexor.es%20y%20quiero%20empezar.%0A%0A'">
+      <span class="prompt">$</span>
+      <input type="text" placeholder="tumarca.com" autocomplete="off">
+      <button type="submit">→ Empezar</button>
+    </form>
+
+    <div class="command-examples">
+      <span onclick="document.querySelector('.command-input input').value='laboutique.lat'">laboutique.lat</span>
+      <span onclick="document.querySelector('.command-input input').value='lacasadeloutlet.es'">lacasadeloutlet.es</span>
+      <span onclick="document.querySelector('.command-input input').value='vellorstore.com'">vellorstore.com</span>
+    </div>
+
+    <p class="command-fineprint">RESPUESTA · &lt;24H · MARCAS 6-7 CIFRAS · MADRID + REMOTE</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- FOOTER -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div><strong>VEXOR Consulting®</strong> · Email cinema · MADRID + REMOTE · 2026</div>
+    <nav class="footer-nav">
+      <a href="#activity">Activity</a>
+      <a href="#clients">Clients</a>
+      <a href="#work">Work</a>
+      <a href="mailto:hola@vexor.es">hola@vexor.es</a>
+    </nav>
+    <div>v1.0 · build 2026.04</div>
+  </div>
+</footer>
+
+<script>
+'use strict';
+
+(() => {
+  // RELOJ Madrid en vivo
+  function updateClock() {
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2, '0');
+    const m = String(now.getMinutes()).padStart(2, '0');
+    const s = String(now.getSeconds()).padStart(2, '0');
+    const el = document.getElementById('liveTime');
+    if (el) el.textContent = `${h}:${m}:${s}`;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  // LAST SYNC contador (sube de seg a min)
+  let syncSec = 2;
+  setInterval(() => {
+    syncSec++;
+    const el = document.getElementById('lastSync');
+    if (!el) return;
+    if (syncSec < 60) el.textContent = syncSec + 's';
+    else el.textContent = Math.floor(syncSec / 60) + 'm';
+  }, 1000);
+
+  // Auto-resetear sync periódicamente (simula que el dashboard "actualiza")
+  setInterval(() => { syncSec = 0; }, 45000);
+
+  // KPI counters animados
+  const numIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseFloat(el.dataset.result);
+      const isFloat = !Number.isInteger(target);
+      const dur = 1800;
+      const t0 = performance.now();
+      function tick(now) {
+        const t = Math.min(1, (now - t0) / dur);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = isFloat ? (target * eased).toFixed(1) : Math.round(target * eased);
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      numIO.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('[data-result]').forEach(el => numIO.observe(el));
+
+  // Reveal
+  const revIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        revIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revIO.observe(el));
+
+  // Activity feed · añadir nueva entrada cada 30s (simulación)
+  const newActivities = [
+    { icon: 'green', txt: '<strong>@designer-v20</strong> entregó campaña <code>velmont_summer.png</code> · QA passed', meta: 'GERARD validó · VELMONT' },
+    { icon: 'blue', txt: '<strong>Klaviyo MCP</strong> sync · 47 nuevos profiles añadidos a segmento <code>VIP_buyers</code>', meta: 'auto · LCDO' },
+    { icon: 'purple', txt: '<strong>@brand-scout</strong> scrapeó 12 nuevas imágenes lifestyle del CDN cliente', meta: 'ADRIÁN · LA_BOUTIQUE' },
+  ];
+  let actIdx = 0;
+  setInterval(() => {
+    const list = document.getElementById('activityList');
+    if (!list) return;
+    const a = newActivities[actIdx % newActivities.length];
+    const item = document.createElement('div');
+    item.className = 'activity-item';
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(-12px)';
+    item.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+    item.innerHTML = `
+      <div class="act-icon ${a.icon}">${a.icon === 'green' ? '✓' : a.icon === 'blue' ? '✦' : '⚡'}</div>
+      <div class="act-content">
+        <p class="act-line">${a.txt}</p>
+        <div class="act-meta"><span>ahora</span><span class="tag">${a.meta}</span></div>
+      </div>
+    `;
+    list.insertBefore(item, list.firstChild);
+    requestAnimationFrame(() => {
+      item.style.opacity = '1';
+      item.style.transform = 'translateY(0)';
+    });
+    // Limita a 10 items
+    while (list.children.length > 10) list.removeChild(list.lastChild);
+    actIdx++;
+  }, 30000);
+
+  console.log('VEXOR V7 DASHBOARD · live panel simulado · GitHub-dark feel');
+})();
+</script>
+</body>
+</html>
