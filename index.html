@@ -2,1351 +2,812 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>VEXOR · Esta landing es un email.</title>
-<meta name="description" content="46 emails se borran. Solo 1 se abre. Este. Email cinema para eCommerce premium.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEXOR · Email marketing para eCommerce</title>
+<meta name="description" content="Diseñamos las campañas y los flows de Klaviyo de tiendas online: cada email a medida, con las fotos y el texto reales de la marca, y revisado por una persona.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#000;
-  --bg2:#08080F;
-  --bg3:#0F0F1A;
-  --blue:#3B82F6;
-  --blue-bright:#60A5FA;
-  --blue-deep:#1D4ED8;
-  --blue-soft:rgba(59,130,246,0.12);
+  /* PALETA v9 · negro + azul cobalto + blanco · Linear/Stripe/Vercel premium */
+  --bg:#000000;
+  --bg2:#0A0A0F;
+  --bg3:#11111A;
+  --blue:#3B82F6;        /* azul brillante · accent principal */
+  --blue2:#1D4ED8;       /* azul oscuro · gradient */
+  --blue3:#60A5FA;       /* azul claro · highlight */
+  --amber:#3B82F6;       /* alias compatibilidad código heredado */
+  --amber2:#1D4ED8;      /* alias compatibilidad */
   --text:#FFFFFF;
-  --text-mute:#94A3B8;
-  --text-soft:#64748B;
-  --line:rgba(255,255,255,0.06);
-  --line-bright:rgba(59,130,246,0.4);
-  --stage:0;          /* 0..6 progresión animación inbox */
+  --muted:#94A3B8;       /* gris azulado · texto secundario */
+  --muted2:#64748B;      /* gris medio */
+  --line:rgba(255,255,255,0.08);
   --scroll:0;
-  --vh:1vh;
+  --scroll-px:0px;
 }
-@property --gradient-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
-
-html{background:var(--bg);color:var(--text);scroll-behavior:smooth;overscroll-behavior:none}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Geist',system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased;
-  font-feature-settings:"ss01","cv01";
-  overflow-x:hidden;
-  cursor:none;
-  min-height:100vh;
-  min-height:100svh;
-}
-@media(max-width:899px){body{cursor:auto}}
-.mono{font-family:'Geist Mono',monospace;letter-spacing:0.02em}
+html{background:var(--bg);color:var(--text);scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;-webkit-font-smoothing:antialiased;font-feature-settings:"ss01","cv01";overflow-x:hidden}
+.mono{font-family:'Geist Mono',monospace}
 .serif{font-family:'Fraunces',serif}
-::selection{background:var(--blue);color:#fff}
-::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:transparent}
+.display{font-family:'Geist',sans-serif;font-weight:800;letter-spacing:-0.045em;line-height:0.92}
+
+::selection{background:var(--amber);color:#000}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(59,130,246,0.3);border-radius:3px}
-::-webkit-scrollbar-thumb:hover{background:var(--blue)}
 
-a{color:inherit;text-decoration:none}
-button{font-family:inherit;cursor:none}
-@media(max-width:899px){button{cursor:pointer}}
+/* BLUE GRADIENT TEXT (era AMBER · rebrand v9) */
+.amber-grad{background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 40%,#1D4ED8 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.blue-grad{background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 40%,#1D4ED8 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
 
-/* Imágenes responsive · sin desbordes ni scroll horizontal */
-img{max-width:100%;height:auto;display:block}
+/* GRAIN NOISE estatico (cero coste · solo 1 paint) */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");pointer-events:none;opacity:0.03;z-index:9999;mix-blend-mode:overlay}
 
-/* Tap targets mínimos en mobile */
+/* PROGRESS BAR top · usa --scroll directamente */
+#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--amber),var(--amber2));z-index:10000;width:calc(var(--scroll) * 100%)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,10,calc(0.4 + var(--scroll) * 0.5));backdrop-filter:blur(12px) saturate(160%);transition:background 0.3s ease}
+nav .inner{max-width:1800px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between}
+nav a{color:#D4D4D8;font-size:14px;text-decoration:none;transition:color 0.3s}
+nav a:hover{color:#fff}
+.btn-amber{background:linear-gradient(135deg,#3B82F6,#1D4ED8);color:#000;font-weight:700;padding:10px 22px;border-radius:99px;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:transform 0.3s cubic-bezier(0.16,1,0.3,1),box-shadow 0.3s}
+.btn-amber:hover{transform:translateY(-2px);box-shadow:0 14px 30px -8px rgba(59,130,246,0.4)}
+.logo-mark{width:36px;height:36px;border-radius:50%;background:#3B82F6;display:inline-flex;align-items:center;justify-content:center;color:#000;font-weight:900;font-size:14px}
+
+/* ─── MASTER SCROLL CANVAS ───
+   Toda la pagina es un viaje scroll-driven. SVG path se dibuja en background. */
+.scroll-canvas{position:relative}
+.scroll-svg-bg{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:1;opacity:0.3}
+.scroll-svg-bg path{fill:none;stroke:url(#amberGrad);stroke-width:2;stroke-linecap:round;stroke-dasharray:3000;stroke-dashoffset:calc(3000 - var(--scroll) * 3000)}
+
+/* ─── HERO v10 · MESH GRADIENT CANVAS 2D animado (Stripe-style ~3KB) ─── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:0 32px}
+#mesh-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:0.85}
+.hero-grid{position:absolute;inset:0;z-index:2;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black 30%,transparent 90%);transform:translateY(calc(var(--scroll) * 200px)) scale(calc(1 + var(--scroll) * 0.15));pointer-events:none}
+.hero-vignette{position:absolute;inset:0;z-index:3;background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,0.6) 90%);pointer-events:none}
+
+.hero-content{position:relative;z-index:10;max-width:1500px;width:100%;display:grid;grid-template-columns:1fr;gap:60px;align-items:center}
+@media (min-width:900px){.hero-content{grid-template-columns:1.2fr 0.8fr;gap:80px}}
+.hero-text{padding-top:80px}
+.hero-tag{font-family:'Geist Mono',monospace;font-size:11px;color:var(--blue3);letter-spacing:0.3em;margin-bottom:24px;opacity:calc(1 - var(--scroll) * 2);display:flex;align-items:center;gap:14px}
+.hero-tag::before{content:'';width:32px;height:1px;background:linear-gradient(90deg,var(--blue),transparent)}
+.hero-h1{font-family:'Geist',sans-serif;font-weight:800;letter-spacing:-0.055em;font-size:clamp(56px,8.5vw,118px);line-height:0.92;margin-bottom:32px;opacity:calc(1 - var(--scroll) * 1.5);transform:translateY(calc(var(--scroll) * -50px))}
+.hero-sub{font-size:clamp(17px,1.6vw,21px);color:#94A3B8;font-weight:300;line-height:1.55;max-width:580px;margin-bottom:40px;opacity:calc(1 - var(--scroll) * 2)}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;opacity:calc(1 - var(--scroll) * 2)}
+.btn-ghost{border:1px solid rgba(255,255,255,0.18);color:#fff;padding:14px 26px;border-radius:99px;font-size:14px;text-decoration:none;transition:all 0.3s}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue3);background:rgba(59,130,246,0.05)}
+/* MOBILE hero · sin iPhone · pantalla completa solo texto + canvas */
 @media(max-width:899px){
-  .btn,.btn-primary,.btn-secondary,.btn-open-email,.cta-dock-btn,.contact-card,.attach-chip,.faq-item summary,.fm-cta{min-height:44px}
+  .hero{min-height:100svh;padding:60px 20px 40px}
+  .phone-stage{display:none !important}
+  .hero-h1{font-size:clamp(48px,12vw,80px);line-height:0.9;letter-spacing:-0.05em}
+  .hero-sub{font-size:16px;line-height:1.5}
+  .hero-cta{flex-direction:column;width:100%}
+  .hero-cta a{width:100%;text-align:center;justify-content:center;padding:18px 24px;font-size:15px}
 }
 
-/* ─── CURSOR MAGNÉTICO + LABELS dinámicos (Awwwards staple) ─── */
-.cursor-dot{position:fixed;top:0;left:0;width:6px;height:6px;background:var(--blue-bright);border-radius:50%;pointer-events:none;z-index:99999;transform:translate3d(-50%,-50%,0);box-shadow:0 0 14px rgba(96,165,250,0.7);transition:transform 0.15s ease,opacity 0.3s}
-.cursor-ring{position:fixed;top:0;left:0;width:32px;height:32px;border:1.5px solid rgba(96,165,250,0.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate3d(-50%,-50%,0);transition:width 0.4s cubic-bezier(0.16,1,0.3,1),height 0.4s cubic-bezier(0.16,1,0.3,1),border-color 0.4s,background 0.4s,box-shadow 0.4s}
-body.cursor-magnet .cursor-ring{width:80px;height:80px;border-color:var(--blue);background:rgba(59,130,246,0.08)}
-body.cursor-magnet .cursor-dot{opacity:0}
-body.cursor-text .cursor-ring{width:50px;height:50px;border-color:var(--blue-bright);background:rgba(96,165,250,0.05)}
-/* Labels dinámicos · ring se vuelve azul sólido + texto centro */
-body.cursor-label .cursor-ring{width:84px;height:84px;background:linear-gradient(135deg,var(--blue-bright),var(--blue));border-color:transparent;box-shadow:0 0 40px rgba(96,165,250,0.5)}
-body.cursor-label .cursor-dot{opacity:0}
-body.cursor-label .cursor-ring::after{content:attr(data-label);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#000;font-family:'Geist',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.15em;text-transform:uppercase}
-@media(max-width:899px){.cursor-dot,.cursor-ring{display:none}}
-
-/* Magnetic class · spring physics aplicado por JS · transición suave */
-.magnetic{transition:transform 0.5s cubic-bezier(0.16,1,0.3,1)}
-
-/* ─── PROGRESS BAR ─── */
-#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue-bright));z-index:9999;width:calc(var(--scroll) * 100%);transition:width 0.05s linear}
-
-/* Anchor scroll offset · evita que la barra superior tape el destino */
-section[id], #servicios, #antes-despues, #trabajo, #sistema, #playground, #faq, #reply{scroll-margin-top:24px}
-
-/* ─── GRAIN NOISE ─── */
-body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");pointer-events:none;opacity:0.025;z-index:9997;mix-blend-mode:overlay}
-
-/* ════════════════════════════════════════════════════════════════
-   🎬 ESCENA 1 · LOADER EDITORIAL (premium · cinematográfico · NO hacker)
-   ════════════════════════════════════════════════════════════════ */
-#scene-loader{position:fixed;inset:0;background:radial-gradient(ellipse at center,#0F0F1A 0%,#000 70%);z-index:9000;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text);transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),visibility 0.9s ease;padding:20px;text-align:center}
-#scene-loader.done{opacity:0;visibility:hidden;pointer-events:none}
-.loader-mark{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.4em;color:var(--blue-bright);margin-bottom:24px;opacity:0;animation:loaderFade 0.6s ease 0.1s forwards}
-.loader-h{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(34px,5.5vw,68px);line-height:1.05;letter-spacing:-0.02em;max-width:850px;color:var(--text)}
-.loader-line{display:block;opacity:0;transform:translateY(20px);animation:loaderRise 0.9s cubic-bezier(0.16,1,0.3,1) forwards}
-.loader-line:nth-child(1){animation-delay:0.4s}
-.loader-line:nth-child(2){animation-delay:0.9s;color:var(--blue-bright);font-style:normal;font-weight:600;font-family:'Geist',sans-serif}
-.loader-counter{margin-top:32px;font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-soft);letter-spacing:0.3em;opacity:0;animation:loaderFade 0.6s ease 1.6s forwards}
-.loader-counter strong{color:var(--blue-bright);font-weight:600}
-@keyframes loaderRise{to{opacity:1;transform:translateY(0)}}
-@keyframes loaderFade{to{opacity:1}}
-@media(max-width:599px){.loader-h{font-size:28px}}
-
-/* ════════════════════════════════════════════════════════════════
-   🎬 ESCENA 2 · INBOX HERO (la landing ES la bandeja)
-   ════════════════════════════════════════════════════════════════ */
-#inbox-hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
-
-/* Mesh gradient canvas BG · Stripe-style */
-#mesh-bg{position:absolute;inset:0;z-index:0;opacity:0.7}
-.mesh-vignette{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 80% 70% at 50% 50%,transparent 30%,rgba(0,0,0,0.85) 95%);pointer-events:none}
-
-/* Inbox header (mock email client) */
-.inbox-header{position:relative;z-index:5;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:rgba(0,0,0,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-.inbox-brand{display:flex;align-items:center;gap:12px}
-.inbox-logo{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--blue-bright),var(--blue-deep));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#000}
-.inbox-title{font-weight:600;font-size:15px;letter-spacing:-0.01em}
-.inbox-meta{display:flex;align-items:center;gap:18px}
-.inbox-count{font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-mute);letter-spacing:0.15em}
-.inbox-count strong{color:var(--blue-bright);font-weight:600}
-@media(max-width:599px){
-  .inbox-header{padding:14px 18px}
-  .inbox-title{font-size:13px}
-  .inbox-count{font-size:10px}
-}
-
-/* Inbox body · grid 2-col desktop · 1 col mobile fluido (ARREGLADO) */
-.inbox-body{position:relative;z-index:5;flex:1;display:grid;grid-template-columns:1fr;min-height:0}
-@media(min-width:900px){.inbox-body{grid-template-columns:1fr 1.3fr}}
-
-/* Lista de emails (izquierda desktop · top mobile · MEJOR mobile) */
-.email-list{padding:16px 12px;overflow-y:auto;max-height:calc(100svh - 80px);border-right:1px solid var(--line)}
-@media(max-width:899px){
-  .email-list{max-height:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 14px;overflow-y:visible}
-  .email-list[data-collapsed="true"]{max-height:280px;overflow:hidden;position:relative}
-  .email-list[data-collapsed="true"]::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(180deg,transparent,#000);pointer-events:none}
-}
-.email-list::-webkit-scrollbar{width:4px}
-
-.email-item{
-  display:flex;align-items:flex-start;gap:12px;
-  padding:14px 16px;border-radius:12px;
-  margin-bottom:4px;
+/* ─── iPhone STICKY · vive toda la página, cambia contenido por sección ─── */
+.phone-stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:80vh}
+.phone-frame{
+  width:280px;height:580px;
+  background:linear-gradient(145deg,#1c1c1e,#0a0a0c);
+  border-radius:46px;
+  padding:8px;
+  box-shadow:0 60px 160px -30px rgba(0,0,0,0.95),
+             0 0 0 1.5px rgba(255,255,255,0.08),
+             0 0 80px rgba(59,130,246,calc(0.15 + var(--scroll) * 0.4));
   position:relative;
-  transition:all 0.5s cubic-bezier(0.16,1,0.3,1);
-  cursor:none;
+  transform:rotateY(calc(var(--scroll) * -10deg)) rotateX(calc(var(--scroll) * 4deg)) translateY(calc(var(--scroll) * 80px));
+  transition:box-shadow 0.4s ease;
 }
-@media(max-width:899px){.email-item{cursor:pointer}}
-.email-item:hover{background:rgba(255,255,255,0.03)}
-
-.email-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;color:#fff}
-.email-content{flex:1;min-width:0}
-.email-from-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:3px}
-.email-from{font-weight:600;font-size:13px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.email-time{font-family:'Geist Mono',monospace;font-size:10px;color:var(--text-soft);flex-shrink:0}
-.email-subject{font-size:12.5px;color:var(--text-mute);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:2px}
-.email-preview{font-size:11px;color:var(--text-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.3}
-
-/* Email item state · animaciones inbox cleanup */
-.email-item[data-state="deleting"]{
-  animation:emailDelete 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
-}
-@keyframes emailDelete{
-  0%{transform:translateX(0);opacity:1;max-height:80px}
-  60%{transform:translateX(-100%);opacity:0;max-height:80px;margin-bottom:4px}
-  100%{transform:translateX(-100%);opacity:0;max-height:0;margin-bottom:0;padding-top:0;padding-bottom:0;overflow:hidden}
-}
-
-/* VEXOR email destacado · azul brillante · pulse */
-.email-item[data-vexor]{
-  background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(96,165,250,0.05));
-  border:1px solid rgba(59,130,246,0.3);
-  margin:8px 0;
-  box-shadow:0 0 0 1px rgba(59,130,246,0.2),0 20px 40px -20px rgba(59,130,246,0.4);
+.phone-screen{
+  width:100%;height:100%;
+  background:linear-gradient(180deg,#0a0a0f 0%,#1a1a2e 100%);
+  border-radius:38px;
+  overflow:hidden;
   position:relative;
-  animation:vexorPulse 2.5s ease-in-out infinite;
 }
-@keyframes vexorPulse{
-  0%,100%{box-shadow:0 0 0 1px rgba(59,130,246,0.2),0 20px 40px -20px rgba(59,130,246,0.4)}
-  50%{box-shadow:0 0 0 1px rgba(96,165,250,0.5),0 30px 60px -15px rgba(59,130,246,0.7)}
-}
-.email-item[data-vexor] .email-avatar{
-  background:linear-gradient(135deg,var(--blue-bright),var(--blue-deep));
-  color:#000;
-  font-weight:900;
-  box-shadow:0 0 20px rgba(96,165,250,0.5);
-}
-.email-item[data-vexor] .email-from{color:var(--blue-bright)}
-.email-item[data-vexor] .email-subject{color:#fff;font-style:italic;font-family:'Fraunces',serif;font-weight:400}
-.email-item[data-vexor]::before{
-  content:'';position:absolute;left:-2px;top:14px;bottom:14px;width:3px;border-radius:2px;
-  background:linear-gradient(180deg,var(--blue-bright),var(--blue-deep));
-}
+.phone-statusbar{position:absolute;top:0;left:0;right:0;padding:12px 28px 0;display:flex;justify-content:space-between;color:#fff;font-size:12px;font-weight:600;font-family:-apple-system,sans-serif;z-index:30}
+.phone-island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:110px;height:32px;background:#000;border-radius:20px;z-index:30}
 
-/* Email view (derecha desktop · bottom mobile) */
-.email-view{padding:40px 32px;overflow-y:auto;max-height:calc(100vh - 70px);max-height:calc(100svh - 70px);position:relative}
-@media(max-width:899px){.email-view{max-height:none;padding:28px 20px}}
+/* Phone slides · cada uno opacity-driven por --scroll */
+.phone-slide{position:absolute;inset:48px 12px 12px;border-radius:24px;overflow:hidden;display:flex;flex-direction:column;padding:14px;transition:opacity 0.4s ease}
+.phone-slide[data-stage="0"]{background:linear-gradient(180deg,#0a0a0f 0%,#1a1a2e 100%);opacity:calc(1 - clamp(0, var(--scroll) * 8, 1))}
+.phone-slide[data-stage="1"]{background:linear-gradient(180deg,#3B82F6 0%,#1D4ED8 100%);opacity:calc(clamp(0, (var(--scroll) - 0.12) * 8, 1) - clamp(0, (var(--scroll) - 0.28) * 8, 1))}
+.phone-slide[data-stage="2"]{background:#fff;opacity:calc(clamp(0, (var(--scroll) - 0.28) * 8, 1) - clamp(0, (var(--scroll) - 0.44) * 8, 1))}
+.phone-slide[data-stage="3"]{background:linear-gradient(180deg,#064e3b 0%,#0a0a0c 100%);opacity:calc(clamp(0, (var(--scroll) - 0.44) * 8, 1) - clamp(0, (var(--scroll) - 0.60) * 8, 1))}
+.phone-slide[data-stage="4"]{background:linear-gradient(180deg,#581c87 0%,#0a0a0c 100%);opacity:calc(clamp(0, (var(--scroll) - 0.60) * 8, 1) - clamp(0, (var(--scroll) - 0.78) * 8, 1))}
+.phone-slide[data-stage="5"]{background:#000;opacity:calc(clamp(0, (var(--scroll) - 0.78) * 8, 1))}
+.phone-slide[data-stage="5"] img{width:100%;height:100%;object-fit:cover;object-position:top}
 
-.email-view-empty{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--text-soft);font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.2em;gap:10px}
-.email-view-empty.hide{display:none}
+/* Slide 0 · lock screen */
+.lock-time{font-family:-apple-system,sans-serif;color:#fff;font-size:64px;font-weight:200;text-align:center;margin-top:60px;letter-spacing:-0.02em}
+.lock-date{font-family:'Geist Mono',monospace;color:rgba(255,255,255,0.7);font-size:11px;letter-spacing:0.2em;text-align:center;margin-bottom:6px}
+.lock-notif{margin-top:auto;background:rgba(40,40,45,0.92);backdrop-filter:blur(18px);border-radius:14px;padding:10px 12px;color:#fff}
+.lock-notif p{font-size:11px;color:rgba(255,255,255,0.6);font-family:'Geist Mono',monospace;letter-spacing:0.15em;margin-bottom:4px}
+.lock-notif strong{font-size:13px;font-weight:600}
 
-.email-view-content{opacity:0;transform:translateY(20px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1)}
-.email-view-content.show{opacity:1;transform:translateY(0)}
+/* Slide 1 · Welcome amber */
+.welcome-block{background:rgba(0,0,0,0.92);border-radius:18px;padding:18px;height:100%;display:flex;flex-direction:column}
+.welcome-tag{font-family:'Geist Mono',monospace;font-size:9px;color:var(--amber);letter-spacing:0.25em;margin-bottom:14px}
+.welcome-h{font-family:'Fraunces',serif;font-style:italic;font-size:22px;color:#fff;line-height:1.15;margin-bottom:auto}
+.welcome-cta{background:#3B82F6;color:#000;padding:9px;border-radius:99px;text-align:center;font-weight:700;font-size:11px;margin-top:10px}
 
-.email-view-header{display:flex;align-items:flex-start;gap:14px;padding-bottom:24px;margin-bottom:32px;border-bottom:1px solid var(--line)}
-.email-view-header .email-avatar{width:48px;height:48px;font-size:16px}
-.email-view-from{font-weight:600;font-size:15px;color:#fff;margin-bottom:2px}
-.email-view-meta{font-size:12px;color:var(--text-mute)}
-.email-view-meta span{color:var(--blue-bright)}
+/* Slide 2 · Cart white */
+.cart-tag{font-family:'Geist Mono',monospace;font-size:9px;color:#dc2626;letter-spacing:0.25em;margin-bottom:10px}
+.cart-h{font-family:'Fraunces',serif;font-style:italic;font-size:18px;color:#0a0a0c;line-height:1.2;margin-bottom:12px}
+.cart-item{background:#f4f4f4;border-radius:8px;padding:10px;display:flex;gap:10px;align-items:center;margin-bottom:auto}
+.cart-img{width:44px;height:44px;background:linear-gradient(135deg,#888,#444);border-radius:6px}
+.cart-info p:first-child{font-size:11px;color:#0a0a0c;font-weight:600;margin-bottom:2px}
+.cart-info p:last-child{font-size:13px;color:#dc2626;font-weight:700}
+.cart-cta{background:#0a0a0c;color:#fff;padding:9px;border-radius:99px;text-align:center;font-weight:700;font-size:11px;margin-top:10px}
 
-.email-view-subject{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(28px,4.5vw,52px);line-height:1.05;letter-spacing:-0.02em;color:#fff;margin-bottom:20px;max-width:680px}
-.email-view-subject em{font-style:normal;font-weight:600;color:var(--blue-bright);font-family:'Geist',sans-serif}
+/* Slide 3 · Post-purchase emerald */
+.post-tag{font-family:'Geist Mono',monospace;font-size:9px;color:#10b981;letter-spacing:0.25em;margin-bottom:14px}
+.post-h{font-family:'Fraunces',serif;font-style:italic;font-size:20px;color:#fff;line-height:1.15;margin-bottom:14px}
+.post-track{background:rgba(16,185,129,0.15);border-radius:10px;padding:10px;margin-bottom:auto}
+.post-track p{font-family:'Geist Mono',monospace;font-size:9px;color:#10b981;letter-spacing:0.2em}
+.post-track strong{font-size:12px;color:#fff;font-weight:600;display:block;margin-top:4px}
+.post-eta{font-size:11px;color:rgba(255,255,255,0.6);font-style:italic;margin-top:12px;font-family:'Fraunces',serif}
 
-.email-view-body p{font-size:clamp(15px,1.4vw,17px);color:var(--text-mute);line-height:1.65;margin-bottom:18px;max-width:600px;font-weight:300}
-.email-view-body p strong{color:#fff;font-weight:500}
-.email-view-body p .blue{color:var(--blue-bright);font-weight:500}
+/* Slide 4 · Win-back purple */
+.winback-tag{font-family:'Geist Mono',monospace;font-size:9px;color:#a855f7;letter-spacing:0.25em;margin-bottom:14px}
+.winback-h{font-family:'Fraunces',serif;font-style:italic;font-size:22px;color:#fff;line-height:1.15;margin-bottom:auto}
+.winback-cta{background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;padding:11px;border-radius:99px;text-align:center;font-weight:700;font-size:11px}
 
-.email-view-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+/* ─── SECTIONS ─── */
+section{position:relative;padding:120px 32px;z-index:5}
+.section-inner{max-width:1400px;margin:0 auto;position:relative}
+.section-tag{font-family:'Geist Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:0.3em;margin-bottom:14px}
+.section-h{font-family:'Geist',sans-serif;font-weight:800;letter-spacing:-0.045em;font-size:clamp(40px,5.5vw,80px);line-height:0.96;margin-bottom:24px;color:#fff}
+.section-sub{font-size:clamp(16px,1.4vw,18px);color:#A1A1AA;font-weight:300;line-height:1.55;max-width:640px}
 
-/* Stats inline · contadores animados */
-.email-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:30px 0 24px;padding:24px 20px;background:linear-gradient(135deg,rgba(59,130,246,0.08),rgba(96,165,250,0.03));border:1px solid rgba(59,130,246,0.2);border-radius:18px}
-@media(max-width:599px){.email-stats{grid-template-columns:1fr;gap:14px;padding:20px}}
-.stat-block{text-align:left;padding:0}
-.stat-num{font-family:'Geist',sans-serif;font-weight:900;font-size:clamp(36px,4vw,52px);line-height:1;letter-spacing:-0.04em;color:var(--blue-bright);font-feature-settings:"tnum"}
-.stat-num::after{content:attr(data-suffix)}
-.stat-label{font-size:11px;color:var(--text-mute);font-weight:500;line-height:1.3;margin-top:6px;letter-spacing:0.02em}
-.stat-label span{display:block;color:var(--text-soft);font-size:10px;font-weight:400;margin-top:2px;font-family:'Geist Mono',monospace;letter-spacing:0.05em}
-
-/* Adjuntos chips */
-.email-attachments{margin:32px 0 16px;padding:22px;background:rgba(255,255,255,0.02);border:1px dashed var(--line);border-radius:18px}
-.attach-label{font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-mute);letter-spacing:0.15em;margin-bottom:14px}
-.attach-grid{display:grid;grid-template-columns:1fr;gap:8px}
-@media(min-width:480px){.attach-grid{grid-template-columns:1fr 1fr}}
-.attach-chip{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,0.03);border:1px solid var(--line);border-radius:10px;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);cursor:none;text-align:left;font-family:inherit}
-@media(max-width:899px){.attach-chip{cursor:pointer}}
-.attach-chip:hover{background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.4);transform:translateY(-2px)}
-.attach-chip:hover .attach-icon{transform:scale(1.08)}
-.attach-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:13px;flex-shrink:0;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1)}
-.attach-chip>div{flex:1;min-width:0}
-.attach-chip strong{display:block;font-size:12px;color:#fff;font-weight:600;letter-spacing:-0.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.attach-chip span{display:block;font-size:10px;color:var(--text-soft);font-family:'Geist Mono',monospace;letter-spacing:0.05em;margin-top:2px}
-
-.email-signature{font-style:italic;color:var(--text-mute);font-size:14px;line-height:1.6;padding-top:20px;border-top:1px solid var(--line)}
-
-/* MOBILE FIX · Email view mejor proporcionado */
-@media(max-width:899px){
-  .email-view{max-height:none;padding:24px 20px}
-  .email-view-subject{font-size:clamp(24px,7vw,38px)}
-  .email-view-body p{font-size:15px}
-}
-
-/* LIGHTBOX modal · click adjunto abre email fullscreen */
-#lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.95);backdrop-filter:blur(20px);z-index:99500;display:none;opacity:0;transition:opacity 0.5s ease;align-items:center;justify-content:center;padding:30px;cursor:zoom-out}
-#lightbox.show{display:flex;opacity:1}
-#lightbox img{max-width:min(680px,95vw);max-height:90vh;border-radius:18px;box-shadow:0 60px 200px -20px rgba(59,130,246,0.5),0 30px 80px rgba(0,0,0,0.95),0 0 0 1px rgba(59,130,246,0.3);transform:scale(0.92);transition:transform 0.6s cubic-bezier(0.16,1,0.3,1)}
-#lightbox.show img{transform:scale(1)}
-#lightbox-close{position:absolute;top:20px;right:24px;width:48px;height:48px;background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.4);color:var(--blue-bright);border-radius:50%;font-size:22px;font-weight:300;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s}
-#lightbox-close:hover{transform:rotate(90deg) scale(1.1);background:rgba(59,130,246,0.3)}
-.btn{padding:14px 26px;border-radius:99px;font-family:'Geist',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.01em;border:none;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);display:inline-flex;align-items:center;gap:8px;cursor:none}
-@media(max-width:899px){.btn{cursor:pointer}}
-.btn-primary{background:linear-gradient(135deg,var(--blue-bright),var(--blue));color:#000}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px -10px rgba(59,130,246,0.6)}
-.btn-secondary{background:transparent;color:var(--text-mute);border:1px solid var(--line)}
-.btn-secondary:hover{border-color:var(--blue);color:var(--blue-bright);background:rgba(59,130,246,0.05)}
-
-/* Scroll cue */
-.scroll-cue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-family:'Geist Mono',monospace;font-size:10px;color:var(--text-soft);letter-spacing:0.3em;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;transition:opacity 0.6s ease;z-index:20;pointer-events:none}
-.scroll-cue.show{opacity:1;animation:cueFloat 3s ease-in-out infinite}
-.scroll-cue::after{content:'';width:1px;height:30px;background:linear-gradient(180deg,var(--blue),transparent)}
-@keyframes cueFloat{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-
-/* ════════════════════════════════════════════════════════════════
-   📜 SECCIONES STORYTELLING (cada una = "párrafo" del email)
-   ════════════════════════════════════════════════════════════════ */
-section.story{position:relative;padding:140px 32px;z-index:5}
-@media(max-width:899px){section.story{padding:90px 20px}}
-.story-inner{max-width:1280px;margin:0 auto;position:relative}
-
-.story-tag{font-family:'Geist Mono',monospace;font-size:11px;color:var(--blue-bright);letter-spacing:0.3em;margin-bottom:16px;display:flex;align-items:center;gap:14px}
-.story-tag::before{content:'';width:32px;height:1px;background:var(--blue)}
-
-.story-h{font-family:'Geist',sans-serif;font-weight:800;letter-spacing:-0.045em;font-size:clamp(36px,6vw,84px);line-height:0.95;margin-bottom:24px;color:#fff;max-width:1100px}
-.story-h em{font-style:normal;font-family:'Fraunces',serif;font-weight:300;font-style:italic;color:var(--blue-bright)}
-.story-h .blue{color:var(--blue-bright)}
-
-.story-sub{font-size:clamp(16px,1.5vw,19px);color:var(--text-mute);font-weight:300;line-height:1.55;max-width:720px;margin-bottom:48px}
-
-/* Reveal */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1)}
+/* Reveal on intersect */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1)}
 .reveal.in{opacity:1;transform:translateY(0)}
-.reveal.d1{transition-delay:0.1s}.reveal.d2{transition-delay:0.2s}.reveal.d3{transition-delay:0.3s}.reveal.d4{transition-delay:0.4s}
+.reveal.delay-1{transition-delay:0.1s}.reveal.delay-2{transition-delay:0.2s}.reveal.delay-3{transition-delay:0.3s}
 
-/* ─── 3D FLIP CARDS · servicios (Jhey-style preserve-3d) ─── */
-.flip-grid{display:grid;gap:18px;grid-template-columns:1fr;perspective:1500px}
-@media(min-width:768px){.flip-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1100px){.flip-grid{grid-template-columns:repeat(3,1fr)}}
-.flip-card{height:340px;position:relative;cursor:none;perspective:1500px}
-@media(max-width:899px){.flip-card{cursor:pointer;height:280px}}
-.flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.9s cubic-bezier(0.16,1,0.3,1)}
-.flip-card:hover .flip-inner,.flip-card.touched .flip-inner{transform:rotateY(180deg)}
-.flip-face{position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:28px;overflow:hidden;display:flex;flex-direction:column}
-.flip-front{background:linear-gradient(135deg,rgba(15,23,42,0.95),rgba(8,8,15,0.98));border:1px solid var(--line)}
-.flip-back{background:linear-gradient(135deg,var(--blue-deep),var(--blue));color:#000;transform:rotateY(180deg);justify-content:center}
-.flip-tag{font-family:'Geist Mono',monospace;font-size:10px;color:var(--blue-bright);letter-spacing:0.3em;margin-bottom:auto}
-.flip-num{font-family:'Geist',sans-serif;font-weight:900;font-size:64px;line-height:1;color:rgba(96,165,250,0.12);position:absolute;top:18px;right:24px}
-.flip-h{font-family:'Geist',sans-serif;font-weight:700;font-size:26px;line-height:1.05;letter-spacing:-0.02em;margin-bottom:8px;color:#fff}
-.flip-p{font-size:13px;color:var(--text-mute);line-height:1.5;font-weight:300}
-.flip-back .flip-h{color:#000;font-size:22px;margin-bottom:16px}
-.flip-back .flip-list{list-style:none;padding:0;font-size:13px;color:rgba(0,0,0,0.85);font-weight:500;line-height:1.7}
-.flip-back .flip-list li{padding-left:18px;position:relative;margin-bottom:4px}
-.flip-back .flip-list li::before{content:'›';position:absolute;left:0;font-weight:700;color:#000}
-.flip-back .flip-cta{margin-top:auto;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.2em;color:#000;font-weight:700;padding-top:14px;border-top:1px solid rgba(0,0,0,0.2)}
+/* SECTION · STORYTELLING SCROLL · iPhone sticky con texto cambiante a la izq */
+.story-stage{display:grid;grid-template-columns:1fr;gap:40px;min-height:80vh}
+@media (min-width:900px){.story-stage{grid-template-columns:1fr 1fr;gap:80px;align-items:center}}
+.story-text-pane{display:flex;flex-direction:column;justify-content:center}
+.story-text{position:relative;min-height:280px}
+.story-block{position:absolute;inset:0;opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.story-block.active{opacity:1;transform:translateY(0)}
+.story-tag{font-family:'Geist Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:0.3em;margin-bottom:18px}
+.story-h{font-family:'Geist',sans-serif;font-weight:800;letter-spacing:-0.045em;font-size:clamp(36px,4.5vw,64px);line-height:0.96;margin-bottom:22px}
+.story-p{font-size:18px;color:#A1A1AA;font-weight:300;line-height:1.55}
 
-/* Flip card hint mobile */
-.flip-card::after{content:'TOCA →';position:absolute;bottom:14px;right:18px;font-family:'Geist Mono',monospace;font-size:9px;color:var(--text-soft);letter-spacing:0.2em;opacity:0;transition:opacity 0.3s;z-index:5}
-@media(max-width:899px){.flip-card::after{opacity:0.6}}
-.flip-card:hover::after{opacity:0}
+.story-phone-pane{position:relative}
+@media (min-width:900px){.story-phone-pane{position:sticky;top:50%;transform:translateY(-50%);height:fit-content}}
 
-/* ─── BENTO grid (sistema · linear-style) ─── */
-.bento{display:grid;gap:14px;grid-template-columns:1fr;grid-auto-rows:minmax(180px,auto);margin-top:32px}
-@media(min-width:768px){.bento{grid-template-columns:repeat(4,1fr)}}
-.bento-card{background:linear-gradient(135deg,rgba(15,23,42,0.95),rgba(8,8,15,0.98));border:1px solid var(--line);border-radius:22px;padding:28px;position:relative;overflow:hidden;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),border-color 0.5s,box-shadow 0.5s;cursor:none}
-@media(max-width:899px){.bento-card{cursor:pointer}}
-.bento-card:hover{transform:translateY(-4px);border-color:rgba(59,130,246,0.4);box-shadow:0 30px 80px -20px rgba(0,0,0,0.6),0 0 60px -20px rgba(59,130,246,0.2)}
-.bento-card[data-w2]{grid-column:span 1}
-@media(min-width:768px){.bento-card[data-w2]{grid-column:span 2}.bento-card[data-w4]{grid-column:span 4}.bento-card[data-h2]{grid-row:span 2}}
-.b-tag{font-family:'Geist Mono',monospace;font-size:9px;color:var(--blue-bright);letter-spacing:0.3em;margin-bottom:14px}
-.b-num{font-family:'Geist',sans-serif;font-weight:900;font-size:56px;letter-spacing:-0.04em;line-height:1;background:linear-gradient(135deg,var(--blue-bright),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+/* GALLERY · 6 emails · hover lift simple */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-top:60px}
+.email-card{position:relative;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 30px 80px -20px rgba(0,0,0,0.8),inset 0 0 0 1px rgba(255,255,255,0.04);transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),box-shadow 0.5s;cursor:pointer}
+.email-card:hover{transform:translateY(-8px);box-shadow:0 60px 140px -30px rgba(0,0,0,0.9),0 0 60px -10px rgba(59,130,246,0.3),inset 0 0 0 1px rgba(59,130,246,0.2)}
+.email-card img{width:100%;display:block}
+.email-card-info{padding:20px 22px}
+.email-card-tag{font-family:'Geist Mono',monospace;font-size:9px;color:var(--amber);letter-spacing:0.25em;margin-bottom:6px}
+.email-card-h{font-family:'Geist',sans-serif;font-weight:700;font-size:22px;color:#fff;margin-bottom:4px}
+.email-card-p{font-size:13px;color:#71717A}
+
+/* BENTO mini */
+.bento{display:grid;grid-template-columns:1fr;gap:14px;margin-top:50px}
+@media (min-width:768px){.bento{grid-template-columns:repeat(4,1fr);grid-auto-rows:170px}}
+.bento-card{background:linear-gradient(135deg,rgba(255,255,255,0.025),rgba(255,255,255,0.005));border:1px solid rgba(255,255,255,0.08);border-radius:22px;padding:24px;position:relative;overflow:hidden;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),border-color 0.5s,box-shadow 0.5s}
+.bento-card:hover{transform:translateY(-3px);border-color:rgba(59,130,246,0.3);box-shadow:0 30px 80px -20px rgba(0,0,0,0.6),0 0 60px -20px rgba(59,130,246,0.18)}
+.b-tag{font-family:'Geist Mono',monospace;font-size:9px;color:var(--amber);letter-spacing:0.3em;margin-bottom:14px}
+.b-num{font-family:'Geist',sans-serif;font-weight:800;font-size:48px;letter-spacing:-0.04em;line-height:1}
 .b-h{font-family:'Geist',sans-serif;font-weight:700;font-size:22px;line-height:1.05;margin-bottom:6px;letter-spacing:-0.02em}
-.b-p{font-size:13px;color:var(--text-mute);line-height:1.45;font-weight:300}
+.b-p{font-size:13px;color:#71717A;line-height:1.4}
+.bento-card.span-2{grid-column:span 2}
+.bento-card.span-2-row{grid-row:span 2}
+.bento-card.span-4{grid-column:span 4}
 
-/* ─── E · SCROLL-STACKING 6 mockups (sticky + z-index incremental) ─── */
-.stacking-section{position:relative;display:flex;flex-direction:column;gap:80px;margin-top:60px;padding-bottom:240px}
-@media(max-width:899px){.stacking-section{gap:40px;padding-bottom:80px}}
-.stack-mockup{position:sticky;top:80px;max-width:1080px;width:calc(100% - 24px);margin:0 auto;border-radius:24px;overflow:hidden;background:linear-gradient(135deg,rgba(15,23,42,0.95),rgba(8,8,15,0.98));border:1px solid var(--line);box-shadow:0 60px 140px -30px rgba(0,0,0,0.95),0 0 0 1px rgba(255,255,255,0.04);transition:transform 0.7s cubic-bezier(0.16,1,0.3,1)}
-.stack-mockup:nth-child(1){top:80px;z-index:1}
-.stack-mockup:nth-child(2){top:100px;z-index:2}
-.stack-mockup:nth-child(3){top:120px;z-index:3}
-.stack-mockup:nth-child(4){top:140px;z-index:4}
-.stack-mockup:nth-child(5){top:160px;z-index:5}
-.stack-mockup:nth-child(6){top:180px;z-index:6}
-@media(max-width:899px){.stack-mockup{position:relative !important;top:auto !important}}
-.stack-mockup-inner{display:grid;grid-template-columns:1fr;gap:0}
-@media(min-width:768px){.stack-mockup-inner{grid-template-columns:1fr 1fr}}
-.stack-mockup-img{background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.stack-mockup-img img{width:100%;height:100%;object-fit:cover;object-position:top;min-height:380px}
-.stack-mockup-content{padding:42px 36px;display:flex;flex-direction:column;justify-content:center}
-@media(max-width:599px){.stack-mockup-content{padding:28px 22px}}
-.stack-mockup-num{font-family:'Geist',sans-serif;font-weight:900;font-size:96px;line-height:0.85;letter-spacing:-0.05em;color:rgba(96,165,250,0.10);margin-bottom:-20px}
-.stack-mockup-tag{font-family:'Geist Mono',monospace;font-size:10px;color:var(--blue-bright);letter-spacing:0.3em;margin-bottom:14px}
-.stack-mockup-h{font-family:'Geist',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,44px);line-height:0.96;letter-spacing:-0.04em;margin-bottom:14px;color:#fff}
-.stack-mockup-p{font-size:15px;color:var(--text-mute);line-height:1.55;font-weight:300;margin-bottom:18px}
-.stack-mockup-meta{font-family:'Geist Mono',monospace;font-size:10px;color:var(--text-soft);letter-spacing:0.2em;margin-top:auto;padding-top:16px;border-top:1px solid var(--line)}
+/* MARQUEE single */
+.marquee-strip{padding:60px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;position:relative;background:rgba(0,0,0,0.4)}
+.marquee-track{display:flex;gap:60px;animation:marquee 35s linear infinite;white-space:nowrap;will-change:transform}
+.marquee-track span{font-family:'Geist',sans-serif;font-weight:800;font-size:64px;letter-spacing:-0.04em;color:rgba(255,255,255,0.08);display:inline-block}
+.marquee-track span.amber{color:var(--amber);opacity:0.9}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ─── REPLY FORM (CTA · "responder al email") ─── */
-.reply-section{padding:140px 32px;background:linear-gradient(180deg,#000 0%,rgba(59,130,246,0.05) 50%,#000 100%);position:relative;overflow:hidden}
-@media(max-width:899px){.reply-section{padding:80px 20px}}
-.reply-inner{max-width:820px;margin:0 auto;position:relative;z-index:5}
-.reply-mark{font-family:'Geist Mono',monospace;font-size:11px;color:var(--blue-bright);letter-spacing:0.3em;text-align:center;margin-bottom:18px}
-.reply-h{font-family:'Geist',sans-serif;font-weight:800;letter-spacing:-0.05em;font-size:clamp(40px,6.5vw,84px);line-height:0.95;text-align:center;margin-bottom:18px}
-.reply-h em{font-style:italic;font-family:'Fraunces',serif;font-weight:300;color:var(--blue-bright)}
-.reply-sub{text-align:center;color:var(--text-mute);font-size:16px;font-weight:300;margin-bottom:48px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.5}
+/* CTA */
+.cta-section{padding:140px 32px;position:relative;overflow:hidden}
+.cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 30%,rgba(59,130,246,0.18),transparent 70%)}
+.cta-inner{max-width:900px;margin:0 auto;text-align:center;position:relative;z-index:5}
+.cta-h{font-family:'Geist',sans-serif;font-weight:900;letter-spacing:-0.05em;font-size:clamp(50px,9vw,140px);line-height:0.92;margin-bottom:30px}
+.cta-form{max-width:560px;margin:50px auto 0;display:flex;flex-direction:column;gap:14px}
+.cta-form input,.cta-form select,.cta-form textarea{width:100%;padding:18px 24px;border-radius:99px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:inherit;font-size:15px;outline:none;transition:border-color 0.3s,box-shadow 0.3s}
+.cta-form textarea{border-radius:24px;resize:none;min-height:100px}
+.cta-form input:focus,.cta-form select:focus,.cta-form textarea:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(59,130,246,0.15)}
+.cta-form button{padding:20px 32px;border-radius:99px;background:linear-gradient(135deg,#3B82F6,#1D4ED8);color:#000;font-weight:700;font-size:16px;border:none;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s}
+.cta-form button:hover{transform:translateY(-2px);box-shadow:0 18px 40px -8px rgba(59,130,246,0.5)}
 
-/* ─── REPLY THREAD · social proof natural ─── */
-.thread-section{margin-bottom:80px}
-.thread-label{font-family:'Geist Mono',monospace;font-size:10px;color:var(--text-mute);letter-spacing:0.3em;text-align:center;margin-bottom:32px}
-.reply-thread{display:flex;gap:16px;padding:24px 24px;background:rgba(15,23,42,0.4);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:18px;margin-bottom:14px;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),border-color 0.4s,box-shadow 0.4s;position:relative}
-.reply-thread:hover{transform:translateX(4px);border-color:rgba(59,130,246,0.3);box-shadow:0 20px 60px -20px rgba(0,0,0,0.6)}
-.reply-thread::before{content:'↳';position:absolute;left:-22px;top:32px;color:var(--text-soft);font-size:22px;font-weight:200}
-@media(max-width:599px){.reply-thread{padding:18px;gap:12px}.reply-thread::before{display:none}}
-.thread-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,0.4)}
-.thread-body{flex:1;min-width:0}
-.thread-header{margin-bottom:8px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.thread-header strong{color:#fff;font-weight:600;font-size:14px}
-.thread-meta{font-family:'Geist Mono',monospace;font-size:10px;color:var(--text-soft);letter-spacing:0.05em}
-.thread-text{font-size:14px;color:var(--text-mute);line-height:1.55;font-weight:300}
-.thread-text em{font-style:italic;color:#fff;font-weight:400}
-.thread-tag{display:inline-block;font-family:'Geist Mono',monospace;font-size:9px;color:var(--blue-bright);background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);padding:3px 8px;border-radius:99px;letter-spacing:0.1em;margin-left:6px;font-weight:500}
+/* FOOTER */
+footer{padding:80px 32px 40px;background:#000;border-top:1px solid var(--line);position:relative;overflow:hidden}
+.footer-aurora{position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:1200px;height:600px;background:radial-gradient(ellipse,rgba(59,130,246,0.18),transparent 60%);filter:blur(60px);pointer-events:none}
+.footer-mega{font-family:'Geist',sans-serif;font-weight:900;letter-spacing:-0.05em;font-size:clamp(80px,18vw,260px);line-height:0.85;text-align:center;background:linear-gradient(180deg,#3B82F6 0%,#1D4ED8 70%,transparent 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:5}
+.footer-tag{text-align:center;font-family:'Geist Mono',monospace;font-size:11px;color:#52525B;letter-spacing:0.3em;margin-top:20px;position:relative;z-index:5}
+.footer-bottom{max-width:1400px;margin:60px auto 0;padding-top:30px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;font-size:13px;color:#71717A;position:relative;z-index:5}
 
-/* ─── CTA editorial · 3 contact cards ─── */
-.reply-cta-block{background:linear-gradient(135deg,rgba(15,23,42,0.5),rgba(8,8,15,0.7));border:1px solid var(--line);border-radius:28px;padding:48px 36px;backdrop-filter:blur(16px)}
-@media(max-width:599px){.reply-cta-block{padding:32px 22px;border-radius:22px}}
-
-.contact-options{display:flex;flex-direction:column;gap:12px;margin:36px 0 28px}
-.contact-card{display:flex;align-items:center;gap:18px;padding:18px 22px;background:rgba(255,255,255,0.02);border:1px solid var(--line);border-radius:16px;text-decoration:none;color:#fff;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);position:relative;overflow:hidden}
-.contact-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,0.08),transparent 50%);opacity:0;transition:opacity 0.4s ease;pointer-events:none}
-.contact-card:hover{transform:translateY(-3px);border-color:rgba(59,130,246,0.4);box-shadow:0 20px 60px -20px rgba(59,130,246,0.3)}
-.contact-card:hover::before{opacity:1}
-.contact-card:hover .contact-arrow{transform:translateX(6px);color:var(--blue-bright)}
-.contact-card.primary{background:linear-gradient(135deg,rgba(59,130,246,0.12),rgba(96,165,250,0.05));border-color:rgba(59,130,246,0.3)}
-.contact-card.primary:hover{box-shadow:0 24px 70px -15px rgba(59,130,246,0.5)}
-.contact-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--blue-bright),var(--blue-deep));color:#000;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;flex-shrink:0}
-.contact-content{flex:1;min-width:0}
-.contact-content strong{display:block;font-size:16px;font-weight:600;margin-bottom:3px;letter-spacing:-0.01em}
-.contact-content span{display:block;font-size:12px;color:var(--text-mute);font-family:'Geist Mono',monospace;letter-spacing:0.05em}
-.contact-arrow{font-size:20px;color:var(--text-soft);transition:transform 0.3s,color 0.3s}
-
-.contact-fineprint{font-size:12.5px;color:var(--text-mute);line-height:1.8;padding-top:24px;border-top:1px solid var(--line);font-weight:300}
-.contact-fineprint .dot{color:var(--blue-bright);margin-right:6px}
-.contact-fineprint strong{color:#fff;font-weight:600}
-
-/* ─── B · LIVE EMAIL PLAYGROUND (interactivo) ─── */
-.playground{display:grid;grid-template-columns:1fr;gap:32px;margin-top:48px;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:linear-gradient(135deg,rgba(15,23,42,0.6),rgba(8,8,15,0.8));backdrop-filter:blur(12px)}
-@media(min-width:900px){.playground{grid-template-columns:0.9fr 1.1fr;gap:0}}
-.playground-controls{padding:32px;display:flex;flex-direction:column;gap:20px;border-bottom:1px solid var(--line)}
-@media(min-width:900px){.playground-controls{border-bottom:none;border-right:1px solid var(--line)}}
-.pg-field{display:flex;flex-direction:column;gap:6px;position:relative}
-.pg-field label{font-family:'Geist Mono',monospace;font-size:10px;color:var(--text-mute);letter-spacing:0.25em}
-.pg-field input,.pg-field select{background:rgba(0,0,0,0.5);border:1px solid var(--line);color:#fff;padding:14px 16px;border-radius:12px;font-family:'Geist',sans-serif;font-size:14px;outline:none;transition:border-color 0.3s,box-shadow 0.3s;width:100%}
-.pg-field input:focus,.pg-field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(59,130,246,0.15)}
-.pg-count{position:absolute;right:14px;bottom:14px;font-family:'Geist Mono',monospace;font-size:10px;color:var(--text-soft);pointer-events:none}
-.pg-field-row{display:grid;grid-template-columns:1fr;gap:14px}
-@media(min-width:480px){.pg-field-row{grid-template-columns:1fr 1fr}}
-.pg-hint{font-size:11px;color:var(--text-soft);letter-spacing:0.05em;margin-top:8px;line-height:1.5}
-
-.playground-preview{padding:24px;display:flex;align-items:center;justify-content:center;min-height:480px}
-.pg-mockup-frame{width:100%;max-width:520px;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 60px 140px -30px rgba(0,0,0,0.95),0 0 0 1px rgba(255,255,255,0.05)}
-.pg-mockup-bar{background:#E8E8ED;padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #D0D0D8}
-.pg-dot{width:11px;height:11px;border-radius:50%}
-.pg-mockup-url{font-family:-apple-system,sans-serif;font-size:11px;color:#666;margin-left:auto;margin-right:auto}
-.pg-mockup-body{padding:0;background:#fff;min-height:380px;transition:background 0.5s ease}
-.pg-email{padding:36px 30px;transition:all 0.5s cubic-bezier(0.16,1,0.3,1);min-height:380px;display:flex;flex-direction:column}
-.pg-email-header{display:flex;flex-direction:column;gap:2px;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid rgba(0,0,0,0.08)}
-.pg-email-header strong{font-size:13px;color:#1a1a1a;font-weight:700}
-.pg-email-header span{font-family:'Geist Mono',monospace;font-size:10px;color:#888;letter-spacing:0.05em}
-.pg-email-subject{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:28px;line-height:1.15;color:#0a0a0c;margin-bottom:14px;letter-spacing:-0.01em;transition:all 0.5s ease}
-.pg-email-pre{font-family:'Geist',sans-serif;font-size:14px;color:#666;line-height:1.5;font-weight:300;margin-bottom:auto}
-.pg-email-cta{align-self:flex-start;margin-top:24px;background:#0a0a0c;color:#fff;padding:11px 22px;border-radius:99px;font-family:'Geist',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.05em}
-
-/* Brand variants playground */
-.pg-email[data-brand="laboutique"]{background:linear-gradient(180deg,#F5EFE6,#fff)}
-.pg-email[data-brand="lcdo"]{background:#0A0A0C;color:#fff}
-.pg-email[data-brand="lcdo"] .pg-email-subject{color:#FFD93D;font-family:'Geist',sans-serif;font-style:normal;font-weight:800;letter-spacing:-0.03em}
-.pg-email[data-brand="lcdo"] .pg-email-header{border-color:rgba(255,217,61,0.2)}
-.pg-email[data-brand="lcdo"] .pg-email-header strong{color:#FFD93D}
-.pg-email[data-brand="lcdo"] .pg-email-pre{color:#A1A1AA;font-family:'Geist Mono',monospace;font-size:12px}
-.pg-email[data-brand="lcdo"] .pg-email-cta{background:#FFD93D;color:#000;font-family:'Geist Mono',monospace;letter-spacing:0.15em}
-
-.pg-email[data-brand="pelvi"]{background:linear-gradient(180deg,#E9D5FF,#F3E8FF)}
-.pg-email[data-brand="pelvi"] .pg-email-subject{color:#7C3AED}
-
-.pg-email[data-brand="vellor"]{background:#0a0a0c;color:#fff}
-.pg-email[data-brand="vellor"] .pg-email-subject{color:#D4AF37;font-family:'Cormorant Garamond','Fraunces',serif;font-weight:400;letter-spacing:0.01em}
-.pg-email[data-brand="vellor"] .pg-email-header strong{color:#D4AF37;font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:0.15em;text-transform:uppercase}
-.pg-email[data-brand="vellor"] .pg-email-pre{color:#999}
-.pg-email[data-brand="vellor"] .pg-email-cta{background:transparent;border:1px solid #D4AF37;color:#D4AF37;letter-spacing:0.2em;text-transform:uppercase}
-
-/* Tone variants */
-.pg-email[data-tone="urgencia"] .pg-email-subject{font-family:'Geist',sans-serif;font-style:normal;font-weight:800;letter-spacing:-0.03em}
-.pg-email[data-tone="urgencia"] .pg-email-cta{background:#dc2626;color:#fff}
-
-/* ─── C · OPEN THIS EMAIL · botón gigante premium ─── */
-.open-email-prompt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:32px;text-align:center;background:radial-gradient(ellipse at center,rgba(15,23,42,0.95),rgba(0,0,0,0.98));backdrop-filter:blur(8px);z-index:6;opacity:0;transition:opacity 0.6s ease,visibility 0.6s ease;visibility:hidden}
-.open-email-prompt.show{opacity:1;visibility:visible}
-.open-email-prompt.opened{opacity:0;visibility:hidden;transform:scale(1.05);transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1),visibility 0.7s ease}
-.open-prompt-inner{max-width:560px}
-.open-prompt-tag{font-family:'Geist Mono',monospace;font-size:10px;color:var(--blue-bright);letter-spacing:0.3em;margin-bottom:18px;display:flex;align-items:center;justify-content:center;gap:10px}
-.open-prompt-tag::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--blue-bright);box-shadow:0 0 0 0 rgba(96,165,250,0.6);animation:livePulse 1.6s ease-in-out infinite}
-.open-prompt-h{font-family:'Geist',sans-serif;font-weight:800;font-size:clamp(38px,5.5vw,68px);line-height:0.95;letter-spacing:-0.045em;margin-bottom:14px;color:#fff}
-.open-prompt-h em{font-style:italic;font-weight:300;font-family:'Fraunces',serif;color:var(--blue-bright)}
-.open-prompt-sub{font-family:'Geist Mono',monospace;font-size:13px;color:var(--text-mute);margin-bottom:36px;letter-spacing:0.02em}
-.open-prompt-sub span{color:#fff;font-style:italic;font-family:'Fraunces',serif}
-
-.btn-open-email{display:inline-flex;align-items:center;gap:14px;padding:22px 38px;background:linear-gradient(135deg,var(--blue-bright),var(--blue));color:#000;font-family:'Geist',sans-serif;font-weight:700;font-size:17px;letter-spacing:-0.01em;border:none;border-radius:99px;cursor:none;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),box-shadow 0.4s,gap 0.3s;position:relative;overflow:hidden;animation:btnGlow 3s ease-in-out infinite}
-@media(max-width:899px){.btn-open-email{cursor:pointer;padding:18px 28px;font-size:15px}}
-@keyframes btnGlow{0%,100%{box-shadow:0 14px 40px -8px rgba(59,130,246,0.5),0 0 0 0 rgba(96,165,250,0.5)}50%{box-shadow:0 24px 60px -8px rgba(59,130,246,0.7),0 0 0 18px rgba(96,165,250,0)}}
-.btn-open-email:hover{transform:translateY(-3px) scale(1.02);gap:18px}
-.btn-open-icon{font-size:22px;line-height:1}
-.btn-open-arrow{font-size:20px;transition:transform 0.3s}
-.btn-open-email:hover .btn-open-arrow{transform:translateX(4px)}
-.open-prompt-hint{font-family:'Geist Mono',monospace;font-size:10px;color:var(--text-soft);letter-spacing:0.25em;margin-top:32px}
-
-/* ─── DRAG SLIDER ANTES/DESPUÉS (A · show don't tell) ─── */
-.slider-wrap{position:relative;max-width:1100px;max-height:600px;margin:60px auto 30px;aspect-ratio:16/10;border-radius:24px;overflow:hidden;background:#000;box-shadow:0 80px 160px -40px rgba(0,0,0,0.95),0 0 0 1px rgba(255,255,255,0.05);cursor:ew-resize;user-select:none;-webkit-user-select:none;touch-action:none}
-@media(min-width:1024px){.slider-wrap{aspect-ratio:16/10}}
-@media(max-width:899px){.slider-wrap{aspect-ratio:4/5;max-height:none}}
-@media(max-width:599px){.slider-wrap{aspect-ratio:3/4}}
-.slider-before,.slider-after{position:absolute;inset:0;overflow:hidden}
-.slider-after{clip-path:inset(0 0 0 50%);will-change:clip-path}
-.slider-after img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;max-width:100%}
-
-/* Fake Mailchimp template feo */
-.fake-mailchimp{height:100%;background:#f4f4f4;font-family:Arial,Helvetica,sans-serif;color:#222;overflow-y:auto}
-.fm-header{background:#fff;padding:22px;text-align:center;border-bottom:1px solid #e5e5e5;font-family:'Times New Roman',serif;font-weight:bold;font-size:24px;letter-spacing:2px;color:#1a1a1a}
-.fm-banner{background:#dc2626;padding:18px;text-align:center;color:#fff;font-weight:bold;font-size:13px;letter-spacing:1px}
-.fm-hero{background:#fff;padding:30px 24px;text-align:center}
-.fm-hero h1{font-size:34px;font-weight:bold;color:#dc2626;margin-bottom:8px;line-height:1.1}
-.fm-hero p{font-size:16px;color:#444;margin-bottom:6px;font-weight:bold}
-.fm-urgency{font-size:13px !important;color:#666 !important;margin-bottom:20px !important;font-weight:normal !important}
-.fm-stock{background:linear-gradient(135deg,#888,#444);width:100%;aspect-ratio:16/9;margin-bottom:20px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;letter-spacing:2px;opacity:0.5}
-.fm-stock::after{content:'[ STOCK PHOTO ]';color:#fff}
-.fm-cta{background:#dc2626;color:#fff;border:none;padding:14px 36px;font-size:14px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;border-radius:4px;cursor:pointer;font-family:Arial,sans-serif}
-.fm-products{background:#fff;padding:20px 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.fm-prod{text-align:center}
-.fm-prod>div{background:#ddd;aspect-ratio:1;margin-bottom:6px}
-.fm-prod p{font-size:11px;color:#222;margin-bottom:2px}
-.fm-prod p:last-child{font-size:13px;font-weight:bold;color:#dc2626}
-.fm-footer{background:#222;padding:18px;text-align:center;color:#999;font-size:10px}
-
-/* Handle del slider */
-.slider-handle{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:3px;background:var(--blue-bright);box-shadow:0 0 30px rgba(96,165,250,0.7);z-index:15;cursor:ew-resize;will-change:left}
-.slider-handle-grip{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;background:linear-gradient(135deg,var(--blue-bright),var(--blue));color:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;box-shadow:0 0 0 8px rgba(0,0,0,0.6),0 0 50px rgba(96,165,250,0.7);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1)}
-.slider-handle:hover .slider-handle-grip,.slider-handle:active .slider-handle-grip{transform:translate(-50%,-50%) scale(1.1)}
-.slider-line{position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:100%;background:transparent}
-
-/* Labels */
-.slider-label{position:absolute;top:18px;font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:0.25em;padding:7px 14px;border-radius:99px;font-weight:700;z-index:10;backdrop-filter:blur(10px)}
-.slider-label-before{left:18px;color:#dc2626;background:rgba(255,255,255,0.95)}
-.slider-label-after{right:18px;color:var(--blue-bright);background:rgba(0,0,0,0.85);border:1px solid rgba(96,165,250,0.4)}
-
-.slider-cue{text-align:center;font-size:11px;color:var(--text-soft);letter-spacing:0.3em;margin-top:24px}
-
-/* ─── BANDA MÉTRICAS HERO (firma agencia top) ─── */
-.hero-metrics{padding:60px 32px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(180deg,#000,rgba(59,130,246,0.04),#000);position:relative}
-.hero-metrics-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
-@media(min-width:768px){.hero-metrics-inner{grid-template-columns:1fr 1px 1fr 1px 1fr 1px 1fr;gap:0}}
-.hm-item{text-align:center;padding:0 24px}
-.hm-num{font-family:'Geist',sans-serif;font-weight:900;font-size:clamp(48px,5.5vw,82px);line-height:0.9;letter-spacing:-0.05em;background:linear-gradient(135deg,var(--blue-bright),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px;font-feature-settings:"tnum"}
-.hm-suffix{font-size:0.55em;color:var(--blue-bright);-webkit-text-fill-color:var(--blue-bright);font-weight:800;margin-left:2px}
-.hm-label{font-family:'Geist',sans-serif;font-weight:600;font-size:14px;color:#fff;letter-spacing:-0.01em;line-height:1.35}
-.hm-label span{display:block;font-family:'Geist Mono',monospace;font-size:10px;color:var(--text-soft);font-weight:400;margin-top:4px;letter-spacing:0.1em;text-transform:uppercase}
-.hm-divider{display:none;height:60%;background:linear-gradient(180deg,transparent,var(--line) 30%,var(--line) 70%,transparent)}
-@media(min-width:768px){.hm-divider{display:block}}
-
-/* ─── BANDA INTEGRACIONES (marquee infinito) ─── */
-.integrations-band{padding:50px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:rgba(0,0,0,0.5);position:relative}
-.integrations-band::before,.integrations-band::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:5;pointer-events:none}
-.integrations-band::before{left:0;background:linear-gradient(90deg,#000,transparent)}
-.integrations-band::after{right:0;background:linear-gradient(-90deg,#000,transparent)}
-.integrations-track{display:flex;gap:80px;animation:slide 40s linear infinite;white-space:nowrap;width:max-content}
-@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.integration-logo{display:flex;align-items:center;gap:12px;flex-shrink:0;opacity:0.45;transition:opacity 0.3s}
-.integration-logo:hover{opacity:1}
-.integration-logo .logo-mark{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;color:#fff}
-.integration-logo span{font-family:'Geist',sans-serif;font-weight:600;font-size:18px;letter-spacing:-0.01em;color:#fff}
-
-/* ─── RESULTADOS REALES · números gigantes ─── */
-.results-section{padding:140px 32px;background:linear-gradient(180deg,#000,#040814 50%,#000);position:relative;overflow:hidden}
-@media(max-width:899px){.results-section{padding:80px 20px}}
-.results-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:48px}
-@media(min-width:768px){.results-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1100px){.results-grid{grid-template-columns:repeat(4,1fr)}}
-.result-card{padding:32px 28px;background:linear-gradient(135deg,rgba(15,23,42,0.6),rgba(8,8,15,0.8));border:1px solid var(--line);border-radius:22px;transition:all 0.5s cubic-bezier(0.16,1,0.3,1);position:relative;overflow:hidden}
-.result-card:hover{border-color:rgba(59,130,246,0.4);transform:translateY(-6px);box-shadow:0 30px 80px -20px rgba(59,130,246,0.2)}
-.result-num{font-family:'Geist',sans-serif;font-weight:900;font-size:clamp(48px,5.5vw,72px);line-height:0.9;letter-spacing:-0.05em;background:linear-gradient(135deg,var(--blue-bright),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:6px;font-feature-settings:"tnum"}
-.result-suffix{font-size:0.6em;color:var(--blue-bright);-webkit-text-fill-color:var(--blue-bright);font-weight:700}
-.result-label{font-family:'Geist',sans-serif;font-weight:600;font-size:15px;color:#fff;margin-bottom:6px;letter-spacing:-0.01em}
-.result-meta{font-family:'Geist Mono',monospace;font-size:10px;color:var(--text-soft);letter-spacing:0.15em;text-transform:uppercase}
-
-/* ─── PROCESO TIMELINE · 4 fases visuales ─── */
-.process-section{padding:140px 32px;position:relative}
-@media(max-width:899px){.process-section{padding:80px 20px}}
-.process-timeline{display:grid;grid-template-columns:1fr;gap:24px;margin-top:60px;position:relative}
-@media(min-width:768px){.process-timeline{grid-template-columns:repeat(4,1fr);gap:18px}}
-.process-step{position:relative;padding:32px 26px;background:linear-gradient(135deg,rgba(15,23,42,0.6),rgba(8,8,15,0.8));border:1px solid var(--line);border-radius:22px;transition:all 0.5s cubic-bezier(0.16,1,0.3,1)}
-.process-step:hover{border-color:rgba(59,130,246,0.4);transform:translateY(-4px)}
-.process-step::after{content:'';position:absolute;right:-18px;top:50%;width:18px;height:1px;background:linear-gradient(90deg,var(--line-bright),transparent);display:none}
-@media(min-width:768px){.process-step:not(:last-child)::after{display:block}}
-.step-num{font-family:'Geist',sans-serif;font-weight:900;font-size:48px;line-height:1;letter-spacing:-0.04em;color:rgba(96,165,250,0.15);position:absolute;top:18px;right:22px}
-.step-tag{font-family:'Geist Mono',monospace;font-size:10px;color:var(--blue-bright);letter-spacing:0.3em;margin-bottom:14px}
-.step-h{font-family:'Geist',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.02em;margin-bottom:10px;color:#fff}
-.step-p{font-size:13px;color:var(--text-mute);line-height:1.5;font-weight:300}
-.step-time{font-family:'Geist Mono',monospace;font-size:9px;color:var(--blue-bright);letter-spacing:0.2em;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
-
-/* ─── FAQ accordion ─── */
-.faq-section{padding:140px 32px;background:linear-gradient(180deg,#000,#040814 50%,#000)}
-@media(max-width:899px){.faq-section{padding:80px 20px}}
-.faq-list{margin-top:48px;max-width:920px;margin-left:auto;margin-right:auto}
-.faq-item{border-bottom:1px solid var(--line);padding:0}
-.faq-item summary{padding:24px 0;cursor:none;display:flex;align-items:center;justify-content:space-between;gap:20px;list-style:none;transition:color 0.3s;font-family:'Geist',sans-serif;font-weight:600;font-size:clamp(16px,2vw,20px);letter-spacing:-0.01em;color:#fff}
-@media(max-width:899px){.faq-item summary{cursor:pointer;padding:20px 0}}
-.faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary::after{content:'+';font-size:28px;color:var(--blue-bright);font-weight:200;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);flex-shrink:0}
-.faq-item[open] summary{color:var(--blue-bright)}
-.faq-item[open] summary::after{transform:rotate(45deg)}
-.faq-item summary:hover{color:var(--blue-bright)}
-.faq-content{padding:0 0 28px;color:var(--text-mute);line-height:1.65;font-size:15px;font-weight:300;max-width:760px}
-.faq-content p+p{margin-top:12px}
-.faq-content strong{color:#fff;font-weight:500}
-.faq-content .blue{color:var(--blue-bright)}
-
-/* ─── MANIFIESTO ─── */
-.manifesto{padding:160px 32px}
-@media(max-width:899px){.manifesto{padding:80px 18px}}
-@media(max-width:599px){.manifesto{padding:60px 16px}}
-.manifesto-quote{font-size:clamp(140px,22vw,360px)}
-@media(max-width:599px){.manifesto-quote{font-size:140px;margin-bottom:-30px}}
-.manifesto-h{font-size:clamp(28px,7vw,98px)}
-@media(max-width:599px){.manifesto-h{font-size:28px;line-height:1.05}}
-
-/* ─── MARQUEE 3D rotado · perspectiva infinita ─── */
-.marquee-3d-section{padding:60px 0;background:#000;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;perspective:1000px}
-.marquee-3d-container{transform:rotateZ(-3deg) translateZ(0);overflow:hidden;width:110vw;margin-left:-5vw}
-.marquee-3d-track{display:flex;gap:60px;animation:marqueeSlide 30s linear infinite;white-space:nowrap;width:max-content;padding:8px 0}
-.marquee-3d-track.marquee-reverse{animation-direction:reverse;animation-duration:36s}
-@keyframes marqueeSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.marquee-3d-track span{font-family:'Geist',sans-serif;font-weight:900;font-size:clamp(48px,7vw,100px);letter-spacing:-0.04em;color:rgba(255,255,255,0.07);display:inline-block;white-space:nowrap;line-height:1}
-.marquee-3d-track span.amber{color:var(--blue-bright);opacity:0.8}
-
-/* ─── FLOATING CTA DOCK · bottom siempre visible ─── */
-.cta-dock{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);z-index:9990;display:flex;align-items:center;gap:10px;padding:10px 12px 10px 18px;background:rgba(15,23,42,0.85);backdrop-filter:blur(20px);border:1px solid rgba(96,165,250,0.3);border-radius:99px;box-shadow:0 20px 60px -15px rgba(0,0,0,0.8),0 0 40px -10px rgba(59,130,246,0.3);opacity:0;transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1),transform 0.6s cubic-bezier(0.16,1,0.3,1);font-family:'Geist',sans-serif}
-.cta-dock.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.cta-dock-text{font-size:13px;color:#fff;font-weight:500;letter-spacing:-0.01em}
-.cta-dock-text strong{color:var(--blue-bright);font-weight:700}
-.cta-dock-btn{padding:9px 18px;background:linear-gradient(135deg,var(--blue-bright),var(--blue));color:#000;font-weight:700;font-size:13px;border-radius:99px;text-decoration:none;letter-spacing:-0.01em;transition:transform 0.3s,box-shadow 0.3s}
-.cta-dock-btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px -8px rgba(59,130,246,0.6)}
-.cta-dock-close{width:28px;height:28px;background:transparent;border:none;color:var(--text-soft);cursor:pointer;font-size:18px;line-height:1;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s}
-.cta-dock-close:hover{color:#fff;background:rgba(255,255,255,0.1)}
-@media(max-width:599px){.cta-dock{bottom:16px;padding:8px 10px 8px 14px;border-radius:99px;width:calc(100% - 32px);max-width:380px;justify-content:space-between}.cta-dock-text{font-size:12px}.cta-dock-btn{padding:8px 14px;font-size:12px}}
-
-/* ─── SECTION PROGRESS INDICATOR (lateral dots) ─── */
-.section-progress{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:14px;opacity:0;transition:opacity 0.6s ease}
-.section-progress.show{opacity:1}
-@media(max-width:899px){.section-progress{display:none}}
-.section-dot{width:10px;height:10px;border-radius:50%;border:1px solid rgba(255,255,255,0.25);background:transparent;cursor:none;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);position:relative;display:block}
-.section-dot:hover{border-color:var(--blue-bright);transform:scale(1.3)}
-.section-dot.active{background:var(--blue-bright);border-color:var(--blue-bright);box-shadow:0 0 18px rgba(96,165,250,0.6);transform:scale(1.2)}
-.section-dot::after{content:attr(data-name);position:absolute;right:22px;top:50%;transform:translateY(-50%);font-family:'Geist Mono',monospace;font-size:10px;color:#fff;background:rgba(0,0,0,0.85);padding:5px 10px;border-radius:6px;white-space:nowrap;letter-spacing:0.1em;opacity:0;pointer-events:none;transition:opacity 0.3s;border:1px solid var(--line)}
-.section-dot:hover::after{opacity:1}
-
-/* ─── CONFETTI emitter ─── */
-.confetti-piece{position:fixed;width:8px;height:8px;pointer-events:none;z-index:99000;border-radius:2px;will-change:transform,opacity}
-
-/* ─── CURSOR trail dots ─── */
-.cursor-trail{position:fixed;top:0;left:0;width:4px;height:4px;background:rgba(96,165,250,0.6);border-radius:50%;pointer-events:none;z-index:99996;transform:translate3d(-50%,-50%,0);transition:opacity 0.5s ease}
-@media(max-width:899px){.cursor-trail{display:none}}
+/* SVG defs */
+.svg-defs{position:absolute;width:0;height:0}
 
 /* ════════════════════════════════════════════════════════════════
-   📱 MOBILE FIX MASIVO v16 · todas las correcciones críticas
+   ✨ TÉCNICAS PREMIUM v8 · Jhey Tompkins + Tahir + Jerry style
    ════════════════════════════════════════════════════════════════ */
-@media(max-width:899px){
-  /* Hero mejor proporcionado */
-  #inbox-hero{min-height:100svh}
-  .inbox-header{padding:12px 16px;flex-wrap:wrap;gap:8px}
-  .inbox-title{font-size:12px}
-  .inbox-count{font-size:9px;letter-spacing:0.1em}
 
-  /* Email list compacto · scroll suave */
-  .email-list{padding:10px 12px}
-  .email-item{padding:10px 12px;gap:10px}
-  .email-avatar{width:30px;height:30px;font-size:11px}
-  .email-from{font-size:12px}
-  .email-time{font-size:9px}
-  .email-subject{font-size:11.5px}
-  .email-preview{font-size:10.5px}
-
-  /* Email view más compacto */
-  .email-view{padding:24px 16px}
-  .email-view-header{padding-bottom:18px;margin-bottom:22px;gap:10px}
-  .email-view-header .email-avatar{width:40px;height:40px;font-size:14px}
-  .email-view-from{font-size:13px}
-  .email-view-meta{font-size:11px}
-  .email-view-subject{font-size:24px;line-height:1.1;margin-bottom:14px}
-  .email-view-body p{font-size:14px;line-height:1.6;margin-bottom:14px}
-
-  /* Stats inline · 1 col vertical */
-  .email-stats{grid-template-columns:1fr;gap:14px;padding:18px}
-  .stat-num{font-size:38px}
-
-  /* Adjuntos · 1 col */
-  .attach-grid{grid-template-columns:1fr}
-  .attach-chip{padding:9px 11px}
-  .attach-chip strong{font-size:11.5px}
-  .attach-chip span{font-size:9.5px}
-
-  /* Open prompt · ajustar tamaños */
-  .open-email-prompt{padding:24px 18px}
-  .open-prompt-h{font-size:32px;margin-bottom:12px}
-  .open-prompt-sub{font-size:11.5px;margin-bottom:24px}
-  .btn-open-email{padding:16px 24px;font-size:14px;gap:10px}
-
-  /* Hero metrics · 2x2 grid mobile */
-  .hero-metrics{padding:40px 20px}
-  .hero-metrics-inner{grid-template-columns:1fr 1fr;gap:24px}
-  .hm-item{padding:0 8px}
-  .hm-num{font-size:38px}
-  .hm-label{font-size:12px}
-  .hm-label span{font-size:9px}
-
-  /* Drag slider · aspect ratio mobile + handle más grande */
-  .slider-wrap{aspect-ratio:3/4;border-radius:18px}
-  .slider-handle-grip{width:54px;height:54px;font-size:20px}
-  .slider-label{font-size:9px;padding:5px 10px;top:12px}
-  .slider-label-before{left:12px}
-  .slider-label-after{right:12px}
-  .fm-header{font-size:18px;padding:16px}
-  .fm-banner{font-size:11px;padding:14px}
-  .fm-hero h1{font-size:24px}
-  .fm-hero p{font-size:13px}
-  .fm-cta{padding:11px 22px;font-size:12px}
-  .fm-products{padding:14px;gap:8px}
-  .fm-prod p{font-size:9px}
-  .fm-prod p:last-child{font-size:11px}
-
-  /* Stack mockups · stacking off, normal flow vertical */
-  .stacking-section{gap:30px;padding-bottom:40px;padding:0 12px 40px}
-  .stack-mockup{position:relative !important;top:auto !important;width:100%;border-radius:18px}
-  .stack-mockup-content{padding:24px 20px}
-  .stack-mockup-num{font-size:64px;margin-bottom:-12px}
-  .stack-mockup-h{font-size:26px}
-  .stack-mockup-p{font-size:13px}
-  .stack-mockup-img img{min-height:240px}
-
-  /* Playground · 1 col + reducir padding */
-  .playground-controls{padding:22px}
-  .playground-preview{padding:18px;min-height:340px}
-  .pg-mockup-frame{max-width:100%}
-  .pg-mockup-body{min-height:300px}
-  .pg-email{padding:24px 20px;min-height:300px}
-  .pg-email-subject{font-size:22px}
-  .pg-email-pre{font-size:13px}
-
-  /* Bento · stack vertical */
-  .bento{grid-template-columns:1fr !important}
-  .bento-card[data-w2],.bento-card[data-w4],.bento-card[data-h2]{grid-column:span 1 !important;grid-row:span 1 !important}
-  .bento-card{padding:22px}
-
-  /* Marquee 3D · más pequeño */
-  .marquee-3d-section{padding:36px 0}
-  .marquee-3d-track span{font-size:42px;letter-spacing:-0.03em}
-
-  /* Section progress hidden ya */
-  /* CTA dock más pequeño */
-  .cta-dock-text{font-size:11.5px}
-
-  /* Reply thread más compacto */
-  .reply-thread{padding:16px;gap:11px}
-  .thread-avatar{width:36px;height:36px;font-size:13px}
-  .thread-text{font-size:13px}
-  .thread-tag{font-size:8.5px;margin-left:0;margin-top:6px;display:inline-block}
-
-  /* Contact cards más compacto */
-  .reply-cta-block{padding:28px 20px}
-  .reply-h{font-size:38px;letter-spacing:-0.04em}
-  .contact-card{padding:14px 16px;gap:14px}
-  .contact-icon{width:42px;height:42px;font-size:18px}
-  .contact-content strong{font-size:14px}
-  .contact-content span{font-size:11px}
-  .contact-fineprint{font-size:11.5px}
-
-  /* Process timeline stack vertical */
-  .process-timeline{grid-template-columns:1fr;gap:14px}
-  .process-step{padding:24px 20px}
-  .process-step::after{display:none !important}
-  .step-h{font-size:18px}
-  .step-p{font-size:12.5px}
-
-  /* Results grid 2x2 mobile */
-  .results-grid{grid-template-columns:1fr 1fr;gap:14px}
-  .result-card{padding:20px 16px}
-  .result-num{font-size:36px}
-  .result-label{font-size:13px}
-  .result-meta{font-size:9px}
-
-  /* FAQ tighter */
-  .faq-item summary{padding:18px 0;font-size:15px}
-  .faq-content{font-size:13.5px;line-height:1.6;padding:0 0 22px}
-
-  /* Story section padding reducido */
-  section.story{padding:60px 16px}
-  .story-h{font-size:30px;letter-spacing:-0.035em}
-  .story-sub{font-size:14px}
-
-  /* Footer mega más controlado */
-  .footer-mega{font-size:80px}
-
-  /* Live counter mobile fits */
-  .live-counter{margin:0 auto 30px;padding:12px 16px}
-  .live-stats{gap:8px;font-size:10px;flex-wrap:wrap;justify-content:center}
+/* ─── 1. SHINY/FOIL TEXT con conic-gradient · Jhey signature ─── */
+@property --shiny-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
+.shiny{
+  background:conic-gradient(from var(--shiny-angle),#3B82F6,#60A5FA,#1D4ED8,#60A5FA,#3B82F6);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  -webkit-text-fill-color:transparent;
+  animation:shinySpin 8s linear infinite;
 }
+@keyframes shinySpin{to{--shiny-angle:360deg}}
 
-@media(max-width:399px){
-  .open-prompt-h{font-size:26px}
-  .email-view-subject{font-size:20px}
-  .stack-mockup-h{font-size:22px}
-  .results-grid{grid-template-columns:1fr}
-  .hero-metrics-inner{grid-template-columns:1fr}
+/* ─── 2. 3D FLIP CARDS (preserve-3d puro · sin libs) ─── */
+.flip-3d{perspective:1500px;cursor:pointer}
+.flip-3d-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.9s cubic-bezier(0.16,1,0.3,1)}
+.flip-3d:hover .flip-3d-inner{transform:rotateY(180deg)}
+.flip-3d-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.flip-3d-back{transform:rotateY(180deg)}
+
+/* ─── 3. STACKING CARDS · simplificadas (sin sticky · evita freeze) ─── */
+.stack-section{position:relative;display:flex;flex-direction:column;gap:60px;padding:0 32px}
+.stack-card{
+  margin:0 auto;
+  max-width:1100px;width:100%;
+  border-radius:28px;
+  overflow:hidden;
+  background:linear-gradient(135deg,rgba(15,23,42,0.95),rgba(8,8,15,0.98));
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 60px 140px -40px rgba(0,0,0,0.95),0 0 0 1px rgba(255,255,255,0.04);
+  transition:transform 0.6s cubic-bezier(0.16,1,0.3,1),border-color 0.5s,box-shadow 0.5s;
+  opacity:0;transform:translateY(60px);
 }
+.stack-card.in{opacity:1;transform:translateY(0)}
+.stack-card:hover{transform:translateY(-6px);border-color:rgba(59,130,246,0.4);box-shadow:0 80px 180px -40px rgba(0,0,0,0.95),0 30px 80px -20px rgba(59,130,246,0.25)}
+.stack-card .stack-inner{display:grid;grid-template-columns:1fr;gap:0;min-height:480px}
+@media(min-width:768px){.stack-card .stack-inner{grid-template-columns:1fr 1fr}}
+.stack-card-img{background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.stack-card-img img{width:100%;height:100%;object-fit:cover;object-position:top}
+.stack-card-content{padding:48px 40px;display:flex;flex-direction:column;justify-content:center}
+.stack-card-tag{font-family:'Geist Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:0.3em;margin-bottom:18px}
+.stack-card-num{font-family:'Geist',sans-serif;font-weight:900;font-size:120px;color:rgba(59,130,246,0.08);line-height:0.9;letter-spacing:-0.05em;margin-bottom:-30px}
+.stack-card h3{font-family:'Geist',sans-serif;font-weight:800;font-size:clamp(36px,4.5vw,52px);line-height:0.96;letter-spacing:-0.045em;margin-bottom:18px;color:#fff}
+.stack-card p{font-size:16px;color:#A1A1AA;line-height:1.55;font-weight:300;margin-bottom:24px}
+.stack-card-meta{font-family:'Geist Mono',monospace;font-size:10px;color:#52525B;letter-spacing:0.25em;margin-top:auto}
 
-/* ─── LIVE counter footer (agencia top gimmick) ─── */
-.live-counter{display:flex;align-items:center;justify-content:center;gap:12px;padding:16px 24px;margin:0 auto 50px;max-width:980px;background:rgba(15,23,42,0.6);border:1px solid rgba(59,130,246,0.2);border-radius:99px;backdrop-filter:blur(20px);font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-mute);letter-spacing:0.05em;flex-wrap:wrap}
-@media(max-width:599px){.live-counter{font-size:10px;padding:14px 18px;border-radius:24px}}
-.live-pulse{width:8px;height:8px;border-radius:50%;background:#10B981;box-shadow:0 0 0 0 rgba(16,185,129,0.7);animation:livePulse 1.6s ease-in-out infinite;flex-shrink:0}
-@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,0.6)}70%{box-shadow:0 0 0 12px rgba(16,185,129,0)}100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}}
-.live-stats{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center}
-.live-stats strong{color:var(--blue-bright);font-weight:600;font-feature-settings:"tnum"}
-.live-label{color:#10B981;font-weight:700;letter-spacing:0.15em}
-.live-sep{color:var(--text-soft);opacity:0.5}
+/* ─── 4. PATTERN BREAK · diagonal section · Jerry signature ─── */
+.pattern-break{
+  position:relative;
+  padding:160px 32px;
+  background:linear-gradient(180deg,#0a0a0c 0%,rgba(59,130,246,0.04) 50%,#0a0a0c 100%);
+  overflow:hidden;
+}
+.pattern-break::before{
+  content:'';position:absolute;top:50%;left:-10%;right:-10%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--amber) 30%,var(--amber2) 70%,transparent);
+  transform:translateY(-50%) rotate(-3deg);opacity:0.3;
+}
+.pattern-break .pattern-content{
+  max-width:1400px;margin:0 auto;
+  display:grid;grid-template-columns:1fr;gap:80px;align-items:center;
+  position:relative;z-index:5;
+}
+@media(min-width:900px){.pattern-break .pattern-content{grid-template-columns:1.4fr 0.6fr}}
+.pattern-h{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(40px,6.5vw,96px);line-height:0.95;letter-spacing:-0.025em;color:#fff}
+.pattern-h em{font-style:normal;font-weight:700;font-family:'Geist',sans-serif;letter-spacing:-0.045em}
+.pattern-callout{padding:32px;border-radius:24px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);font-family:'Geist Mono',monospace;font-size:13px;color:#3B82F6;letter-spacing:0.05em;line-height:1.6}
 
-/* ─── FOOTER mega ─── */
-footer{padding:60px 32px 40px;background:#000;border-top:1px solid var(--line);text-align:center;position:relative;overflow:hidden}
-.footer-mega{font-family:'Geist',sans-serif;font-weight:900;font-size:clamp(80px,18vw,260px);line-height:0.85;letter-spacing:-0.05em;background:linear-gradient(180deg,var(--blue-bright) 0%,var(--blue) 50%,transparent 100%);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px}
-.footer-tag{font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-soft);letter-spacing:0.3em;margin-bottom:36px}
-.footer-bottom{max-width:1280px;margin:0 auto;padding-top:30px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;align-items:center;font-size:12px;color:var(--text-soft)}
-.footer-bottom a:hover{color:var(--blue-bright)}
-@media(max-width:899px){.footer-bottom{justify-content:center;text-align:center}}
+/* ─── 5. SCROLL-INDICATOR cinematográfico ─── */
+.scroll-cue{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);font-family:'Geist Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.3em;display:flex;flex-direction:column;align-items:center;gap:12px;animation:cueFloat 3s ease-in-out infinite}
+.scroll-cue::after{content:'';width:1px;height:36px;background:linear-gradient(180deg,var(--amber),transparent)}
+@keyframes cueFloat{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 
+/* MOBILE specific */
+@media (max-width:899px){
+  .phone-frame{width:230px;height:480px;transform:none}
+  .story-phone-pane{order:-1;margin-bottom:30px}
+  .lock-time{font-size:48px}
+  .stack-card{position:relative;top:auto !important}
+  .stack-card .stack-inner{grid-template-columns:1fr}
+  .stack-card-num{font-size:80px}
+}
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- CURSOR magnético + trails + progress bar + lightbox + dock      -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<div class="cursor-ring"></div>
-<div class="cursor-dot"></div>
-<div class="cursor-trail" data-i="0"></div>
-<div class="cursor-trail" data-i="1"></div>
-<div class="cursor-trail" data-i="2"></div>
-<div class="cursor-trail" data-i="3"></div>
-<div class="cursor-trail" data-i="4"></div>
+<!-- SVG defs (shared gradients) -->
+<svg class="svg-defs">
+  <defs>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- PROGRESS BAR top -->
 <div id="progress"></div>
 
-<!-- Section progress indicator lateral -->
-<nav class="section-progress" id="sectionProgress" aria-label="Sections">
-  <a href="#openPrompt" class="section-dot" data-name="HERO · INBOX"></a>
-  <a href="#servicios" class="section-dot" data-name="§1 · SERVICIOS"></a>
-  <a href="#antes-despues" class="section-dot" data-name="§1.5 · ANTES/DESPUÉS"></a>
-  <a href="#trabajo" class="section-dot" data-name="§2 · TRABAJO"></a>
-  <a href="#sistema" class="section-dot" data-name="§3 · SISTEMA"></a>
-  <a href="#playground" class="section-dot" data-name="§3.3 · PLAYGROUND"></a>
-  <a href="#faq" class="section-dot" data-name="§4.5 · FAQ"></a>
-  <a href="#reply" class="section-dot" data-name="§5 · CONTACTO"></a>
-</nav>
+<!-- BACKGROUND SVG · path que se dibuja al scrollear (decorativo) -->
+<svg class="scroll-svg-bg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+  <path d="M 100 50 Q 200 200 400 250 T 700 350 Q 900 400 850 600 T 500 750 Q 200 800 150 950" />
+</svg>
 
-<!-- Floating CTA dock bottom -->
-<div class="cta-dock" id="ctaDock">
-  <span class="cta-dock-text">¿Te gusta lo que ves? <strong>Hablemos.</strong></span>
-  <a href="#reply" class="cta-dock-btn">Empezar →</a>
-  <button class="cta-dock-close" id="ctaDockClose" aria-label="Cerrar">×</button>
-</div>
-
-<div id="lightbox">
-  <button id="lightbox-close" aria-label="Cerrar">×</button>
-  <img id="lightbox-img" src="" alt="">
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- ESCENA 1 · LOADER EDITORIAL premium                             -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<div id="scene-loader">
-  <p class="loader-mark">VEXOR · EMAIL CINEMA</p>
-  <h1 class="loader-h">
-    <span class="loader-line">Cada mañana, tu cliente abre 47 emails.</span>
-    <span class="loader-line">Solo lee uno.</span>
-  </h1>
-  <p class="loader-counter">CARGANDO LA BANDEJA · <strong>1/1</strong> emails que valen la pena</p>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- ESCENA 2 · INBOX HERO                                           -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section id="inbox-hero">
-  <canvas id="mesh-bg"></canvas>
-  <div class="mesh-vignette"></div>
-
-  <!-- Inbox header -->
-  <header class="inbox-header">
-    <div class="inbox-brand">
-      <div class="inbox-logo">V</div>
+<!-- NAV -->
+<nav>
+  <div class="inner">
+    <a href="#" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff">
+      <span class="logo-mark">V</span>
       <div>
-        <div class="inbox-title">Bandeja · martes 09:32</div>
-        <div class="mono" style="font-size:9px;color:var(--text-soft);letter-spacing:0.15em;margin-top:2px">VEXOR · EMAIL CINEMA</div>
+        <div style="font-weight:700;font-size:14px;letter-spacing:-0.01em">VEXOR</div>
+        <div class="mono" style="font-size:9px;color:#52525B;letter-spacing:0.2em">CONSULTING</div>
+      </div>
+    </a>
+    <div style="display:none;gap:36px;align-items:center" class="nav-links-desktop">
+      <a href="#problema">Por qué</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#trabajo">Trabajo</a>
+      <a href="#sistema">Sistema</a>
+      <a href="#contacto" class="btn-amber">Hablemos →</a>
+    </div>
+  </div>
+</nav>
+<style>@media (min-width:900px){.nav-links-desktop{display:flex !important}#proceso .section-h{max-width:56%}#proceso .section-sub{max-width:48%}}</style>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- HERO -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <canvas id="mesh-canvas"></canvas>
+  <div class="hero-grid"></div>
+  <div class="hero-vignette"></div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <p class="hero-tag">· EMAIL MARKETING PARA ECOMMERCE ·</p>
+      <h1 class="hero-h1">
+        Emails que se ven<br>
+        como <span class="shiny">tu marca</span>.
+      </h1>
+      <p class="hero-sub">Diseñamos las campañas y los flows de Klaviyo de tiendas online. Cada email a medida, con las fotos y el texto reales de la marca, y revisado por una persona antes de salir. Pensado para leerse en el móvil.</p>
+      <div class="hero-cta">
+        <a href="#trabajo" class="btn-amber">Ver el trabajo →</a>
+        <a href="#contacto" class="btn-ghost">Hablemos</a>
       </div>
     </div>
-    <div class="inbox-meta">
-      <div class="inbox-count"><span id="count-current">47</span> / <span id="count-total">47</span> · <strong id="count-vexor">1 vale la pena</strong></div>
-    </div>
-  </header>
 
-  <div class="inbox-body">
-    <!-- LISTA EMAILS · 7 visibles, 6 se borran, 1 queda (VEXOR) -->
-    <div class="email-list" id="email-list">
-      <!-- emails generados por JS -->
-    </div>
+    <div class="phone-stage">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="phone-statusbar">
+            <span>9:32</span>
+            <div style="display:flex;gap:6px;font-size:10px"><span>📶</span><span>🔋</span></div>
+          </div>
+          <div class="phone-island"></div>
 
-    <!-- VISTA EMAIL · empty al inicio · luego abre VEXOR fullscreen -->
-    <div class="email-view">
-      <div class="email-view-empty" id="view-empty">
-        <span>·</span>
-        <span>SELECCIONA UN EMAIL</span>
-        <span>·</span>
-      </div>
-      <!-- C · BOTÓN GIGANTE "OPEN THIS EMAIL" antes de abrir email -->
-      <div class="open-email-prompt" id="openPrompt">
-        <div class="open-prompt-inner">
-          <p class="open-prompt-tag">UN EMAIL ESPERA · MARCADO COMO IMPORTANTE</p>
-          <h2 class="open-prompt-h">VEXOR <em>te ha escrito.</em></h2>
-          <p class="open-prompt-sub">Subject: <span>Esta landing es el email · los otros 46 ya los borraste</span></p>
-          <button class="btn-open-email" id="openEmailBtn">
-            <span class="btn-open-icon">✉</span>
-            <span>Abrir el email</span>
-            <span class="btn-open-arrow">→</span>
-          </button>
-          <p class="open-prompt-hint">↓ o sigue scrolleando · ya está abierto</p>
+          <!-- 6 phone slides · cambian con --scroll -->
+          <div class="phone-slide" data-stage="0">
+            <p class="lock-date">MARTES, 4 MAYO</p>
+            <p class="lock-time">9:32</p>
+            <div class="lock-notif">
+              <p>· MAILCHIMP · ahora</p>
+              <strong>🔥 OFERTA!! 50% DTO 🛍️</strong>
+            </div>
+          </div>
+
+          <div class="phone-slide" data-stage="1">
+            <div class="welcome-block">
+              <p class="welcome-tag">— BIENVENIDA —</p>
+              <p class="welcome-h">Bienvenida.<br>Esto es solo<br>el principio.</p>
+              <div class="welcome-cta">DESCUBRIR →</div>
+            </div>
+          </div>
+
+          <div class="phone-slide" data-stage="2">
+            <p class="cart-tag">— A 1 PASO —</p>
+            <p class="cart-h">Aún está<br>en tu carrito</p>
+            <div class="cart-item">
+              <div class="cart-img"></div>
+              <div class="cart-info"><p>Producto premium</p><p>€89,00</p></div>
+            </div>
+            <div class="cart-cta">FINALIZAR COMPRA →</div>
+          </div>
+
+          <div class="phone-slide" data-stage="3">
+            <p class="post-tag">— GRACIAS —</p>
+            <p class="post-h">Tu pedido<br>ya está en camino.</p>
+            <div class="post-track">
+              <p>SEGUIMIENTO</p>
+              <strong>#VX-8472-MOR</strong>
+            </div>
+            <p class="post-eta">Lo tendrás en 48h.</p>
+          </div>
+
+          <div class="phone-slide" data-stage="4">
+            <p class="winback-tag">— TE EXTRAÑAMOS —</p>
+            <p class="winback-h">Ha pasado<br>tiempo.<br><span style="color:#a855f7">Vuelve.</span></p>
+            <div class="winback-cta">VER NOVEDADES →</div>
+          </div>
+
+          <div class="phone-slide" data-stage="5">
+            <img src="assets/trabajo_01_moda_halloween.webp" alt="Email de Halloween diseñado por VEXOR">
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <article class="email-view-content" id="view-vexor">
-        <div class="email-view-header">
-          <div class="email-avatar" style="background:linear-gradient(135deg,var(--blue-bright),var(--blue-deep));color:#000">V</div>
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- MARQUEE -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="amber">DISEÑO A MEDIDA</span><span>·</span>
+    <span>FLOWS DE KLAVIYO</span><span>·</span>
+    <span class="amber">CAMPAÑAS CADA MES</span><span>·</span>
+    <span>4 IDIOMAS</span><span>·</span>
+    <span class="amber">REVISIÓN HUMANA</span><span>·</span>
+    <span>CERO DATOS INVENTADOS</span><span>·</span>
+    <!-- duplicate for infinite loop -->
+    <span class="amber">DISEÑO A MEDIDA</span><span>·</span>
+    <span>FLOWS DE KLAVIYO</span><span>·</span>
+    <span class="amber">CAMPAÑAS CADA MES</span><span>·</span>
+    <span>4 IDIOMAS</span><span>·</span>
+    <span class="amber">REVISIÓN HUMANA</span><span>·</span>
+    <span>CERO DATOS INVENTADOS</span><span>·</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- PROBLEMA -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="problema">
+  <div class="section-inner">
+    <p class="section-tag reveal">01 · POR QUÉ</p>
+    <h2 class="section-h reveal">Tu email no debería parecer<br><span class="amber-grad">el de cualquier otra tienda.</span></h2>
+    <p class="section-sub reveal delay-1">Demasiadas tiendas mandan la misma plantilla con otro logo. Y cuando falta un dato, alguien se lo inventa.</p>
+
+    <div class="bento" style="margin-top:60px">
+      <div class="bento-card span-2 reveal">
+        <p class="b-tag">DOLOR #1</p>
+        <h3 class="b-h">La plantilla de siempre</h3>
+        <p class="b-p">Logo arriba, foto, botón y pie legal. La misma pieza para una joyería que para una tienda de bicis.</p>
+      </div>
+      <div class="bento-card reveal delay-1">
+        <p class="b-tag">DOLOR #2</p>
+        <h3 class="b-h">Datos que nadie dio</h3>
+        <p class="b-p">Descuentos, reseñas y cifras que la marca nunca respaldó. Nosotros no ponemos ni uno.</p>
+      </div>
+      <div class="bento-card reveal delay-2">
+        <p class="b-tag">DOLOR #3</p>
+        <h3 class="b-h">Flows olvidados</h3>
+        <p class="b-p">Bienvenidas de hace años que enseñan productos que ya no se venden.</p>
+      </div>
+      <div class="bento-card span-4 reveal delay-3">
+        <div style="display:flex;justify-content:space-between;align-items:center;height:100%;flex-wrap:wrap;gap:20px">
           <div>
-            <div class="email-view-from">VEXOR Consulting <span style="color:var(--blue-bright);font-size:11px;margin-left:6px">✦ verificado</span></div>
-            <div class="email-view-meta">vexor.es · <span>martes 09:32</span> · para ti</div>
+            <p class="b-tag">LO QUE HACEMOS DISTINTO</p>
+            <h3 class="b-h">Cada email sale con las fotos, los colores y el texto reales de la marca. Y una persona lo revisa antes de entregarlo.</h3>
+          </div>
+          <div style="text-align:right">
+            <div class="b-num amber-grad">721</div>
+            <p class="mono" style="font-size:10px;color:#52525B;letter-spacing:0.25em;margin-top:4px">EMAILS ENTREGADOS EN OCTUBRE 2026</p>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <h1 class="email-view-subject">
-          Esta landing es <em>el email</em>.<br>
-          Los otros 46 ya los borraste.
-        </h1>
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- STORYTELLING SCROLL · iPhone sticky con 6 historias -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section id="proceso">
+  <div class="section-inner">
+    <p class="section-tag reveal">02 · CÓMO TRABAJAMOS</p>
+    <h2 class="section-h reveal">Un email para cada momento.<br><span class="amber-grad">Del primer día a la siguiente compra</span>.</h2>
+    <p class="section-sub reveal delay-1" style="margin-bottom:80px">Baja despacio. Cada momento de la relación con tu cliente tiene su email, y cada email se diseña para tu marca.</p>
 
-        <div class="email-view-body">
-          <p>Hola.</p>
-          <p>Tu cliente abre la bandeja cada mañana. Recibe <strong>47 emails</strong>. Borra 46 sin abrirlos. Solo lee uno.</p>
-          <p>Nuestro trabajo es hacer que <span class="blue">ese único email seas tú</span>.</p>
-
-          <!-- STATS INLINE animados (densidad real con datos) -->
-          <div class="email-stats">
-            <div class="stat-block">
-              <div class="stat-num" data-count="38">0</div>
-              <div class="stat-label">% open rate medio<br><span>vs 22% sector</span></div>
+    <div class="story-stage" id="story">
+      <!-- TEXT PANE · 6 blocks que cambian con scroll -->
+      <div class="story-text-pane">
+        <div class="story-text">
+          <div class="story-block active" data-story="0">
+            <p class="story-tag">· INICIO ·</p>
+            <h3 class="story-h">Tu cliente se suscribe.</h3>
+            <p class="story-p">Acaba de darte su email. Lo primero que recibe tiene que parecer de tu marca, no de una plantilla.</p>
+          </div>
+          <div class="story-block" data-story="1">
+            <p class="story-tag">· BIENVENIDA ·</p>
+            <h3 class="story-h">La bienvenida.</h3>
+            <p class="story-p">Una serie que presenta la marca, su producto y por qué comprarle, con el tono y las fotos de la propia tienda.</p>
+          </div>
+          <div class="story-block" data-story="2">
+            <p class="story-tag">· CARRITO ·</p>
+            <h3 class="story-h">El carrito abandonado.</h3>
+            <p class="story-p">Recordatorios que enseñan lo que dejó y suenan a la marca, no a un aviso automático.</p>
+          </div>
+          <div class="story-block" data-story="3">
+            <p class="story-tag">· DESPUÉS DE COMPRAR ·</p>
+            <h3 class="story-h">El momento más cálido.</h3>
+            <p class="story-p">Confirmación, envío, cuidado del producto y la siguiente compra. Cada paso con su propio email.</p>
+          </div>
+          <div class="story-block" data-story="4">
+            <p class="story-tag">· RECUPERACIÓN ·</p>
+            <h3 class="story-h">Cuando deja de abrir.</h3>
+            <p class="story-p">Novedades y razones para volver. Sin descuentos que la marca no haya decidido.</p>
+          </div>
+          <div class="story-block" data-story="5">
+            <p class="story-tag">· CAMPAÑAS ·</p>
+            <h3 class="story-h">El calendario del mes.</h3>
+            <p class="story-p">Las campañas de cada mes con sus fechas: Halloween, Black Friday, Navidad. Cada fecha ambientada y con su asunto y preheader preparados.</p>
+          </div>
+        </div>
+      </div>
+      <!-- iPhone STICKY que vive aquí -->
+      <div class="story-phone-pane">
+        <!-- Reuse phone visual · pero como decoración (el principal está fijo en hero) -->
+        <div class="phone-frame" style="transform:rotateY(-8deg) rotateX(2deg)">
+          <div class="phone-screen">
+            <div class="phone-statusbar">
+              <span>9:32</span>
+              <div style="display:flex;gap:6px;font-size:10px"><span>📶</span><span>🔋</span></div>
             </div>
-            <div class="stat-block">
-              <div class="stat-num" data-count="3.4">0</div>
-              <div class="stat-label">x conversion<br><span>vs welcome genérico</span></div>
+            <div class="phone-island"></div>
+            <!-- Active phone-slide se cambia con JS según story scroll -->
+            <div id="story-phone-slides">
+              <div class="phone-slide active" data-story-slide="0" style="background:linear-gradient(180deg,#0a0a0f 0%,#1a1a2e 100%);opacity:1">
+                <p class="lock-date">MARTES, 4 MAYO</p>
+                <p class="lock-time">9:32</p>
+                <div class="lock-notif">
+                  <p>· VEXOR · ahora</p>
+                  <strong>Bienvenida</strong>
+                </div>
+              </div>
+              <div class="phone-slide" data-story-slide="1" style="background:linear-gradient(180deg,#3B82F6 0%,#1D4ED8 100%);opacity:0">
+                <div class="welcome-block">
+                  <p class="welcome-tag">— BIENVENIDA —</p>
+                  <p class="welcome-h">Bienvenida.<br>Esto es solo<br>el principio.</p>
+                  <div class="welcome-cta">DESCUBRIR →</div>
+                </div>
+              </div>
+              <div class="phone-slide" data-story-slide="2" style="background:#fff;opacity:0">
+                <p class="cart-tag">— A 1 PASO —</p>
+                <p class="cart-h">Aún está<br>en tu carrito</p>
+                <div class="cart-item">
+                  <div class="cart-img"></div>
+                  <div class="cart-info"><p>Producto premium</p><p>€89,00</p></div>
+                </div>
+                <div class="cart-cta">FINALIZAR COMPRA →</div>
+              </div>
+              <div class="phone-slide" data-story-slide="3" style="background:linear-gradient(180deg,#064e3b 0%,#0a0a0c 100%);opacity:0">
+                <p class="post-tag">— GRACIAS —</p>
+                <p class="post-h">Tu pedido<br>ya está en camino.</p>
+                <div class="post-track"><p>SEGUIMIENTO</p><strong>#VX-8472-MOR</strong></div>
+                <p class="post-eta">Lo tendrás en 48h.</p>
+              </div>
+              <div class="phone-slide" data-story-slide="4" style="background:linear-gradient(180deg,#581c87 0%,#0a0a0c 100%);opacity:0">
+                <p class="winback-tag">— TE EXTRAÑAMOS —</p>
+                <p class="winback-h">Ha pasado<br>tiempo.<br><span style="color:#a855f7">Vuelve.</span></p>
+                <div class="winback-cta">VER NOVEDADES →</div>
+              </div>
+              <div class="phone-slide" data-story-slide="5" style="background:#000;opacity:0;padding:0">
+                <img src="assets/trabajo_05_cosmetica.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top">
+              </div>
             </div>
-            <div class="stat-block">
-              <div class="stat-num" data-count="15">0</div>
-              <div class="stat-label">min por campaña<br><span>vs 2 semanas agencia</span></div>
-            </div>
           </div>
-
-          <p style="margin-top:28px"><strong>Email cinematográfico para eCommerce 6-7 cifras.</strong> Welcome flows, abandoned cart, post-purchase, win-back, browse abandonment. Calendarios mensuales editoriales. KPIs accionables.</p>
-          <p>Sin plantillas Mailchimp 2018. Sin AI slop. Sin urgencia falsa. Cero diseño genérico.</p>
-
-          <!-- ADJUNTOS · 6 emails clientes reales -->
-          <div class="email-attachments">
-            <p class="attach-label">📎 6 adjuntos · trabajo real con clientes activos</p>
-            <div class="attach-grid">
-              <button class="attach-chip" data-thumb="assets/email_lcdo_01.webp">
-                <span class="attach-icon" style="background:linear-gradient(135deg,#1a1a1a,#3B82F6)">L</span>
-                <div><strong>LCDO_BlackFriday.png</strong><span>2.4MB · Dark Premium Sci-Fi</span></div>
-              </button>
-              <button class="attach-chip" data-thumb="assets/email_hero_madre.webp">
-                <span class="attach-icon" style="background:linear-gradient(135deg,#D4AF37,#F5E6CC)">B</span>
-                <div><strong>LaBoutique_Madre.png</strong><span>1.8MB · Editorial Warm</span></div>
-              </button>
-              <button class="attach-chip" data-thumb="assets/email_hero_pelvi.webp">
-                <span class="attach-icon" style="background:linear-gradient(135deg,#A855F7,#7C3AED)">P</span>
-                <div><strong>Pelvi_Empezar.png</strong><span>1.6MB · Wellness Púrpura</span></div>
-              </button>
-              <button class="attach-chip" data-thumb="assets/email_vellor_01.webp">
-                <span class="attach-icon" style="background:linear-gradient(135deg,#000,#D4AF37)">V</span>
-                <div><strong>Vellor_NewCollection.png</strong><span>2.1MB · Dark Editorial</span></div>
-              </button>
-              <button class="attach-chip" data-thumb="assets/email_velvetrend_01.webp">
-                <span class="attach-icon" style="background:linear-gradient(135deg,#1F1F23,#D6B89F)">V</span>
-                <div><strong>Velvetrend_Casual.png</strong><span>1.9MB · Casual Editorial</span></div>
-              </button>
-              <button class="attach-chip" data-thumb="assets/email_velmont_01.webp">
-                <span class="attach-icon" style="background:linear-gradient(135deg,#8B6F47,#D6B89F)">V</span>
-                <div><strong>Velmont_Mediterráneo.png</strong><span>2.3MB · Warm Masculino</span></div>
-              </button>
-            </div>
-            <p style="font-size:11px;color:var(--text-soft);margin-top:14px;font-style:italic">Click cualquiera para abrir el email completo</p>
-          </div>
-
-          <p class="email-signature" style="margin-top:36px">
-            — Si te interesa, responde abajo.<br>
-            <span style="color:var(--blue-bright);font-weight:500">Onboarding 24h. Primera entrega 48h.</span>
-          </p>
         </div>
-
-        <div class="email-view-cta">
-          <a href="#sistema" class="btn btn-primary">Ver el sistema completo →</a>
-          <a href="#reply" class="btn btn-secondary">Responder ahora</a>
-        </div>
-      </article>
-    </div>
-  </div>
-
-  <div class="scroll-cue" id="scroll-cue">↓ SIGUE LEYENDO EL EMAIL</div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- BANDA MÉTRICAS HERO (D · gigantes animados · firma agencia top) -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="hero-metrics">
-  <div class="hero-metrics-inner">
-    <div class="hm-item">
-      <div class="hm-num"><span data-result="47">0</span><span class="hm-suffix">M+</span></div>
-      <div class="hm-label">emails enviados<br><span>histórico VEXOR · 2024-2026</span></div>
-    </div>
-    <div class="hm-divider"></div>
-    <div class="hm-item">
-      <div class="hm-num"><span data-result="3.2">0</span><span class="hm-suffix">x</span></div>
-      <div class="hm-label">ROAS medio<br><span>vs benchmarks sector</span></div>
-    </div>
-    <div class="hm-divider"></div>
-    <div class="hm-item">
-      <div class="hm-num"><span data-result="287">0</span></div>
-      <div class="hm-label">campañas Q1 2026<br><span>0 retrasos · 0 plantillas</span></div>
-    </div>
-    <div class="hm-divider"></div>
-    <div class="hm-item">
-      <div class="hm-num"><span data-result="180">0</span><span class="hm-suffix">%</span></div>
-      <div class="hm-label">revenue lift medio<br><span>cliente al 6º mes</span></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- §1 · SERVICIOS (3D flip cards)                                  -->
+<!-- TRABAJO · STACKING CARDS scroll-driven (Linear/Tahir/Lusion-style) -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="story" id="servicios">
-  <div class="story-inner">
-    <p class="story-tag reveal">§1 · QUÉ ENTREGAMOS</p>
-    <h2 class="story-h reveal d1">Todo el ciclo del email.<br><em>Cinema en cada touchpoint.</em></h2>
-    <p class="story-sub reveal d2">Toca cada card para ver lo que entregamos exactamente. Sin promesas vagas · sin paquetes opacos.</p>
+<section id="trabajo">
+  <div class="section-inner" style="margin-bottom:60px">
+    <p class="section-tag reveal">03 · TRABAJO REAL</p>
+    <h2 class="section-h reveal">Cada marca.<br><span class="shiny">Su propia identidad</span>.</h2>
+    <p class="section-sub reveal delay-1">Emails entregados en octubre y noviembre de 2026. Ninguno sale de la misma plantilla.</p>
+  </div>
 
-    <div class="flip-grid">
-      <div class="flip-card reveal"><div class="flip-inner">
-        <div class="flip-face flip-front">
-          <p class="flip-tag">FLOW · 5-7 EMAILS</p>
-          <span class="flip-num">01</span>
-          <h3 class="flip-h" style="margin-top:auto">Welcome<br>Series</h3>
-          <p class="flip-p">El primer email define la relación con tu marca. x3.4 conversion vs welcome genérico.</p>
-        </div>
-        <div class="flip-face flip-back">
-          <h3 class="flip-h">Welcome Series</h3>
-          <ul class="flip-list">
-            <li>Email 1 · Bienvenida + historia marca</li>
-            <li>Email 2 · Primer producto recomendado</li>
-            <li>Email 3 · Código exclusivo 1ª compra</li>
-            <li>Email 4 · Social proof + reviews</li>
-            <li>Email 5 · Recordatorio + scarcity real</li>
-            <li>Setup completo: 48-72h</li>
-          </ul>
-          <div class="flip-cta">— DESDE 1.500€ ONE-TIME</div>
-        </div>
-      </div></div>
+  <div class="stack-section">
 
-      <div class="flip-card reveal d1"><div class="flip-inner">
-        <div class="flip-face flip-front">
-          <p class="flip-tag">FLOW · 3-4 EMAILS</p>
-          <span class="flip-num">02</span>
-          <h3 class="flip-h" style="margin-top:auto">Abandoned<br>Cart</h3>
-          <p class="flip-p">El 70% del carrito muere antes del checkout. Recuperamos el revenue invisible.</p>
+    <article class="stack-card">
+      <div class="stack-inner">
+        <div class="stack-card-content">
+          <p class="stack-card-num">01</p>
+          <p class="stack-card-tag">MODA MUJER · HALLOWEEN</p>
+          <h3>Catalina Vergara.</h3>
+          <p>Una fecha festiva siempre va ambientada. Aquí, la foto real del abrigo de su tienda sobre una escena de otoño.</p>
+          <p class="stack-card-meta">— CAMPAÑA · 31 OCTUBRE 2026 —</p>
         </div>
-        <div class="flip-face flip-back">
-          <h3 class="flip-h">Abandoned Cart</h3>
-          <ul class="flip-list">
-            <li>1h · soft reminder amigable</li>
-            <li>24h · emocional + producto</li>
-            <li>72h · urgencia con incentivo real</li>
-            <li>Cuadro gris dinámico Klaviyo</li>
-            <li>Setup: 48h</li>
-          </ul>
-          <div class="flip-cta">— DESDE 1.200€ ONE-TIME</div>
+        <div class="stack-card-img">
+          <img src="assets/trabajo_01_moda_halloween.webp" alt="Email de Halloween de Catalina Vergara" loading="lazy">
         </div>
-      </div></div>
+      </div>
+    </article>
 
-      <div class="flip-card reveal d2"><div class="flip-inner">
-        <div class="flip-face flip-front">
-          <p class="flip-tag">FLOW · 4-6 EMAILS</p>
-          <span class="flip-num">03</span>
-          <h3 class="flip-h" style="margin-top:auto">Post<br>Purchase</h3>
-          <p class="flip-p">El momento más cálido. Cliente único → cliente vitalicio.</p>
+    <article class="stack-card">
+      <div class="stack-inner">
+        <div class="stack-card-content">
+          <p class="stack-card-num">02</p>
+          <p class="stack-card-tag">MODA · PRENDA ENTERA</p>
+          <h3>Maison Victoire.</h3>
+          <p>La prenda entera en su marco, sin recortes, y el nombre del producto tal y como lo escribe la tienda.</p>
+          <p class="stack-card-meta">— CAMPAÑA · 31 OCTUBRE 2026 —</p>
         </div>
-        <div class="flip-face flip-back">
-          <h3 class="flip-h">Post-Purchase</h3>
-          <ul class="flip-list">
-            <li>Confirmación que enamora</li>
-            <li>Expectativa de envío</li>
-            <li>Tracking real + storytelling</li>
-            <li>Review honesta · sin presión</li>
-            <li>Cross-sell editorial</li>
-            <li>Setup: 72h</li>
-          </ul>
-          <div class="flip-cta">— DESDE 1.500€ ONE-TIME</div>
+        <div class="stack-card-img">
+          <img src="assets/trabajo_02_moda.webp" alt="Email de Maison Victoire" loading="lazy">
         </div>
-      </div></div>
+      </div>
+    </article>
 
-      <div class="flip-card reveal"><div class="flip-inner">
-        <div class="flip-face flip-front">
-          <p class="flip-tag">FLOW · 2-3 EMAILS</p>
-          <span class="flip-num">04</span>
-          <h3 class="flip-h" style="margin-top:auto">Browse<br>Abandonment</h3>
-          <p class="flip-p">Visitó pero no añadió. Conversión silenciosa de tráfico perdido.</p>
+    <article class="stack-card">
+      <div class="stack-inner">
+        <div class="stack-card-content">
+          <p class="stack-card-num">03</p>
+          <p class="stack-card-tag">MODA HOMBRE</p>
+          <h3>Castell Madrid.</h3>
+          <p>Una sola familia de letra, tamaños homogéneos y la prenda real como protagonista.</p>
+          <p class="stack-card-meta">— CAMPAÑA · 2 NOVIEMBRE 2026 —</p>
         </div>
-        <div class="flip-face flip-back">
-          <h3 class="flip-h">Browse Abandonment</h3>
-          <ul class="flip-list">
-            <li>Producto exacto + alternativas</li>
-            <li>Storytelling editorial</li>
-            <li>Sin pushiness</li>
-            <li>Setup: 48h</li>
-          </ul>
-          <div class="flip-cta">— DESDE 900€ ONE-TIME</div>
+        <div class="stack-card-img">
+          <img src="assets/trabajo_03_moda_hombre.webp" alt="Email de Castell Madrid" loading="lazy">
         </div>
-      </div></div>
+      </div>
+    </article>
 
-      <div class="flip-card reveal d1"><div class="flip-inner">
-        <div class="flip-face flip-front">
-          <p class="flip-tag">FLOW · 3-5 EMAILS</p>
-          <span class="flip-num">05</span>
-          <h3 class="flip-h" style="margin-top:auto">Win-Back<br>Reactivación</h3>
-          <p class="flip-p">90 días sin abrir. Antes de churn: un último intento editorial. 25% vuelve.</p>
+    <article class="stack-card">
+      <div class="stack-inner">
+        <div class="stack-card-content">
+          <p class="stack-card-num">04</p>
+          <p class="stack-card-tag">BOLSOS DE PIEL</p>
+          <h3>Vellor.</h3>
+          <p>El producto real de su catálogo y el texto de la marca, sin cambiar una palabra.</p>
+          <p class="stack-card-meta">— CAMPAÑA · 2 NOVIEMBRE 2026 —</p>
         </div>
-        <div class="flip-face flip-back">
-          <h3 class="flip-h">Win-Back</h3>
-          <ul class="flip-list">
-            <li>Recordatorio editorial · qué te enamoró</li>
-            <li>Novedades en tu categoría</li>
-            <li>Oferta única personalizada</li>
-            <li>Goodbye email (si no responde)</li>
-            <li>Setup: 72h</li>
-          </ul>
-          <div class="flip-cta">— DESDE 1.200€ ONE-TIME</div>
+        <div class="stack-card-img">
+          <img src="assets/trabajo_04_bolsos.webp" alt="Email de Vellor" loading="lazy">
         </div>
-      </div></div>
+      </div>
+    </article>
 
-      <div class="flip-card reveal d2" style="grid-column:span 1"><div class="flip-inner">
-        <div class="flip-face flip-front" style="background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(8,8,15,0.98));border-color:rgba(59,130,246,0.3)">
-          <p class="flip-tag">CAMPAÑAS · MENSUAL</p>
-          <span class="flip-num" style="color:rgba(96,165,250,0.3)">06</span>
-          <h3 class="flip-h" style="margin-top:auto">Newsletter<br>+ Campañas</h3>
-          <p class="flip-p">12-16 campañas/mes. BFCM, San Valentín, Madre, Navidad. 15 min cada una con sistema IA.</p>
+    <article class="stack-card">
+      <div class="stack-inner">
+        <div class="stack-card-content">
+          <p class="stack-card-num">05</p>
+          <p class="stack-card-tag">COSMÉTICA</p>
+          <h3>Lunéa Scents.</h3>
+          <p>El envase real que enseña la tienda, la paleta de la marca y una palabra que manda en el titular.</p>
+          <p class="stack-card-meta">— CAMPAÑA · 25 OCTUBRE 2026 —</p>
         </div>
-        <div class="flip-face flip-back">
-          <h3 class="flip-h">Newsletter + Campañas</h3>
-          <ul class="flip-list">
-            <li>12-16 emails/mes</li>
-            <li>Calendario seasonal completo</li>
-            <li>3 variantes A/B subject</li>
-            <li>Diseño cinema + copy editorial</li>
-            <li>Reportes mensuales KPI</li>
-          </ul>
-          <div class="flip-cta">— DESDE 1.500€/MES</div>
+        <div class="stack-card-img">
+          <img src="assets/trabajo_05_cosmetica.webp" alt="Email de Lunéa Scents" loading="lazy">
         </div>
-      </div></div>
+      </div>
+    </article>
+
+    <article class="stack-card">
+      <div class="stack-inner">
+        <div class="stack-card-content">
+          <p class="stack-card-num">06</p>
+          <p class="stack-card-tag">E-BIKE · EE. UU. · EN INGLÉS</p>
+          <h3>Velox.</h3>
+          <p>Un solo producto contado en ocho campañas distintas, en inglés y con las fotos de su tienda.</p>
+          <p class="stack-card-meta">— CAMPAÑA · 25 OCTUBRE 2026 —</p>
+        </div>
+        <div class="stack-card-img">
+          <img src="assets/trabajo_06_ebike.webp" alt="Email de Velox" loading="lazy">
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- PATTERN BREAK · sección Jerry-style "slow you down moment" -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section class="pattern-break">
+  <div class="pattern-content">
+    <p class="pattern-h reveal">
+      Las mejores webs no se hacen para <em>parecer bonitas</em>.
+      <br>Se hacen para <span class="shiny">romper patrones</span>,
+      <br>para hacerte parar,
+      <br>para hacerte sentir que <em>hay algo</em>
+      <br>que merece ser <em>entendido</em>.
+    </p>
+    <div class="pattern-callout reveal delay-1">
+      &gt; Eso aplica al email también.<br><br>
+      Por eso cada marca de arriba<br>tiene su propia pieza.<br><br>
+      Por eso cero plantillas.<br>Por eso cero datos inventados.<br><br>
+      Y por eso una persona revisa<br>cada email antes de que salga.
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- §1.5 · DRAG SLIDER ANTES/DESPUÉS (A · show don't tell)          -->
+<!-- SISTEMA · BENTO -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="story" id="antes-despues">
-  <div class="story-inner">
-    <p class="story-tag reveal">§1.5 · ARRASTRA EL HANDLE</p>
-    <h2 class="story-h reveal d1">Mismo cliente.<br><em>Antes y después.</em></h2>
-    <p class="story-sub reveal d2">Arrastra el slider con el ratón (o el dedo en mobile) · izquierda lo que tu agencia anterior te entregaba · derecha lo que te entregamos nosotros · mismo presupuesto · 0 plantillas.</p>
-
-    <div class="slider-wrap reveal d3" id="dragSlider">
-      <!-- ANTES · email genérico Klaviyo template -->
-      <div class="slider-before">
-        <div class="fake-mailchimp">
-          <div class="fm-header">YOUR.STORE</div>
-          <div class="fm-banner">🔥 FREE SHIPPING + 20% OFF · CODE: SAVE20 🔥</div>
-          <div class="fm-hero">
-            <h1>SUMMER SALE!!!</h1>
-            <p>UP TO 50% OFF EVERYTHING</p>
-            <p class="fm-urgency">Hurry! Limited time · Only today!</p>
-            <div class="fm-stock"></div>
-            <button class="fm-cta">SHOP NOW! →</button>
-          </div>
-          <div class="fm-products">
-            <div class="fm-prod"><div></div><p>Product</p><p>$49</p></div>
-            <div class="fm-prod"><div></div><p>Product</p><p>$39</p></div>
-            <div class="fm-prod"><div></div><p>Product</p><p>$59</p></div>
-          </div>
-          <div class="fm-footer">YOUR.STORE · 123 Main St · Unsubscribe · View in browser</div>
-        </div>
-      </div>
-
-      <!-- DESPUÉS · email VEXOR real (La Boutique) -->
-      <div class="slider-after">
-        <img src="assets/email_hero_madre.webp" alt="VEXOR · La Boutique">
-      </div>
-
-      <!-- HANDLE -->
-      <div class="slider-handle" id="dragHandle">
-        <div class="slider-handle-grip">⇆</div>
-        <div class="slider-line"></div>
-      </div>
-
-      <!-- LABELS -->
-      <div class="slider-label slider-label-before">ANTES · KLAVIYO TEMPLATE</div>
-      <div class="slider-label slider-label-after">DESPUÉS · VEXOR</div>
-    </div>
-
-    <p class="slider-cue mono reveal d4">⇆ ARRASTRA · TÚ DECIDES CUÁL ABRES SI ESTÁS EN LA BANDEJA</p>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- §2 · TRABAJO REAL · galería 6 emails                            -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="story" id="trabajo">
-  <div class="story-inner">
-    <p class="story-tag reveal">§2 · TRABAJO REAL</p>
-    <h2 class="story-h reveal d1">6 marcas. <em>6 universos visuales.</em></h2>
-    <p class="story-sub reveal d2">Scrollea lento · cada email se apila sobre el anterior · 6 universos cero plantillas.</p>
-  </div>
-
-  <!-- E · STACKING SECTION (sticky + z-index incremental) -->
-  <div class="stacking-section">
-    <article class="stack-mockup">
-      <div class="stack-mockup-inner">
-        <div class="stack-mockup-content">
-          <p class="stack-mockup-num">01</p>
-          <p class="stack-mockup-tag">DARK PREMIUM SCI-FI</p>
-          <h3 class="stack-mockup-h">LCDO.</h3>
-          <p class="stack-mockup-p">Outlet tech con poética cinematográfica. Partículas warm flotando · serial codes mono · headlines tipo poster de película.</p>
-          <p class="stack-mockup-meta">— LACASADELOUTLET.ES · 2026 · ARQUETIPO 01</p>
-        </div>
-        <div class="stack-mockup-img"><img src="assets/email_lcdo_01.webp" alt="LCDO" loading="lazy"></div>
-      </div>
-    </article>
-
-    <article class="stack-mockup">
-      <div class="stack-mockup-inner">
-        <div class="stack-mockup-content">
-          <p class="stack-mockup-num">02</p>
-          <p class="stack-mockup-tag">EDITORIAL WARM FEMENINO</p>
-          <h3 class="stack-mockup-h">La Boutique.</h3>
-          <p class="stack-mockup-p">Moda femenina con tono editorial revista. Warm white + dorado. Modelo full-bleed. Tipografía serif italic · sin emojis · sin urgencia falsa.</p>
-          <p class="stack-mockup-meta">— LABOUTIQUE.LAT · 2026 · ARQUETIPO 02</p>
-        </div>
-        <div class="stack-mockup-img"><img src="assets/email_hero_madre.webp" alt="La Boutique" loading="lazy"></div>
-      </div>
-    </article>
-
-    <article class="stack-mockup">
-      <div class="stack-mockup-inner">
-        <div class="stack-mockup-content">
-          <p class="stack-mockup-num">03</p>
-          <p class="stack-mockup-tag">WELLNESS PÚRPURA</p>
-          <h3 class="stack-mockup-h">Pelvicontrol.</h3>
-          <p class="stack-mockup-p">Salud íntima femenina con sensibilidad editorial. Gradient púrpura signature. Serif Fraunces. Tono cálido sin clínico.</p>
-          <p class="stack-mockup-meta">— PELVICONTROL.COM · 2026 · ARQUETIPO 03</p>
-        </div>
-        <div class="stack-mockup-img"><img src="assets/email_hero_pelvi.webp" alt="Pelvicontrol" loading="lazy"></div>
-      </div>
-    </article>
-
-    <article class="stack-mockup">
-      <div class="stack-mockup-inner">
-        <div class="stack-mockup-content">
-          <p class="stack-mockup-num">04</p>
-          <p class="stack-mockup-tag">DARK PREMIUM EDITORIAL</p>
-          <h3 class="stack-mockup-h">Vellor Store.</h3>
-          <p class="stack-mockup-p">Joyería con storytelling premium. Negro + dorado · engraved typography · fotos macro de pieza. Bilingüe ES/EN.</p>
-          <p class="stack-mockup-meta">— VELLORSTORE.COM · 2026 · ARQUETIPO 04</p>
-        </div>
-        <div class="stack-mockup-img"><img src="assets/email_vellor_01.webp" alt="Vellor" loading="lazy"></div>
-      </div>
-    </article>
-
-    <article class="stack-mockup">
-      <div class="stack-mockup-inner">
-        <div class="stack-mockup-content">
-          <p class="stack-mockup-num">05</p>
-          <p class="stack-mockup-tag">DARK EDITORIAL CASUAL</p>
-          <h3 class="stack-mockup-h">Velvetrend.</h3>
-          <p class="stack-mockup-p">Moda femenina contemporánea. Negro + nude + color de prenda. Quote pills tipo Instagram. Fast-fashion premium.</p>
-          <p class="stack-mockup-meta">— VELVETREND.ES · 2026 · ARQUETIPO 05</p>
-        </div>
-        <div class="stack-mockup-img"><img src="assets/email_velvetrend_01.webp" alt="Velvetrend" loading="lazy"></div>
-      </div>
-    </article>
-
-    <article class="stack-mockup">
-      <div class="stack-mockup-inner">
-        <div class="stack-mockup-content">
-          <p class="stack-mockup-num">06</p>
-          <p class="stack-mockup-tag">EDITORIAL WARM MASCULINO</p>
-          <h3 class="stack-mockup-h">Velmont.</h3>
-          <p class="stack-mockup-p">Moda masculina mediterránea. Tierras + terracota + Cormorant serif. Lookbook lifestyle. Cada email es un viaje.</p>
-          <p class="stack-mockup-meta">— VELMONT.ES · 2026 · ARQUETIPO 06</p>
-        </div>
-        <div class="stack-mockup-img"><img src="assets/email_velmont_01.webp" alt="Velmont" loading="lazy"></div>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- §3 · SISTEMA · bento                                            -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="story" id="sistema">
-  <div class="story-inner">
-    <p class="story-tag reveal">§3 · EL SISTEMA</p>
-    <h2 class="story-h reveal d1">Velocidad de máquina.<br><em>Calidad de boutique.</em></h2>
-    <p class="story-sub reveal d2">4 personas + motor IA cognitivo = capacidad de 20. Cada cliente en su universo aislado.</p>
+<section id="sistema">
+  <div class="section-inner">
+    <p class="section-tag reveal">04 · EL SISTEMA</p>
+    <h2 class="section-h reveal">Herramientas para ir rápido.<br><span class="amber-grad">Personas para decidir</span>.</h2>
+    <p class="section-sub reveal delay-1">Usamos IA y comprobaciones automáticas para producir y revisar a escala. Lo que sale, lo decide y lo revisa una persona.</p>
 
     <div class="bento">
-      <div class="bento-card reveal" data-w2 data-h2>
-        <p class="b-tag">SISTEMA COGNITIVO</p>
-        <h3 class="b-h" style="font-size:30px;line-height:1;margin-top:12px">4 capas que aprenden cada día.</h3>
-        <p class="b-p" style="margin-top:14px">Mejora 30% cada 30 días sin tu intervención. Errores documentados. Decisiones registradas. Memoria diaria por persona.</p>
+      <div class="bento-card span-2 span-2-row reveal">
+        <p class="b-tag">ASÍ SALE CADA EMAIL</p>
+        <h3 class="b-h" style="font-size:32px;line-height:1;margin-top:20px">Cuatro pasos, siempre los mismos.</h3>
+        <p class="b-p" style="margin-top:14px">Cada error que aparece se convierte en una comprobación nueva, para que no vuelva a pasar.</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px">
-          <div style="border:1px solid rgba(59,130,246,0.25);border-radius:10px;padding:10px;background:rgba(59,130,246,0.05)"><p class="mono" style="font-size:9px;color:var(--blue-bright);letter-spacing:0.2em;margin-bottom:3px">DISCOVERY</p><p style="font-size:11px">Cliente · 24h</p></div>
-          <div style="border:1px solid rgba(59,130,246,0.25);border-radius:10px;padding:10px;background:rgba(59,130,246,0.05)"><p class="mono" style="font-size:9px;color:var(--blue-bright);letter-spacing:0.2em;margin-bottom:3px">SCOUTING</p><p style="font-size:11px">Web · assets</p></div>
-          <div style="border:1px solid rgba(59,130,246,0.25);border-radius:10px;padding:10px;background:rgba(59,130,246,0.05)"><p class="mono" style="font-size:9px;color:var(--blue-bright);letter-spacing:0.2em;margin-bottom:3px">VOICE</p><p style="font-size:11px">Histórico · tono</p></div>
-          <div style="border:1px solid rgba(59,130,246,0.25);border-radius:10px;padding:10px;background:rgba(59,130,246,0.05)"><p class="mono" style="font-size:9px;color:var(--blue-bright);letter-spacing:0.2em;margin-bottom:3px">CREATION</p><p style="font-size:11px">Copy + diseño</p></div>
+          <div style="border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:10px;background:rgba(59,130,246,0.05)">
+            <p class="mono" style="font-size:9px;color:var(--amber);letter-spacing:0.2em;margin-bottom:4px">IDENTIDAD</p>
+            <p style="font-size:11px">Logo, colores y fotos de su web</p>
+          </div>
+          <div style="border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:10px;background:rgba(59,130,246,0.05)">
+            <p class="mono" style="font-size:9px;color:var(--amber);letter-spacing:0.2em;margin-bottom:4px">TEXTO</p>
+            <p style="font-size:11px">El de la marca, intacto</p>
+          </div>
+          <div style="border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:10px;background:rgba(59,130,246,0.05)">
+            <p class="mono" style="font-size:9px;color:var(--amber);letter-spacing:0.2em;margin-bottom:4px">DISEÑO</p>
+            <p style="font-size:11px">A medida, sin plantilla</p>
+          </div>
+          <div style="border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:10px;background:rgba(59,130,246,0.05)">
+            <p class="mono" style="font-size:9px;color:var(--amber);letter-spacing:0.2em;margin-bottom:4px">REVISIÓN</p>
+            <p style="font-size:11px">Comprobación y ojo humano</p>
+          </div>
         </div>
       </div>
-
-      <div class="bento-card reveal d1" data-w2>
-        <div style="display:flex;justify-content:space-between;align-items:center;height:100%;gap:16px">
-          <div><p class="b-tag">VELOCIDAD</p><h3 class="b-h">Onboarding</h3><p class="b-p">vs 2-3 semanas tradicional</p></div>
-          <div style="text-align:right"><div class="b-num" style="font-size:60px">24h</div></div>
+      <div class="bento-card span-2 reveal delay-1">
+        <div style="display:flex;justify-content:space-between;align-items:center;height:100%;gap:20px">
+          <div>
+            <p class="b-tag">VOLUMEN REAL</p>
+            <h3 class="b-h">Marcas activas</h3>
+            <p class="b-p">En el calendario de octubre de 2026.</p>
+          </div>
+          <div style="text-align:right">
+            <div class="b-num amber-grad" style="font-size:60px">52</div>
+          </div>
         </div>
       </div>
-
-      <div class="bento-card reveal d2">
-        <p class="b-tag">PRODUCCIÓN</p>
-        <div style="margin-top:auto"><div class="b-num">15min</div><p class="b-p" style="margin-top:6px">Por campaña</p></div>
-      </div>
-
-      <div class="bento-card reveal d3">
-        <p class="b-tag">ARQUETIPOS</p>
+      <div class="bento-card reveal delay-2">
+        <p class="b-tag">OCTUBRE 2026</p>
         <div style="margin-top:auto">
-          <div class="b-num">6</div>
-          <div style="display:flex;gap:5px;margin-top:8px">
-            <span style="width:14px;height:14px;border-radius:50%;background:var(--blue-bright);box-shadow:0 0 8px rgba(96,165,250,0.5)"></span>
-            <span style="width:14px;height:14px;border-radius:50%;background:#A855F7"></span>
-            <span style="width:14px;height:14px;border-radius:50%;background:#F4F4F5"></span>
-            <span style="width:14px;height:14px;border-radius:50%;background:#1F1F23;border:1px solid #444"></span>
-            <span style="width:14px;height:14px;border-radius:50%;background:#D97706"></span>
-            <span style="width:14px;height:14px;border-radius:50%;background:#7C3AED"></span>
-          </div>
+          <div class="b-num amber-grad" style="font-size:48px">721</div>
+          <p class="b-p" style="margin-top:6px">Emails entregados.</p>
         </div>
       </div>
-
-      <div class="bento-card reveal" data-w4>
+      <div class="bento-card reveal delay-3">
+        <p class="b-tag">IDIOMAS</p>
+        <div style="margin-top:auto">
+          <div class="b-num amber-grad" style="font-size:48px">4</div>
+          <p class="b-p" style="margin-top:6px">ES · EN · FR · IT</p>
+          
+        </div>
+      </div>
+      <div class="bento-card span-4 reveal">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;height:100%">
-          <div><p class="b-tag">PLATAFORMAS COMPATIBLES</p><h3 class="b-h">Tu ESP, no el nuestro.</h3></div>
-          <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
-            <div style="display:flex;align-items:center;gap:8px"><span style="width:32px;height:32px;border-radius:8px;background:#3B82F6;color:#000;display:flex;align-items:center;justify-content:center;font-weight:900">K</span><span style="font-weight:500;font-size:14px">Klaviyo</span></div>
-            <div style="display:flex;align-items:center;gap:8px;opacity:0.6"><span style="width:32px;height:32px;border-radius:8px;background:#3B82F6;color:#000;display:flex;align-items:center;justify-content:center;font-weight:900">M</span><span style="font-weight:500;font-size:14px">Mailchimp</span></div>
-            <div style="display:flex;align-items:center;gap:8px;opacity:0.6"><span style="width:32px;height:32px;border-radius:8px;background:#0070F3;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900">B</span><span style="font-weight:500;font-size:14px">Brevo</span></div>
-            <div style="display:flex;align-items:center;gap:8px;opacity:0.6"><span style="width:32px;height:32px;border-radius:8px;background:#356AE6;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900">A</span><span style="font-weight:500;font-size:14px">ActiveCampaign</span></div>
+          <div>
+            <p class="b-tag">ENTREGA</p>
+            <h3 class="b-h">Listo para programar en Klaviyo.</h3>
+            <p class="b-p">Cada email en imagen y HTML, con su asunto y su preheader, en la carpeta de Drive de tu marca.</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:8px"><span style="width:36px;height:36px;border-radius:8px;background:#3B82F6;color:#000;display:flex;align-items:center;justify-content:center;font-weight:900">K</span><span style="font-weight:500">Klaviyo</span></div>
+            
           </div>
         </div>
       </div>
@@ -1355,622 +816,101 @@ footer{padding:60px 32px 40px;background:#000;border-top:1px solid var(--line);t
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- §3.3 · LIVE EMAIL PLAYGROUND (B · interactivo · escribe y mira) -->
+<!-- MANIFIESTO -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="story" id="playground">
-  <div class="story-inner">
-    <p class="story-tag reveal">§3.3 · PLAYGROUND</p>
-    <h2 class="story-h reveal d1">Pruébalo.<br><em>Escribe un subject · ve el email VEXOR generándose.</em></h2>
-    <p class="story-sub reveal d2">Demo interactiva · escribe tu propio subject y mira cómo lo renderizamos en estilo VEXOR. No es magia · es nuestro sistema.</p>
-
-    <div class="playground reveal d3">
-      <div class="playground-controls">
-        <div class="pg-field">
-          <label>SUBJECT</label>
-          <input type="text" id="pg-subject" placeholder="Las cosas que importan, se eligen con tiempo." maxlength="80" value="Las cosas que importan, se eligen con tiempo.">
-          <span class="pg-count"><span id="pg-len">46</span>/80</span>
-        </div>
-        <div class="pg-field-row">
-          <div class="pg-field">
-            <label>MARCA</label>
-            <select id="pg-brand">
-              <option value="laboutique">La Boutique · Editorial Warm</option>
-              <option value="lcdo">LCDO · Dark Premium Sci-Fi</option>
-              <option value="pelvi">Pelvicontrol · Wellness Púrpura</option>
-              <option value="vellor">Vellor · Dark Editorial</option>
-            </select>
-          </div>
-          <div class="pg-field">
-            <label>TONO</label>
-            <select id="pg-tone">
-              <option value="editorial">Editorial · serif italic</option>
-              <option value="urgencia">Urgencia · directo CTA</option>
-              <option value="historia">Historia · narrativo</option>
-            </select>
-          </div>
-        </div>
-        <p class="pg-hint mono">→ Escribe arriba · cambia marca/tono · el preview se actualiza en tiempo real</p>
-      </div>
-
-      <div class="playground-preview">
-        <div class="pg-mockup-frame">
-          <div class="pg-mockup-bar">
-            <span class="pg-dot" style="background:#FF5F57"></span>
-            <span class="pg-dot" style="background:#FFBD2E"></span>
-            <span class="pg-dot" style="background:#28CA42"></span>
-            <span class="pg-mockup-url">vexor.es · preview email</span>
-          </div>
-          <div class="pg-mockup-body" id="pg-mockup">
-            <div class="pg-email" data-brand="laboutique" data-tone="editorial">
-              <div class="pg-email-header">
-                <strong>VEXOR · La Boutique</strong>
-                <span>martes 09:32 · para ti</span>
-              </div>
-              <h3 class="pg-email-subject" id="pg-preview-subject">Las cosas que importan, se eligen con tiempo.</h3>
-              <p class="pg-email-pre">Día de la Madre · una colección editorial pensada para ella.</p>
-              <div class="pg-email-cta">VER COLECCIÓN →</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<section style="padding:160px 32px;text-align:center;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;pointer-events:none">
+    <div style="position:absolute;top:25%;left:25%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.14),transparent 60%);filter:blur(80px)"></div>
+    <div style="position:absolute;bottom:25%;right:25%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(29,78,216,0.12),transparent 60%);filter:blur(80px)"></div>
   </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- BANDA INTEGRACIONES (marquee infinito · stack tecnológico)      -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<div class="integrations-band">
-  <div class="integrations-track">
-    <div class="integration-logo"><span class="logo-mark" style="background:#3B82F6;color:#000">K</span><span>Klaviyo</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#FFE100;color:#000">M</span><span>Mailchimp</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#0070F3;color:#fff">B</span><span>Brevo</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#356AE6;color:#fff">A</span><span>ActiveCampaign</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#5A31F4;color:#fff">S</span><span>Shopify</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#FF6900;color:#fff">W</span><span>WooCommerce</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#1E1E1E;color:#fff;border:1px solid #444">N</span><span>Notion</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#635BFF;color:#fff">$</span><span>Stripe</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#0061FE;color:#fff">D</span><span>Dropbox</span></div>
-    <!-- Duplicate para loop -->
-    <div class="integration-logo"><span class="logo-mark" style="background:#3B82F6;color:#000">K</span><span>Klaviyo</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#FFE100;color:#000">M</span><span>Mailchimp</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#0070F3;color:#fff">B</span><span>Brevo</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#356AE6;color:#fff">A</span><span>ActiveCampaign</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#5A31F4;color:#fff">S</span><span>Shopify</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#FF6900;color:#fff">W</span><span>WooCommerce</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#1E1E1E;color:#fff;border:1px solid #444">N</span><span>Notion</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#635BFF;color:#fff">$</span><span>Stripe</span></div>
-    <div class="integration-logo"><span class="logo-mark" style="background:#0061FE;color:#fff">D</span><span>Dropbox</span></div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- §3.5 · RESULTADOS REALES · números gigantes                     -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="results-section">
-  <div class="story-inner">
-    <p class="story-tag reveal">§3.5 · RESULTADOS REALES</p>
-    <h2 class="story-h reveal d1">Números <em>de clientes activos.</em></h2>
-    <p class="story-sub reveal d2">Datos agregados de los 6 clientes activos · enero–abril 2026 · medidos en Klaviyo.</p>
-
-    <div class="results-grid">
-      <div class="result-card reveal">
-        <div class="result-num"><span data-result="2.4">0</span><span class="result-suffix">M€</span></div>
-        <div class="result-label">Revenue email atribuido</div>
-        <div class="result-meta">2026 YTD · 6 clientes</div>
-      </div>
-      <div class="result-card reveal d1">
-        <div class="result-num"><span data-result="38">0</span><span class="result-suffix">%</span></div>
-        <div class="result-label">Open rate medio</div>
-        <div class="result-meta">vs sector 22%</div>
-      </div>
-      <div class="result-card reveal d2">
-        <div class="result-num"><span data-result="287">0</span></div>
-        <div class="result-label">Campañas entregadas</div>
-        <div class="result-meta">Q1 2026 · sin retrasos</div>
-      </div>
-      <div class="result-card reveal d3">
-        <div class="result-num"><span data-result="48">0</span><span class="result-suffix">h</span></div>
-        <div class="result-label">Tiempo medio entrega flow</div>
-        <div class="result-meta">vs 3 semanas agencia tradicional</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- §3.7 · PROCESO TIMELINE · 4 fases visuales                      -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="process-section">
-  <div class="story-inner">
-    <p class="story-tag reveal">§3.7 · CÓMO TRABAJAMOS CONTIGO</p>
-    <h2 class="story-h reveal d1">De call inicial a primera entrega:<br><em>96 horas.</em></h2>
-    <p class="story-sub reveal d2">Sin reuniones interminables · sin demos vacías · sin "te enviamos propuesta el lunes".</p>
-
-    <div class="process-timeline">
-      <div class="process-step reveal">
-        <span class="step-num">01</span>
-        <p class="step-tag">DÍA 1 · CALL</p>
-        <h3 class="step-h">Discovery</h3>
-        <p class="step-p">30 min con Carlos. Cuéntanos tu marca, KPIs actuales, dolores. Te decimos sí o no en la call (sin mareos).</p>
-        <div class="step-time">⏱ 30 MIN</div>
-      </div>
-
-      <div class="process-step reveal d1">
-        <span class="step-num">02</span>
-        <p class="step-tag">DÍA 1-2 · ONBOARDING</p>
-        <h3 class="step-h">Brand + Voice</h3>
-        <p class="step-p">Auto-extraemos paleta, fuentes y tono de tu web. Te lo validamos en 24h. Setup fee 200-400€ one-time.</p>
-        <div class="step-time">⏱ 24H AUTOMÁTICO</div>
-      </div>
-
-      <div class="process-step reveal d2">
-        <span class="step-num">03</span>
-        <p class="step-tag">DÍA 3-4 · PRODUCCIÓN</p>
-        <h3 class="step-h">Primera Entrega</h3>
-        <p class="step-p">Welcome flow rebrandeado o primera campaña editorial · respetando tu copy, en tu estética.</p>
-        <div class="step-time">⏱ 48-72H</div>
-      </div>
-
-      <div class="process-step reveal d3">
-        <span class="step-num">04</span>
-        <p class="step-tag">MES 1+ · OPERACIÓN</p>
-        <h3 class="step-h">KPIs + Iteración</h3>
-        <p class="step-p">Reporte mensual con 5 acciones concretas para el próximo mes. No "mejorar engagement" · acciones reales.</p>
-        <div class="step-time">⏱ MENSUAL</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- §4 · MANIFIESTO                                                 -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="story manifesto" style="text-align:center">
-  <div style="max-width:1200px;margin:0 auto;position:relative">
-    <p class="serif manifesto-quote" style="font-weight:bold;color:rgba(59,130,246,0.12);user-select:none;line-height:0.7;margin-bottom:-50px">«</p>
-    <p class="story-tag reveal" style="justify-content:center;display:flex">§4 · EL MANIFIESTO</p>
-    <p class="serif reveal d1 manifesto-h" style="font-style:italic;font-weight:300;line-height:0.95;margin-top:20px;letter-spacing:-0.025em">
-      El email no es <em style="font-style:normal;font-weight:700;font-family:'Geist',sans-serif">un canal</em>.<br>
-      Es <span style="color:var(--blue-bright);font-weight:600;font-style:normal;font-family:'Geist',sans-serif">la única ventana</span><br>
-      donde tu cliente <span style="color:var(--blue-bright);text-decoration:underline;text-underline-offset:8px;text-decoration-thickness:3px">sí</span> mira.
+  <div style="max-width:1400px;margin:0 auto;position:relative;z-index:5">
+    <p class="serif" style="font-weight:bold;color:rgba(59,130,246,0.15);user-select:none;font-size:clamp(180px,22vw,360px);line-height:0.7">«</p>
+    <p class="mono reveal" style="font-size:11px;color:var(--amber);letter-spacing:0.3em;margin-top:-50px;margin-bottom:40px">— EL MANIFIESTO —</p>
+    <p class="serif reveal delay-1" style="font-style:italic;font-weight:300;font-size:clamp(36px,7vw,100px);line-height:0.95;max-width:1300px;margin:0 auto;color:#fff">
+      El email no es un canal.<br>
+      Es <span class="amber-grad" style="font-style:normal;font-weight:700">la única ventana</span><br>
+      donde tu cliente <span style="font-style:normal;font-weight:500;text-decoration:underline;text-decoration-color:var(--amber);text-underline-offset:8px;text-decoration-thickness:4px">sí</span> mira.
     </p>
-    <p class="reveal d2" style="font-size:clamp(14px,1.6vw,18px);color:var(--text-mute);font-weight:300;margin-top:48px;max-width:560px;margin-left:auto;margin-right:auto">Diseñamos cada email como si fuera el único que tu cliente abrirá esa mañana. Porque, estadísticamente, así es.</p>
+    <p class="reveal delay-2" style="font-size:18px;color:#A1A1AA;font-weight:300;margin-top:60px;max-width:600px;margin-left:auto;margin-right:auto">Por eso diseñamos cada email como si fuera el único que va a abrir esa mañana.</p>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- MARQUEE 3D rotado · texto VEXOR gigante perspectiva (modo dios) -->
+<!-- CTA -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="marquee-3d-section">
-  <div class="marquee-3d-container">
-    <div class="marquee-3d-track">
-      <span>EMAIL CINEMA ✦</span>
-      <span>VEXOR ✦</span>
-      <span>EMAIL CINEMA ✦</span>
-      <span>VEXOR ✦</span>
-      <span>EMAIL CINEMA ✦</span>
-      <span>VEXOR ✦</span>
-      <span>EMAIL CINEMA ✦</span>
-      <span>VEXOR ✦</span>
-    </div>
-    <div class="marquee-3d-track marquee-reverse">
-      <span class="amber">SIN PLANTILLAS</span>
-      <span>—</span>
-      <span class="amber">0% AI SLOP</span>
-      <span>—</span>
-      <span class="amber">15 MIN POR CAMPAÑA</span>
-      <span>—</span>
-      <span class="amber">MADE IN SPAIN</span>
-      <span>—</span>
-      <span class="amber">SIN PLANTILLAS</span>
-      <span>—</span>
-      <span class="amber">0% AI SLOP</span>
-      <span>—</span>
-      <span class="amber">15 MIN POR CAMPAÑA</span>
-      <span>—</span>
-      <span class="amber">MADE IN SPAIN</span>
-      <span>—</span>
+<section id="contacto" class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <p class="mono reveal" style="font-size:11px;color:var(--amber);letter-spacing:0.3em;margin-bottom:30px">— EMPECEMOS —</p>
+    <h2 class="cta-h reveal delay-1">¿Hablamos de los<br>emails de <span class="amber-grad serif" style="font-style:italic">tu tienda</span>?</h2>
+    <p class="reveal delay-2" style="font-size:18px;color:#A1A1AA;font-weight:300;max-width:560px;margin:0 auto">Cuéntanos qué vendes y dónde. Te enseñamos cómo quedaría tu marca en un email.</p>
+
+    <div class="cta-form reveal delay-3" style="text-align:center">
+      <a class="btn-amber" href="mailto:gerard@vexorconsulting.com?subject=Emails%20para%20mi%20tienda" style="display:inline-block;font-size:18px;padding:18px 34px">Escríbenos →</a>
+      <p style="font-size:16px;color:#A1A1AA;margin-top:22px">o directamente a <a href="mailto:gerard@vexorconsulting.com" style="color:#fff">gerard@vexorconsulting.com</a></p>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- §4.5 · FAQ                                                      -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="faq-section" id="faq">
-  <div class="story-inner">
-    <p class="story-tag reveal">§4.5 · PREGUNTAS FRECUENTES</p>
-    <h2 class="story-h reveal d1">Lo que preguntan <em>antes de firmar.</em></h2>
-
-    <div class="faq-list">
-      <details class="faq-item reveal">
-        <summary>¿En qué se diferencia VEXOR de mi agencia actual?</summary>
-        <div class="faq-content">
-          <p>Tu agencia tarda <strong>2-3 semanas</strong> por campaña. Nosotros <strong>15 minutos</strong>. Tu agencia te entrega plantillas Mailchimp 2018. Nosotros diseñamos cada email desde el arquetipo único de tu marca · cero plantillas reutilizadas.</p>
-          <p>Tu agencia te manda un PDF mensual con métricas. Nosotros te mandamos <span class="blue">5 acciones concretas</span> para implementar el mes siguiente · con owner asignado e impacto estimado.</p>
-        </div>
-      </details>
-
-      <details class="faq-item reveal">
-        <summary>¿Cuánto cuesta exactamente? ¿Hay paquetes?</summary>
-        <div class="faq-content">
-          <p><strong>Setup fee:</strong> 200-400€ one-time (cubre onboarding automatizado + brand_rules + voice_profile + primera entrega piloto).</p>
-          <p><strong>Mensual:</strong></p>
-          <p>· Solo campañas (12-16/mes): <span class="blue">800-1.500€/mes</span><br>· Solo flows (rebrand completo): <span class="blue">1.500-3.000€/mes</span><br>· Ambos (recomendado): <span class="blue">2.000-4.000€/mes</span></p>
-          <p>Sin permanencia. Mes a mes. Si no entregamos lo prometido, cancelas sin penalización.</p>
-        </div>
-      </details>
-
-      <details class="faq-item reveal">
-        <summary>¿Cómo es posible que entreguen en 15 min cuando otras agencias tardan semanas?</summary>
-        <div class="faq-content">
-          <p>Sistema cognitivo propio con IA orquestada por departamentos. <strong>4 personas + motor IA = capacidad de 20</strong>.</p>
-          <p>Cada cliente tiene su <span class="blue">brand_rules.md</span> + <span class="blue">voice_profile.md</span> + arquetipo visual asignado. Nuestro sistema lee todo eso antes de escribir una palabra. El copy y diseño se generan respetando 100% tu marca · validados por @qa-reviewer (checklist 18 puntos).</p>
-          <p>El único paso humano es Adrián revisando y aprobando · 5 min finales.</p>
-        </div>
-      </details>
-
-      <details class="faq-item reveal">
-        <summary>¿Trabajáis con cualquier ESP o solo Klaviyo?</summary>
-        <div class="faq-content">
-          <p>Klaviyo es nuestro favorito (es lo más maduro para eCommerce premium) pero también: <strong>Mailchimp, Brevo, ActiveCampaign, ConvertKit</strong>. Nos adaptamos a tu stack actual.</p>
-          <p>Si estás en una plataforma exótica, lo evaluamos en la call.</p>
-        </div>
-      </details>
-
-      <details class="faq-item reveal">
-        <summary>¿Qué pasa con el copy de los flows · lo cambiáis?</summary>
-        <div class="faq-content">
-          <p><strong>Nunca tocamos el copy de los flows existentes.</strong> Es regla sagrada. Tu copy es tuyo · llevas meses puliéndolo · puede tener temas legales o de tono que no conocemos. Solo rediseñamos visualmente.</p>
-          <p>Para campañas nuevas (newsletters mensuales) sí escribimos el copy desde cero · respetando tu voice_profile y validándolo contigo antes de mandar.</p>
-        </div>
-      </details>
-
-      <details class="faq-item reveal">
-        <summary>¿Quién está detrás de VEXOR?</summary>
-        <div class="faq-content">
-          <p>4 personas: <strong>Carlos</strong> (founder · estrategia + cliente), <strong>Adrián</strong> (copys + calendarios), <strong>Alejandro</strong> (KPIs + optimización), <strong>Gerard</strong> (diseño + sistema técnico).</p>
-          <p>Todos hispanohablantes. Equipo distribuido entre Madrid + remoto. Hablamos español, catalán e inglés.</p>
-        </div>
-      </details>
-
-      <details class="faq-item reveal">
-        <summary>¿Y si no estoy contento? ¿Cancelar es difícil?</summary>
-        <div class="faq-content">
-          <p>Mes a mes. Cancelas avisando antes del día 25 · siguiente mes ya no se factura. Cero papeles · cero abogados · cero pasivo-agresivo. Si en 3 meses no entregamos resultados, te devolvemos el setup fee.</p>
-        </div>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- §5 · REPLY THREAD + CTA editorial (NO formulario)               -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="reply-section" id="reply">
-  <div class="reply-inner">
-
-    <!-- THREAD · 3 respuestas mock (social proof natural) -->
-    <div class="thread-section reveal">
-      <p class="thread-label">— 3 RESPUESTAS PREVIAS A ESTE EMAIL —</p>
-
-      <article class="reply-thread">
-        <div class="thread-avatar" style="background:linear-gradient(135deg,#D4AF37,#F5E6CC);color:#000">M</div>
-        <div class="thread-body">
-          <div class="thread-header">
-            <strong>María R.</strong> <span class="thread-meta">CMO · La Boutique · respondió 14 abr</span>
-          </div>
-          <p class="thread-text">Pasamos de 4 emails al mes a 12. Open rate subió del 22% al 38%. Lo mejor: nuestro cliente <em>espera</em> los emails. <span class="thread-tag">Cliente activo desde 2025</span></p>
-        </div>
-      </article>
-
-      <article class="reply-thread">
-        <div class="thread-avatar" style="background:linear-gradient(135deg,#1a1a1a,#3B82F6);color:#fff">L</div>
-        <div class="thread-body">
-          <div class="thread-header">
-            <strong>Lucas C.</strong> <span class="thread-meta">Founder · LCDO · respondió 28 mar</span>
-          </div>
-          <p class="thread-text">Welcome flow rebrand en 48h. Llevábamos 2 años con el viejo. Cero excusas. Cero disculpas. Solo entrega. <span class="thread-tag">Setup 350€</span></p>
-        </div>
-      </article>
-
-      <article class="reply-thread">
-        <div class="thread-avatar" style="background:linear-gradient(135deg,#A855F7,#7C3AED);color:#fff">T</div>
-        <div class="thread-body">
-          <div class="thread-header">
-            <strong>Teresa S.</strong> <span class="thread-meta">Marketing Lead · Pelvicontrol · respondió 7 abr</span>
-          </div>
-          <p class="thread-text">Antes pagábamos 3.200€/mes a una agencia que tardaba 2 semanas por campaña. Ahora 1.800€/mes y entregan en 15 min. Sin perder calidad. <span class="thread-tag">Reducción coste 44%</span></p>
-        </div>
-      </article>
-    </div>
-
-    <!-- CTA EDITORIAL · contacto directo SIN formulario -->
-    <div class="reply-cta-block reveal d2">
-      <p class="reply-mark">— RESPONDER AL EMAIL —</p>
-      <h2 class="reply-h">¿<em>Empezamos</em>?</h2>
-      <p class="reply-sub">Sin formularios. Sin demos de 45 min. Sin "agendaremos una call". <br>Escríbenos directo · te respondemos antes de 24h.</p>
-
-      <div class="contact-options">
-        <a href="mailto:hola@vexor.es?subject=Quiero%20empezar%20con%20VEXOR&amp;body=Hola%2C%0A%0AMi%20marca%20es%3A%20%0AMi%20web%3A%20%0AFacturaci%C3%B3n%20anual%20aprox%3A%20%0A%0A%C2%BFQu%C3%A9%20me%20trae%20aqu%C3%AD%3F%0A%0A" class="contact-card primary">
-          <div class="contact-icon">✉</div>
-          <div class="contact-content">
-            <strong>hola@vexor.es</strong>
-            <span>Email directo · respuesta &lt;24h</span>
-          </div>
-          <span class="contact-arrow">→</span>
-        </a>
-
-        <a href="#" onclick="event.preventDefault();alert('Calendly disponible en deploy real');return false;" class="contact-card">
-          <div class="contact-icon">◉</div>
-          <div class="contact-content">
-            <strong>Agendar 15 min</strong>
-            <span>Si prefieres call · sin presión · sin pitch agresivo</span>
-          </div>
-          <span class="contact-arrow">→</span>
-        </a>
-      </div>
-
-      <p class="contact-fineprint">
-        <span class="dot">●</span> Solo trabajamos con marcas eCommerce <strong>6-7 cifras</strong> (500k€+/año).<br>
-        <span class="dot">●</span> Setup fee <strong>200-400€</strong> (one-time).<br>
-        <span class="dot">●</span> Mensual <strong>1.500-4.000€</strong> según paquete (campañas + flows + KPIs).
-      </p>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- FOOTER                                                          -->
+<!-- FOOTER -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <footer>
-  <!-- LIVE counter "actividad hoy" · agencia top gimmick -->
-  <div class="live-counter">
-    <div class="live-pulse"></div>
-    <div class="live-stats">
-      <span class="live-label">EN VIVO ·</span>
-      <span><strong id="live-camp">0</strong> campañas enviadas hoy</span>
-      <span class="live-sep">·</span>
-      <span><strong id="live-rev">0</strong>€ revenue email atribuido</span>
-      <span class="live-sep">·</span>
-      <span><strong id="live-opens">0</strong> opens en últimos 60s</span>
-    </div>
-  </div>
-
+  <div class="footer-aurora"></div>
   <p class="footer-mega">VEXOR</p>
-  <p class="footer-tag">— EMAIL CINEMA · MADE IN SPAIN · 2026 —</p>
+  <p class="footer-tag">— EMAIL MARKETING PARA ECOMMERCE · 2026 —</p>
   <div class="footer-bottom">
-    <div>VEXOR Consulting® · Madrid + remoto</div>
-    <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center"><a href="#servicios">Servicios</a><a href="#trabajo">Trabajo</a><a href="#sistema">Sistema</a><a href="#faq">FAQ</a><a href="#reply">Hablemos</a></div>
-    <div class="mono" style="font-size:10px;letter-spacing:0.2em">RESPUESTA &lt;24H</div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <span class="logo-mark" style="width:28px;height:28px;font-size:12px">V</span>
+      <div>
+        <div style="font-weight:700;color:#fff;font-size:14px">VEXOR Consulting</div>
+        <div class="mono" style="font-size:9px;color:#52525B;letter-spacing:0.2em;margin-top:2px">CAMPAÑAS · FLOWS · KLAVIYO</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:24px">
+      <a href="#trabajo" style="color:#71717A;text-decoration:none;font-size:13px">Trabajo</a>
+      <a href="#sistema" style="color:#71717A;text-decoration:none;font-size:13px">Sistema</a>
+      <a href="#contacto" style="color:#71717A;text-decoration:none;font-size:13px">Contacto</a>
+    </div>
+    <p class="mono" style="font-size:11px;color:#52525B;letter-spacing:0.2em">CERO PLANTILLAS · CERO DATOS INVENTADOS</p>
   </div>
 </footer>
 
 <script>
-'use strict';
-
 // ═════════════════════════════════════════════════════════════════
-// VEXOR V11 · scroll engine + cursor + mesh canvas + inbox storytelling
+// VEXOR V2 · scroll engine ULTRA LIGERO
+// 1 listener scroll global rAF-throttled · CSS variables actualizadas
+// = 60fps real en cualquier dispositivo
 // ═════════════════════════════════════════════════════════════════
 
 (() => {
-
-  // ─── SETUP --vh real para mobile ───
-  const setVH = () => document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
-  setVH();
-  window.addEventListener('resize', setVH, { passive: true });
-
-  // ═════════════════════════════════════════════════════════════════
-  // CURSOR magnético azul
-  // ═════════════════════════════════════════════════════════════════
-  const cDot = document.querySelector('.cursor-dot');
-  const cRing = document.querySelector('.cursor-ring');
-  let mx = 0, my = 0, dx = 0, dy = 0, rx = 0, ry = 0;
-
-  if (window.innerWidth > 899) {
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
-    function animCursor() {
-      dx += (mx - dx) * 0.85;
-      dy += (my - dy) * 0.85;
-      rx += (mx - rx) * 0.18;
-      ry += (my - ry) * 0.18;
-      cDot.style.transform = `translate3d(${dx}px,${dy}px,0) translate(-50%,-50%)`;
-      cRing.style.transform = `translate3d(${rx}px,${ry}px,0) translate(-50%,-50%)`;
-      requestAnimationFrame(animCursor);
-    }
-    animCursor();
-
-    document.addEventListener('mouseover', e => {
-      const t = e.target;
-      if (t.closest('a,button,.flip-card,.bento-card,.email-card,.email-item')) {
-        document.body.classList.add('cursor-magnet');
-      } else if (t.matches('input,textarea,select')) {
-        document.body.classList.add('cursor-text');
-      }
-    });
-    document.addEventListener('mouseout', () => {
-      document.body.classList.remove('cursor-magnet', 'cursor-text');
-    });
-  }
-
-  // ═════════════════════════════════════════════════════════════════
-  // PROGRESS BAR · scroll global
-  // ═════════════════════════════════════════════════════════════════
+  const root = document.documentElement;
   let ticking = false;
+  let lastScroll = -1;
+
   function updateScroll() {
-    const sy = window.scrollY;
+    const scrollY = window.scrollY;
+    if (scrollY === lastScroll) {
+      ticking = false;
+      return;
+    }
+    lastScroll = scrollY;
     const h = document.documentElement.scrollHeight - window.innerHeight;
-    const p = Math.min(1, Math.max(0, sy / h));
-    document.documentElement.style.setProperty('--scroll', p.toFixed(4));
+    const progress = Math.min(1, Math.max(0, scrollY / h));
+    root.style.setProperty('--scroll', progress.toFixed(4));
+    root.style.setProperty('--scroll-px', scrollY + 'px');
+    updateStoryActive(scrollY);
     ticking = false;
   }
+
   window.addEventListener('scroll', () => {
-    if (!ticking) { requestAnimationFrame(updateScroll); ticking = true; }
-  }, { passive: true });
-
-  // ═════════════════════════════════════════════════════════════════
-  // MESH GRADIENT CANVAS (Stripe-style ~3KB)
-  // ═════════════════════════════════════════════════════════════════
-  const mesh = document.getElementById('mesh-bg');
-  if (mesh) {
-    const mctx = mesh.getContext('2d', { alpha: true });
-    let mw, mh;
-    function resizeMesh() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      mw = mesh.offsetWidth; mh = mesh.offsetHeight;
-      mesh.width = mw * dpr; mesh.height = mh * dpr;
-      mctx.scale(dpr, dpr);
-    }
-    resizeMesh();
-    window.addEventListener('resize', resizeMesh, { passive: true });
-
-    const blobs = [
-      { cx: 0.20, cy: 0.30, r: 600, color: '#1D4ED8', om: 0.00018, ph: 0 },
-      { cx: 0.80, cy: 0.20, r: 500, color: '#3B82F6', om: -0.00022, ph: 1.2 },
-      { cx: 0.40, cy: 0.80, r: 650, color: '#1E40AF', om: 0.00016, ph: 2.5 },
-      { cx: 0.85, cy: 0.75, r: 550, color: '#60A5FA', om: -0.00020, ph: 3.7 },
-    ];
-    let pause = false;
-    if ('IntersectionObserver' in window) {
-      const heroEl = document.getElementById('inbox-hero');
-      new IntersectionObserver(([e]) => {
-        pause = !e.isIntersecting;
-        if (!pause) requestAnimationFrame(meshFrame);
-      }, { threshold: 0 }).observe(heroEl);
-    }
-    function meshFrame(t) {
-      if (pause) return;
-      mctx.fillStyle = '#000';
-      mctx.fillRect(0, 0, mw, mh);
-      blobs.forEach(b => {
-        const cx = (b.cx + Math.sin(t * b.om + b.ph) * 0.16) * mw;
-        const cy = (b.cy + Math.cos(t * b.om * 1.3 + b.ph) * 0.16) * mh;
-        const r = b.r + Math.sin(t * b.om * 0.7) * 60;
-        const g = mctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-        g.addColorStop(0, b.color + 'AA');
-        g.addColorStop(0.4, b.color + '33');
-        g.addColorStop(1, b.color + '00');
-        mctx.fillStyle = g;
-        mctx.fillRect(0, 0, mw, mh);
-      });
-      requestAnimationFrame(meshFrame);
-    }
-    requestAnimationFrame(meshFrame);
-  }
-
-  // ═════════════════════════════════════════════════════════════════
-  // ESCENA 1 · TERMINAL LOADER (3 segundos)
-  // ═════════════════════════════════════════════════════════════════
-  const loader = document.getElementById('scene-loader');
-  setTimeout(() => {
-    loader.classList.add('done');
-    startInboxAnimation();
-  }, 2400);
-
-  // ═════════════════════════════════════════════════════════════════
-  // ESCENA 2 · INBOX HERO · 7 emails fakes + animación cleanup
-  // ═════════════════════════════════════════════════════════════════
-  const FAKE_EMAILS = [
-    { from: 'Mailchimp', subj: '🔥 ¡¡OFERTA EXCLUSIVA!! 50% DTO SOLO HOY 🛍️🎉', preview: 'No te pierdas esta locura, solo hasta medianoche...', color: '#E03B3B', time: 'ahora' },
-    { from: 'Brevo Marketing', subj: 'Newsletter semanal — Lo más nuevo en moda 👗', preview: 'Las tendencias que están arrasando este mes...', color: '#3B82F6', time: '1 min' },
-    { from: 'Random Store', subj: '¿Te has olvidado algo en tu carrito?', preview: 'Tienes 1 producto esperándote, vuelve antes de que...', color: '#F59E0B', time: '2 min' },
-    { from: 'Fashion Blast', subj: 'FLASH SALE!!! 24h - PRECIOS DE LOCURA', preview: 'Aprovecha YA, no quedará nada en stock...', color: '#A855F7', time: '3 min' },
-    { from: 'VEXOR · La Boutique', subj: 'Las cosas que importan, se eligen con tiempo.', preview: 'Día de la Madre · una colección editorial pensada para ella.', color: 'gradient', time: 'ahora', vexor: true },
-    { from: 'Daily Newsletter', subj: '🎁 Regalo gratis con tu compra hoy', preview: 'Si compras en las próximas 6 horas...', color: '#06B6D4', time: '4 min' },
-    { from: 'Generic Shop', subj: '⚡ ÚLTIMA OPORTUNIDAD ⚡ -70%', preview: 'No te lo creerás, esto es una locura total!!!', color: '#EC4899', time: '5 min' },
-  ];
-
-  function renderEmailItem(e, idx) {
-    const div = document.createElement('div');
-    div.className = 'email-item';
-    div.dataset.idx = idx;
-    if (e.vexor) div.dataset.vexor = 'true';
-    const avatarStyle = e.color === 'gradient'
-      ? 'background:linear-gradient(135deg,var(--blue-bright),var(--blue-deep));color:#000'
-      : `background:${e.color}`;
-    div.innerHTML = `
-      <div class="email-avatar" style="${avatarStyle}">${e.from[0]}</div>
-      <div class="email-content">
-        <div class="email-from-row">
-          <span class="email-from">${e.from}</span>
-          <span class="email-time">${e.time}</span>
-        </div>
-        <div class="email-subject">${e.subj}</div>
-        <div class="email-preview">${e.preview}</div>
-      </div>
-    `;
-    return div;
-  }
-
-  const list = document.getElementById('email-list');
-  FAKE_EMAILS.forEach((e, i) => list.appendChild(renderEmailItem(e, i)));
-
-  function startInboxAnimation() {
-    const items = document.querySelectorAll('.email-item:not([data-vexor])');
-    let count = 47;
-    const countEl = document.getElementById('count-current');
-
-    // Borrar emails uno a uno (excepto VEXOR)
-    items.forEach((item, i) => {
-      setTimeout(() => {
-        item.dataset.state = 'deleting';
-        // Decrementar contador
-        const target = 47 - (i + 1) * 7;
-        const startVal = count;
-        const duration = 400;
-        const t0 = performance.now();
-        function tick(now) {
-          const t = Math.min(1, (now - t0) / duration);
-          count = Math.round(startVal + (target - startVal) * t);
-          countEl.textContent = count;
-          if (t < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      }, 600 + i * 280);
-    });
-
-    // Después de cleanup → countEl=1 + mostrar prompt "Open this email" (no abrir directo)
-    setTimeout(() => {
-      countEl.textContent = '1';
-      document.getElementById('view-empty').classList.add('hide');
-      const prompt = document.getElementById('openPrompt');
-      if (prompt) prompt.classList.add('show');
-      document.getElementById('scroll-cue').classList.add('show');
-    }, 600 + items.length * 280 + 400);
-  }
-
-  // C · Botón "Abrir el email" → animación cinematográfica abrir
-  const openBtn = document.getElementById('openEmailBtn');
-  if (openBtn) {
-    openBtn.addEventListener('click', () => {
-      const prompt = document.getElementById('openPrompt');
-      prompt.classList.add('opened');
-      setTimeout(() => {
-        document.getElementById('view-vexor').classList.add('show');
-      }, 350);
-    });
-  }
-  // Auto-abrir si el usuario scrollea (no espera al click)
-  let promptAutoOpened = false;
-  window.addEventListener('scroll', () => {
-    if (promptAutoOpened) return;
-    if (window.scrollY > 100) {
-      const prompt = document.getElementById('openPrompt');
-      if (prompt && prompt.classList.contains('show') && !prompt.classList.contains('opened')) {
-        prompt.classList.add('opened');
-        setTimeout(() => {
-          document.getElementById('view-vexor').classList.add('show');
-        }, 350);
-        promptAutoOpened = true;
-      }
+    if (!ticking) {
+      requestAnimationFrame(updateScroll);
+      ticking = true;
     }
   }, { passive: true });
 
-  // ═════════════════════════════════════════════════════════════════
-  // REVEAL on intersect
-  // ═════════════════════════════════════════════════════════════════
+  // ─── REVEAL on intersect (1 IntersectionObserver para todos los .reveal) ───
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1978,404 +918,122 @@ footer{padding:60px 32px 40px;background:#000;border-top:1px solid var(--line);t
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // ═════════════════════════════════════════════════════════════════
-  // FLIP CARDS touch (mobile · click toggle)
-  // ═════════════════════════════════════════════════════════════════
-  if ('ontouchstart' in window) {
-    document.querySelectorAll('.flip-card').forEach(c => {
-      c.addEventListener('click', () => c.classList.toggle('touched'));
-    });
-  }
-
-  // ═════════════════════════════════════════════════════════════════
-  // STATS CONTADORES animados (cuando email VEXOR aparece)
-  // ═════════════════════════════════════════════════════════════════
-  function animateStats() {
-    document.querySelectorAll('.stat-num').forEach((el, idx) => {
-      const target = parseFloat(el.dataset.count);
-      const isFloat = !Number.isInteger(target);
-      const duration = 1800;
-      const t0 = performance.now();
-      function tick(now) {
-        const t = Math.min(1, (now - t0) / duration);
-        // ease out cubic
-        const eased = 1 - Math.pow(1 - t, 3);
-        const val = target * eased;
-        el.textContent = isFloat ? val.toFixed(1) : Math.round(val);
-        if (t < 1) requestAnimationFrame(tick);
-      }
-      setTimeout(() => requestAnimationFrame(tick), 200 + idx * 150);
-    });
-  }
-
-  // Disparar stats cuando email VEXOR se abre
-  const vexorViewObs = new MutationObserver(() => {
-    if (document.getElementById('view-vexor').classList.contains('show')) {
-      setTimeout(animateStats, 600);
-      vexorViewObs.disconnect();
-    }
-  });
-  if (document.getElementById('view-vexor')) {
-    vexorViewObs.observe(document.getElementById('view-vexor'), { attributes: true });
-  }
-
-  // ═════════════════════════════════════════════════════════════════
-  // ADJUNTOS · click abre lightbox con email completo
-  // ═════════════════════════════════════════════════════════════════
-  const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lightbox-img');
-  const lbClose = document.getElementById('lightbox-close');
-
-  function openLB(src) {
-    lbImg.src = src;
-    lb.classList.add('show');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeLB() {
-    lb.classList.remove('show');
-    document.body.style.overflow = '';
-  }
-
-  document.querySelectorAll('.attach-chip').forEach(c => {
-    c.addEventListener('click', () => openLB(c.dataset.thumb));
-  });
-  lbClose.addEventListener('click', closeLB);
-  lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('show')) closeLB(); });
-
-  // ═════════════════════════════════════════════════════════════════
-  // 3D TILT mouse parallax · email-card + bento-card · DESKTOP only
-  // ═════════════════════════════════════════════════════════════════
-  if (window.innerWidth > 899 && !('ontouchstart' in window)) {
-    document.querySelectorAll('.email-card,.bento-card').forEach(card => {
-      card.style.transformStyle = 'preserve-3d';
-      card.style.willChange = 'transform';
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(1500px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg) translateY(-4px)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
-  }
-
-  // ═════════════════════════════════════════════════════════════════
-  // EMAIL LIST mobile · collapsed by default · botón ver más
-  // ═════════════════════════════════════════════════════════════════
-  if (window.innerWidth <= 899) {
-    const list = document.getElementById('email-list');
-    list.dataset.collapsed = 'true';
-    // Tras animación cleanup terminada, expandir
-    setTimeout(() => { list.dataset.collapsed = 'false'; }, 4500);
-  }
-
-  // ═════════════════════════════════════════════════════════════════
-  // RESULTS counters · animados al entrar viewport
-  // ═════════════════════════════════════════════════════════════════
-  function animateResultNum(el) {
-    const target = parseFloat(el.dataset.result);
-    const isFloat = !Number.isInteger(target);
-    const duration = 2200;
-    const t0 = performance.now();
-    function tick(now) {
-      const t = Math.min(1, (now - t0) / duration);
-      const eased = 1 - Math.pow(1 - t, 3);
-      const val = target * eased;
-      el.textContent = isFloat ? val.toFixed(1) : Math.round(val);
-      if (t < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-
-  const resultIO = new IntersectionObserver((entries) => {
+  // Stack cards reveal (mismo IO)
+  const stackIo = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        animateResultNum(e.target);
-        resultIO.unobserve(e.target);
+        e.target.classList.add('in');
+        stackIo.unobserve(e.target);
       }
     });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('[data-result]').forEach(el => resultIO.observe(el));
+  }, { threshold: 0.15, rootMargin: '0px 0px -100px 0px' });
+  document.querySelectorAll('.stack-card').forEach(c => stackIo.observe(c));
 
-  // ═════════════════════════════════════════════════════════════════
-  // B · LIVE EMAIL PLAYGROUND · escribe subject + cambia marca/tono
-  // ═════════════════════════════════════════════════════════════════
-  (function playground() {
-    const subjInput = document.getElementById('pg-subject');
-    const brandSel = document.getElementById('pg-brand');
-    const toneSel = document.getElementById('pg-tone');
-    const subjPreview = document.getElementById('pg-preview-subject');
-    const lenCount = document.getElementById('pg-len');
-    const emailEl = document.querySelector('.pg-email');
-    if (!subjInput || !emailEl) return;
+  // ─── STORY storytelling · cambia activeBlock + activeSlide según scroll ───
+  const storyEl = document.getElementById('story');
+  const storyBlocks = document.querySelectorAll('.story-block');
+  const storySlides = document.querySelectorAll('[data-story-slide]');
+  let activeStoryIdx = -1;
 
-    const PRE_BY_BRAND = {
-      laboutique: 'Día de la Madre · una colección editorial pensada para ella.',
-      lcdo: 'Restock limitado · serial codes activos · 48h.',
-      pelvi: 'Lo que importa es arrancar. Nosotras te guiamos el resto.',
-      vellor: 'Crafted to last. Made to wear. New collection arrives.'
-    };
-    const HEADER_BY_BRAND = {
-      laboutique: 'VEXOR · La Boutique',
-      lcdo: 'VEXOR · LCDO',
-      pelvi: 'VEXOR · Pelvicontrol',
-      vellor: 'VEXOR · Vellor Store'
-    };
-    const CTA_BY_BRAND = {
-      laboutique: 'VER COLECCIÓN →',
-      lcdo: 'COMPRAR AHORA →',
-      pelvi: 'PROBAR PELVICONTROL →',
-      vellor: 'EXPLORE NEW IN →'
-    };
-
-    function update() {
-      const subject = subjInput.value.trim() || 'Las cosas que importan, se eligen con tiempo.';
-      const brand = brandSel.value;
-      const tone = toneSel.value;
-      subjPreview.textContent = subject;
-      lenCount.textContent = subjInput.value.length;
-      emailEl.dataset.brand = brand;
-      emailEl.dataset.tone = tone;
-      emailEl.querySelector('.pg-email-header strong').textContent = HEADER_BY_BRAND[brand];
-      emailEl.querySelector('.pg-email-pre').textContent = PRE_BY_BRAND[brand];
-      emailEl.querySelector('.pg-email-cta').textContent = CTA_BY_BRAND[brand];
+  function updateStoryActive(scrollY) {
+    if (!storyEl) return;
+    const r = storyEl.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > window.innerHeight) return;
+    // Calcular qué bloque mostrar basado en posición scroll dentro del story
+    const storyTop = r.top - window.innerHeight * 0.5;
+    const storyHeight = r.height;
+    const localProgress = Math.min(1, Math.max(0, -storyTop / (storyHeight - window.innerHeight * 0.5)));
+    const idx = Math.min(5, Math.floor(localProgress * 6));
+    if (idx !== activeStoryIdx) {
+      activeStoryIdx = idx;
+      storyBlocks.forEach((b, i) => b.classList.toggle('active', i === idx));
+      storySlides.forEach((s, i) => {
+        s.style.opacity = i === idx ? '1' : '0';
+      });
     }
+  }
 
-    subjInput.addEventListener('input', update);
-    brandSel.addEventListener('change', update);
-    toneSel.addEventListener('change', update);
-    update();
-  })();
+  // Init
+  updateScroll();
 
-  // ═════════════════════════════════════════════════════════════════
-  // DRAG SLIDER ANTES/DESPUÉS · clip-path inset dinámico
-  // ═════════════════════════════════════════════════════════════════
-  (function dragSlider() {
-    const wrap = document.getElementById('dragSlider');
-    if (!wrap) return;
-    const after = wrap.querySelector('.slider-after');
-    const handle = document.getElementById('dragHandle');
-    let dragging = false;
-
-    function setPos(clientX) {
-      const r = wrap.getBoundingClientRect();
-      let pct = ((clientX - r.left) / r.width) * 100;
-      pct = Math.max(0, Math.min(100, pct));
-      handle.style.left = pct + '%';
-      after.style.clipPath = `inset(0 0 0 ${pct}%)`;
-    }
-
-    // Mouse
-    wrap.addEventListener('mousedown', e => { dragging = true; setPos(e.clientX); e.preventDefault(); });
-    document.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
-    document.addEventListener('mouseup', () => { dragging = false; });
-
-    // Touch
-    wrap.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
-    document.addEventListener('touchmove', e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
-    document.addEventListener('touchend', () => { dragging = false; });
-
-    // Animación intro · slider hace "wave" para indicar interactividad
-    const wrapIO = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) {
-        let t = 0;
-        const intro = setInterval(() => {
-          t += 0.04;
-          const pos = 50 + Math.sin(t) * 20;
-          handle.style.left = pos + '%';
-          after.style.clipPath = `inset(0 0 0 ${pos}%)`;
-          if (t > Math.PI) {
-            clearInterval(intro);
-            handle.style.left = '50%';
-            after.style.clipPath = 'inset(0 0 0 50%)';
-          }
-        }, 16);
-        wrapIO.disconnect();
-      }
-    }, { threshold: 0.4 });
-    wrapIO.observe(wrap);
-  })();
-
-  // ═════════════════════════════════════════════════════════════════
-  // LIVE counter footer · simula actividad real-time
-  // ═════════════════════════════════════════════════════════════════
-  (function liveCounter() {
-    const camp = document.getElementById('live-camp');
-    const rev = document.getElementById('live-rev');
-    const opens = document.getElementById('live-opens');
-    if (!camp) return;
-    // Valores base · empiezan plausibles
-    let cCamp = 47 + Math.floor(Math.random() * 12);
-    let cRev = 12847 + Math.floor(Math.random() * 1500);
-    let cOpens = 28 + Math.floor(Math.random() * 18);
-    function fmt(n) { return n.toLocaleString('es-ES'); }
-    function update() {
-      camp.textContent = cCamp;
-      rev.textContent = fmt(cRev);
-      opens.textContent = cOpens;
-    }
-    update();
-    // Increments realistas
-    setInterval(() => { cCamp += 1; update(); }, 8000 + Math.random() * 4000);
-    setInterval(() => { cRev += Math.floor(40 + Math.random() * 180); update(); }, 3500);
-    setInterval(() => { cOpens = 28 + Math.floor(Math.random() * 24); update(); }, 5000);
-  })();
-
-  // ═════════════════════════════════════════════════════════════════
-  // 🔥 MODO DIOS · 5 features extras (cursor labels, trails, dock, confetti, progress)
-  // ═════════════════════════════════════════════════════════════════
-
-  // 1 · CURSOR LABELS dinámicos (data-cursor-label en elementos)
-  const cursorRing = document.querySelector('.cursor-ring');
-  document.addEventListener('mouseover', e => {
-    const target = e.target.closest('[data-cursor-label]');
-    if (target && cursorRing) {
-      cursorRing.dataset.label = target.dataset.cursorLabel;
-      document.body.classList.add('cursor-label');
-    }
-  });
-  document.addEventListener('mouseout', e => {
-    const target = e.target.closest('[data-cursor-label]');
-    if (target) document.body.classList.remove('cursor-label');
+  // ─── BENTO spotlight hover (opcional · sin lag) ───
+  document.querySelectorAll('.bento-card').forEach(c => {
+    c.addEventListener('mousemove', e => {
+      const r = c.getBoundingClientRect();
+      c.style.background = `radial-gradient(600px circle at ${e.clientX-r.left}px ${e.clientY-r.top}px, rgba(59,130,246,0.06), rgba(255,255,255,0.025) 40%, rgba(255,255,255,0.005))`;
+    });
+    c.addEventListener('mouseleave', () => {
+      c.style.background = '';
+    });
   });
 
-  // Asignar labels automáticamente a elementos clave
-  if (window.innerWidth > 899) {
-    const labelMap = [
-      { sel: '.flip-card', label: 'TOCA' },
-      { sel: '#dragSlider', label: 'ARRASTRA' },
-      { sel: '.attach-chip', label: 'ABRIR' },
-      { sel: '.email-item[data-vexor]', label: 'OPEN' },
-      { sel: '#openEmailBtn', label: 'OPEN ✦' },
-      { sel: '.stack-mockup', label: 'VER' },
-      { sel: '.email-card', label: 'EXPAND' },
-      { sel: '.btn-primary,.btn-open-email,.cta-dock-btn', label: 'GO →' },
-      { sel: '.contact-card', label: 'EMAIL' },
+  // ═════════════════════════════════════════════════════════════════
+  // MESH GRADIENT CANVAS 2D (Stripe-style · ~3KB · WebGL-free)
+  // 4 puntos de gradiente radial que se mueven con sin/cos
+  // = sensación de "mesh fluido" sin Three.js
+  // ═════════════════════════════════════════════════════════════════
+  const meshCanvas = document.getElementById('mesh-canvas');
+  if (meshCanvas) {
+    const mctx = meshCanvas.getContext('2d', { alpha: true });
+    let mw, mh;
+    function resizeMesh() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      mw = meshCanvas.offsetWidth;
+      mh = meshCanvas.offsetHeight;
+      meshCanvas.width = mw * dpr;
+      meshCanvas.height = mh * dpr;
+      mctx.scale(dpr, dpr);
+    }
+    resizeMesh();
+    window.addEventListener('resize', resizeMesh, { passive: true });
+
+    // 4 blobs gradient · cada uno en órbita propia con sin/cos
+    const blobs = [
+      { cx: 0.25, cy: 0.30, r: 700, color: '#1D4ED8', omega: 0.00018, phase: 0 },
+      { cx: 0.75, cy: 0.25, r: 600, color: '#3B82F6', omega: -0.00022, phase: 1.2 },
+      { cx: 0.40, cy: 0.75, r: 750, color: '#1E40AF', omega: 0.00016, phase: 2.5 },
+      { cx: 0.85, cy: 0.80, r: 650, color: '#60A5FA', omega: -0.00020, phase: 3.7 },
     ];
-    labelMap.forEach(({ sel, label }) => {
-      document.querySelectorAll(sel).forEach(el => el.dataset.cursorLabel = label);
-    });
-  }
 
-  // 2 · CURSOR TRAILS (5 dots con delay)
-  const trails = document.querySelectorAll('.cursor-trail');
-  const trailPos = Array.from({length: trails.length}, () => ({x: 0, y: 0}));
-  const TRAIL_LERP = [0.4, 0.32, 0.24, 0.18, 0.12];
-  function animTrails() {
-    trails.forEach((t, i) => {
-      trailPos[i].x += (mx - trailPos[i].x) * TRAIL_LERP[i];
-      trailPos[i].y += (my - trailPos[i].y) * TRAIL_LERP[i];
-      t.style.transform = `translate3d(${trailPos[i].x}px,${trailPos[i].y}px,0) translate(-50%,-50%)`;
-      t.style.opacity = (1 - i * 0.18).toFixed(2);
-    });
-    requestAnimationFrame(animTrails);
-  }
-  if (window.innerWidth > 899) animTrails();
-
-  // 3 · FLOATING CTA DOCK · aparece después de scrollear hero
-  const dock = document.getElementById('ctaDock');
-  const dockClose = document.getElementById('ctaDockClose');
-  let dockShown = false;
-  window.addEventListener('scroll', () => {
-    if (dockShown || !dock) return;
-    if (window.scrollY > window.innerHeight * 1.2) {
-      dock.classList.add('show');
-      dockShown = true;
+    let stopMesh = false;
+    // Pausa cuando hero NO visible (perf)
+    if ('IntersectionObserver' in window) {
+      const heroEl = document.querySelector('.hero');
+      const heroIO = new IntersectionObserver(([e]) => {
+        stopMesh = !e.isIntersecting;
+        if (!stopMesh) requestAnimationFrame(meshFrame);
+      }, { threshold: 0 });
+      if (heroEl) heroIO.observe(heroEl);
     }
-  }, { passive: true });
-  if (dockClose) dockClose.addEventListener('click', () => {
-    dock.classList.remove('show');
-    sessionStorage.setItem('dockClosed', '1');
-  });
-  if (sessionStorage.getItem('dockClosed') === '1') dockShown = true;
 
-  // 4 · SECTION PROGRESS INDICATOR (dots laterales)
-  const sectionDots = document.querySelectorAll('.section-dot');
-  const sectionProgress = document.getElementById('sectionProgress');
-  const sectionTargets = Array.from(sectionDots).map(d => document.querySelector(d.getAttribute('href')));
-  function updateSectionDots() {
-    if (window.scrollY > window.innerHeight * 0.5) sectionProgress.classList.add('show');
-    else sectionProgress.classList.remove('show');
-    let activeIdx = 0;
-    sectionTargets.forEach((target, i) => {
-      if (target && target.offsetTop <= window.scrollY + window.innerHeight * 0.4) activeIdx = i;
-    });
-    sectionDots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
-  }
-  window.addEventListener('scroll', updateSectionDots, { passive: true });
-  updateSectionDots();
+    function meshFrame(t) {
+      if (stopMesh) return;
+      // Limpia con negro semitransparente para trail sutil
+      mctx.fillStyle = '#000';
+      mctx.fillRect(0, 0, mw, mh);
 
-  // 5 · CONFETTI emitter · al abrir email + al cambiar marca playground
-  function emitConfetti(x, y, colors = ['#3B82F6', '#60A5FA', '#1D4ED8', '#FFFFFF']) {
-    const N = 32;
-    for (let i = 0; i < N; i++) {
-      const piece = document.createElement('div');
-      piece.className = 'confetti-piece';
-      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-      piece.style.left = x + 'px';
-      piece.style.top = y + 'px';
-      const angle = Math.random() * Math.PI * 2;
-      const velocity = 200 + Math.random() * 400;
-      const vx = Math.cos(angle) * velocity;
-      const vy = Math.sin(angle) * velocity - 200;
-      const rot = (Math.random() - 0.5) * 720;
-      const dur = 800 + Math.random() * 800;
-      document.body.appendChild(piece);
-      piece.animate([
-        { transform: 'translate(0,0) rotate(0)', opacity: 1 },
-        { transform: `translate(${vx}px, ${vy + 600}px) rotate(${rot}deg)`, opacity: 0 }
-      ], { duration: dur, easing: 'cubic-bezier(0.16,1,0.3,1)' });
-      setTimeout(() => piece.remove(), dur);
+      blobs.forEach(b => {
+        const cx = (b.cx + Math.sin(t * b.omega + b.phase) * 0.18) * mw;
+        const cy = (b.cy + Math.cos(t * b.omega * 1.3 + b.phase) * 0.18) * mh;
+        const radius = b.r + Math.sin(t * b.omega * 0.7) * 80;
+        const grad = mctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+        grad.addColorStop(0, b.color + 'CC');     // 80% alpha
+        grad.addColorStop(0.4, b.color + '40');   // 25% alpha
+        grad.addColorStop(1, b.color + '00');     // 0% transparent
+        mctx.fillStyle = grad;
+        mctx.fillRect(0, 0, mw, mh);
+      });
+
+      requestAnimationFrame(meshFrame);
     }
+    requestAnimationFrame(meshFrame);
   }
 
-  // Confetti al abrir email VEXOR
-  const vexorViewIO = new MutationObserver(() => {
-    if (document.getElementById('view-vexor').classList.contains('show')) {
-      const r = document.getElementById('view-vexor').getBoundingClientRect();
-      emitConfetti(r.left + r.width / 2, r.top + 60);
-      vexorViewIO.disconnect();
-    }
-  });
-  vexorViewIO.observe(document.getElementById('view-vexor'), { attributes: true });
-
-  // Confetti al cambiar marca/tono playground
-  ['pg-brand', 'pg-tone'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('change', e => {
-      const r = el.getBoundingClientRect();
-      emitConfetti(r.left + r.width / 2, r.top + 20, ['#3B82F6', '#60A5FA', '#FFFFFF']);
-    });
-  });
-
-  // 6 · WEB AUDIO API · sutil click feedback (solo si user interactúa primero)
-  let audioCtx = null;
-  function playClick(freq = 600, dur = 0.06) {
-    if (!audioCtx) {
-      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-      catch (e) { return; }
-    }
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.frequency.value = freq;
-    osc.type = 'sine';
-    gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
-    osc.connect(gain).connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + dur);
-  }
-  // Sound al click en CTAs principales
-  document.querySelectorAll('.btn-primary,.btn-open-email,.contact-card,.cta-dock-btn,#openEmailBtn').forEach(el => {
-    el.addEventListener('click', () => playClick(800, 0.08));
-  });
-
+  console.log('VEXOR v10 · mesh canvas + scroll-driven · cero deps externas');
 })();
 </script>
 </body>
