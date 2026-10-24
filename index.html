@@ -1,1040 +1,134 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VEXOR · Email marketing para eCommerce</title>
-<meta name="description" content="Diseñamos las campañas y los flows de Klaviyo de tiendas online: cada email a medida, con las fotos y el texto reales de la marca, y revisado por una persona.">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,700&display=swap" rel="stylesheet">
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  /* PALETA v9 · negro + azul cobalto + blanco · Linear/Stripe/Vercel premium */
-  --bg:#000000;
-  --bg2:#0A0A0F;
-  --bg3:#11111A;
-  --blue:#3B82F6;        /* azul brillante · accent principal */
-  --blue2:#1D4ED8;       /* azul oscuro · gradient */
-  --blue3:#60A5FA;       /* azul claro · highlight */
-  --amber:#3B82F6;       /* alias compatibilidad código heredado */
-  --amber2:#1D4ED8;      /* alias compatibilidad */
-  --text:#FFFFFF;
-  --muted:#94A3B8;       /* gris azulado · texto secundario */
-  --muted2:#64748B;      /* gris medio */
-  --line:rgba(255,255,255,0.08);
-  --scroll:0;
-  --scroll-px:0px;
-}
-html{background:var(--bg);color:var(--text);scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Geist',sans-serif;-webkit-font-smoothing:antialiased;font-feature-settings:"ss01","cv01";overflow-x:hidden}
-.mono{font-family:'Geist Mono',monospace}
-.serif{font-family:'Fraunces',serif}
-.display{font-family:'Geist',sans-serif;font-weight:800;letter-spacing:-0.045em;line-height:0.92}
-
-::selection{background:var(--amber);color:#000}
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:rgba(59,130,246,0.3);border-radius:3px}
-
-/* BLUE GRADIENT TEXT (era AMBER · rebrand v9) */
-.amber-grad{background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 40%,#1D4ED8 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
-.blue-grad{background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 40%,#1D4ED8 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
-
-/* GRAIN NOISE estatico (cero coste · solo 1 paint) */
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");pointer-events:none;opacity:0.03;z-index:9999;mix-blend-mode:overlay}
-
-/* PROGRESS BAR top · usa --scroll directamente */
-#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--amber),var(--amber2));z-index:10000;width:calc(var(--scroll) * 100%)}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,10,calc(0.4 + var(--scroll) * 0.5));backdrop-filter:blur(12px) saturate(160%);transition:background 0.3s ease}
-nav .inner{max-width:1800px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between}
-nav a{color:#D4D4D8;font-size:14px;text-decoration:none;transition:color 0.3s}
-nav a:hover{color:#fff}
-.btn-amber{background:linear-gradient(135deg,#3B82F6,#1D4ED8);color:#000;font-weight:700;padding:10px 22px;border-radius:99px;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:transform 0.3s cubic-bezier(0.16,1,0.3,1),box-shadow 0.3s}
-.btn-amber:hover{transform:translateY(-2px);box-shadow:0 14px 30px -8px rgba(59,130,246,0.4)}
-.logo-mark{width:36px;height:36px;border-radius:50%;background:#3B82F6;display:inline-flex;align-items:center;justify-content:center;color:#000;font-weight:900;font-size:14px}
-
-/* ─── MASTER SCROLL CANVAS ───
-   Toda la pagina es un viaje scroll-driven. SVG path se dibuja en background. */
-.scroll-canvas{position:relative}
-.scroll-svg-bg{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:1;opacity:0.3}
-.scroll-svg-bg path{fill:none;stroke:url(#amberGrad);stroke-width:2;stroke-linecap:round;stroke-dasharray:3000;stroke-dashoffset:calc(3000 - var(--scroll) * 3000)}
-
-/* ─── HERO v10 · MESH GRADIENT CANVAS 2D animado (Stripe-style ~3KB) ─── */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:0 32px}
-#mesh-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:0.85}
-.hero-grid{position:absolute;inset:0;z-index:2;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black 30%,transparent 90%);transform:translateY(calc(var(--scroll) * 200px)) scale(calc(1 + var(--scroll) * 0.15));pointer-events:none}
-.hero-vignette{position:absolute;inset:0;z-index:3;background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,0.6) 90%);pointer-events:none}
-
-.hero-content{position:relative;z-index:10;max-width:1500px;width:100%;display:grid;grid-template-columns:1fr;gap:60px;align-items:center}
-@media (min-width:900px){.hero-content{grid-template-columns:1.2fr 0.8fr;gap:80px}}
-.hero-text{padding-top:80px}
-.hero-tag{font-family:'Geist Mono',monospace;font-size:11px;color:var(--blue3);letter-spacing:0.3em;margin-bottom:24px;opacity:calc(1 - var(--scroll) * 2);display:flex;align-items:center;gap:14px}
-.hero-tag::before{content:'';width:32px;height:1px;background:linear-gradient(90deg,var(--blue),transparent)}
-.hero-h1{font-family:'Geist',sans-serif;font-weight:800;letter-spacing:-0.055em;font-size:clamp(56px,8.5vw,118px);line-height:0.92;margin-bottom:32px;opacity:calc(1 - var(--scroll) * 1.5);transform:translateY(calc(var(--scroll) * -50px))}
-.hero-sub{font-size:clamp(17px,1.6vw,21px);color:#94A3B8;font-weight:300;line-height:1.55;max-width:580px;margin-bottom:40px;opacity:calc(1 - var(--scroll) * 2)}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap;opacity:calc(1 - var(--scroll) * 2)}
-.btn-ghost{border:1px solid rgba(255,255,255,0.18);color:#fff;padding:14px 26px;border-radius:99px;font-size:14px;text-decoration:none;transition:all 0.3s}
-.btn-ghost:hover{border-color:var(--blue);color:var(--blue3);background:rgba(59,130,246,0.05)}
-/* MOBILE hero · sin iPhone · pantalla completa solo texto + canvas */
-@media(max-width:899px){
-  .hero{min-height:100svh;padding:60px 20px 40px}
-  .phone-stage{display:none !important}
-  .hero-h1{font-size:clamp(48px,12vw,80px);line-height:0.9;letter-spacing:-0.05em}
-  .hero-sub{font-size:16px;line-height:1.5}
-  .hero-cta{flex-direction:column;width:100%}
-  .hero-cta a{width:100%;text-align:center;justify-content:center;padding:18px 24px;font-size:15px}
-}
-
-/* ─── iPhone STICKY · vive toda la página, cambia contenido por sección ─── */
-.phone-stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:80vh}
-.phone-frame{
-  width:280px;height:580px;
-  background:linear-gradient(145deg,#1c1c1e,#0a0a0c);
-  border-radius:46px;
-  padding:8px;
-  box-shadow:0 60px 160px -30px rgba(0,0,0,0.95),
-             0 0 0 1.5px rgba(255,255,255,0.08),
-             0 0 80px rgba(59,130,246,calc(0.15 + var(--scroll) * 0.4));
-  position:relative;
-  transform:rotateY(calc(var(--scroll) * -10deg)) rotateX(calc(var(--scroll) * 4deg)) translateY(calc(var(--scroll) * 80px));
-  transition:box-shadow 0.4s ease;
-}
-.phone-screen{
-  width:100%;height:100%;
-  background:linear-gradient(180deg,#0a0a0f 0%,#1a1a2e 100%);
-  border-radius:38px;
-  overflow:hidden;
-  position:relative;
-}
-.phone-statusbar{position:absolute;top:0;left:0;right:0;padding:12px 28px 0;display:flex;justify-content:space-between;color:#fff;font-size:12px;font-weight:600;font-family:-apple-system,sans-serif;z-index:30}
-.phone-island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:110px;height:32px;background:#000;border-radius:20px;z-index:30}
-
-/* Phone slides · cada uno opacity-driven por --scroll */
-.phone-slide{position:absolute;inset:48px 12px 12px;border-radius:24px;overflow:hidden;display:flex;flex-direction:column;padding:14px;transition:opacity 0.4s ease}
-.phone-slide[data-stage="0"]{background:linear-gradient(180deg,#0a0a0f 0%,#1a1a2e 100%);opacity:calc(1 - clamp(0, var(--scroll) * 8, 1))}
-.phone-slide[data-stage="1"]{background:linear-gradient(180deg,#3B82F6 0%,#1D4ED8 100%);opacity:calc(clamp(0, (var(--scroll) - 0.12) * 8, 1) - clamp(0, (var(--scroll) - 0.28) * 8, 1))}
-.phone-slide[data-stage="2"]{background:#fff;opacity:calc(clamp(0, (var(--scroll) - 0.28) * 8, 1) - clamp(0, (var(--scroll) - 0.44) * 8, 1))}
-.phone-slide[data-stage="3"]{background:linear-gradient(180deg,#064e3b 0%,#0a0a0c 100%);opacity:calc(clamp(0, (var(--scroll) - 0.44) * 8, 1) - clamp(0, (var(--scroll) - 0.60) * 8, 1))}
-.phone-slide[data-stage="4"]{background:linear-gradient(180deg,#581c87 0%,#0a0a0c 100%);opacity:calc(clamp(0, (var(--scroll) - 0.60) * 8, 1) - clamp(0, (var(--scroll) - 0.78) * 8, 1))}
-.phone-slide[data-stage="5"]{background:#000;opacity:calc(clamp(0, (var(--scroll) - 0.78) * 8, 1))}
-.phone-slide[data-stage="5"] img{width:100%;height:100%;object-fit:cover;object-position:top}
-
-/* Slide 0 · lock screen */
-.lock-time{font-family:-apple-system,sans-serif;color:#fff;font-size:64px;font-weight:200;text-align:center;margin-top:60px;letter-spacing:-0.02em}
-.lock-date{font-family:'Geist Mono',monospace;color:rgba(255,255,255,0.7);font-size:11px;letter-spacing:0.2em;text-align:center;margin-bottom:6px}
-.lock-notif{margin-top:auto;background:rgba(40,40,45,0.92);backdrop-filter:blur(18px);border-radius:14px;padding:10px 12px;color:#fff}
-.lock-notif p{font-size:11px;color:rgba(255,255,255,0.6);font-family:'Geist Mono',monospace;letter-spacing:0.15em;margin-bottom:4px}
-.lock-notif strong{font-size:13px;font-weight:600}
-
-/* Slide 1 · Welcome amber */
-.welcome-block{background:rgba(0,0,0,0.92);border-radius:18px;padding:18px;height:100%;display:flex;flex-direction:column}
-.welcome-tag{font-family:'Geist Mono',monospace;font-size:9px;color:var(--amber);letter-spacing:0.25em;margin-bottom:14px}
-.welcome-h{font-family:'Fraunces',serif;font-style:italic;font-size:22px;color:#fff;line-height:1.15;margin-bottom:auto}
-.welcome-cta{background:#3B82F6;color:#000;padding:9px;border-radius:99px;text-align:center;font-weight:700;font-size:11px;margin-top:10px}
-
-/* Slide 2 · Cart white */
-.cart-tag{font-family:'Geist Mono',monospace;font-size:9px;color:#dc2626;letter-spacing:0.25em;margin-bottom:10px}
-.cart-h{font-family:'Fraunces',serif;font-style:italic;font-size:18px;color:#0a0a0c;line-height:1.2;margin-bottom:12px}
-.cart-item{background:#f4f4f4;border-radius:8px;padding:10px;display:flex;gap:10px;align-items:center;margin-bottom:auto}
-.cart-img{width:44px;height:44px;background:linear-gradient(135deg,#888,#444);border-radius:6px}
-.cart-info p:first-child{font-size:11px;color:#0a0a0c;font-weight:600;margin-bottom:2px}
-.cart-info p:last-child{font-size:13px;color:#dc2626;font-weight:700}
-.cart-cta{background:#0a0a0c;color:#fff;padding:9px;border-radius:99px;text-align:center;font-weight:700;font-size:11px;margin-top:10px}
-
-/* Slide 3 · Post-purchase emerald */
-.post-tag{font-family:'Geist Mono',monospace;font-size:9px;color:#10b981;letter-spacing:0.25em;margin-bottom:14px}
-.post-h{font-family:'Fraunces',serif;font-style:italic;font-size:20px;color:#fff;line-height:1.15;margin-bottom:14px}
-.post-track{background:rgba(16,185,129,0.15);border-radius:10px;padding:10px;margin-bottom:auto}
-.post-track p{font-family:'Geist Mono',monospace;font-size:9px;color:#10b981;letter-spacing:0.2em}
-.post-track strong{font-size:12px;color:#fff;font-weight:600;display:block;margin-top:4px}
-.post-eta{font-size:11px;color:rgba(255,255,255,0.6);font-style:italic;margin-top:12px;font-family:'Fraunces',serif}
-
-/* Slide 4 · Win-back purple */
-.winback-tag{font-family:'Geist Mono',monospace;font-size:9px;color:#a855f7;letter-spacing:0.25em;margin-bottom:14px}
-.winback-h{font-family:'Fraunces',serif;font-style:italic;font-size:22px;color:#fff;line-height:1.15;margin-bottom:auto}
-.winback-cta{background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;padding:11px;border-radius:99px;text-align:center;font-weight:700;font-size:11px}
-
-/* ─── SECTIONS ─── */
-section{position:relative;padding:120px 32px;z-index:5}
-.section-inner{max-width:1400px;margin:0 auto;position:relative}
-.section-tag{font-family:'Geist Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:0.3em;margin-bottom:14px}
-.section-h{font-family:'Geist',sans-serif;font-weight:800;letter-spacing:-0.045em;font-size:clamp(40px,5.5vw,80px);line-height:0.96;margin-bottom:24px;color:#fff}
-.section-sub{font-size:clamp(16px,1.4vw,18px);color:#A1A1AA;font-weight:300;line-height:1.55;max-width:640px}
-
-/* Reveal on intersect */
-.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1)}
-.reveal.in{opacity:1;transform:translateY(0)}
-.reveal.delay-1{transition-delay:0.1s}.reveal.delay-2{transition-delay:0.2s}.reveal.delay-3{transition-delay:0.3s}
-
-/* SECTION · STORYTELLING SCROLL · iPhone sticky con texto cambiante a la izq */
-.story-stage{display:grid;grid-template-columns:1fr;gap:40px;min-height:80vh}
-@media (min-width:900px){.story-stage{grid-template-columns:1fr 1fr;gap:80px;align-items:center}}
-.story-text-pane{display:flex;flex-direction:column;justify-content:center}
-.story-text{position:relative;min-height:280px}
-.story-block{position:absolute;inset:0;opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
-.story-block.active{opacity:1;transform:translateY(0)}
-.story-tag{font-family:'Geist Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:0.3em;margin-bottom:18px}
-.story-h{font-family:'Geist',sans-serif;font-weight:800;letter-spacing:-0.045em;font-size:clamp(36px,4.5vw,64px);line-height:0.96;margin-bottom:22px}
-.story-p{font-size:18px;color:#A1A1AA;font-weight:300;line-height:1.55}
-
-.story-phone-pane{position:relative}
-@media (min-width:900px){.story-phone-pane{position:sticky;top:50%;transform:translateY(-50%);height:fit-content}}
-
-/* GALLERY · 6 emails · hover lift simple */
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-top:60px}
-.email-card{position:relative;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 30px 80px -20px rgba(0,0,0,0.8),inset 0 0 0 1px rgba(255,255,255,0.04);transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),box-shadow 0.5s;cursor:pointer}
-.email-card:hover{transform:translateY(-8px);box-shadow:0 60px 140px -30px rgba(0,0,0,0.9),0 0 60px -10px rgba(59,130,246,0.3),inset 0 0 0 1px rgba(59,130,246,0.2)}
-.email-card img{width:100%;display:block}
-.email-card-info{padding:20px 22px}
-.email-card-tag{font-family:'Geist Mono',monospace;font-size:9px;color:var(--amber);letter-spacing:0.25em;margin-bottom:6px}
-.email-card-h{font-family:'Geist',sans-serif;font-weight:700;font-size:22px;color:#fff;margin-bottom:4px}
-.email-card-p{font-size:13px;color:#71717A}
-
-/* BENTO mini */
-.bento{display:grid;grid-template-columns:1fr;gap:14px;margin-top:50px}
-@media (min-width:768px){.bento{grid-template-columns:repeat(4,1fr);grid-auto-rows:170px}}
-.bento-card{background:linear-gradient(135deg,rgba(255,255,255,0.025),rgba(255,255,255,0.005));border:1px solid rgba(255,255,255,0.08);border-radius:22px;padding:24px;position:relative;overflow:hidden;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),border-color 0.5s,box-shadow 0.5s}
-.bento-card:hover{transform:translateY(-3px);border-color:rgba(59,130,246,0.3);box-shadow:0 30px 80px -20px rgba(0,0,0,0.6),0 0 60px -20px rgba(59,130,246,0.18)}
-.b-tag{font-family:'Geist Mono',monospace;font-size:9px;color:var(--amber);letter-spacing:0.3em;margin-bottom:14px}
-.b-num{font-family:'Geist',sans-serif;font-weight:800;font-size:48px;letter-spacing:-0.04em;line-height:1}
-.b-h{font-family:'Geist',sans-serif;font-weight:700;font-size:22px;line-height:1.05;margin-bottom:6px;letter-spacing:-0.02em}
-.b-p{font-size:13px;color:#71717A;line-height:1.4}
-.bento-card.span-2{grid-column:span 2}
-.bento-card.span-2-row{grid-row:span 2}
-.bento-card.span-4{grid-column:span 4}
-
-/* MARQUEE single */
-.marquee-strip{padding:60px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;position:relative;background:rgba(0,0,0,0.4)}
-.marquee-track{display:flex;gap:60px;animation:marquee 35s linear infinite;white-space:nowrap;will-change:transform}
-.marquee-track span{font-family:'Geist',sans-serif;font-weight:800;font-size:64px;letter-spacing:-0.04em;color:rgba(255,255,255,0.08);display:inline-block}
-.marquee-track span.amber{color:var(--amber);opacity:0.9}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* CTA */
-.cta-section{padding:140px 32px;position:relative;overflow:hidden}
-.cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 30%,rgba(59,130,246,0.18),transparent 70%)}
-.cta-inner{max-width:900px;margin:0 auto;text-align:center;position:relative;z-index:5}
-.cta-h{font-family:'Geist',sans-serif;font-weight:900;letter-spacing:-0.05em;font-size:clamp(50px,9vw,140px);line-height:0.92;margin-bottom:30px}
-.cta-form{max-width:560px;margin:50px auto 0;display:flex;flex-direction:column;gap:14px}
-.cta-form input,.cta-form select,.cta-form textarea{width:100%;padding:18px 24px;border-radius:99px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:inherit;font-size:15px;outline:none;transition:border-color 0.3s,box-shadow 0.3s}
-.cta-form textarea{border-radius:24px;resize:none;min-height:100px}
-.cta-form input:focus,.cta-form select:focus,.cta-form textarea:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(59,130,246,0.15)}
-.cta-form button{padding:20px 32px;border-radius:99px;background:linear-gradient(135deg,#3B82F6,#1D4ED8);color:#000;font-weight:700;font-size:16px;border:none;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s}
-.cta-form button:hover{transform:translateY(-2px);box-shadow:0 18px 40px -8px rgba(59,130,246,0.5)}
-
-/* FOOTER */
-footer{padding:80px 32px 40px;background:#000;border-top:1px solid var(--line);position:relative;overflow:hidden}
-.footer-aurora{position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:1200px;height:600px;background:radial-gradient(ellipse,rgba(59,130,246,0.18),transparent 60%);filter:blur(60px);pointer-events:none}
-.footer-mega{font-family:'Geist',sans-serif;font-weight:900;letter-spacing:-0.05em;font-size:clamp(80px,18vw,260px);line-height:0.85;text-align:center;background:linear-gradient(180deg,#3B82F6 0%,#1D4ED8 70%,transparent 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;position:relative;z-index:5}
-.footer-tag{text-align:center;font-family:'Geist Mono',monospace;font-size:11px;color:#52525B;letter-spacing:0.3em;margin-top:20px;position:relative;z-index:5}
-.footer-bottom{max-width:1400px;margin:60px auto 0;padding-top:30px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;font-size:13px;color:#71717A;position:relative;z-index:5}
-
-/* SVG defs */
-.svg-defs{position:absolute;width:0;height:0}
-
-/* ════════════════════════════════════════════════════════════════
-   ✨ TÉCNICAS PREMIUM v8 · Jhey Tompkins + Tahir + Jerry style
-   ════════════════════════════════════════════════════════════════ */
-
-/* ─── 1. SHINY/FOIL TEXT con conic-gradient · Jhey signature ─── */
-@property --shiny-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
-.shiny{
-  background:conic-gradient(from var(--shiny-angle),#3B82F6,#60A5FA,#1D4ED8,#60A5FA,#3B82F6);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  -webkit-text-fill-color:transparent;
-  animation:shinySpin 8s linear infinite;
-}
-@keyframes shinySpin{to{--shiny-angle:360deg}}
-
-/* ─── 2. 3D FLIP CARDS (preserve-3d puro · sin libs) ─── */
-.flip-3d{perspective:1500px;cursor:pointer}
-.flip-3d-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.9s cubic-bezier(0.16,1,0.3,1)}
-.flip-3d:hover .flip-3d-inner{transform:rotateY(180deg)}
-.flip-3d-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.flip-3d-back{transform:rotateY(180deg)}
-
-/* ─── 3. STACKING CARDS · simplificadas (sin sticky · evita freeze) ─── */
-.stack-section{position:relative;display:flex;flex-direction:column;gap:60px;padding:0 32px}
-.stack-card{
-  margin:0 auto;
-  max-width:1100px;width:100%;
-  border-radius:28px;
-  overflow:hidden;
-  background:linear-gradient(135deg,rgba(15,23,42,0.95),rgba(8,8,15,0.98));
-  border:1px solid rgba(255,255,255,0.08);
-  box-shadow:0 60px 140px -40px rgba(0,0,0,0.95),0 0 0 1px rgba(255,255,255,0.04);
-  transition:transform 0.6s cubic-bezier(0.16,1,0.3,1),border-color 0.5s,box-shadow 0.5s;
-  opacity:0;transform:translateY(60px);
-}
-.stack-card.in{opacity:1;transform:translateY(0)}
-.stack-card:hover{transform:translateY(-6px);border-color:rgba(59,130,246,0.4);box-shadow:0 80px 180px -40px rgba(0,0,0,0.95),0 30px 80px -20px rgba(59,130,246,0.25)}
-.stack-card .stack-inner{display:grid;grid-template-columns:1fr;gap:0;min-height:480px}
-@media(min-width:768px){.stack-card .stack-inner{grid-template-columns:1fr 1fr}}
-.stack-card-img{background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.stack-card-img img{width:100%;height:100%;object-fit:cover;object-position:top}
-.stack-card-content{padding:48px 40px;display:flex;flex-direction:column;justify-content:center}
-.stack-card-tag{font-family:'Geist Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:0.3em;margin-bottom:18px}
-.stack-card-num{font-family:'Geist',sans-serif;font-weight:900;font-size:120px;color:rgba(59,130,246,0.08);line-height:0.9;letter-spacing:-0.05em;margin-bottom:-30px}
-.stack-card h3{font-family:'Geist',sans-serif;font-weight:800;font-size:clamp(36px,4.5vw,52px);line-height:0.96;letter-spacing:-0.045em;margin-bottom:18px;color:#fff}
-.stack-card p{font-size:16px;color:#A1A1AA;line-height:1.55;font-weight:300;margin-bottom:24px}
-.stack-card-meta{font-family:'Geist Mono',monospace;font-size:10px;color:#52525B;letter-spacing:0.25em;margin-top:auto}
-
-/* ─── 4. PATTERN BREAK · diagonal section · Jerry signature ─── */
-.pattern-break{
-  position:relative;
-  padding:160px 32px;
-  background:linear-gradient(180deg,#0a0a0c 0%,rgba(59,130,246,0.04) 50%,#0a0a0c 100%);
-  overflow:hidden;
-}
-.pattern-break::before{
-  content:'';position:absolute;top:50%;left:-10%;right:-10%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--amber) 30%,var(--amber2) 70%,transparent);
-  transform:translateY(-50%) rotate(-3deg);opacity:0.3;
-}
-.pattern-break .pattern-content{
-  max-width:1400px;margin:0 auto;
-  display:grid;grid-template-columns:1fr;gap:80px;align-items:center;
-  position:relative;z-index:5;
-}
-@media(min-width:900px){.pattern-break .pattern-content{grid-template-columns:1.4fr 0.6fr}}
-.pattern-h{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(40px,6.5vw,96px);line-height:0.95;letter-spacing:-0.025em;color:#fff}
-.pattern-h em{font-style:normal;font-weight:700;font-family:'Geist',sans-serif;letter-spacing:-0.045em}
-.pattern-callout{padding:32px;border-radius:24px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);font-family:'Geist Mono',monospace;font-size:13px;color:#3B82F6;letter-spacing:0.05em;line-height:1.6}
-
-/* ─── 5. SCROLL-INDICATOR cinematográfico ─── */
-.scroll-cue{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);font-family:'Geist Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.3em;display:flex;flex-direction:column;align-items:center;gap:12px;animation:cueFloat 3s ease-in-out infinite}
-.scroll-cue::after{content:'';width:1px;height:36px;background:linear-gradient(180deg,var(--amber),transparent)}
-@keyframes cueFloat{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
-
-/* MOBILE specific */
-@media (max-width:899px){
-  .phone-frame{width:230px;height:480px;transform:none}
-  .story-phone-pane{order:-1;margin-bottom:30px}
-  .lock-time{font-size:48px}
-  .stack-card{position:relative;top:auto !important}
-  .stack-card .stack-inner{grid-template-columns:1fr}
-  .stack-card-num{font-size:80px}
-}
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VEXOR Consulting · Email marketing para tiendas online</title>
+<meta name="description" content="Nos ocupamos de todo el email marketing de tu tienda online. Activo en menos de 72 horas, sin que te ocupe tiempo. Escríbenos.">
+<!-- PENDIENTE: QUITAR esta línea (noindex) al publicar en vexorconsulting.com -->
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://vexorconsulting.com/">
+<link rel="alternate" hreflang="es" href="https://vexorconsulting.com/">
+<link rel="alternate" hreflang="en" href="https://vexorconsulting.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://vexorconsulting.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="VEXOR Consulting · Email marketing para tiendas online">
+<meta property="og:description" content="Nos ocupamos de todo el email marketing de tu tienda online. Activo en menos de 72 horas, sin que te ocupe tiempo. Escríbenos.">
+<meta property="og:url" content="https://vexorconsulting.com/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/site.js" defer></script>
 </head>
 <body>
-
-<!-- SVG defs (shared gradients) -->
-<svg class="svg-defs">
-  <defs>
-    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3B82F6"/>
-      <stop offset="100%" stop-color="#1D4ED8"/>
-    </linearGradient>
-  </defs>
-</svg>
-
-<!-- PROGRESS BAR top -->
-<div id="progress"></div>
-
-<!-- BACKGROUND SVG · path que se dibuja al scrollear (decorativo) -->
-<svg class="scroll-svg-bg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
-  <path d="M 100 50 Q 200 200 400 250 T 700 350 Q 900 400 850 600 T 500 750 Q 200 800 150 950" />
-</svg>
-
-<!-- NAV -->
-<nav>
-  <div class="inner">
-    <a href="#" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff">
-      <span class="logo-mark">V</span>
-      <div>
-        <div style="font-weight:700;font-size:14px;letter-spacing:-0.01em">VEXOR</div>
-        <div class="mono" style="font-size:9px;color:#52525B;letter-spacing:0.2em">CONSULTING</div>
-      </div>
-    </a>
-    <div style="display:none;gap:36px;align-items:center" class="nav-links-desktop">
-      <a href="#problema">Por qué</a>
-      <a href="#proceso">Proceso</a>
-      <a href="#trabajo">Trabajo</a>
-      <a href="#sistema">Sistema</a>
-      <a href="#contacto" class="btn-amber">Hablemos →</a>
-    </div>
-  </div>
-</nav>
-<style>@media (min-width:900px){.nav-links-desktop{display:flex !important}#proceso .section-h{max-width:56%}#proceso .section-sub{max-width:48%}}</style>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- HERO -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="hero">
-  <canvas id="mesh-canvas"></canvas>
-  <div class="hero-grid"></div>
-  <div class="hero-vignette"></div>
-
-  <div class="hero-content">
-    <div class="hero-text">
-      <p class="hero-tag">· EMAIL MARKETING PARA ECOMMERCE ·</p>
-      <h1 class="hero-h1">
-        Emails que se ven<br>
-        como <span class="shiny">tu marca</span>.
-      </h1>
-      <p class="hero-sub">Diseñamos las campañas y los flows de Klaviyo de tiendas online. Cada email a medida, con las fotos y el texto reales de la marca, y revisado por una persona antes de salir. Pensado para leerse en el móvil.</p>
-      <div class="hero-cta">
-        <a href="#trabajo" class="btn-amber">Ver el trabajo →</a>
-        <a href="#contacto" class="btn-ghost">Hablemos</a>
-      </div>
-    </div>
-
-    <div class="phone-stage">
-      <div class="phone-frame">
-        <div class="phone-screen">
-          <div class="phone-statusbar">
-            <span>9:32</span>
-            <div style="display:flex;gap:6px;font-size:10px"><span>📶</span><span>🔋</span></div>
-          </div>
-          <div class="phone-island"></div>
-
-          <!-- 6 phone slides · cambian con --scroll -->
-          <div class="phone-slide" data-stage="0">
-            <p class="lock-date">MARTES, 4 MAYO</p>
-            <p class="lock-time">9:32</p>
-            <div class="lock-notif">
-              <p>· MAILCHIMP · ahora</p>
-              <strong>🔥 OFERTA!! 50% DTO 🛍️</strong>
-            </div>
-          </div>
-
-          <div class="phone-slide" data-stage="1">
-            <div class="welcome-block">
-              <p class="welcome-tag">— BIENVENIDA —</p>
-              <p class="welcome-h">Bienvenida.<br>Esto es solo<br>el principio.</p>
-              <div class="welcome-cta">DESCUBRIR →</div>
-            </div>
-          </div>
-
-          <div class="phone-slide" data-stage="2">
-            <p class="cart-tag">— A 1 PASO —</p>
-            <p class="cart-h">Aún está<br>en tu carrito</p>
-            <div class="cart-item">
-              <div class="cart-img"></div>
-              <div class="cart-info"><p>Producto premium</p><p>€89,00</p></div>
-            </div>
-            <div class="cart-cta">FINALIZAR COMPRA →</div>
-          </div>
-
-          <div class="phone-slide" data-stage="3">
-            <p class="post-tag">— GRACIAS —</p>
-            <p class="post-h">Tu pedido<br>ya está en camino.</p>
-            <div class="post-track">
-              <p>SEGUIMIENTO</p>
-              <strong>#VX-8472-MOR</strong>
-            </div>
-            <p class="post-eta">Lo tendrás en 48h.</p>
-          </div>
-
-          <div class="phone-slide" data-stage="4">
-            <p class="winback-tag">— TE EXTRAÑAMOS —</p>
-            <p class="winback-h">Ha pasado<br>tiempo.<br><span style="color:#a855f7">Vuelve.</span></p>
-            <div class="winback-cta">VER NOVEDADES →</div>
-          </div>
-
-          <div class="phone-slide" data-stage="5">
-            <img src="assets/trabajo_01_moda_halloween.webp" alt="Email de Halloween diseñado por VEXOR">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- MARQUEE -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<div class="marquee-strip">
-  <div class="marquee-track">
-    <span class="amber">DISEÑO A MEDIDA</span><span>·</span>
-    <span>FLOWS DE KLAVIYO</span><span>·</span>
-    <span class="amber">CAMPAÑAS CADA MES</span><span>·</span>
-    <span>4 IDIOMAS</span><span>·</span>
-    <span class="amber">REVISIÓN HUMANA</span><span>·</span>
-    <span>CERO DATOS INVENTADOS</span><span>·</span>
-    <!-- duplicate for infinite loop -->
-    <span class="amber">DISEÑO A MEDIDA</span><span>·</span>
-    <span>FLOWS DE KLAVIYO</span><span>·</span>
-    <span class="amber">CAMPAÑAS CADA MES</span><span>·</span>
-    <span>4 IDIOMAS</span><span>·</span>
-    <span class="amber">REVISIÓN HUMANA</span><span>·</span>
-    <span>CERO DATOS INVENTADOS</span><span>·</span>
-  </div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-12.2 7.5L3 20.5l1.6-5.5A8.4 8.4 0 1 1 21 11.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol></svg>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="site-header">
+<div class="wrap bar">
+<a class="brand" href="./" aria-label="VEXOR Consulting, inicio"><img src="assets/brand/vexor-logo.webp" width="87" height="30" alt="VEXOR Consulting"></a>
+<div class="bar-right">
+<nav class="lang" aria-label="Idioma"><a href="./" hreflang="es" lang="es" aria-current="true">ES</a><a href="en/" hreflang="en" lang="en" data-lang-switch="header">EN</a></nav>
+<!-- PENDIENTE: número WhatsApp Business --><a class="btn btn-sm" href="mailto:gerard@vexorconsulting.com?subject=Consulta%20desde%20la%20web%20de%20VEXOR%20Consulting&body=Hola%2C%20tengo%20una%20tienda%20online%20y%20me%20gustar%C3%ADa%20saber%20c%C3%B3mo%20trabaj%C3%A1is%20el%20email%20marketing." data-wa="header"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chat"/></svg>Contacto</a>
 </div>
+</div>
+</header>
+<main id="contenido">
 
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- PROBLEMA -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section id="problema">
-  <div class="section-inner">
-    <p class="section-tag reveal">01 · POR QUÉ</p>
-    <h2 class="section-h reveal">Tu email no debería parecer<br><span class="amber-grad">el de cualquier otra tienda.</span></h2>
-    <p class="section-sub reveal delay-1">Demasiadas tiendas mandan la misma plantilla con otro logo. Y cuando falta un dato, alguien se lo inventa.</p>
-
-    <div class="bento" style="margin-top:60px">
-      <div class="bento-card span-2 reveal">
-        <p class="b-tag">DOLOR #1</p>
-        <h3 class="b-h">La plantilla de siempre</h3>
-        <p class="b-p">Logo arriba, foto, botón y pie legal. La misma pieza para una joyería que para una tienda de bicis.</p>
-      </div>
-      <div class="bento-card reveal delay-1">
-        <p class="b-tag">DOLOR #2</p>
-        <h3 class="b-h">Datos que nadie dio</h3>
-        <p class="b-p">Descuentos, reseñas y cifras que la marca nunca respaldó. Nosotros no ponemos ni uno.</p>
-      </div>
-      <div class="bento-card reveal delay-2">
-        <p class="b-tag">DOLOR #3</p>
-        <h3 class="b-h">Flows olvidados</h3>
-        <p class="b-p">Bienvenidas de hace años que enseñan productos que ya no se venden.</p>
-      </div>
-      <div class="bento-card span-4 reveal delay-3">
-        <div style="display:flex;justify-content:space-between;align-items:center;height:100%;flex-wrap:wrap;gap:20px">
-          <div>
-            <p class="b-tag">LO QUE HACEMOS DISTINTO</p>
-            <h3 class="b-h">Cada email sale con las fotos, los colores y el texto reales de la marca. Y una persona lo revisa antes de entregarlo.</h3>
-          </div>
-          <div style="text-align:right">
-            <div class="b-num amber-grad">721</div>
-            <p class="mono" style="font-size:10px;color:#52525B;letter-spacing:0.25em;margin-top:4px">EMAILS ENTREGADOS EN OCTUBRE 2026</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- BLOQUE 1 · CABECERA (briefing §6) -->
+<section class="hero" id="cabecera">
+<div class="wrap">
+<p class="markets-label">Operamos en 14 mercados</p>
+<ul class="flags" aria-label="Mercados"><li><img src="assets/flags/us.svg" width="38" height="29" alt="Estados Unidos" title="Estados Unidos"></li><li><img src="assets/flags/mx.svg" width="38" height="29" alt="México" title="México"></li><li><img src="assets/flags/ar.svg" width="38" height="29" alt="Argentina" title="Argentina"></li><li><img src="assets/flags/cl.svg" width="38" height="29" alt="Chile" title="Chile"></li><li><img src="assets/flags/pe.svg" width="38" height="29" alt="Perú" title="Perú"></li><li><img src="assets/flags/es.svg" width="38" height="29" alt="España" title="España"></li><li><img src="assets/flags/pt.svg" width="38" height="29" alt="Portugal" title="Portugal"></li><li><img src="assets/flags/de.svg" width="38" height="29" alt="Alemania" title="Alemania"></li><li><img src="assets/flags/fr.svg" width="38" height="29" alt="Francia" title="Francia"></li><li><img src="assets/flags/gb.svg" width="38" height="29" alt="Reino Unido" title="Reino Unido"></li><li><img src="assets/flags/cz.svg" width="38" height="29" alt="República Checa" title="República Checa"></li><li><img src="assets/flags/au.svg" width="38" height="29" alt="Australia" title="Australia"></li><li><img src="assets/flags/ca.svg" width="38" height="29" alt="Canadá" title="Canadá"></li><li><img src="assets/flags/it.svg" width="38" height="29" alt="Italia" title="Italia"></li></ul>
+<h1><span class="h1-claim"><span class="s">Más ingresos por email.</span> <span class="s">Sin que te ocupe tiempo.</span></span>
+<span class="h1-figure">Más de <span class="num nw">4.000.000 €</span> generados en los últimos 12 meses</span></h1>
+<p class="hero-source">Atribuido por Klaviyo.</p>
+<p class="lead">Nos ocupamos de todo el email marketing de tu tienda online. Tú pones el foco en el resto de tu negocio.</p>
+<div class="cta">
+<!-- PENDIENTE: número WhatsApp Business --><a class="btn" href="mailto:gerard@vexorconsulting.com?subject=Consulta%20desde%20la%20web%20de%20VEXOR%20Consulting&body=Hola%2C%20tengo%20una%20tienda%20online%20y%20me%20gustar%C3%ADa%20saber%20c%C3%B3mo%20trabaj%C3%A1is%20el%20email%20marketing." data-wa="hero"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chat"/></svg>Escríbenos</a>
+</div>
+<p class="hero-72"><strong>Activo en menos de 72 horas</strong> desde que nos das los accesos.</p>
+<ul class="badges"><li class="badges-label">Plataformas</li><li>Shopify</li><li>Klaviyo</li></ul>
+</div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- STORYTELLING SCROLL · iPhone sticky con 6 historias -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section id="proceso">
-  <div class="section-inner">
-    <p class="section-tag reveal">02 · CÓMO TRABAJAMOS</p>
-    <h2 class="section-h reveal">Un email para cada momento.<br><span class="amber-grad">Del primer día a la siguiente compra</span>.</h2>
-    <p class="section-sub reveal delay-1" style="margin-bottom:80px">Baja despacio. Cada momento de la relación con tu cliente tiene su email, y cada email se diseña para tu marca.</p>
+<!-- PENDIENTE: BLOQUE 2 · REFERENTES DEL SECTOR (briefing §6.2). Sin permiso de los 7 ni fotos/frases, queda fuera. Ver README. -->
 
-    <div class="story-stage" id="story">
-      <!-- TEXT PANE · 6 blocks que cambian con scroll -->
-      <div class="story-text-pane">
-        <div class="story-text">
-          <div class="story-block active" data-story="0">
-            <p class="story-tag">· INICIO ·</p>
-            <h3 class="story-h">Tu cliente se suscribe.</h3>
-            <p class="story-p">Acaba de darte su email. Lo primero que recibe tiene que parecer de tu marca, no de una plantilla.</p>
-          </div>
-          <div class="story-block" data-story="1">
-            <p class="story-tag">· BIENVENIDA ·</p>
-            <h3 class="story-h">La bienvenida.</h3>
-            <p class="story-p">Una serie que presenta la marca, su producto y por qué comprarle, con el tono y las fotos de la propia tienda.</p>
-          </div>
-          <div class="story-block" data-story="2">
-            <p class="story-tag">· CARRITO ·</p>
-            <h3 class="story-h">El carrito abandonado.</h3>
-            <p class="story-p">Recordatorios que enseñan lo que dejó y suenan a la marca, no a un aviso automático.</p>
-          </div>
-          <div class="story-block" data-story="3">
-            <p class="story-tag">· DESPUÉS DE COMPRAR ·</p>
-            <h3 class="story-h">El momento más cálido.</h3>
-            <p class="story-p">Confirmación, envío, cuidado del producto y la siguiente compra. Cada paso con su propio email.</p>
-          </div>
-          <div class="story-block" data-story="4">
-            <p class="story-tag">· RECUPERACIÓN ·</p>
-            <h3 class="story-h">Cuando deja de abrir.</h3>
-            <p class="story-p">Novedades y razones para volver. Sin descuentos que la marca no haya decidido.</p>
-          </div>
-          <div class="story-block" data-story="5">
-            <p class="story-tag">· CAMPAÑAS ·</p>
-            <h3 class="story-h">El calendario del mes.</h3>
-            <p class="story-p">Las campañas de cada mes con sus fechas: Halloween, Black Friday, Navidad. Cada fecha ambientada y con su asunto y preheader preparados.</p>
-          </div>
-        </div>
-      </div>
-      <!-- iPhone STICKY que vive aquí -->
-      <div class="story-phone-pane">
-        <!-- Reuse phone visual · pero como decoración (el principal está fijo en hero) -->
-        <div class="phone-frame" style="transform:rotateY(-8deg) rotateX(2deg)">
-          <div class="phone-screen">
-            <div class="phone-statusbar">
-              <span>9:32</span>
-              <div style="display:flex;gap:6px;font-size:10px"><span>📶</span><span>🔋</span></div>
-            </div>
-            <div class="phone-island"></div>
-            <!-- Active phone-slide se cambia con JS según story scroll -->
-            <div id="story-phone-slides">
-              <div class="phone-slide active" data-story-slide="0" style="background:linear-gradient(180deg,#0a0a0f 0%,#1a1a2e 100%);opacity:1">
-                <p class="lock-date">MARTES, 4 MAYO</p>
-                <p class="lock-time">9:32</p>
-                <div class="lock-notif">
-                  <p>· VEXOR · ahora</p>
-                  <strong>Bienvenida</strong>
-                </div>
-              </div>
-              <div class="phone-slide" data-story-slide="1" style="background:linear-gradient(180deg,#3B82F6 0%,#1D4ED8 100%);opacity:0">
-                <div class="welcome-block">
-                  <p class="welcome-tag">— BIENVENIDA —</p>
-                  <p class="welcome-h">Bienvenida.<br>Esto es solo<br>el principio.</p>
-                  <div class="welcome-cta">DESCUBRIR →</div>
-                </div>
-              </div>
-              <div class="phone-slide" data-story-slide="2" style="background:#fff;opacity:0">
-                <p class="cart-tag">— A 1 PASO —</p>
-                <p class="cart-h">Aún está<br>en tu carrito</p>
-                <div class="cart-item">
-                  <div class="cart-img"></div>
-                  <div class="cart-info"><p>Producto premium</p><p>€89,00</p></div>
-                </div>
-                <div class="cart-cta">FINALIZAR COMPRA →</div>
-              </div>
-              <div class="phone-slide" data-story-slide="3" style="background:linear-gradient(180deg,#064e3b 0%,#0a0a0c 100%);opacity:0">
-                <p class="post-tag">— GRACIAS —</p>
-                <p class="post-h">Tu pedido<br>ya está en camino.</p>
-                <div class="post-track"><p>SEGUIMIENTO</p><strong>#VX-8472-MOR</strong></div>
-                <p class="post-eta">Lo tendrás en 48h.</p>
-              </div>
-              <div class="phone-slide" data-story-slide="4" style="background:linear-gradient(180deg,#581c87 0%,#0a0a0c 100%);opacity:0">
-                <p class="winback-tag">— TE EXTRAÑAMOS —</p>
-                <p class="winback-h">Ha pasado<br>tiempo.<br><span style="color:#a855f7">Vuelve.</span></p>
-                <div class="winback-cta">VER NOVEDADES →</div>
-              </div>
-              <div class="phone-slide" data-story-slide="5" style="background:#000;opacity:0;padding:0">
-                <img src="assets/trabajo_05_cosmetica.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- BLOQUE 3 · BARRA DE CIFRAS -->
+<section class="figures" id="cifras" aria-label="Cifras">
+<div class="wrap">
+<ul class="fig-grid"><li class="fig"><span class="fig-eyebrow">Más de</span> <span class="fig-num nw">4.000.000 €</span> <span class="fig-label">generados en los últimos 12 meses</span></li><li class="fig"><span class="fig-eyebrow"></span> <span class="fig-num">87</span> <span class="fig-label">clientes activos</span></li><li class="fig"><span class="fig-eyebrow"></span> <span class="fig-num">14</span> <span class="fig-label">mercados</span></li><li class="fig"><span class="fig-eyebrow">El</span> <span class="fig-num nw">92,4 %</span> <span class="fig-label">de nuestros clientes mejora sus resultados</span></li><li class="fig"><span class="fig-eyebrow">Activo en menos de</span> <span class="fig-num">72 horas</span> <span class="fig-label">desde que el cliente entrega los accesos</span></li></ul>
+<p class="fig-foot">Ingresos generados: atribución de Klaviyo. 92,4 %: sobre clientes cuyo negocio sigue abierto pasados 7 meses. 72 horas: desde que el cliente entrega los accesos.</p>
+</div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- TRABAJO · STACKING CARDS scroll-driven (Linear/Tahir/Lusion-style) -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section id="trabajo">
-  <div class="section-inner" style="margin-bottom:60px">
-    <p class="section-tag reveal">03 · TRABAJO REAL</p>
-    <h2 class="section-h reveal">Cada marca.<br><span class="shiny">Su propia identidad</span>.</h2>
-    <p class="section-sub reveal delay-1">Emails entregados en octubre y noviembre de 2026. Ninguno sale de la misma plantilla.</p>
-  </div>
+<!-- PENDIENTE: BLOQUE 4 · RESULTADOS (briefing §6.4). Sin 8-10 casos con captura de Klaviyo/Perfit, queda fuera. Ver README. -->
 
-  <div class="stack-section">
-
-    <article class="stack-card">
-      <div class="stack-inner">
-        <div class="stack-card-content">
-          <p class="stack-card-num">01</p>
-          <p class="stack-card-tag">MODA MUJER · HALLOWEEN</p>
-          <h3>Catalina Vergara.</h3>
-          <p>Una fecha festiva siempre va ambientada. Aquí, la foto real del abrigo de su tienda sobre una escena de otoño.</p>
-          <p class="stack-card-meta">— CAMPAÑA · 31 OCTUBRE 2026 —</p>
-        </div>
-        <div class="stack-card-img">
-          <img src="assets/trabajo_01_moda_halloween.webp" alt="Email de Halloween de Catalina Vergara" loading="lazy">
-        </div>
-      </div>
-    </article>
-
-    <article class="stack-card">
-      <div class="stack-inner">
-        <div class="stack-card-content">
-          <p class="stack-card-num">02</p>
-          <p class="stack-card-tag">MODA · PRENDA ENTERA</p>
-          <h3>Maison Victoire.</h3>
-          <p>La prenda entera en su marco, sin recortes, y el nombre del producto tal y como lo escribe la tienda.</p>
-          <p class="stack-card-meta">— CAMPAÑA · 31 OCTUBRE 2026 —</p>
-        </div>
-        <div class="stack-card-img">
-          <img src="assets/trabajo_02_moda.webp" alt="Email de Maison Victoire" loading="lazy">
-        </div>
-      </div>
-    </article>
-
-    <article class="stack-card">
-      <div class="stack-inner">
-        <div class="stack-card-content">
-          <p class="stack-card-num">03</p>
-          <p class="stack-card-tag">MODA HOMBRE</p>
-          <h3>Castell Madrid.</h3>
-          <p>Una sola familia de letra, tamaños homogéneos y la prenda real como protagonista.</p>
-          <p class="stack-card-meta">— CAMPAÑA · 2 NOVIEMBRE 2026 —</p>
-        </div>
-        <div class="stack-card-img">
-          <img src="assets/trabajo_03_moda_hombre.webp" alt="Email de Castell Madrid" loading="lazy">
-        </div>
-      </div>
-    </article>
-
-    <article class="stack-card">
-      <div class="stack-inner">
-        <div class="stack-card-content">
-          <p class="stack-card-num">04</p>
-          <p class="stack-card-tag">BOLSOS DE PIEL</p>
-          <h3>Vellor.</h3>
-          <p>El producto real de su catálogo y el texto de la marca, sin cambiar una palabra.</p>
-          <p class="stack-card-meta">— CAMPAÑA · 2 NOVIEMBRE 2026 —</p>
-        </div>
-        <div class="stack-card-img">
-          <img src="assets/trabajo_04_bolsos.webp" alt="Email de Vellor" loading="lazy">
-        </div>
-      </div>
-    </article>
-
-    <article class="stack-card">
-      <div class="stack-inner">
-        <div class="stack-card-content">
-          <p class="stack-card-num">05</p>
-          <p class="stack-card-tag">COSMÉTICA</p>
-          <h3>Lunéa Scents.</h3>
-          <p>El envase real que enseña la tienda, la paleta de la marca y una palabra que manda en el titular.</p>
-          <p class="stack-card-meta">— CAMPAÑA · 25 OCTUBRE 2026 —</p>
-        </div>
-        <div class="stack-card-img">
-          <img src="assets/trabajo_05_cosmetica.webp" alt="Email de Lunéa Scents" loading="lazy">
-        </div>
-      </div>
-    </article>
-
-    <article class="stack-card">
-      <div class="stack-inner">
-        <div class="stack-card-content">
-          <p class="stack-card-num">06</p>
-          <p class="stack-card-tag">E-BIKE · EE. UU. · EN INGLÉS</p>
-          <h3>Velox.</h3>
-          <p>Un solo producto contado en ocho campañas distintas, en inglés y con las fotos de su tienda.</p>
-          <p class="stack-card-meta">— CAMPAÑA · 25 OCTUBRE 2026 —</p>
-        </div>
-        <div class="stack-card-img">
-          <img src="assets/trabajo_06_ebike.webp" alt="Email de Velox" loading="lazy">
-        </div>
-      </div>
-    </article>
-
-  </div>
+<!-- BLOQUE 5 · QUÉ HACEMOS -->
+<section class="section" id="que-hacemos">
+<div class="wrap">
+<p class="eyebrow">Qué hacemos</p>
+<h2>Estrategia, diseño, envíos y optimización de tu email marketing</h2>
+<ul class="do"><li><h3>Recuperación</h3><p>Los que se iban sin comprar, vuelven. Carritos, checkouts y navegaciones abandonadas.</p></li><li><h3>Retención</h3><p>El que compró una vez, vuelve a comprar. Sin que tengas que perseguirlo.</p></li><li><h3>Optimización</h3><p>Más ingresos de la lista que ya tienes, mes a mes.</p></li></ul>
+<div class="no-do">
+<h3>¿Qué dejo de tener que hacer yo?</h3>
+<ul><li>Dejamos funcionando todo tu sistema de recuperación. Tú no tocas nada.</li><li>Cada semana salen tus campañas. No tienes que escribir ni aprobar nada.</li><li>Cada mes te decimos cuánto has ganado. En una página.</li><li>El canal mejora solo, sin que lo pidas.</li></ul>
+</div>
+<p class="promise">Lo llevamos nosotros de principio a fin. <span>Tú solo ves los resultados.</span></p>
+<div class="stack">
+<p class="stack-label">Plataformas por mercado</p>
+<dl><div><dt>General</dt><dd>Shopify + Klaviyo</dd></div><div><dt>Argentina</dt><dd>Tienda Nube + Perfit</dd></div></dl>
+</div>
+</div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- PATTERN BREAK · sección Jerry-style "slow you down moment" -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section class="pattern-break">
-  <div class="pattern-content">
-    <p class="pattern-h reveal">
-      Las mejores webs no se hacen para <em>parecer bonitas</em>.
-      <br>Se hacen para <span class="shiny">romper patrones</span>,
-      <br>para hacerte parar,
-      <br>para hacerte sentir que <em>hay algo</em>
-      <br>que merece ser <em>entendido</em>.
-    </p>
-    <div class="pattern-callout reveal delay-1">
-      &gt; Eso aplica al email también.<br><br>
-      Por eso cada marca de arriba<br>tiene su propia pieza.<br><br>
-      Por eso cero plantillas.<br>Por eso cero datos inventados.<br><br>
-      Y por eso una persona revisa<br>cada email antes de que salga.
-    </div>
-  </div>
+<!-- BLOQUE 6 · CÓMO TRABAJAMOS -->
+<section class="section section-soft" id="como-trabajamos">
+<div class="wrap">
+<p class="eyebrow">Cómo trabajamos</p>
+<h2>Cuatro pasos. Activo en menos de 72 horas.</h2>
+<ol class="steps"><li><span>Nos escribes</span></li><li><span>Llamada de 15 minutos</span></li><li><span>Nos das acceso</span></li><li class="is-72"><span>En <strong>72 horas</strong> está funcionando</span></li></ol>
+<p class="steps-note">Instalamos un sistema de flujos ya probado. La personalización llega después, cuando los datos la justifican.</p>
+</div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- SISTEMA · BENTO -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section id="sistema">
-  <div class="section-inner">
-    <p class="section-tag reveal">04 · EL SISTEMA</p>
-    <h2 class="section-h reveal">Herramientas para ir rápido.<br><span class="amber-grad">Personas para decidir</span>.</h2>
-    <p class="section-sub reveal delay-1">Usamos IA y comprobaciones automáticas para producir y revisar a escala. Lo que sale, lo decide y lo revisa una persona.</p>
-
-    <div class="bento">
-      <div class="bento-card span-2 span-2-row reveal">
-        <p class="b-tag">ASÍ SALE CADA EMAIL</p>
-        <h3 class="b-h" style="font-size:32px;line-height:1;margin-top:20px">Cuatro pasos, siempre los mismos.</h3>
-        <p class="b-p" style="margin-top:14px">Cada error que aparece se convierte en una comprobación nueva, para que no vuelva a pasar.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px">
-          <div style="border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:10px;background:rgba(59,130,246,0.05)">
-            <p class="mono" style="font-size:9px;color:var(--amber);letter-spacing:0.2em;margin-bottom:4px">IDENTIDAD</p>
-            <p style="font-size:11px">Logo, colores y fotos de su web</p>
-          </div>
-          <div style="border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:10px;background:rgba(59,130,246,0.05)">
-            <p class="mono" style="font-size:9px;color:var(--amber);letter-spacing:0.2em;margin-bottom:4px">TEXTO</p>
-            <p style="font-size:11px">El de la marca, intacto</p>
-          </div>
-          <div style="border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:10px;background:rgba(59,130,246,0.05)">
-            <p class="mono" style="font-size:9px;color:var(--amber);letter-spacing:0.2em;margin-bottom:4px">DISEÑO</p>
-            <p style="font-size:11px">A medida, sin plantilla</p>
-          </div>
-          <div style="border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:10px;background:rgba(59,130,246,0.05)">
-            <p class="mono" style="font-size:9px;color:var(--amber);letter-spacing:0.2em;margin-bottom:4px">REVISIÓN</p>
-            <p style="font-size:11px">Comprobación y ojo humano</p>
-          </div>
-        </div>
-      </div>
-      <div class="bento-card span-2 reveal delay-1">
-        <div style="display:flex;justify-content:space-between;align-items:center;height:100%;gap:20px">
-          <div>
-            <p class="b-tag">VOLUMEN REAL</p>
-            <h3 class="b-h">Marcas activas</h3>
-            <p class="b-p">En el calendario de octubre de 2026.</p>
-          </div>
-          <div style="text-align:right">
-            <div class="b-num amber-grad" style="font-size:60px">52</div>
-          </div>
-        </div>
-      </div>
-      <div class="bento-card reveal delay-2">
-        <p class="b-tag">OCTUBRE 2026</p>
-        <div style="margin-top:auto">
-          <div class="b-num amber-grad" style="font-size:48px">721</div>
-          <p class="b-p" style="margin-top:6px">Emails entregados.</p>
-        </div>
-      </div>
-      <div class="bento-card reveal delay-3">
-        <p class="b-tag">IDIOMAS</p>
-        <div style="margin-top:auto">
-          <div class="b-num amber-grad" style="font-size:48px">4</div>
-          <p class="b-p" style="margin-top:6px">ES · EN · FR · IT</p>
-          
-        </div>
-      </div>
-      <div class="bento-card span-4 reveal">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;height:100%">
-          <div>
-            <p class="b-tag">ENTREGA</p>
-            <h3 class="b-h">Listo para programar en Klaviyo.</h3>
-            <p class="b-p">Cada email en imagen y HTML, con su asunto y su preheader, en la carpeta de Drive de tu marca.</p>
-          </div>
-          <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
-            <div style="display:flex;align-items:center;gap:8px"><span style="width:36px;height:36px;border-radius:8px;background:#3B82F6;color:#000;display:flex;align-items:center;justify-content:center;font-weight:900">K</span><span style="font-weight:500">Klaviyo</span></div>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- BLOQUE 7 · CONTACTO (el pie con CIF, dirección, legales e idioma va debajo) -->
+<section class="contact" id="contacto">
+<div class="wrap">
+<p class="eyebrow">Contacto</p>
+<h2>Escríbenos</h2>
+<p class="lead">Cuéntanos qué tienda tienes. Te explicamos cómo trabajamos y los precios en una llamada de 15 minutos.</p>
+<div class="cta">
+<!-- PENDIENTE: número WhatsApp Business --><a class="btn" href="mailto:gerard@vexorconsulting.com?subject=Consulta%20desde%20la%20web%20de%20VEXOR%20Consulting&body=Hola%2C%20tengo%20una%20tienda%20online%20y%20me%20gustar%C3%ADa%20saber%20c%C3%B3mo%20trabaj%C3%A1is%20el%20email%20marketing." data-wa="contact"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chat"/></svg>Escríbenos</a>
+</div>
+<p class="contact-mail"><span>Email:</span> <a href="mailto:gerard@vexorconsulting.com">gerard@vexorconsulting.com</a></p>
+</div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- MANIFIESTO -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section style="padding:160px 32px;text-align:center;position:relative;overflow:hidden">
-  <div style="position:absolute;inset:0;pointer-events:none">
-    <div style="position:absolute;top:25%;left:25%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.14),transparent 60%);filter:blur(80px)"></div>
-    <div style="position:absolute;bottom:25%;right:25%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(29,78,216,0.12),transparent 60%);filter:blur(80px)"></div>
-  </div>
-  <div style="max-width:1400px;margin:0 auto;position:relative;z-index:5">
-    <p class="serif" style="font-weight:bold;color:rgba(59,130,246,0.15);user-select:none;font-size:clamp(180px,22vw,360px);line-height:0.7">«</p>
-    <p class="mono reveal" style="font-size:11px;color:var(--amber);letter-spacing:0.3em;margin-top:-50px;margin-bottom:40px">— EL MANIFIESTO —</p>
-    <p class="serif reveal delay-1" style="font-style:italic;font-weight:300;font-size:clamp(36px,7vw,100px);line-height:0.95;max-width:1300px;margin:0 auto;color:#fff">
-      El email no es un canal.<br>
-      Es <span class="amber-grad" style="font-style:normal;font-weight:700">la única ventana</span><br>
-      donde tu cliente <span style="font-style:normal;font-weight:500;text-decoration:underline;text-decoration-color:var(--amber);text-underline-offset:8px;text-decoration-thickness:4px">sí</span> mira.
-    </p>
-    <p class="reveal delay-2" style="font-size:18px;color:#A1A1AA;font-weight:300;margin-top:60px;max-width:600px;margin-left:auto;margin-right:auto">Por eso diseñamos cada email como si fuera el único que va a abrir esa mañana.</p>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- CTA -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<section id="contacto" class="cta-section">
-  <div class="cta-bg"></div>
-  <div class="cta-inner">
-    <p class="mono reveal" style="font-size:11px;color:var(--amber);letter-spacing:0.3em;margin-bottom:30px">— EMPECEMOS —</p>
-    <h2 class="cta-h reveal delay-1">¿Hablamos de los<br>emails de <span class="amber-grad serif" style="font-style:italic">tu tienda</span>?</h2>
-    <p class="reveal delay-2" style="font-size:18px;color:#A1A1AA;font-weight:300;max-width:560px;margin:0 auto">Cuéntanos qué vendes y dónde. Te enseñamos cómo quedaría tu marca en un email.</p>
-
-    <div class="cta-form reveal delay-3" style="text-align:center">
-      <a class="btn-amber" href="mailto:gerard@vexorconsulting.com?subject=Emails%20para%20mi%20tienda" style="display:inline-block;font-size:18px;padding:18px 34px">Escríbenos →</a>
-      <p style="font-size:16px;color:#A1A1AA;margin-top:22px">o directamente a <a href="mailto:gerard@vexorconsulting.com" style="color:#fff">gerard@vexorconsulting.com</a></p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- FOOTER -->
-<!-- ═══════════════════════════════════════════════════════════════ -->
-<footer>
-  <div class="footer-aurora"></div>
-  <p class="footer-mega">VEXOR</p>
-  <p class="footer-tag">— EMAIL MARKETING PARA ECOMMERCE · 2026 —</p>
-  <div class="footer-bottom">
-    <div style="display:flex;align-items:center;gap:12px">
-      <span class="logo-mark" style="width:28px;height:28px;font-size:12px">V</span>
-      <div>
-        <div style="font-weight:700;color:#fff;font-size:14px">VEXOR Consulting</div>
-        <div class="mono" style="font-size:9px;color:#52525B;letter-spacing:0.2em;margin-top:2px">CAMPAÑAS · FLOWS · KLAVIYO</div>
-      </div>
-    </div>
-    <div style="display:flex;gap:24px">
-      <a href="#trabajo" style="color:#71717A;text-decoration:none;font-size:13px">Trabajo</a>
-      <a href="#sistema" style="color:#71717A;text-decoration:none;font-size:13px">Sistema</a>
-      <a href="#contacto" style="color:#71717A;text-decoration:none;font-size:13px">Contacto</a>
-    </div>
-    <p class="mono" style="font-size:11px;color:#52525B;letter-spacing:0.2em">CERO PLANTILLAS · CERO DATOS INVENTADOS</p>
-  </div>
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<div class="foot-grid">
+<div class="foot-brand">
+<img src="assets/brand/vexor-logo.webp" width="81" height="28" alt="VEXOR Consulting" loading="lazy">
+<div class="foot-data">
+<span><span class="k">Email:</span> <a href="mailto:gerard@vexorconsulting.com">gerard@vexorconsulting.com</a></span>
+</div>
+</div>
+<nav class="foot-links" aria-label="Legal"><a href="aviso-legal/">Aviso legal</a><a href="privacidad/">Privacidad</a><a href="cookies/">Cookies</a><button type="button" data-cookie-open>Gestionar cookies</button></nav>
+<nav class="lang" aria-label="Idioma"><a href="./" hreflang="es" lang="es" aria-current="true">ES</a><a href="en/" hreflang="en" lang="en" data-lang-switch="footer">EN</a></nav>
+</div>
+<p class="foot-copy">© 2026 VEXOR Consulting</p>
+</div>
 </footer>
-
-<script>
-// ═════════════════════════════════════════════════════════════════
-// VEXOR V2 · scroll engine ULTRA LIGERO
-// 1 listener scroll global rAF-throttled · CSS variables actualizadas
-// = 60fps real en cualquier dispositivo
-// ═════════════════════════════════════════════════════════════════
-
-(() => {
-  const root = document.documentElement;
-  let ticking = false;
-  let lastScroll = -1;
-
-  function updateScroll() {
-    const scrollY = window.scrollY;
-    if (scrollY === lastScroll) {
-      ticking = false;
-      return;
-    }
-    lastScroll = scrollY;
-    const h = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = Math.min(1, Math.max(0, scrollY / h));
-    root.style.setProperty('--scroll', progress.toFixed(4));
-    root.style.setProperty('--scroll-px', scrollY + 'px');
-    updateStoryActive(scrollY);
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(updateScroll);
-      ticking = true;
-    }
-  }, { passive: true });
-
-  // ─── REVEAL on intersect (1 IntersectionObserver para todos los .reveal) ───
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
-
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  // Stack cards reveal (mismo IO)
-  const stackIo = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        stackIo.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -100px 0px' });
-  document.querySelectorAll('.stack-card').forEach(c => stackIo.observe(c));
-
-  // ─── STORY storytelling · cambia activeBlock + activeSlide según scroll ───
-  const storyEl = document.getElementById('story');
-  const storyBlocks = document.querySelectorAll('.story-block');
-  const storySlides = document.querySelectorAll('[data-story-slide]');
-  let activeStoryIdx = -1;
-
-  function updateStoryActive(scrollY) {
-    if (!storyEl) return;
-    const r = storyEl.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > window.innerHeight) return;
-    // Calcular qué bloque mostrar basado en posición scroll dentro del story
-    const storyTop = r.top - window.innerHeight * 0.5;
-    const storyHeight = r.height;
-    const localProgress = Math.min(1, Math.max(0, -storyTop / (storyHeight - window.innerHeight * 0.5)));
-    const idx = Math.min(5, Math.floor(localProgress * 6));
-    if (idx !== activeStoryIdx) {
-      activeStoryIdx = idx;
-      storyBlocks.forEach((b, i) => b.classList.toggle('active', i === idx));
-      storySlides.forEach((s, i) => {
-        s.style.opacity = i === idx ? '1' : '0';
-      });
-    }
-  }
-
-  // Init
-  updateScroll();
-
-  // ─── BENTO spotlight hover (opcional · sin lag) ───
-  document.querySelectorAll('.bento-card').forEach(c => {
-    c.addEventListener('mousemove', e => {
-      const r = c.getBoundingClientRect();
-      c.style.background = `radial-gradient(600px circle at ${e.clientX-r.left}px ${e.clientY-r.top}px, rgba(59,130,246,0.06), rgba(255,255,255,0.025) 40%, rgba(255,255,255,0.005))`;
-    });
-    c.addEventListener('mouseleave', () => {
-      c.style.background = '';
-    });
-  });
-
-  // ═════════════════════════════════════════════════════════════════
-  // MESH GRADIENT CANVAS 2D (Stripe-style · ~3KB · WebGL-free)
-  // 4 puntos de gradiente radial que se mueven con sin/cos
-  // = sensación de "mesh fluido" sin Three.js
-  // ═════════════════════════════════════════════════════════════════
-  const meshCanvas = document.getElementById('mesh-canvas');
-  if (meshCanvas) {
-    const mctx = meshCanvas.getContext('2d', { alpha: true });
-    let mw, mh;
-    function resizeMesh() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      mw = meshCanvas.offsetWidth;
-      mh = meshCanvas.offsetHeight;
-      meshCanvas.width = mw * dpr;
-      meshCanvas.height = mh * dpr;
-      mctx.scale(dpr, dpr);
-    }
-    resizeMesh();
-    window.addEventListener('resize', resizeMesh, { passive: true });
-
-    // 4 blobs gradient · cada uno en órbita propia con sin/cos
-    const blobs = [
-      { cx: 0.25, cy: 0.30, r: 700, color: '#1D4ED8', omega: 0.00018, phase: 0 },
-      { cx: 0.75, cy: 0.25, r: 600, color: '#3B82F6', omega: -0.00022, phase: 1.2 },
-      { cx: 0.40, cy: 0.75, r: 750, color: '#1E40AF', omega: 0.00016, phase: 2.5 },
-      { cx: 0.85, cy: 0.80, r: 650, color: '#60A5FA', omega: -0.00020, phase: 3.7 },
-    ];
-
-    let stopMesh = false;
-    // Pausa cuando hero NO visible (perf)
-    if ('IntersectionObserver' in window) {
-      const heroEl = document.querySelector('.hero');
-      const heroIO = new IntersectionObserver(([e]) => {
-        stopMesh = !e.isIntersecting;
-        if (!stopMesh) requestAnimationFrame(meshFrame);
-      }, { threshold: 0 });
-      if (heroEl) heroIO.observe(heroEl);
-    }
-
-    function meshFrame(t) {
-      if (stopMesh) return;
-      // Limpia con negro semitransparente para trail sutil
-      mctx.fillStyle = '#000';
-      mctx.fillRect(0, 0, mw, mh);
-
-      blobs.forEach(b => {
-        const cx = (b.cx + Math.sin(t * b.omega + b.phase) * 0.18) * mw;
-        const cy = (b.cy + Math.cos(t * b.omega * 1.3 + b.phase) * 0.18) * mh;
-        const radius = b.r + Math.sin(t * b.omega * 0.7) * 80;
-        const grad = mctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-        grad.addColorStop(0, b.color + 'CC');     // 80% alpha
-        grad.addColorStop(0.4, b.color + '40');   // 25% alpha
-        grad.addColorStop(1, b.color + '00');     // 0% transparent
-        mctx.fillStyle = grad;
-        mctx.fillRect(0, 0, mw, mh);
-      });
-
-      requestAnimationFrame(meshFrame);
-    }
-    requestAnimationFrame(meshFrame);
-  }
-
-  console.log('VEXOR v10 · mesh canvas + scroll-driven · cero deps externas');
-})();
-</script>
+<div class="float" id="float"><!-- PENDIENTE: número WhatsApp Business --><a class="btn" href="mailto:gerard@vexorconsulting.com?subject=Consulta%20desde%20la%20web%20de%20VEXOR%20Consulting&body=Hola%2C%20tengo%20una%20tienda%20online%20y%20me%20gustar%C3%ADa%20saber%20c%C3%B3mo%20trabaj%C3%A1is%20el%20email%20marketing." data-wa="float"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chat"/></svg>Escríbenos</a></div>
+<div class="cookie" id="cookie" role="dialog" aria-label="Cookies" hidden>
+<div class="cookie-in">
+<p>Usamos almacenamiento técnico para recordar esta elección. Con tu permiso, también medimos las visitas y los clics en los botones de contacto para saber si la web funciona. No usamos cookies de publicidad. <a href="cookies/">Más información</a>.</p>
+<div class="cookie-btns">
+<button type="button" class="btn btn-line" id="cookie-no">Rechazar</button>
+<button type="button" class="btn btn-line" id="cookie-yes">Aceptar</button>
+</div>
+</div>
+</div>
 </body>
 </html>

@@ -1,0 +1,2 @@
+# La landing necesita sus imágenes: el .gitignore raíz ignora *.webp en todo el repo.
+!*.webp

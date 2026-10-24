@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="VEXOR mark">
+  <rect width="64" height="64" rx="10" fill="#0F0F14"/>
+  <!-- X negro · ramas -->
+  <polygon points="14,18 22,18 32,32 24,32" fill="#FFFFFF"/>
+  <polygon points="40,46 48,46 32,32" fill="#FFFFFF"/>
+  <!-- Trazo diagonal azul VEXOR -->
+  <line x1="46" y1="14" x2="20" y2="50" stroke="#2563EB" stroke-width="5" stroke-linecap="round"/>
+</svg>
