@@ -656,3 +656,14 @@ nav[aria-label="Legal"] a,nav[aria-label="Legal"] button{display:inline-flex;ali
   .phone-main{animation:flota-18nov 7s ease-in-out infinite}
 }
 @keyframes flota-18nov{0%,100%{translate:0 0}50%{translate:0 -8px}}
+
+/* hover-fila-18nov: en escritorio la fila sube al pasar el raton y la seleccionada se distingue del hover (juez P2, 18-nov) */
+@media (min-width:960px){
+  .row.is-sel{background:#17213a;box-shadow:inset 4px 0 0 var(--acc,var(--light)),inset 0 0 0 1px var(--line2)}
+  .row.is-sel::before{display:none}
+}
+@media (min-width:960px) and (hover:hover) and (prefers-reduced-motion:no-preference){
+  .row{transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}
+  .list:not(.arriving) .row:hover{transform:translateY(-2px);z-index:1;box-shadow:inset 3px 0 0 var(--acc,transparent),0 8px 22px rgba(3,6,14,.55)}
+  .list:not(.arriving) .row.is-sel:hover{box-shadow:inset 4px 0 0 var(--acc,var(--light)),inset 0 0 0 1px var(--line2),0 8px 22px rgba(3,6,14,.55)}
+}
