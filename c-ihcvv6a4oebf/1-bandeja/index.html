@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VEXOR Consulting · Email marketing para tiendas online</title>
+<meta name="description" content="Más ingresos por email. Sin que te ocupe tiempo. Más de 4.000.000 € generados en los últimos 12 meses para tiendas online en 14 mercados. Atribuido por Klaviyo.">
+<meta name="theme-color" content="#070b14">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/barlow-condensed-700-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/source-sans-3-var-latin.woff2">
+<!-- LANDING V9 · VEXOR · «La bandeja» · 15-nov-2026 · NO PUBLICADA · vista local · sin dependencias externas.
+     Qué es: la web como una bandeja de entrada (lista de emails reales, lector con deslizamiento, carpetas = secciones).
+     Entra: nada (HTML + v9.css + v9.js + img/ + fonts/). Se prueba: index.html y design/prueba_v9.py.
+     Concepto y fuentes de cada técnica: ../design/CONCEPTO_V9.md. Sin JS se lee entera; con prefers-reduced-motion, quieta. -->
+<link rel="stylesheet" href="v9.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<div class="app" id="app">
+
+  <header class="appbar">
+    <a class="brand" href="#bandeja" aria-label="Vexor, bandeja de entrada"><img src="img/vexor-logo-light.webp" alt="VEXOR Consulting" width="560" height="122" style="width:132px;height:auto;filter:none" data-logo="oficial-17nov"></a>
+    
+    <a class="btn btn-top" href="mailto:gerard@vexorconsulting.com">Pide tu llamada de 15 min</a>
+  </header>
+
+  <nav class="rail" aria-label="Secciones">
+    <a class="rail-brand" href="#bandeja" aria-label="Vexor, bandeja de entrada"><img src="img/vexor-logo-light.webp" alt="VEXOR Consulting" width="560" height="122" style="width:132px;height:auto;filter:none" data-logo="oficial-17nov"></a>
+    <a class="btn compose" href="mailto:gerard@vexorconsulting.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4l10-10-4-4L4 16v4z"/><path d="M13 7l4 4"/></svg>Pide tu llamada de 15 min</a>
+    <ul class="folders">
+      <li><a class="tab" href="#bandeja" data-view="bandeja"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13l3-8h12l3 8v6H3z"/><path d="M3 13h5l1 3h6l1-3h5"/></svg><span>Bandeja<span class="long"> de entrada</span></span><b class="count" id="unread" aria-label="correos sin leer">10</b></a></li>
+      <li class="only-pc"><a class="tab" href="#antes-despues" data-view="antes-despues"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 2v20M8 10l-2 2 2 2M16 10l2 2-2 2"/></svg><span>Antes / después</span></a></li>
+      <li><a class="tab" href="#flujos" data-view="flujos"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><path d="M7 12c6 0 4-7 10-7M7 12c6 0 4 7 10 7"/></svg><span>Qué hacemos</span></a></li>
+      <li><a class="tab" href="#cifras" data-view="cifras"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span>Cifras</span></a></li>
+      <li><a class="tab" href="#72h" data-view="72h"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg><span>En 72 h</span></a></li>
+      <li><a class="tab" href="#preguntas" data-view="preguntas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M10 9a2 2 0 1 1 3 1.7c-.6.4-1 .8-1 1.5M12 14.5v.2"/></svg><span>Preguntas</span></a></li>
+    </ul>
+    
+    <div class="rail-meter" aria-hidden="true">
+      <strong class="meter-n">4.000.000 €</strong>
+      <span>Atribuido por Klaviyo · últimos 12 meses</span>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- ============ 1 · BANDEJA ============ -->
+    <section class="view view-inbox is-active" id="v-bandeja" data-view="bandeja" aria-labelledby="h1">
+      <div class="inbox-col">
+        <div class="hero">
+          <p class="kicker">Operamos en 14 mercados</p>
+          <h1 id="h1">Más ingresos por email. <span class="hl">Sin que te ocupe tiempo.</span></h1>
+          <div class="metric">
+            <strong class="meter-n" id="meter"><span class="sr">Más de 4.000.000 € generados en los últimos 12 meses. Atribuido por Klaviyo.</span><span class="vis" aria-hidden="true">4.000.000 €</span></strong>
+            <p class="metric-how"><span>Atribuido por Klaviyo · últimos 12 meses</span> <a href="#cifras">Cómo se mide ↗</a></p>
+          </div>
+          <p class="sub">Nos ocupamos de todo tu email marketing: estrategia, diseño, envíos y optimización. Tú pones el foco en el resto de tu negocio.</p>
+          <a class="btn btn-main" id="cta-main" href="mailto:gerard@vexorconsulting.com">Pide tu llamada de 15 min</a>
+        </div>
+
+        <div class="strip" id="strip" aria-label="Emails reales, de tiendas reales">
+          <button class="peek" type="button" data-i="0"><img src="img/emails/cosima_1_th.webp" alt="" width="300" height="420"><span>Cósima</span></button>
+          <button class="peek" type="button" data-i="2"><img src="img/emails/maison-victoire_1_th.webp" alt="" width="300" height="420"><span>Maison Victoire</span></button>
+          <button class="peek" type="button" data-i="3"><img src="img/emails/fortemax_1_th.webp" alt="" width="300" height="420"><span>Forte Max</span></button>
+          <button class="peek" type="button" data-i="4"><img src="img/emails/selamora_1_th.webp" alt="" width="300" height="420" loading="lazy"><span>Selamora</span></button>
+          <button class="peek" type="button" data-i="5"><img src="img/emails/novem_1_th.webp" alt="" width="300" height="420" loading="lazy"><span>Novem</span></button>
+          <button class="peek" type="button" data-i="7"><img src="img/emails/superlab_1_th.webp" alt="" width="300" height="420" loading="lazy"><span>Superlab Argentina</span></button>
+        </div>
+
+        <div class="inbox" id="inbox">
+          <div class="inbox-head">
+            <h2 class="inbox-title">Bandeja de entrada</h2>
+            <p class="inbox-sub">Emails reales, de tiendas reales</p>
+          </div>
+
+          <a class="row row-pin" href="#antes-despues">
+            <span class="thumb thumb-split" aria-hidden="true"><img src="img/wow/ba_lunea_antes.webp" alt="" width="420" height="1110" loading="lazy"><img src="img/wow/ba_lunea_despues.webp" alt="" width="420" height="1110" loading="lazy"></span>
+            <span class="row-txt"><span class="row-from">Vexor <i class="chip chip-pin">Fijado</i></span><span class="row-subj">Antes / después</span><span class="row-prev">El mismo email de un cliente, en la versión anterior de Vexor y en la actual.</span></span>
+            <span class="row-go" aria-hidden="true">›</span>
+          </a>
+
+          <ol class="list" id="list" aria-label="Diez emails reales de clientes de Vexor">
+            <li><a class="row mail" href="img/emails/cosima_1.webp" data-i="0" data-full="img/emails/cosima_1.webp" data-h="1724" data-cap="Carrito abandonado · Cósima · accesorios (gafas)" data-from="Cósima"><span class="thumb"><img src="img/emails/cosima_1_th.webp" width="300" height="420" alt="Email de carrito abandonado de Cósima (accesorios (gafas)): primer plano de una mujer con gafas de sol de montura de carey y el titular «Lo dejaste a medias»."></span><span class="row-txt"><span class="row-from">Cósima <i class="chip">Carrito abandonado</i></span><span class="row-subj">Lo dejaste a medias</span><span class="row-prev">accesorios (gafas)</span></span><span class="row-go" aria-hidden="true"><i class="dot"></i>›</span></a></li>
+            <li><a class="row mail" href="img/emails/dalia-pure_1.webp" data-i="1" data-full="img/emails/dalia-pure_1.webp" data-h="2672" data-cap="Newsletter · Dalia Pure · belleza" data-from="Dalia Pure"><span class="thumb"><img src="img/emails/dalia-pure_1_th.webp" width="300" height="420" alt="Email de newsletter de Dalia Pure (belleza): una ampolla de sérum con colágeno sobre fondo azul marino y un texto largo de producto."></span><span class="row-txt"><span class="row-from">Dalia Pure <i class="chip">Newsletter</i></span><span class="row-subj">Ampolla, crema en sérum y su aplicador</span><span class="row-prev">belleza</span></span><span class="row-go" aria-hidden="true"><i class="dot"></i>›</span></a></li>
+            <li><a class="row mail" href="img/emails/maison-victoire_1.webp" data-i="2" data-full="img/emails/maison-victoire_1.webp" data-h="1880" data-cap="Bienvenida · Maison Victoire · moda" data-from="Maison Victoire"><span class="thumb"><img src="img/emails/maison-victoire_1_th.webp" width="300" height="420" alt="Email de bienvenida de Maison Victoire (moda): una mujer con vestido azul marino de pie junto a una ventana y el titular «Bienvenida a casa»."></span><span class="row-txt"><span class="row-from">Maison Victoire <i class="chip">Bienvenida</i></span><span class="row-subj">Bienvenida a casa</span><span class="row-prev">moda</span></span><span class="row-go" aria-hidden="true"><i class="dot"></i>›</span></a></li>
+            <li><a class="row mail" href="img/emails/fortemax_1.webp" data-i="3" data-full="img/emails/fortemax_1.webp" data-h="2332" data-cap="Carrito abandonado · Forte Max · salud" data-from="Forte Max"><span class="thumb"><img src="img/emails/fortemax_1_th.webp" width="300" height="420" alt="Email de carrito abandonado de Forte Max (salud): el titular «Tu carrito sigue ahí» en letras grandes sobre fondo blanco y un botón negro para recuperar el carrito."></span><span class="row-txt"><span class="row-from">Forte Max <i class="chip">Carrito abandonado</i></span><span class="row-subj">Tu carrito sigue ahí</span><span class="row-prev">salud</span></span><span class="row-go" aria-hidden="true"><i class="dot"></i>›</span></a></li>
+            <li><a class="row mail" href="img/emails/selamora_1.webp" data-i="4" data-full="img/emails/selamora_1.webp" data-h="2336" data-cap="Newsletter · Selamora · joyería" data-from="Selamora"><span class="thumb"><img src="img/emails/selamora_1_th.webp" width="300" height="420" alt="Email de newsletter de Selamora (joyería): un collar de cuentas de colores y el titular «Regalar sin preguntar la talla»."></span><span class="row-txt"><span class="row-from">Selamora <i class="chip">Newsletter</i></span><span class="row-subj">Regalar sin preguntar la talla</span><span class="row-prev">joyería</span></span><span class="row-go" aria-hidden="true"><i class="dot"></i>›</span></a></li>
+            <li><a class="row mail" href="img/emails/novem_1.webp" data-i="5" data-full="img/emails/novem_1.webp" data-h="1810" data-cap="Bienvenida · Novem · joyería" data-from="Novem"><span class="thumb"><img src="img/emails/novem_1_th.webp" width="300" height="420" alt="Email de bienvenida de Novem (joyería): retrato de una mujer sonriendo y el titular «Un detalle que es tuyo»."></span><span class="row-txt"><span class="row-from">Novem <i class="chip">Bienvenida</i></span><span class="row-subj">Un detalle que es tuyo</span><span class="row-prev">joyería</span></span><span class="row-go" aria-hidden="true"><i class="dot"></i>›</span></a></li>
+            <li><a class="row mail" href="img/emails/glowys_1.webp" data-i="6" data-full="img/emails/glowys_1.webp" data-h="1860" data-cap="Abandono de navegación · Glowys · niños" data-from="Glowys"><span class="thumb"><img src="img/emails/glowys_1_th.webp" width="300" height="420" loading="lazy" alt="Email de abandono de navegación de Glowys (niños): unas zapatillas deportivas infantiles blancas y el titular «Did something catch your eye?»."></span><span class="row-txt"><span class="row-from">Glowys <i class="chip">Abandono de navegación</i></span><span class="row-subj">Did something catch your eye?</span><span class="row-prev">niños</span></span><span class="row-go" aria-hidden="true"><i class="dot"></i>›</span></a></li>
+            <li><a class="row mail" href="img/emails/superlab_1.webp" data-i="7" data-full="img/emails/superlab_1.webp" data-h="1664" data-cap="Bienvenida · Superlab Argentina · salud" data-from="Superlab Argentina"><span class="thumb"><img src="img/emails/superlab_1_th.webp" width="300" height="420" loading="lazy" alt="Email de bienvenida de Superlab Argentina (salud): una caja de parches de alivio muscular sobre fondo negro y el titular «Bienvenido a Superlab»."></span><span class="row-txt"><span class="row-from">Superlab Argentina <i class="chip">Bienvenida</i></span><span class="row-subj">Bienvenido a Superlab</span><span class="row-prev">salud</span></span><span class="row-go" aria-hidden="true"><i class="dot"></i>›</span></a></li>
+            <li><a class="row mail" href="img/emails/palmora-society_1.webp" data-i="8" data-full="img/emails/palmora-society_1.webp" data-h="2926" data-cap="Newsletter · Palmora Society · moda (bolsos)" data-from="Palmora Society"><span class="thumb"><img src="img/emails/palmora-society_1_th.webp" width="300" height="420" loading="lazy" alt="Email de newsletter de Palmora Society (moda (bolsos)): una modelo con un bolso marrón de ante y el texto «For the days that carry it all.»."></span><span class="row-txt"><span class="row-from">Palmora Society <i class="chip">Newsletter</i></span><span class="row-subj">For the days that carry it all.</span><span class="row-prev">moda (bolsos)</span></span><span class="row-go" aria-hidden="true"><i class="dot"></i>›</span></a></li>
+            <li><a class="row mail" href="img/emails/aqualo_1.webp" data-i="9" data-full="img/emails/aqualo_1.webp" data-h="2472" data-cap="Bienvenida · Aqualo · belleza" data-from="Aqualo"><span class="thumb"><img src="img/emails/aqualo_1_th.webp" width="300" height="420" loading="lazy" alt="Email de bienvenida de Aqualo (belleza): dos botellas de champú con romero sobre un fondo de plantas y el titular «Bienvenida» con el aviso de que el descuento ya está activo."></span><span class="row-txt"><span class="row-from">Aqualo <i class="chip">Bienvenida</i></span><span class="row-subj">Bienvenida</span><span class="row-prev">belleza</span></span><span class="row-go" aria-hidden="true"><i class="dot"></i>›</span></a></li>
+          </ol>
+          <p class="inbox-hint">Desliza y pulsa un email para verlo entero.</p>
+        </div>
+        <p class="sub-m" aria-hidden="true">Nos ocupamos de todo tu email marketing: estrategia, diseño, envíos y optimización. Tú pones el foco en el resto de tu negocio.</p>
+
+        <div class="logos" aria-label="Clientes de Vexor">
+          <img src="img/logos/bianca_wear.png" alt="Bianca Wear" width="400" height="73" loading="lazy">
+          <img src="img/logos/camila_lopez.png" alt="Camila Lopez" width="400" height="295" loading="lazy">
+          <img src="img/logos/catalina_vergara.png" alt="Catalina Vergara" width="400" height="61" loading="lazy">
+          <img src="img/logos/elara.png" alt="Elara" width="400" height="194" loading="lazy">
+          <img src="img/logos/livia_ferretti.png" alt="Livia Ferretti" width="400" height="128" loading="lazy">
+        </div>
+        <footer class="foot">
+          <span>© 2026 VEXOR Consulting</span>
+          <nav aria-label="Legal"><a href="#aviso-legal" data-dialog="d-aviso">Aviso legal</a><a href="#privacidad" data-dialog="d-priv">Privacidad</a><a href="#cookies" data-dialog="d-cookies">Cookies</a><button type="button" data-dialog="d-gestion">Gestionar cookies</button></nav>
+        </footer>
+      </div>
+
+      <div class="stage" id="stage" aria-hidden="true">
+        <div class="stage-tilt" id="tilt">
+          <div class="phone phone-b2"><div class="screen"><img src="img/emails/selamora_1_th.webp" alt="" width="300" height="420" loading="lazy"></div></div>
+          <div class="phone phone-b1"><div class="screen"><img src="img/emails/maison-victoire_1_th.webp" alt="" width="300" height="420" loading="lazy"></div></div>
+          <div class="phone phone-main"><div class="screen"><img id="stage-img" src="img/emails/cosima_1.webp" alt="" width="600" height="1724" loading="lazy"></div><i class="glass"></i></div>
+        </div>
+        <p class="stage-cap"><span id="stage-cap">Carrito abandonado · Cósima · accesorios (gafas)</span></p>
+        <svg class="thread thread-stage" viewBox="0 0 600 800" preserveAspectRatio="none"><path d="M-20 640 C 160 600 300 760 620 560"/></svg>
+      </div>
+    </section>
+
+    <!-- ============ 2 · ANTES / DESPUÉS ============ -->
+    <section class="view" id="v-antes-despues" data-view="antes-despues" aria-labelledby="ba-t" hidden>
+      <div class="view-in view-ba">
+        <a class="back" href="#bandeja">‹ <span>Bandeja</span></a>
+        <div class="ba-wrap">
+          <div class="ba-col">
+            <div class="ba-labels" aria-hidden="true"><span>Versión anterior de Vexor</span><span>Versión actual de Vexor</span></div>
+            <div class="ba-panel" id="ba-p0" role="tabpanel" aria-labelledby="ba-t0">
+              <div class="ba" style="--p:40"><img class="ba-b" src="img/wow/ba_lunea_despues.webp" width="420" height="1110" loading="lazy" alt="El mismo email de Lunéa Scents en la versión actual de Vexor: fondo burdeos oscuro con el título «Save the date» en rosa, cinco tubos de crema de colores y un calendario del 13 al 16 de noviembre."><img class="ba-a" src="img/wow/ba_lunea_antes.webp" width="420" height="1110" loading="lazy" alt="Email de Lunéa Scents en la versión anterior de Vexor: fondo magenta con el título «Save the date» en grande y un solo tubo de crema sobre un pedestal blanco."><i class="ba-h" aria-hidden="true"><b></b></i></div>
+              <input class="ba-r" type="range" min="0" max="100" step="1" value="40" aria-label="Comparar la versión anterior de Vexor (izquierda) y la versión actual (derecha) del email de Lunéa Scents">
+            </div>
+            <div class="ba-panel" id="ba-p1" role="tabpanel" aria-labelledby="ba-t1" hidden>
+              <div class="ba" style="--p:40"><img class="ba-b" src="img/wow/ba_castell_despues.webp" width="600" height="2000" loading="lazy" alt="El mismo email de Castell Madrid en la versión actual de Vexor: la misma cazadora granate que se funde con un fondo azul marino donde va el texto y el botón «Ver las bomber»."><img class="ba-a" src="img/wow/ba_castell_antes.webp" width="600" height="2000" loading="lazy" alt="Email de Castell Madrid (moda hombre) en la versión anterior de Vexor: una cazadora bomber granate y el texto sobre fondo gris claro con el botón «Ver las bomber»."><i class="ba-h" aria-hidden="true"><b></b></i></div>
+              <input class="ba-r" type="range" min="0" max="100" step="1" value="40" aria-label="Comparar la versión anterior de Vexor (izquierda) y la versión actual (derecha) del email de Castell Madrid">
+            </div>
+            <div class="ba-panel" id="ba-p2" role="tabpanel" aria-labelledby="ba-t2" hidden>
+              <div class="ba" style="--p:40"><img class="ba-b" src="img/wow/ba_merida_despues.webp" width="380" height="1660" loading="lazy" alt="El mismo email de Casa Mérida en la versión actual de Vexor: franja de envío gratis arriba, una cabecera en tonos vino con la mujer del vestido estampado y tres vestidos con su precio."><img class="ba-a" src="img/wow/ba_merida_antes.webp" width="380" height="1660" loading="lazy" alt="Email de Casa Mérida en la versión anterior de Vexor: fondo blanco, el título «Bienvenida a Casa Mérida» y una mujer con un vestido estampado."><i class="ba-h" aria-hidden="true"><b></b></i></div>
+              <input class="ba-r" type="range" min="0" max="100" step="1" value="40" aria-label="Comparar la versión anterior de Vexor (izquierda) y la versión actual (derecha) del email de Casa Mérida">
+            </div>
+          </div>
+          <div class="ba-txt">
+            <p class="kicker">Nuestro sistema, antes y ahora</p>
+            <h2 class="h2" id="ba-t">Arrastra y compara</h2>
+            <p class="lead">El mismo email de un cliente, en la versión anterior de Vexor y en la actual. No son emails de antes de trabajar con nosotros.</p>
+            <div class="ba-tabs" role="tablist" aria-label="Elige el email que quieres comparar">
+              <button class="ba-tab" id="ba-t0" role="tab" type="button" aria-controls="ba-p0" aria-selected="true" tabindex="0"><img src="img/wow/ba_lunea_despues.webp" alt="" width="420" height="1110" loading="lazy"><span>Lunéa Scents</span></button>
+              <button class="ba-tab" id="ba-t1" role="tab" type="button" aria-controls="ba-p1" aria-selected="false" tabindex="-1"><img src="img/wow/ba_castell_despues.webp" alt="" width="600" height="2000" loading="lazy"><span>Castell Madrid</span></button>
+              <button class="ba-tab" id="ba-t2" role="tab" type="button" aria-controls="ba-p2" aria-selected="false" tabindex="-1"><img src="img/wow/ba_merida_despues.webp" alt="" width="380" height="1660" loading="lazy"><span>Casa Mérida</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3 · QUÉ HACEMOS (FLUJOS) ============ -->
+    <section class="view" id="v-flujos" data-view="flujos" aria-labelledby="fl-t" hidden>
+      <div class="view-in">
+        <p class="kicker">Estrategia, diseño, envíos y optimización de tu email marketing</p>
+        <h2 class="h2" id="fl-t">¿Qué dejo de tener que hacer yo?</h2>
+
+        <div class="flows" role="img" aria-label="Flujos del sistema: Bienvenida, Carrito abandonado, Pago abandonado, Producto visto, Visita sin compra, Después de la compra y Reposición">
+          <svg class="flows-pc" viewBox="0 0 1000 310" aria-hidden="true">
+            <g class="hilos">
+              <path id="f0" d="M196 155 C 430 155 430 26 690 26"/><path id="f1" d="M196 155 C 430 155 430 69 690 69"/><path id="f2" d="M196 155 C 430 155 430 112 690 112"/><path id="f3" d="M196 155 L 690 155"/><path id="f4" d="M196 155 C 430 155 430 198 690 198"/><path id="f5" d="M196 155 C 430 155 430 241 690 241"/><path id="f6" d="M196 155 C 430 155 430 284 690 284"/>
+            </g>
+            <g class="sobres">
+              <g><rect x="-11" y="-8" width="22" height="16" rx="3"/><path d="M-9 -6l9 7 9-7"/><animateMotion dur="6s" begin="-0.00s" repeatCount="indefinite"><mpath href="#f0"/></animateMotion></g>
+              <g><rect x="-11" y="-8" width="22" height="16" rx="3"/><path d="M-9 -6l9 7 9-7"/><animateMotion dur="6s" begin="-0.86s" repeatCount="indefinite"><mpath href="#f1"/></animateMotion></g>
+              <g><rect x="-11" y="-8" width="22" height="16" rx="3"/><path d="M-9 -6l9 7 9-7"/><animateMotion dur="6s" begin="-1.72s" repeatCount="indefinite"><mpath href="#f2"/></animateMotion></g>
+              <g><rect x="-11" y="-8" width="22" height="16" rx="3"/><path d="M-9 -6l9 7 9-7"/><animateMotion dur="6s" begin="-2.58s" repeatCount="indefinite"><mpath href="#f3"/></animateMotion></g>
+              <g><rect x="-11" y="-8" width="22" height="16" rx="3"/><path d="M-9 -6l9 7 9-7"/><animateMotion dur="6s" begin="-3.44s" repeatCount="indefinite"><mpath href="#f4"/></animateMotion></g>
+              <g><rect x="-11" y="-8" width="22" height="16" rx="3"/><path d="M-9 -6l9 7 9-7"/><animateMotion dur="6s" begin="-4.30s" repeatCount="indefinite"><mpath href="#f5"/></animateMotion></g>
+              <g><rect x="-11" y="-8" width="22" height="16" rx="3"/><path d="M-9 -6l9 7 9-7"/><animateMotion dur="6s" begin="-5.16s" repeatCount="indefinite"><mpath href="#f6"/></animateMotion></g>
+            </g>
+            <g class="tienda"><rect x="20" y="124" width="176" height="62" rx="10"/><text x="108" y="161">Tu tienda</text></g>
+            <g class="nodos">
+              <g><rect x="690" y="8" width="290" height="36" rx="8"/><circle cx="690" cy="26" r="5"/><text x="712" y="32">Bienvenida</text></g>
+              <g><rect x="690" y="51" width="290" height="36" rx="8"/><circle cx="690" cy="69" r="5"/><text x="712" y="75">Carrito abandonado</text></g>
+              <g><rect x="690" y="94" width="290" height="36" rx="8"/><circle cx="690" cy="112" r="5"/><text x="712" y="118">Pago abandonado</text></g>
+              <g><rect x="690" y="137" width="290" height="36" rx="8"/><circle cx="690" cy="155" r="5"/><text x="712" y="161">Producto visto</text></g>
+              <g><rect x="690" y="180" width="290" height="36" rx="8"/><circle cx="690" cy="198" r="5"/><text x="712" y="204">Visita sin compra</text></g>
+              <g><rect x="690" y="223" width="290" height="36" rx="8"/><circle cx="690" cy="241" r="5"/><text x="712" y="247">Después de la compra</text></g>
+              <g><rect x="690" y="266" width="290" height="36" rx="8"/><circle cx="690" cy="284" r="5"/><text x="712" y="290">Reposición</text></g>
+            </g>
+          </svg>
+          <div class="flows-m" aria-hidden="true">
+            <p class="fm-store">Tu tienda</p>
+            <ol class="fm-list">
+              <li>Bienvenida</li><li>Carrito abandonado</li><li>Pago abandonado</li><li>Producto visto</li><li>Visita sin compra</li><li>Después de la compra</li><li>Reposición</li>
+            </ol>
+            <i class="fm-env"><svg viewBox="0 0 24 18"><rect x="1" y="1" width="22" height="16" rx="3"/><path d="M3 3l9 7 9-7"/></svg></i>
+          </div>
+        </div>
+
+        <div class="pillars">
+          <article><h3 class="h3">Recuperación</h3><p>Los que se iban sin comprar, vuelven. Carritos, checkouts y navegaciones abandonadas.</p></article>
+          <article><h3 class="h3">Retención</h3><p>El que compró una vez, vuelve a comprar. Sin que tengas que perseguirlo.</p></article>
+          <article><h3 class="h3">Optimización</h3><p>Más ingresos de la lista que ya tienes, mes a mes.</p></article>
+        </div>
+        <ul class="ticks" aria-labelledby="fl-t">
+          <li><b>Dejamos funcionando todo tu sistema de recuperación.</b><span>Tú no tocas nada.</span></li>
+          <li><b>Cada semana salen tus campañas.</b><span>No tienes que escribir ni aprobar nada.</span></li>
+          <li><b>Cada mes te decimos cuánto has ganado.</b><span>En una página.</span></li>
+          <li><b>El canal mejora solo, sin que lo pidas.</b></li>
+        </ul>
+        <div class="minis" aria-hidden="true"><figure><img src="img/emails/fortemax_1_th.webp" alt="" width="300" height="420" loading="lazy"><figcaption>Carrito abandonado · Forte Max · salud</figcaption></figure><figure><img src="img/emails/cosima_1_th.webp" alt="" width="300" height="420" loading="lazy"><figcaption>Carrito abandonado · Cósima · accesorios (gafas)</figcaption></figure><figure><img src="img/emails/glowys_1_th.webp" alt="" width="300" height="420" loading="lazy"><figcaption>Abandono de navegación · Glowys · niños</figcaption></figure><figure><img src="img/emails/selamora_1_th.webp" alt="" width="300" height="420" loading="lazy"><figcaption>Newsletter · Selamora · joyería</figcaption></figure><figure><img src="img/emails/dalia-pure_1_th.webp" alt="" width="300" height="420" loading="lazy"><figcaption>Newsletter · Dalia Pure · belleza</figcaption></figure><figure><img src="img/emails/palmora-society_1_th.webp" alt="" width="300" height="420" loading="lazy"><figcaption>Newsletter · Palmora Society · moda (bolsos)</figcaption></figure></div>
+        <a class="btn btn-end" href="mailto:gerard@vexorconsulting.com">Pide tu llamada de 15 min</a>
+      </div>
+    </section>
+
+    <!-- ============ 4 · CIFRAS ============ -->
+    <section class="view" id="v-cifras" data-view="cifras" aria-labelledby="ci-t" hidden>
+      <div class="view-in">
+        <h2 class="h2 h2-s" id="ci-t">Cinco cifras y cómo se mide cada una</h2>
+        <div class="big">
+          <div class="wall" aria-hidden="true"><img src="img/emails/cosima_1_th.webp" alt="" width="300" height="420" loading="lazy"><img src="img/emails/dalia-pure_1_th.webp" alt="" width="300" height="420" loading="lazy"><img src="img/emails/maison-victoire_1_th.webp" alt="" width="300" height="420" loading="lazy"><img src="img/emails/fortemax_1_th.webp" alt="" width="300" height="420" loading="lazy"><img src="img/emails/selamora_1_th.webp" alt="" width="300" height="420" loading="lazy"><img src="img/emails/novem_1_th.webp" alt="" width="300" height="420" loading="lazy"><img src="img/emails/glowys_1_th.webp" alt="" width="300" height="420" loading="lazy"><img src="img/emails/superlab_1_th.webp" alt="" width="300" height="420" loading="lazy"><img src="img/emails/palmora-society_1_th.webp" alt="" width="300" height="420" loading="lazy"><img src="img/emails/aqualo_1_th.webp" alt="" width="300" height="420" loading="lazy"></div>
+          <p class="big-n"><span class="sr">Más de 4.000.000 € generados en los últimos 12 meses. Atribuido por Klaviyo.</span><span class="vis" aria-hidden="true">4.000.000 €</span></p>
+          <i class="thread-line" aria-hidden="true"></i>
+          <p class="big-l" aria-hidden="true">generados en los últimos 12 meses. Atribuido por Klaviyo.</p>
+          <p class="how"><b>Cómo se mide:</b> Atribución real de Klaviyo.</p>
+          <p class="note">Las cifras publicadas corresponden a resultados pasados de clientes de VEXOR Consulting y no garantizan resultados futuros.</p>
+        </div>
+        <div class="figs">
+          <article class="fig"><p class="num">87</p><p class="lab">clientes activos</p><p class="how"><b>Cómo se mide:</b> Cartera actual.</p></article>
+          <article class="fig"><p class="num">14</p><p class="lab">mercados</p><p class="how"><b>Cómo se mide:</b> Los países de la lista de mercados.</p></article>
+          <article class="fig"><p class="num">92,4&nbsp;%</p><p class="lab">de nuestros clientes mejora sus resultados</p><p class="how"><b>Cómo se mide:</b> Sobre clientes cuyo negocio sigue abierto pasados 7 meses.</p></article>
+          <article class="fig"><p class="num">72&nbsp;h</p><p class="lab">Activo en menos de 72 horas</p><p class="how"><b>Cómo se mide:</b> Desde que el cliente entrega los accesos.</p></article>
+        </div>
+        <div class="markets">
+          <p class="kicker">Operamos en estos países</p>
+          <ul class="pills" aria-label="Los mercados donde operamos"><li>Estados Unidos</li><li>México</li><li>Argentina</li><li>Chile</li><li>Perú</li><li>España</li><li>Portugal</li><li>Alemania</li><li>Francia</li><li>Reino Unido</li><li>República Checa</li><li>Australia</li><li>Canadá</li><li>Italia</li></ul>
+          <p class="stacks"><b>Argentina:</b> Tienda Nube + Perfit. <b>Resto de mercados:</b> Shopify + Klaviyo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5 · EN 72 H ============ -->
+    <section class="view" id="v-72h" data-view="72h" aria-labelledby="h72-t" hidden>
+      <div class="view-in">
+        <p class="kicker">Cómo trabajamos</p>
+        <h2 class="h2" id="h72-t">Cuatro pasos hasta tenerlo activo.</h2>
+        <div class="t72">
+          <div class="t72-clock"><strong>72&nbsp;h</strong><span>Desde que nos das los accesos.</span></div>
+          <ol class="steps">
+            <li><i class="n" aria-hidden="true">01</i><h3 class="h3">Nos escribes</h3><p>Por correo.</p></li>
+            <li><i class="n" aria-hidden="true">02</i><h3 class="h3">Llamada de 15 minutos</h3><p>Te explicamos cómo trabajamos y los precios.</p></li>
+            <li><i class="n" aria-hidden="true">03</i><h3 class="h3">Nos das acceso</h3><p>Un grupo con tu equipo y el nuestro. Te pedimos los accesos.</p></li>
+            <li><i class="n" aria-hidden="true">04</i><h3 class="h3">Está funcionando</h3><p>Todo montado y activo, con el sistema de flujos ya probado.</p></li>
+          </ol>
+        </div>
+        <div class="flowtags">
+          <p class="lab">Flujos</p>
+          <ul aria-label="Flujos del sistema"><li>Bienvenida</li><li>Carrito abandonado</li><li>Pago abandonado</li><li>Producto visto</li><li>Visita sin compra</li><li>Después de la compra</li><li>Reposición</li></ul>
+          <p class="note">Instalamos un sistema de flujos ya probado. La personalización llega después, cuando los datos la justifican.</p>
+          <div class="minis" aria-hidden="true"><figure><img src="img/emails/novem_1_th.webp" alt="" width="300" height="420" loading="lazy"><figcaption>Bienvenida · Novem · joyería</figcaption></figure><figure><img src="img/emails/cosima_1_th.webp" alt="" width="300" height="420" loading="lazy"><figcaption>Carrito abandonado · Cósima · accesorios (gafas)</figcaption></figure><figure><img src="img/emails/maison-victoire_1_th.webp" alt="" width="300" height="420" loading="lazy"><figcaption>Bienvenida · Maison Victoire · moda</figcaption></figure><figure><img src="img/emails/fortemax_1_th.webp" alt="" width="300" height="420" loading="lazy"><figcaption>Carrito abandonado · Forte Max · salud</figcaption></figure><figure><img src="img/emails/glowys_1_th.webp" alt="" width="300" height="420" loading="lazy"><figcaption>Abandono de navegación · Glowys · niños</figcaption></figure><figure><img src="img/emails/superlab_1_th.webp" alt="" width="300" height="420" loading="lazy"><figcaption>Bienvenida · Superlab Argentina · salud</figcaption></figure></div>
+        </div>
+        <a class="btn btn-end" href="mailto:gerard@vexorconsulting.com">Pide tu llamada de 15 min</a>
+      </div>
+    </section>
+
+    <!-- ============ 6 · PREGUNTAS ============ -->
+    <section class="view" id="v-preguntas" data-view="preguntas" aria-labelledby="faq-t" hidden>
+      <div class="view-in">
+        <h2 class="h2" id="faq-t">Preguntas</h2>
+        <div class="faq">
+          <div class="faq-col">
+            <details name="faq"><summary>¿Cuánto cuesta?</summary><p>Los precios se explican en la llamada de 15 minutos.</p></details>
+            <details name="faq"><summary>¿Hay permanencia?</summary><p>Las condiciones del servicio, duración incluida, se explican en la llamada de 15 minutos.</p></details>
+            <details name="faq"><summary>¿Cuánto tardáis en ponerlo en marcha?</summary><p>El plazo está en «Cómo trabajamos» y se cuenta desde que nos das los accesos.</p></details>
+            <details name="faq"><summary>¿Qué tengo que hacer yo?</summary><p>Una llamada, un grupo de WhatsApp y los accesos.</p></details>
+            <details name="faq"><summary>¿Qué hacéis cada mes?</summary><p>Cada semana salen tus campañas. Cada mes te decimos cuánto has ganado, en una página.</p></details>
+          </div>
+          <div class="faq-col">
+            <details name="faq"><summary>¿Quién escribe y envía los emails?</summary><p>Nosotros. Cada semana salen tus campañas y no tienes que escribir ni aprobar nada.</p></details>
+            <details name="faq"><summary>¿Cómo sé cuánto he ganado?</summary><p>Cada mes te decimos cuánto has ganado, en una página. La cifra de ingresos que damos en esta web es la atribución de Klaviyo.</p></details>
+            <details name="faq"><summary>¿Con qué plataformas trabajáis?</summary><p>Shopify y Klaviyo, y Tienda Nube y Perfit en Argentina. Si usas otra, escríbenos y te decimos qué se puede hacer.</p></details>
+            <details name="faq"><summary>¿Qué accesos necesitáis y qué hacéis con mis datos?</summary><p>Los accesos se piden en el paso 3, en un grupo con tu equipo y el nuestro. Cómo tratamos los datos de quien nos escribe está en la política de privacidad.</p></details>
+            <details name="faq"><summary>¿Trabajáis con Tienda Nube?</summary><p>Sí. En Argentina trabajamos con Tienda Nube + Perfit; en el resto de mercados, con Shopify + Klaviyo.</p></details>
+          </div>
+        </div>
+        <div class="closing">
+          <p class="closing-t">Más ingresos por email. Sin que te ocupe tiempo.</p>
+          <a class="btn btn-main" href="mailto:gerard@vexorconsulting.com">Pide tu llamada de 15 min</a>
+        </div>
+        <footer class="foot foot-in">
+          <span>© 2026 VEXOR Consulting</span>
+          <nav aria-label="Legal"><a href="#aviso-legal" data-dialog="d-aviso">Aviso legal</a><a href="#privacidad" data-dialog="d-priv">Privacidad</a><a href="#cookies" data-dialog="d-cookies">Cookies</a><button type="button" data-dialog="d-gestion">Gestionar cookies</button></nav>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============ LECTOR DE EMAILS ============ -->
+<div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="Email completo" hidden>
+  <div class="reader-bar">
+    <button class="reader-back" id="reader-back" type="button" aria-label="Volver a la bandeja">‹ <span>Bandeja</span></button>
+    <p class="reader-title" id="reader-title"></p>
+    <p class="reader-count" id="reader-count" aria-live="polite"></p>
+    <button class="reader-nav" id="reader-prev" type="button" aria-label="Email anterior">←</button>
+    <button class="reader-nav" id="reader-next" type="button" aria-label="Email siguiente">→</button>
+  </div>
+  <div class="reader-dots" id="reader-dots" aria-hidden="true"></div>
+  <div class="reader-body"><div class="reader-side" id="reader-side" aria-label="Los diez emails"></div><div class="reader-track" id="reader-track"></div></div>
+</div>
+
+<dialog aria-label="Aviso legal" class="legal" id="d-aviso"><div class="legal-in"><button class="btn btn--ghost x" data-close="" type="button">Cerrar</button>
+<h1>Aviso legal</h1>
+<h2>1. Titular del sitio web</h2>
+<p>En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de los datos del titular de este sitio web:</p>
+<table><tbody>
+<tr><th scope="row">Correo electrónico</th><td><a href="mailto:gerard@vexorconsulting.com">gerard@vexorconsulting.com</a></td></tr>
+<tr><th scope="row">Nombre comercial</th><td>VEXOR Consulting</td></tr>
+<tr><th scope="row">Dominio</th><td>vexorconsulting.com</td></tr>
+</tbody></table>
+<h2>2. Objeto</h2>
+<p>Este sitio web informa de los servicios de gestión de email marketing de VEXOR Consulting para tiendas online. No permite contratar servicios ni realizar pagos. El contacto se hace por WhatsApp o por correo electrónico.</p>
+<h2>3. Condiciones de uso</h2>
+<p>El acceso al sitio es gratuito. Quien lo use se compromete a hacerlo conforme a la ley, a la buena fe y a este aviso, y a no emplearlo para actividades ilícitas o que dañen a VEXOR Consulting o a terceros.</p>
+<h2>4. Propiedad intelectual y marcas de terceros</h2>
+<p>Los textos, el diseño y el logotipo de este sitio pertenecen a su titular. Shopify, Klaviyo, Tienda Nube, Perfit y WhatsApp son marcas de sus respectivos propietarios. Se mencionan solo para indicar con qué plataformas trabajamos y no implican acuerdo, patrocinio ni condición de socio oficial.</p>
+<h2>5. Responsabilidad</h2>
+<p>Las cifras publicadas corresponden a resultados pasados de clientes de VEXOR Consulting y no garantizan resultados futuros. Procuramos que la información sea correcta y esté actualizada, pero no respondemos de errores u omisiones que no nos sean imputables.</p>
+<h2>6. Enlaces a terceros</h2>
+<p>Si nos escribes por WhatsApp, usas un servicio de un tercero (WhatsApp, de Meta). Su uso se rige por las condiciones y la política de privacidad de ese servicio.</p>
+<h2>7. Legislación aplicable</h2>
+<p>Este sitio se rige por la legislación española.</p>
+</div></dialog>
+<dialog aria-label="Política de privacidad" class="legal" id="d-priv"><div class="legal-in"><button class="btn btn--ghost x" data-close="" type="button">Cerrar</button>
+<h1>Política de privacidad</h1>
+<h2>1. Responsable del tratamiento</h2>
+<table><tbody>
+<tr><th scope="row">Correo electrónico</th><td><a href="mailto:gerard@vexorconsulting.com">gerard@vexorconsulting.com</a></td></tr>
+</tbody></table>
+<h2>2. Qué datos tratamos</h2>
+<p>Este sitio no tiene formularios. Si nos escribes por WhatsApp, tratamos tu número de teléfono, el nombre de tu perfil y el contenido de los mensajes que nos envíes. Si nos escribes por correo electrónico, tratamos tu dirección y el contenido del mensaje.</p>
+<p>Si aceptas las cookies de medición, tratamos además datos agregados de uso del sitio: visitas, llegada al bloque de resultados, cambio de idioma y clics en los botones de contacto.</p>
+<h2>3. Para qué los usamos y con qué base legal</h2>
+<ul>
+<li>Atender tu consulta y, si hay interés, preparar una propuesta. Base legal: tu consentimiento al escribirnos (art. 6.1.a RGPD) y la aplicación de medidas precontractuales a petición tuya (art. 6.1.b).</li>
+<li>Medir el uso del sitio, solo si aceptas las cookies de medición. Base legal: tu consentimiento (art. 6.1.a).</li>
+</ul>
+<h2>4. Destinatarios</h2>
+<p>No cedemos tus datos a terceros salvo obligación legal. WhatsApp es un servicio de Meta, que trata los datos según su propia política de privacidad.</p>
+<h2>5. Cuánto tiempo los conservamos</h2>
+<p>El tiempo necesario para atender tu consulta y, después, durante los plazos legales de prescripción.</p>
+<h2>6. Tus derechos</h2>
+<p>Puedes ejercer los derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad escribiendo a <a href="mailto:gerard@vexorconsulting.com">gerard@vexorconsulting.com</a>. También puedes retirar tu consentimiento en cualquier momento y presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" rel="noopener">www.aepd.es</a>).</p>
+</div></dialog>
+<dialog aria-label="Política de cookies" class="legal" id="d-cookies"><div class="legal-in"><button class="btn btn--ghost x" data-close="" type="button">Cerrar</button>
+<h1>Política de cookies</h1>
+<h2>1. Qué usamos</h2>
+<table><tbody>
+<tr><th scope="row">vexor_consent</th><td>Técnica. Se guarda en el almacenamiento local de tu navegador para recordar si aceptaste o rechazaste. Dura hasta que la borres.</td></tr>
+<tr><th scope="row">Medición</th><td>Solo si aceptas. Mide visitas, llegada al bloque de resultados, cambio de idioma y clics en los botones de contacto.</td></tr>
+</tbody></table>
+<p>No usamos cookies de publicidad ni de seguimiento entre sitios. La tipografía y las imágenes se sirven desde este mismo dominio.</p>
+<h2>2. Cómo cambiar tu elección</h2>
+<p>Puedes cambiarla cuando quieras con el enlace «Gestionar cookies» del pie de página. Rechazar es tan fácil como aceptar y no limita el uso de la web. También puedes borrar los datos del sitio desde la configuración de tu navegador.</p>
+</div></dialog>
+<dialog aria-label="Gestionar cookies" class="legal" id="d-gestion"><div class="legal-in"><button class="btn btn--ghost x" data-close="" type="button">Cerrar</button>
+<h1>Gestionar cookies</h1>
+<p>Hoy esta web no mide tus visitas ni usa cookies de publicidad. Si algún día activamos la medición, será solo con tu permiso. Tu elección se guarda en este navegador.</p>
+<div class="acts"><button class="btn" data-consent="rechazar" type="button">Rechazar</button><button class="btn" data-consent="aceptar" type="button">Aceptar</button><a class="btn btn--ghost" data-dialog="d-cookies" href="#cookies">Más información</a></div>
+</div></dialog>
+<script src="v9.js"></script>
+</body>
+</html>
