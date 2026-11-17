@@ -605,3 +605,10 @@ html:not(.js) .reader{display:none}
 .metric-how a{display:inline-flex;align-items:center;min-height:44px}
 @media (min-width:960px){a.rail-brand{display:flex;align-items:center;min-height:44px}}
 nav[aria-label="Legal"] a,nav[aria-label="Legal"] button{display:inline-flex;align-items:center;min-height:44px}
+
+/* boton-cabecera-17nov (P2 FALLOS_H): a 360 px «Pide tu llamada de 15 min» se partía en 2 líneas y tocaba el logo.
+   Ahora no parte línea, hay 12 px mínimos entre logo y botón, y a 400 px o menos se ve «Pide tu llamada»
+   (el resto queda para el lector de pantalla). Diana de 44 px. */
+.appbar{gap:12px}
+.btn-top{white-space:nowrap;min-height:44px;flex:none}
+@media (max-width:400px){.btn-largo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}}
