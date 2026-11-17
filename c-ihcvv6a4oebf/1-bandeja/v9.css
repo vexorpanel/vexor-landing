@@ -88,7 +88,7 @@ main{position:fixed;inset:var(--bar) 0 calc(var(--tabs) + var(--safe-b)) 0;overf
 .row-from{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--text);min-width:0;white-space:nowrap}
 .chip{font-style:normal;font-size:12px;font-weight:600;color:var(--light);border:1px solid #6ea0ff55;border-radius:20px;padding:1px 8px;overflow:hidden;text-overflow:ellipsis}
 .chip-pin{color:var(--muted);border-color:var(--line2)}
-.row-subj{font-size:16px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row-subj{font-size:16px;color:var(--text);overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow-wrap:anywhere}
 .row-prev{font-size:14px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .row-go{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:22px;line-height:1}
 .dot{width:9px;height:9px;border-radius:50%;background:var(--light);box-shadow:0 0 10px var(--light)}
