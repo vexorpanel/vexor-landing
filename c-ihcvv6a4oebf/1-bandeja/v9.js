@@ -68,8 +68,8 @@
   $$('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) d.close(); }));
 
   /* ---------------- contador ---------------- */
-  const FINAL = 4000000, START = 2800000;
-  const fmt = n => Math.round(n).toLocaleString('es-ES').replace(/ /g, '.') + ' €';
+  const FINAL = 3.7, START = 2.6;   // cifra de Carlos: +3,7 M$ en dolares, generados este año (17-nov)
+  const fmt = n => '+' + n.toFixed(1).replace('.', ',') + ' M$';
   const meters = $$('.meter-n .vis, .rail-meter .meter-n');
   function setMeters(v) { const t = fmt(v); meters.forEach(m => { m.textContent = t; }); }
   function countUp(el, ms) {
