@@ -16,9 +16,8 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.className="js"</script>
 <style>
-/* Web de Vexor en formato «bandeja de entrada», con el estilo de la página de planes de Carlos (17-nov):
-   claro, limpio y azul (#1f6ff2), titulares geométricos y planes en tarjeta oscura. La bandeja es la portada;
-   cada «correo» se abre a pantalla completa en el móvil y al lado en el ordenador. Lo leído se marca y se cuenta. */
+/* Web de Vexor con el estilo y el orden de la página de planes de Carlos (17-nov): una sola columna, sin menú.
+   Lo de bandeja, ligero: cada bloque es un «correo» con su marca de sin leer, y una barra fina cuenta los leídos. */
 @font-face{font-family:"Outfit";font-weight:300 700;font-display:swap;src:url(fonts/outfit.woff2) format("woff2")}
 @font-face{font-family:"Inter";font-weight:300 700;font-display:swap;src:url(fonts/inter.woff2) format("woff2")}
 :root{
@@ -66,35 +65,6 @@ button{font:inherit;color:inherit;cursor:pointer}
 .proof .ico{width:.8em;height:.8em;flex:none}
 .proof span{font-size:14px;line-height:1.35;color:var(--muted)}
 
-/* la bandeja */
-.inbox{border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;box-shadow:0 1px 2px rgba(12,15,20,.04),0 8px 24px rgba(12,15,20,.05)}
-.inbox-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 10px;padding:14px 16px 12px;border-bottom:1px solid var(--line)}
-.inbox-head h2{font-size:19px}
-.count{min-width:26px;height:26px;padding:0 8px;border-radius:999px;display:inline-grid;place-items:center;background:var(--accent);color:#fff;font:700 13px/1 var(--display)}
-.prog{grid-column:1/-1;display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)}
-.prog .bar2{flex:1;height:6px;border-radius:3px;background:var(--track);overflow:hidden}
-.prog .bar2 i{display:block;height:100%;width:0;background:var(--accent);border-radius:3px;transition:width .35s ease}
-.prog b{font:600 12.5px/1 var(--display);color:var(--fg);font-variant-numeric:tabular-nums;white-space:nowrap}
-.inbox.todo .prog b{color:var(--accent)}
-.list{list-style:none;margin:0;padding:0}
-.rowm{display:grid;grid-template-columns:42px minmax(0,1fr) 16px;gap:12px;align-items:center;min-height:74px;padding:12px 14px 12px 18px;border-top:1px solid var(--line);text-decoration:none;position:relative;transition:background-color .15s}
-.list li:first-child .rowm{border-top:0}
-.rowm::before{content:"";position:absolute;left:6px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--accent)}
-.rowm.leido::before{display:none}
-.rowm.leido .subj{font-weight:500;color:var(--muted)}
-.rowm.on{background:var(--accent-soft)}
-.rowm.on::after{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:var(--accent)}
-.av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
-.av svg{width:20px;height:20px}
-.rtxt{display:grid;gap:2px;min-width:0}
-.from{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:12.5px;color:var(--muted)}
-.chip{font:600 10.5px/1.2 var(--display);letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:var(--accent);color:#fff}
-.chip.lim{background:transparent;box-shadow:inset 0 0 0 1px var(--oro);color:var(--oro)}
-.subj{font:600 16.5px/1.25 var(--display)}
-.prev{font-size:14px;line-height:1.35;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.go{color:var(--muted);font-size:22px;line-height:1}
-@media (hover:hover){.rowm:hover{background:var(--bg)}.rowm.on:hover{background:var(--accent-soft)}}
-
 /* confían en nosotros: la cinta de Carlos */
 .trust{display:grid;gap:10px;padding-block:30px 4px}
 .marq{display:grid;gap:2px;margin-inline:calc(-1 * var(--pad))}
@@ -130,22 +100,6 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:cen
 footer img{width:100px}
 footer nav{display:flex;flex-wrap:wrap;gap:0 18px}
 footer nav a{display:inline-flex;align-items:center;min-height:44px;font-size:14px;color:var(--muted);text-underline-offset:4px}
-
-/* un correo abierto */
-.mail{padding-block:26px;border-top:1px solid var(--line)}
-.back{display:none}
-.mhead{display:grid;gap:10px;margin-bottom:20px}
-.mfrom{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--muted)}
-.mfrom .av{width:34px;height:34px}
-.mfrom .av svg{width:16px;height:16px}
-.mhead h2{font-size:clamp(26px,7.4vw,36px)}
-.mhead .lead{color:var(--muted);font-size:16px}
-.mbody{display:grid;gap:18px}
-.mbody p b{font-weight:600;color:var(--fg)}
-.tags{display:flex;flex-wrap:wrap;gap:8px}
-.tags .chip{font-size:11px;padding:6px 9px}
-.mnav{display:none}
-.recompensa{display:none}
 
 /* calculadora */
 .calc{display:grid;gap:10px;padding:20px 18px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
@@ -227,53 +181,53 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
 .conds dt{font-weight:600}
 .conds dd{margin:0;color:var(--muted);font-size:15px}
 
-/* con programa: en el móvil la bandeja es la portada y cada correo se abre solo */
-.js .mail{display:none;border-top:0;padding-block:6px 28px}
-.js .mail.on{display:block;animation:entra .25s ease-out}
-@keyframes entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.js .back{display:inline-flex;align-items:center;gap:6px;min-height:46px;margin-bottom:6px;padding:0 12px 0 6px;border-radius:10px;font:600 15px/1 var(--display);color:var(--accent);text-decoration:none}
-.js .mnav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
-.js .mnav .btn{padding:0 12px}
-.js .mnav .full{grid-column:1/-1}
-.js .mnav .avance{grid-column:1/-1;font-size:13px;color:var(--muted);text-align:center}
-.js body.leyendo .home{display:none}
-.js .recompensa{display:grid;gap:6px;margin-top:22px;padding:18px;border-radius:12px;background:var(--accent-soft);border:1.5px solid var(--accent)}
-.js .recompensa[hidden]{display:none}
-.recompensa b{font:700 18px/1.25 var(--display)}
-.recompensa p{color:var(--muted);font-size:14.5px}
-
 @media (min-width:560px){
   .proof{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
   .proof li{grid-template-columns:1fr;gap:6px;align-items:start}
   .proof b{font-size:40px}
   .fin{justify-items:start}
 }
-@media (min-width:960px){
-  .js .lay{display:grid;grid-template-columns:minmax(0,430px) minmax(0,1fr);gap:40px;align-items:start}
-  .js body.leyendo .home{display:block}
-  .js .reader{position:sticky;top:18px;max-height:calc(100dvh - 36px);overflow-y:auto;overscroll-behavior:contain;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:10px 34px;scrollbar-width:thin;box-shadow:0 1px 2px rgba(12,15,20,.04),0 8px 24px rgba(12,15,20,.05)}
-  .js .reader .calc,.js .reader .fpanel{background:var(--bg)}
-  .js .back{display:none}
-  .js .mail{padding-block:26px 30px}
-  .hero h1{font-size:44px}
-  .js .proof{grid-template-columns:1fr;gap:10px}
-  .js .proof li{grid-template-columns:128px minmax(0,1fr);gap:12px;align-items:center}
-  .js .proof b{font-size:32px}
-  .reader .gal,.reader .ftabs{margin-inline:0;padding-inline:0;scroll-padding-inline:0}
-  .reader .ftabs{flex-wrap:wrap;overflow:visible}
-}
 @media (prefers-reduced-motion:reduce){.btn,.esc summary::after,.rowm,.prog .bar2 i{transition:none}.js .mail.on{animation:none}}
+
+/* una sola columna, como la de Carlos */
+.wrap{max-width:760px}
+.mail,.bloque{margin-top:16px;padding:22px 20px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.mhead{display:grid;gap:10px;margin-bottom:18px}
+.ojo{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.estado{display:inline-flex;align-items:center;gap:6px;font:600 11px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+.estado::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.leido .estado{color:var(--muted)}
+.leido .estado::before{background:transparent;box-shadow:inset 0 0 0 1.5px var(--muted)}
+.mhead h2{font-size:clamp(24px,6.6vw,32px)}
+.mhead .lead{color:var(--muted)}
+.mbody{display:grid;gap:18px}
+.mbody p b{font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.calc{background:var(--bg)}
+.mail.plan{background:var(--ink);color:var(--inkfg);border-color:#1d232c}
+.mail.plan .lead,.mail.plan .estado{color:var(--inkmuted)}
+.mail.plan .estado::before{background:var(--inkaccent)}
+.mail.plan.leido .estado::before{background:transparent;box-shadow:inset 0 0 0 1.5px var(--inkmuted)}
+.mail.plan .kicker{color:var(--inkaccent)}
+#branded{border:2px solid #1f6ff2}
+.fpanel{background:var(--bg)}
+.fin{border:0;background:transparent;padding:30px 0 0;gap:12px}
+.fin a{color:var(--accent);font-weight:600;text-underline-offset:4px}
+/* la barra de leídos: fina, arriba, solo cuando ya se ha bajado de la portada */
+.leidos{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;align-items:center;gap:12px;padding:max(8px,env(safe-area-inset-top,0px)) var(--pad) 8px;background:color-mix(in srgb,var(--bg) 92%,transparent);border-bottom:1px solid var(--line);transform:translateY(-110%);transition:transform .25s ease;font-size:12.5px;color:var(--muted)}
+.leidos.ver{transform:none}
+.leidos .bar2{flex:1;height:5px;border-radius:3px;background:var(--track);overflow:hidden;max-width:560px}
+.leidos .bar2 i{display:block;height:100%;width:0;background:var(--accent);border-radius:3px;transition:width .35s ease}
+.leidos b{font:600 12.5px/1 var(--display);color:var(--fg);white-space:nowrap;font-variant-numeric:tabular-nums}
+.leidos[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.leidos,.leidos .bar2 i{transition:none}}
 </style>
 </head>
 <body>
+<div class="leidos" id="leidos" hidden aria-live="polite"><span>Bandeja</span><span class="bar2"><i id="pbar"></i></span><b id="ptxt">0 de 8 leídos</b></div>
 <div class="wrap">
-  <header class="bar">
-    <img class="logo-oscuro" src="img/vexor-claro.webp" alt="VEXOR" width="560" height="126"><img class="logo-claro" src="img/vexor-oscuro.webp" alt="VEXOR" width="560" height="122">
-    <a class="btn btn--sm" href="mailto:gerard@vexorconsulting.com?subject=Consulta%20desde%20la%20web%20de%20VEXOR%20Consulting">Escríbenos</a>
-  </header>
+  <header class="bar"><img class="logo-oscuro" src="img/vexor-claro.webp" alt="VEXOR" width="560" height="126"><img class="logo-claro" src="img/vexor-oscuro.webp" alt="VEXOR" width="560" height="122"></header>
 
-  <div class="lay">
-  <div class="home">
     <section class="hero" aria-labelledby="h1">
       <span class="kicker">Para dueños de negocio de tiendas Shopify</span>
       <h1 id="h1">Tu email marketing, delegado y optimizado <span>de principio a fin.</span></h1>
@@ -283,21 +237,6 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
         <li><b>+7 años</b><span>en ecommerce</span></li>
       </ul>
     </section>
-
-    <nav class="inbox" aria-label="Bandeja de entrada">
-      <div class="inbox-head"><h2>Bandeja de entrada</h2><span class="count" id="count" aria-label="Correos sin abrir">8</span><div class="prog" aria-live="polite"><span class="bar2"><i id="pbar"></i></span><b id="ptxt">0 de 8 leídos</b></div></div>
-      <ol class="list" id="list">
-        <li><a class="rowm" href="#potencial"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M8 15l4-5 3 3 4-6"/></svg></span><span class="rtxt"><span class="from">Vexor · Tu potencial</span><span class="subj">¿Cuánto más puede facturar tu tienda con email?</span><span class="prev">Pon lo que factura tu tienda y mira lo que podría significar.</span></span><span class="go" aria-hidden="true">›</span></a></li>
-        <li><a class="rowm" href="#essential"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 6 8-6"/></svg></span><span class="rtxt"><span class="from">Vexor · Planes</span><span class="subj">Essential</span><span class="prev">Fee de inicio 150 € · Mensual 15 % → 10 %</span></span><span class="go" aria-hidden="true">›</span></a></li>
-        <li><a class="rowm" href="#branded"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 6 8-6"/></svg></span><span class="rtxt"><span class="from">Vexor · Planes <span class="chip">El más contratado</span></span><span class="subj">Branded</span><span class="prev">Fee de inicio 400 € · Mensual 15 % · 10 %</span></span><span class="go" aria-hidden="true">›</span></a></li>
-        <li><a class="rowm" href="#vip"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 6 8-6"/></svg></span><span class="rtxt"><span class="from">Vexor · Planes <span class="chip lim">Plazas limitadas</span></span><span class="subj">VIP</span><span class="prev">Fee de inicio incluido · Mensual 2.000 €</span></span><span class="go" aria-hidden="true">›</span></a></li>
-        <li><a class="rowm" href="#flujos"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 12c5 0 5-6 10-6M7 12c5 0 5 6 10 6"/></svg></span><span class="rtxt"><span class="from">Vexor · Ejemplos</span><span class="subj">Los flujos de una tienda con el plan Branded</span><span class="prev">Elige un flujo para ver qué email recibe tu cliente en cada paso.</span></span><span class="go" aria-hidden="true">›</span></a></li>
-        <li><a class="rowm" href="#disenos"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="rtxt"><span class="from">Vexor · Ejemplos</span><span class="subj">Diseños a medida</span><span class="prev">Campañas y flujos del plan Branded</span></span><span class="go" aria-hidden="true">›</span></a></li>
-        <li><a class="rowm" href="#proceso"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="rtxt"><span class="from">Vexor · Cómo trabajamos</span><span class="subj">De la firma al primer envío</span><span class="prev">Eliges tu plan · Set up de inicio · Calendario de campañas · Optimización y KPI</span></span><span class="go" aria-hidden="true">›</span></a></li>
-        <li><a class="rowm" href="#condiciones"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="rtxt"><span class="from">Vexor · Condiciones</span><span class="subj">Claro desde el principio</span><span class="prev">Todos los precios son + IVA y ninguno tiene permanencia.</span></span><span class="go" aria-hidden="true">›</span></a></li>
-      </ol>
-    </nav>
-    <div class="recompensa" id="premio" hidden><b>Has leído toda la bandeja.</b><p>¿Quieres empezar? Dinos qué plan encaja contigo y te enviamos el onboarding para arrancar.</p><a class="btn" href="mailto:gerard@vexorconsulting.com?subject=Consulta%20desde%20la%20web%20de%20VEXOR%20Consulting">Escríbenos</a></div>
 
     <section class="trust" aria-label="Confían en nosotros">
       <span class="kicker">Confían en nosotros</span>
@@ -318,21 +257,10 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
       </div>
     </section>
 
-    <div class="invcard">
-      <p class="claim">Formación, inversión, crecimiento.</p>
-      <p class="inv">Invertimos <b>+ de 135.000 €</b> este año en desarrollo de servicio, formación de nuestro equipo y stack tecnológico.</p>
-    </div>
 
-    <div class="fin">
-      <p>¿Quieres empezar? Dinos qué plan encaja contigo y te enviamos el onboarding para arrancar.</p>
-      <a class="btn" href="mailto:gerard@vexorconsulting.com?subject=Consulta%20desde%20la%20web%20de%20VEXOR%20Consulting">Escríbenos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-    </div>
-  </div>
-
-  <main class="reader" id="reader">
+<main>
     <article class="mail" id="potencial">
-      <a class="back" href="#">‹ Bandeja</a>
-      <header class="mhead"><span class="mfrom"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M8 15l4-5 3 3 4-6"/></svg></span>Vexor · Tu potencial</span>
+      <header class="mhead"><span class="ojo"><span class="kicker">Tu potencial</span><span class="estado">Sin leer</span></span>
         <h2>¿Cuánto más puede facturar tu tienda con email?</h2></header>
       <div class="mbody">
         <p><b>¡Preferimos ser conservadores!</b> Nuestro objetivo con cada cliente es que el email sume <b>mínimo un 15 % real a su facturación</b>. Que sea una fuente de ingresos estable y predecible. Pon lo que factura tu tienda y mira lo que podría significar.</p>
@@ -352,10 +280,8 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
         </div>
       </div>
     </article>
-
-    <article class="mail" id="essential">
-      <a class="back" href="#">‹ Bandeja</a>
-      <header class="mhead"><span class="mfrom"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 6 8-6"/></svg></span>Vexor · Planes</span>
+    <article class="mail plan" id="essential">
+      <header class="mhead"><span class="ojo"><span class="kicker">Planes</span><span class="estado">Sin leer</span></span>
         <h2>Essential</h2>
         <p class="lead">Comienza a delegar todo tu email marketing. Flujos automatizados que recuperan ventas, campañas gestionadas y optimización constante.</p></header>
       <div class="mbody">
@@ -388,10 +314,8 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
         <p class="cuotas">Todos los precios son + IVA y ninguno tiene permanencia.</p>
       </div>
     </article>
-
-    <article class="mail" id="branded">
-      <a class="back" href="#">‹ Bandeja</a>
-      <header class="mhead"><span class="mfrom"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 6 8-6"/></svg></span>Vexor · Planes</span>
+    <article class="mail plan" id="branded">
+      <header class="mhead"><span class="ojo"><span class="kicker">Planes</span><span class="estado">Sin leer</span></span>
         <div class="tags"><span class="chip">El más contratado por nuestros clientes</span></div>
         <h2>Branded</h2>
         <p class="lead">Todo lo incluido en Essential, además de: creación de identidad de marca, diseños de emails y ángulos de venta personalizados, y flujos para fidelizar.</p></header>
@@ -413,10 +337,28 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
         <p class="cuotas">Todos los precios son + IVA y ninguno tiene permanencia.</p>
       </div>
     </article>
-
-    <article class="mail" id="vip">
-      <a class="back" href="#">‹ Bandeja</a>
-      <header class="mhead"><span class="mfrom"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 6 8-6"/></svg></span>Vexor · Planes</span>
+    <article class="mail" id="disenos">
+      <header class="mhead"><span class="ojo"><span class="kicker">Ejemplos</span><span class="estado">Sin leer</span></span>
+        <h2>Diseños a medida</h2>
+        <p class="lead">Campañas y flujos del plan Branded. Marcas de muestra: toca un diseño para verlo entero.</p></header>
+      <div class="mbody">
+        <div class="gal" id="gal" tabindex="0" aria-label="Diseños de muestra">
+          <figure><a href="img/d-brava.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-brava.webp" width="560" height="1789" alt="Carrito abandonado de Brava en estilo Retro"></a><figcaption><b>Brava</b> · Carrito abandonado · estilo Retro</figcaption></figure>
+          <figure><a href="img/d-hidra.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-hidra.webp" width="560" height="2151" alt="Bienvenida de Hidra en estilo Pulso"></a><figcaption><b>Hidra</b> · Bienvenida · estilo Pulso</figcaption></figure>
+          <figure><a href="img/d-huella.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-huella.webp" width="560" height="1798" alt="Post-compra de Huella en estilo Chill y divertido"></a><figcaption><b>Huella</b> · Post-compra · estilo Chill y divertido</figcaption></figure>
+          <figure><a href="img/d-kova.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-kova.webp" width="560" height="2166" alt="Campaña Black Friday de Kova en estilo Deporte"></a><figcaption><b>Kova</b> · Campaña Black Friday · estilo Deporte</figcaption></figure>
+          <figure><a href="img/d-lumen.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-lumen.webp" width="560" height="2097" alt="Producto visto de Lumen en estilo Clínico premium"></a><figcaption><b>Lumen</b> · Producto visto · estilo Clínico premium</figcaption></figure>
+          <figure><a href="img/d-nomada.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-nomada.webp" width="560" height="2106" alt="Lanzamiento de colección de Nómada en estilo Minimal"></a><figcaption><b>Nómada</b> · Lanzamiento de colección · estilo Minimal</figcaption></figure>
+          <figure><a href="img/d-olmo.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-olmo.webp" width="560" height="2181" alt="Campaña de Navidad de Olmo en estilo Editorial"></a><figcaption><b>Olmo</b> · Campaña de Navidad · estilo Editorial</figcaption></figure>
+          <figure><a href="img/d-oriel.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-oriel.webp" width="560" height="1768" alt="Reposición de Oriel en estilo Lujo"></a><figcaption><b>Oriel</b> · Reposición · estilo Lujo</figcaption></figure>
+          <figure><a href="img/d-pomelo.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-pomelo.webp" width="560" height="2171" alt="Recuperación de clientes de Pomelo en estilo Glossy"></a><figcaption><b>Pomelo</b> · Recuperación de clientes · estilo Glossy</figcaption></figure>
+          <figure><a href="img/d-tierra.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-tierra.webp" width="560" height="1723" alt="Checkout abandonado de Tierra en estilo Terroso"></a><figcaption><b>Tierra</b> · Checkout abandonado · estilo Terroso</figcaption></figure>
+          <figure><a href="img/d-volta.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-volta.webp" width="560" height="1817" alt="Campaña último día de Volta en estilo Afiche bold"></a><figcaption><b>Volta</b> · Campaña último día · estilo Afiche bold</figcaption></figure>
+        </div>
+      </div>
+    </article>
+    <article class="mail plan" id="vip">
+      <header class="mhead"><span class="ojo"><span class="kicker">Planes</span><span class="estado">Sin leer</span></span>
         <div class="tags"><span class="chip">Todo incluido</span><span class="chip lim">Plazas limitadas</span></div>
         <h2>VIP</h2>
         <p class="lead">Todo Branded, más contenido para redes, optimización de tu tienda y estrategia mensual.</p></header>
@@ -438,9 +380,13 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
       </div>
     </article>
 
+    <div class="invcard">
+      <p class="claim">Formación, inversión, crecimiento.</p>
+      <p class="inv">Invertimos <b>+ de 135.000 €</b> este año en desarrollo de servicio, formación de nuestro equipo y stack tecnológico.</p>
+    </div>
+
     <article class="mail" id="flujos">
-      <a class="back" href="#">‹ Bandeja</a>
-      <header class="mhead"><span class="mfrom"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 12c5 0 5-6 10-6M7 12c5 0 5 6 10 6"/></svg></span>Vexor · Ejemplos</span>
+      <header class="mhead"><span class="ojo"><span class="kicker">Ejemplos</span><span class="estado">Sin leer</span></span>
         <h2>Los flujos de una tienda con el plan Branded</h2>
         <p class="lead">Elige un flujo para ver qué email recibe tu cliente en cada paso. Es la estructura de una tienda tipo; la adaptamos a tus productos y a tu oferta.</p></header>
       <div class="mbody">
@@ -448,32 +394,8 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
         <div class="fpanel" id="fpanel" role="tabpanel" aria-live="polite"></div>
       </div>
     </article>
-
-    <article class="mail" id="disenos">
-      <a class="back" href="#">‹ Bandeja</a>
-      <header class="mhead"><span class="mfrom"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>Vexor · Ejemplos</span>
-        <h2>Diseños a medida</h2>
-        <p class="lead">Campañas y flujos del plan Branded. Marcas de muestra: toca un diseño para verlo entero.</p></header>
-      <div class="mbody">
-        <div class="gal" id="gal" tabindex="0" aria-label="Diseños de muestra">
-          <figure><a href="img/d-brava.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-brava.webp" width="560" height="1789" alt="Carrito abandonado de Brava en estilo Retro"></a><figcaption><b>Brava</b> · Carrito abandonado · estilo Retro</figcaption></figure>
-          <figure><a href="img/d-hidra.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-hidra.webp" width="560" height="2151" alt="Bienvenida de Hidra en estilo Pulso"></a><figcaption><b>Hidra</b> · Bienvenida · estilo Pulso</figcaption></figure>
-          <figure><a href="img/d-huella.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-huella.webp" width="560" height="1798" alt="Post-compra de Huella en estilo Chill y divertido"></a><figcaption><b>Huella</b> · Post-compra · estilo Chill y divertido</figcaption></figure>
-          <figure><a href="img/d-kova.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-kova.webp" width="560" height="2166" alt="Campaña Black Friday de Kova en estilo Deporte"></a><figcaption><b>Kova</b> · Campaña Black Friday · estilo Deporte</figcaption></figure>
-          <figure><a href="img/d-lumen.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-lumen.webp" width="560" height="2097" alt="Producto visto de Lumen en estilo Clínico premium"></a><figcaption><b>Lumen</b> · Producto visto · estilo Clínico premium</figcaption></figure>
-          <figure><a href="img/d-nomada.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-nomada.webp" width="560" height="2106" alt="Lanzamiento de colección de Nómada en estilo Minimal"></a><figcaption><b>Nómada</b> · Lanzamiento de colección · estilo Minimal</figcaption></figure>
-          <figure><a href="img/d-olmo.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-olmo.webp" width="560" height="2181" alt="Campaña de Navidad de Olmo en estilo Editorial"></a><figcaption><b>Olmo</b> · Campaña de Navidad · estilo Editorial</figcaption></figure>
-          <figure><a href="img/d-oriel.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-oriel.webp" width="560" height="1768" alt="Reposición de Oriel en estilo Lujo"></a><figcaption><b>Oriel</b> · Reposición · estilo Lujo</figcaption></figure>
-          <figure><a href="img/d-pomelo.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-pomelo.webp" width="560" height="2171" alt="Recuperación de clientes de Pomelo en estilo Glossy"></a><figcaption><b>Pomelo</b> · Recuperación de clientes · estilo Glossy</figcaption></figure>
-          <figure><a href="img/d-tierra.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-tierra.webp" width="560" height="1723" alt="Checkout abandonado de Tierra en estilo Terroso"></a><figcaption><b>Tierra</b> · Checkout abandonado · estilo Terroso</figcaption></figure>
-          <figure><a href="img/d-volta.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-volta.webp" width="560" height="1817" alt="Campaña último día de Volta en estilo Afiche bold"></a><figcaption><b>Volta</b> · Campaña último día · estilo Afiche bold</figcaption></figure>
-        </div>
-      </div>
-    </article>
-
     <article class="mail" id="proceso">
-      <a class="back" href="#">‹ Bandeja</a>
-      <header class="mhead"><span class="mfrom"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Vexor · Cómo trabajamos</span>
+      <header class="mhead"><span class="ojo"><span class="kicker">Cómo trabajamos</span><span class="estado">Sin leer</span></span>
         <h2>De la firma al primer envío</h2></header>
       <div class="mbody">
         <ol class="steps">
@@ -484,10 +406,8 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
         </ol>
       </div>
     </article>
-
     <article class="mail" id="condiciones">
-      <a class="back" href="#">‹ Bandeja</a>
-      <header class="mhead"><span class="mfrom"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span>Vexor · Condiciones</span>
+      <header class="mhead"><span class="ojo"><span class="kicker">Condiciones</span><span class="estado">Sin leer</span></span>
         <h2>Claro desde el principio</h2>
         <p class="lead">Todos los precios son + IVA y ninguno tiene permanencia.</p></header>
       <div class="mbody">
@@ -502,15 +422,17 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
         </dl>
       </div>
     </article>
-  </main>
-  </div>
+</main>
+    <div class="fin">
+      <p>¿Quieres empezar? Dinos qué plan encaja contigo y te enviamos el onboarding para arrancar.</p>
+      <a href="mailto:gerard@vexorconsulting.com?subject=Consulta%20desde%20la%20web%20de%20VEXOR%20Consulting">gerard@vexorconsulting.com</a>
+    </div>
 
   <footer>
     <img class="logo-oscuro" src="img/vexor-claro.webp" alt="VEXOR" width="560" height="126" loading="lazy"><img class="logo-claro" src="img/vexor-oscuro.webp" alt="VEXOR" width="560" height="122" loading="lazy">
     <nav aria-label="Legal"><a href="../../aviso-legal/index.html">Aviso legal</a><a href="../../privacidad/index.html">Privacidad</a><a href="../../cookies/index.html">Cookies</a></nav>
   </footer>
 </div>
-
 <script>
 /* Cuentas y flujos: los de la página de Carlos, sin cambiar una cifra. */
 const fmt=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,".")+" €";
@@ -554,32 +476,16 @@ showF(0);
 if(matchMedia("(prefers-reduced-motion:no-preference)").matches){
   document.querySelectorAll(".marq .set").forEach(s=>{const c=s.cloneNode(true);c.setAttribute("aria-hidden","true");c.querySelectorAll("a").forEach(a=>a.tabIndex=-1);s.parentNode.appendChild(c)});
 }
-/* la bandeja: cada fila abre su correo; en el móvil a pantalla completa, en el ordenador al lado */
+/* lo de bandeja, ligero: cada bloque se marca leído al verlo y la barra de arriba los cuenta */
 (()=>{
-  const filas=[...document.querySelectorAll("#list .rowm")],ids=filas.map(a=>a.getAttribute("href").slice(1));
-  const ancho=matchMedia("(min-width:960px)"),reader=document.getElementById("reader"),count=document.getElementById("count");
-  const CORREO="mailto:gerard@vexorconsulting.com?subject=Consulta%20desde%20la%20web%20de%20VEXOR%20Consulting";
-  ids.forEach((id,i)=>{
-    const m=document.getElementById(id),n=document.createElement("nav");n.className="mnav";n.setAttribute("aria-label","Más correos");
-    const ant=i>0?`<a class="btn btn--line" href="#${ids[i-1]}">‹ Anterior</a>`:`<a class="btn btn--line" href="#">‹ Bandeja</a>`;
-    const sig=i<ids.length-1?`<a class="btn btn--line" href="#${ids[i+1]}">Siguiente ›</a>`:`<a class="btn btn--line" href="#">Bandeja</a>`;
-    n.innerHTML=`<a class="btn full" href="${CORREO}">Escríbenos</a>${ant}${sig}<span class="avance">Correo ${i+1} de ${ids.length}</span>`;m.appendChild(n);
-  });
-  const K="vexor-bandeja-leidos";let vistos=[];try{vistos=JSON.parse(localStorage.getItem(K)||"[]")}catch(e){}
-  filas.forEach((a,i)=>{if(vistos.includes(ids[i]))a.classList.add("leido")});
-  const pbar=document.getElementById("pbar"),ptxt=document.getElementById("ptxt"),premio=document.getElementById("premio"),caja=document.querySelector(".inbox");
-  function pinta(mover){
-    let id=location.hash.slice(1);if(!ids.includes(id))id="";
-    if(!id&&ancho.matches)id=ids[0];
-    document.querySelectorAll(".mail").forEach(m=>m.classList.toggle("on",m.id===id));
-    filas.forEach((a,i)=>{const on=ids[i]===id;a.classList.toggle("on",on);if(on){a.classList.add("leido");a.setAttribute("aria-current","true")}else a.removeAttribute("aria-current")});
-    document.body.classList.toggle("leyendo",!!id);
-    const sin=filas.filter(a=>!a.classList.contains("leido")).length,leidos=ids.length-sin;count.textContent=sin;count.hidden=!sin;
-    pbar.style.width=(100*leidos/ids.length)+"%";ptxt.textContent=sin?leidos+" de "+ids.length+" leídos":"Bandeja leída";caja.classList.toggle("todo",!sin);premio.hidden=!!sin;
-    try{localStorage.setItem(K,JSON.stringify(ids.filter((x,i)=>filas[i].classList.contains("leido"))))}catch(e){}
-    if(mover){if(ancho.matches)reader.scrollTop=0;else window.scrollTo(0,0)}
-  }
-  addEventListener("hashchange",()=>pinta(true));ancho.addEventListener("change",()=>pinta(false));pinta(false);
+  const correos=[...document.querySelectorAll(".mail")],barra=document.getElementById("leidos"),pbar=document.getElementById("pbar"),ptxt=document.getElementById("ptxt"),hero=document.querySelector(".hero");
+  if(!("IntersectionObserver" in window))return;
+  barra.hidden=false;
+  const cuenta=()=>{const n=correos.filter(c=>c.classList.contains("leido")).length;pbar.style.width=(100*n/correos.length)+"%";ptxt.textContent=n<correos.length?n+" de "+correos.length+" leídos":"Todo leído"};
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("leido");const s=e.target.querySelector(".estado");if(s)s.textContent="Leído";io.unobserve(e.target);cuenta()}}),{threshold:.45});
+  correos.forEach(c=>io.observe(c));
+  new IntersectionObserver(([e])=>barra.classList.toggle("ver",!e.isIntersecting&&e.boundingClientRect.top<0)).observe(hero);
+  cuenta();
 })();
 </script>
 </body>
