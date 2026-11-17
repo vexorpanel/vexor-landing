@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>VEXOR · Planes de email marketing</title>
+<meta name="description" content="Tu email marketing, delegado y optimizado de principio a fin.">
+<meta property="og:title" content="VEXOR · Planes de email marketing">
+<meta property="og:description" content="Tu email marketing, delegado y optimizado de principio a fin.">
+<meta property="og:image" content="https://vexorpanel.github.io/vexor-landing/c-ihcvv6a4oebf/propuesta/compartir.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0e13" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preload" href="fonts/outfit.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.className="js"</script>
+<style>
+/* Web de planes de Vexor. Estructura, textos, precios y colores: los de la página «Planes Vexor» de Carlos (17-nov).
+   Pensada primero para el móvil: una columna, botones de 48 px o más, nada que obligue a mover la página de lado. */
+@font-face{font-family:"Outfit";font-style:normal;font-weight:300 700;font-display:swap;src:url(fonts/outfit.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:300 700;font-display:swap;src:url(fonts/inter.woff2) format("woff2")}
+:root{
+  --bg:#f6f7f9;--surface:#ffffff;--fg:#0c0f14;--muted:#5b6472;--line:#e1e5eb;
+  --accent:#1f6ff2;--accent-soft:#e7f0fe;--track:#e9edf2;
+  --card:#07090c;--card-fg:#f2f4f7;--card-muted:#a7b0bd;--card-line:#262c36;--card-accent:#5b9bff;--card-in:#11151b;--oro:#f2c94c;
+  --display:"Outfit",system-ui,-apple-system,"Segoe UI",sans-serif;--body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --pad:max(18px,env(safe-area-inset-left,0px));color-scheme:light
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0b0e13;--surface:#141922;--fg:#eef1f5;--muted:#9aa4b2;--line:#252c38;
+  --accent:#5b9bff;--accent-soft:#16233a;--track:#232a36;color-scheme:dark}}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;height:auto}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.015em}
+p{margin:0}
+button{font:inherit;cursor:pointer;color:inherit}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:var(--pad)}
+.eyebrow{display:block;font:600 12px/1.3 var(--display);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border:0;border-radius:12px;background:#1f6ff2;color:#fff;font:600 16px/1 var(--display);text-decoration:none;transition:background-color .2s,transform .2s}
+.btn svg{width:18px;height:18px;flex:none}
+.btn--sm{min-height:44px;padding:0 16px;font-size:15px;border-radius:10px}
+@media (hover:hover){.btn:hover{background:#1558cf;transform:translateY(-1px)}}
+
+/* logo: versión para fondo claro y versión para fondo oscuro */
+.logo{display:block;height:auto}
+.logo-b{display:none}
+@media (prefers-color-scheme:dark){.logo-a{display:none}.logo-b{display:block}}
+
+/* cabecera y portada */
+.top{display:flex;justify-content:space-between;align-items:center;gap:14px;padding-top:max(18px,env(safe-area-inset-top,0px))}
+.top .logo{width:118px}
+.top .tag{display:none;font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-left:auto}
+.hero{display:grid;gap:18px;padding-block:34px 30px}
+.hero h1{font-size:clamp(32px,8.8vw,56px);line-height:1.06;font-weight:700;max-width:16ch}
+.hero h1 span{color:var(--accent)}
+.proof{display:grid;gap:12px;margin:4px 0 2px;padding:0;list-style:none}
+.proof li{display:grid;grid-template-columns:132px minmax(0,1fr);align-items:center;gap:12px}
+.proof b{display:flex;align-items:center;gap:8px;font:700 28px/1 var(--display);color:var(--accent);letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.proof .ico{width:.8em;height:.8em;flex:none}
+.proof span{font-size:14.5px;line-height:1.35;color:var(--muted)}
+.hero .btn{justify-self:stretch}
+
+/* confían en nosotros: dos filas de personas que se mueven despacio */
+.trust{display:grid;gap:10px;margin-top:10px}
+.marq{display:grid;gap:2px;margin-inline:calc(-1 * var(--pad))}
+.marq .row{overflow:hidden;padding:8px 0}
+.marq .track{display:flex;flex-wrap:wrap;gap:10px;padding-inline:var(--pad)}
+.marq .set{display:contents}
+.person{display:flex;align-items:center;gap:10px;min-height:62px;max-width:100%;padding:8px 16px 8px 8px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg);text-decoration:none}
+.person img{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none;box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--accent)}
+.person span{display:grid;line-height:1.25;min-width:0}
+.person b{font:700 14px/1.25 var(--display)}
+.person em{font-style:normal;color:var(--accent);font-weight:600;font-size:13px;overflow-wrap:anywhere}
+.person small{color:var(--muted);font-size:12px}
+@media (hover:hover){.person:hover{border-color:var(--accent)}}
+@media (prefers-reduced-motion:no-preference){
+  .js .marq .row{-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+  .js .marq .track{flex-wrap:nowrap;gap:0;padding:0;width:max-content;animation:marq 38s linear infinite}
+  .js .marq .r2 .track{animation-direction:reverse;animation-duration:42s}
+  .js .marq .set{display:flex;gap:10px;padding-right:10px}
+  .js .marq .person{flex:none}
+  .js .marq .row:hover .track,.js .marq .row:focus-within .track{animation-play-state:paused}
+}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+section{padding-block:40px;border-top:1px solid var(--line)}
+.sh{display:grid;gap:8px;margin-bottom:22px;max-width:660px}
+.sh h2{font-size:clamp(25px,6.4vw,34px);font-weight:700;line-height:1.12}
+.sh p{color:var(--muted)}
+
+/* potencial */
+.up{display:grid;gap:22px}
+.up-txt{display:grid;gap:12px}
+.up-txt h2{font-size:clamp(26px,6.8vw,38px);font-weight:700;line-height:1.1}
+.up-txt p{color:var(--muted)}
+.up-txt p b{color:var(--fg);font-weight:600}
+.up-calc{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 18px;display:grid;gap:10px}
+.up-calc label{font-weight:600;font-size:14.5px}
+.up-in{font:700 32px/1 var(--display);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;height:36px;margin:0;accent-color:#1f6ff2;touch-action:pan-y}
+.up-scale{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.up-res{margin-top:6px;padding:16px;border-radius:12px;background:var(--accent-soft);display:grid;gap:4px}
+.cons{justify-self:start;font:700 11px/1.2 var(--display);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#1f6ff2;padding:6px 9px;border-radius:999px;margin-bottom:4px}
+.up-res span{font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+.up-res b{font:700 clamp(40px,12vw,56px)/1 var(--display);color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.up-res b small{font-size:18px;font-weight:600;margin-left:4px}
+.up-res em{font-style:normal;font-weight:600}
+.up-bars{display:grid;gap:6px;margin-top:4px}
+.up-bars div{display:grid;grid-template-columns:76px auto auto 1fr;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.up-bars i{display:block;height:12px;border-radius:3px}
+.up-bars .b0{width:clamp(90px,40vw,200px);background:var(--fg);opacity:.85}
+.up-bars .b1{width:30px;background:var(--accent);border-radius:0 3px 3px 0;margin-left:-8px}
+.up-com{font-size:14.5px}
+.up-disc{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+
+/* planes: tarjetas oscuras en los dos temas, como en la página de Carlos */
+.plans{display:grid;gap:14px}
+.plan{background:var(--card);color:var(--card-fg);border:1px solid #1d232c;border-radius:16px;padding:22px 20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.plan.bra{border:2px solid #1f6ff2}
+.plan h3{font-size:24px;font-weight:700}
+.plan .for{font-size:14.5px;color:var(--card-muted)}
+.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:9px;font-size:15px}
+.plan ul li{display:flex;gap:10px}
+.plan ul li::before{content:"";flex:none;width:6px;height:6px;margin-top:9px;background:var(--card-accent);transform:skewX(-35deg)}
+.badge{align-self:flex-start;font:600 11px/1.3 var(--display);letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:#1f6ff2;color:#fff}
+.badge.lim{background:transparent;border:1px solid var(--oro);color:var(--oro)}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.fees{display:grid;gap:8px;padding:14px 0;border-block:1px solid var(--card-line)}
+.fee{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.fee span{font-size:14.5px}
+.fee b{font:700 23px/1.1 var(--display);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cuotas{font-size:13.5px;line-height:1.45;color:var(--card-muted)}
+.wel{display:block;font:600 13px/1.35 var(--body);color:var(--card-accent)}
+.esc{border:1px solid var(--card-line);border-radius:10px;background:var(--card-in)}
+.esc summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:48px;padding:0 14px;font-weight:600;font-size:14.5px;color:var(--card-accent)}
+.esc summary::-webkit-details-marker{display:none}
+.esc summary::after{content:"▾";font-size:16px;line-height:1;transition:transform .15s}
+.esc[open] summary::after{transform:rotate(180deg)}
+.esc ol{list-style:none;margin:0;padding:0 14px}
+.esc ol li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--card-line);font-size:14px}
+.esc .c{text-align:right;line-height:1.2}
+.esc .c b{display:block;font:700 15.5px/1.2 var(--display);font-variant-numeric:tabular-nums}
+.esc .c small{display:block;font-size:11.5px;color:var(--card-muted)}
+.esc-pie{font-size:12px;color:var(--card-muted);padding:9px 14px 11px;border-top:1px solid var(--card-line)}
+.lim-t{font-size:14px;color:var(--oro);font-weight:600}
+.setup{font-size:13.5px;color:var(--card-muted)}
+.vip-a,.vip-b{display:flex;flex-direction:column;gap:14px;min-width:0}
+
+/* diseños de muestra */
+.carr{margin-top:30px}
+.carr-h{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.carr-h h3{font-size:clamp(19px,5vw,22px);line-height:1.2}
+.carr-nav{display:none;gap:8px;flex:none}
+.carr-nav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:22px;line-height:1}
+.carr-n{margin-top:6px;font-size:13.5px;color:var(--muted)}
+.gal{display:flex;gap:14px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;margin:8px calc(-1 * var(--pad)) 0;padding:8px var(--pad) 18px;scroll-padding-inline:var(--pad);-webkit-overflow-scrolling:touch}
+.gal figure{margin:0;flex:none;width:min(68vw,270px);scroll-snap-align:start;display:grid;gap:8px}
+.gal a{position:relative;display:block;aspect-ratio:560/940;overflow:hidden;border-radius:10px;background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.08),0 10px 26px rgba(0,0,0,.14)}
+.gal a::after{content:"";position:absolute;inset:auto 0 0 0;height:22%;background:linear-gradient(transparent,rgba(7,9,12,.55))}
+.gal img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.gal figcaption{font-size:13px;line-height:1.35;color:var(--muted)}
+.gal figcaption b{color:var(--fg)}
+.invcard{margin-top:22px;background:#1f6ff2;color:#fff;border-radius:16px;padding:24px 20px;display:grid;gap:10px}
+.invcard .claim{font:700 clamp(22px,6vw,28px)/1.2 var(--display);text-wrap:balance}
+.invcard .inv{color:rgba(255,255,255,.88)}
+.invcard .inv b{color:#fff;font-weight:700}
+
+/* flujos: pestañas y, debajo, los emails del flujo como una bandeja de entrada */
+.ftabs{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;margin:0 calc(-1 * var(--pad)) 12px;padding:2px var(--pad) 8px;scrollbar-width:none}
+.ftabs::-webkit-scrollbar{display:none}
+.ftab{flex:none;min-height:44px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:0 15px;font-size:14.5px;white-space:nowrap}
+.ftab[aria-selected="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.ftab small{font-size:11.5px;opacity:.65;margin-left:5px}
+.fpanel{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.fhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 14px;align-items:center;padding:18px 18px 14px}
+.fhead h3{font-size:21px}
+.fhead .pl{font:600 11px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:7px 10px;border-radius:999px}
+.fhead p{flex-basis:100%;color:var(--muted);font-size:14.5px}
+.inbox{list-style:none;margin:0;padding:0}
+.inbox li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:2px 12px;align-items:center;padding:14px 18px;border-top:1px solid var(--line)}
+.inbox .env{grid-row:1/3;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.inbox .env svg{width:19px;height:19px}
+.inbox .when{font:600 11.5px/1.2 var(--display);color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+.inbox .what{font-size:15.5px;font-weight:500;line-height:1.35}
+
+/* pasos y condiciones */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:20px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:4px 14px;align-items:start}
+.steps li::before{counter-increment:s;content:counter(s);grid-row:1/3;width:40px;height:40px;display:grid;place-items:center;border:1.5px solid var(--accent);border-radius:50%;font:700 16px/1 var(--display);color:var(--accent)}
+.steps h3{font-size:18px;align-self:center}
+.steps p{grid-column:2;font-size:15px;color:var(--muted)}
+.conds{margin:0;display:grid}
+.conds div{display:grid;gap:3px;padding-block:14px;border-bottom:1px solid var(--line)}
+.conds dt{font-weight:600}
+.conds dd{margin:0;color:var(--muted);font-size:15px}
+
+/* cierre y pie */
+.fin{display:grid;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px 20px}
+.fin p{font:600 clamp(19px,5.2vw,24px)/1.3 var(--display);text-wrap:balance}
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px 24px;padding-block:28px max(36px,env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+footer .logo{width:104px}
+footer nav{display:flex;flex-wrap:wrap;gap:0 18px}
+footer nav a{display:inline-flex;align-items:center;min-height:44px;font-size:14px;color:var(--muted);text-underline-offset:4px}
+
+@media (min-width:560px){
+  .hero .btn{justify-self:start}
+  .top .tag{display:block}
+  .top .btn{margin-left:0}
+  .proof{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+  .proof li{grid-template-columns:1fr;gap:6px;align-items:start}
+  .proof b{font-size:clamp(32px,4.4vw,46px)}
+  .fin{justify-items:start}
+}
+@media (min-width:720px){
+  .hero{padding-block:56px 44px;gap:22px}
+  section{padding-block:60px}
+  .carr-nav{display:flex}
+  .gal figure{width:270px}
+  .ftabs{flex-wrap:wrap;overflow:visible;margin-inline:0;padding-inline:0}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 32px}
+  .conds{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:36px}
+  .person{padding:10px 18px 10px 10px;gap:12px}
+  .person img{width:56px;height:56px}
+  .person b{font-size:15px}
+  .person em{font-size:14px}
+}
+@media (min-width:900px){
+  .up{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+  .up-calc{padding:28px}
+  .plans{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .plan{padding:26px 24px}
+  .plan.vip{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:32px;align-items:start;padding:30px 28px}
+  .steps{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .steps li{grid-template-columns:1fr;gap:8px}
+  .steps li::before{grid-row:auto}
+  .steps p{grid-column:auto}
+  .fin{padding:36px 34px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.esc summary::after{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="top">
+      <img class="logo logo-a" src="img/logo-fondo-claro.webp" alt="VEXOR" width="540" height="120">
+      <img class="logo logo-b" src="img/logo-fondo-oscuro.webp" alt="VEXOR" width="540" height="120">
+      <span class="tag">Propuesta de servicios · Email marketing</span>
+      <a class="btn btn--sm" href="mailto:gerard@vexorconsulting.com?subject=Consulta%20desde%20la%20web%20de%20VEXOR%20Consulting">Escríbenos</a>
+    </div>
+    <div class="hero">
+      <span class="eyebrow">Para dueños de negocio de tiendas Shopify</span>
+      <h1>Tu email marketing, delegado y optimizado <span>de principio a fin.</span></h1>
+      <ul class="proof">
+        <li><b>+3,7 M$</b><span>millones de dólares generados este año para nuestros clientes</span></li>
+        <li><b><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v7h14v-7"/><path d="M10 20v-4h4v4"/></svg>+85</b><span>tiendas online activas</span></li>
+        <li><b>+7 años</b><span>en ecommerce</span></li>
+      </ul>
+      <a class="btn" href="#planes">Planes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      <div class="trust">
+        <span class="eyebrow">Confían en nosotros</span>
+        <div class="marq">
+          <div class="row r1"><div class="track"><div class="set">
+            <a class="person" href="https://www.instagram.com/arz.urus/" target="_blank" rel="noopener"><img src="img/p-arz-urus.jpg" alt="" width="150" height="150"><span><b>Alejandro Rodríguez</b><em>@arz.urus</em><small>397K seguidores</small></span></a>
+            <a class="person" href="https://www.instagram.com/matiasscardozo/" target="_blank" rel="noopener"><img src="img/p-matiasscardozo.jpg" alt="" width="150" height="150"><span><b>Matias Cardozo</b><em>@matiasscardozo</em><small>332K seguidores</small></span></a>
+            <a class="person" href="https://www.instagram.com/andrescaminos_/" target="_blank" rel="noopener"><img src="img/p-andrescaminos.jpg" alt="" width="150" height="150"><span><b>Andrés Caminos</b><em>@andrescaminos_</em><small>46K seguidores</small></span></a>
+            <a class="person" href="https://www.instagram.com/javier.sanchezecom/" target="_blank" rel="noopener"><img src="img/p-javier-sanchezecom.jpg" alt="" width="150" height="150"><span><b>Javier Sánchez</b><em>@javier.sanchezecom</em><small>33K seguidores</small></span></a>
+            <a class="person" href="https://www.instagram.com/luiscamilo23/" target="_blank" rel="noopener"><img src="img/p-luiscamilo23.jpg" alt="" width="150" height="150"><span><b>Luis Camilo Torres</b><em>@luiscamilo23</em><small>24K seguidores</small></span></a>
+          </div></div></div>
+          <div class="row r2"><div class="track"><div class="set">
+            <a class="person" href="https://www.instagram.com/jordigarcia89/" target="_blank" rel="noopener"><img src="img/p-jordigarcia89.jpg" alt="" width="150" height="150"><span><b>Jordi Garcia</b><em>@jordigarcia89</em><small>14K seguidores</small></span></a>
+            <a class="person" href="https://www.instagram.com/mentoriumecom8cifras/" target="_blank" rel="noopener"><img src="img/p-mentoriumecom8cifras.jpg" alt="" width="150" height="150"><span><b>Mentorium Ecom 8 cifras</b><em>@mentoriumecom8cifras</em><small>13K seguidores</small></span></a>
+            <a class="person" href="https://www.instagram.com/tu.buyer/" target="_blank" rel="noopener"><img src="img/p-tu-buyer.jpg" alt="" width="150" height="150"><span><b>Tubuyer</b><em>@tu.buyer</em><small>5,1K seguidores</small></span></a>
+            <a class="person" href="https://www.instagram.com/vicky.ramnani.77/" target="_blank" rel="noopener"><img src="img/p-vicky-ramnani-77.jpg" alt="" width="150" height="150"><span><b>Vicky Ramnani</b><em>@vicky.ramnani.77</em><small>2,8K seguidores</small></span></a>
+          </div></div></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+  <section id="potencial">
+    <div class="up">
+      <div class="up-txt">
+        <span class="eyebrow">Tu potencial</span>
+        <h2>¿Cuánto más puede facturar tu tienda con email?</h2>
+        <p><b>¡Preferimos ser conservadores!</b> Nuestro objetivo con cada cliente es que el email sume <b>mínimo un 15 % real a su facturación</b>. Que sea una fuente de ingresos estable y predecible. Pon lo que factura tu tienda y mira lo que podría significar.</p>
+      </div>
+      <div class="up-calc">
+        <label for="r-fact">Facturación mensual de tu tienda</label>
+        <div class="up-in" id="v-fact">10.000 €</div>
+        <input type="range" id="r-fact" min="2000" max="100000" step="1000" value="10000">
+        <div class="up-scale" aria-hidden="true"><span>2.000 €</span><span>50.000 €</span><span>100.000 €</span></div>
+        <div class="up-res" aria-live="polite">
+          <i class="cons">Escenario conservador · 15 %</i>
+          <span>Ventas extra con email</span>
+          <b id="v-extra">+1.500 €<small>/mes</small></b>
+          <em id="v-anual">18.000 € más al año</em>
+        </div>
+        <div class="up-bars" aria-hidden="true">
+          <div><span>Hoy</span><i class="b0"></i></div>
+          <div><span>Con Vexor</span><i class="b0"></i><i class="b1"></i></div>
+        </div>
+        <p class="up-com" id="v-com">Con Essential o Branded, nuestra comisión sobre esas ventas sería de 225 €: te quedas con 1.275 €.</p>
+        <p class="up-disc">Estimación orientativa, no una garantía. El resultado depende del país, el nicho, la oferta, el ticket medio, el tráfico y la base de suscriptores de cada negocio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="planes">
+    <div class="sh">
+      <span class="eyebrow">Planes</span>
+      <h2>Planes</h2>
+      <p>Todos los precios son + IVA y ninguno tiene permanencia.</p>
+    </div>
+    <div class="plans">
+      <article class="plan">
+        <h3>Essential</h3>
+        <p class="for">Comienza a delegar todo tu email marketing. Flujos automatizados que recuperan ventas, campañas gestionadas y optimización constante.</p>
+        <div class="fees">
+          <div class="fee"><span>Fee de inicio</span><b>150 €</b></div>
+          <div class="fee"><span>Mensual</span><b>15 % → 10 %</b></div>
+          <p class="cuotas">Comisión escalonada: cuanto más genera tu email, menor es el porcentaje.</p>
+          <details class="esc">
+            <summary>Ver la comisión por tramos</summary>
+            <ol>
+              <li><span>Hasta 3.999 €</span><span class="c"><b>15 %</b><small>mín. 150 €</small></span></li>
+              <li><span>4.000 – 5.999 €</span><span class="c"><b>600 €</b><small>15 % → 10 %</small></span></li>
+              <li><span>6.000 – 7.999 €</span><span class="c"><b>800 €</b><small>13,3 % → 10 %</small></span></li>
+              <li><span>8.000 – 9.999 €</span><span class="c"><b>1.000 €</b><small>12,5 % → 10 %</small></span></li>
+              <li><span>10.000 – 11.999 €</span><span class="c"><b>1.200 €</b><small>12 % → 10 %</small></span></li>
+              <li><span>12.000 – 14.999 €</span><span class="c"><b>1.300 €</b><small>10,8 % → 8,7 %</small></span></li>
+              <li><span>15.000 € o más</span><span class="c"><b>1.500 €</b><small>10 % o menos</small></span></li>
+            </ol>
+            <p class="esc-pie">Ventas generadas por email al mes, sin la serie de bienvenida.</p>
+          </details>
+          <span class="wel">La serie de bienvenida se descuenta de la comisión</span>
+        </div>
+        <ul>
+          <li>Puesta en marcha en 48-72 h</li>
+          <li>6 flujos automáticos (14 emails)</li>
+          <li>Pop-up de captación</li>
+          <li>Campañas del mes, diseñadas y enviadas</li>
+          <li>Segmentación, tests A/B y reporte mensual</li>
+        </ul>
+      </article>
+      <article class="plan bra">
+        <span class="badge">El más contratado por nuestros clientes</span>
+        <h3>Branded</h3>
+        <p class="for">Todo lo incluido en Essential, además de: creación de identidad de marca, diseños de emails y ángulos de venta personalizados, y flujos para fidelizar.</p>
+        <div class="fees">
+          <div class="fee"><span>Fee de inicio</span><b>400 €</b></div>
+          <div class="fee"><span>Mensual</span><b>15 % · 10 %</b></div>
+          <p class="cuotas">15 % hasta 4.000 € generados; desde 4.001 €, el 10 % de todo<br>Cuota mínima 150 € · Cuota máxima 1.500 €</p>
+          <span class="wel">La serie de bienvenida se descuenta de la comisión</span>
+        </div>
+        <ul>
+          <li>Todo lo de Essential</li>
+          <li>Diseño a medida con tu identidad</li>
+          <li>Estudio de tu cliente (voz del cliente)</li>
+          <li>10 flujos: suma post-compra, reposición, recuperación y limpieza</li>
+          <li>SMS marketing: flujos y campañas por SMS</li>
+          <li>Reuniones con el equipo cuando las necesites</li>
+        </ul>
+      </article>
+      <article class="plan vip">
+        <div class="vip-a">
+          <div class="tags"><span class="badge">Todo incluido</span><span class="badge lim">Plazas limitadas</span></div>
+          <h3>VIP</h3>
+          <p class="for">Todo Branded, más contenido para redes, optimización de tu tienda y estrategia mensual.</p>
+          <div class="fees">
+            <div class="fee"><span>Fee de inicio</span><b>Incluido</b></div>
+            <div class="fee"><span>Mensual</span><b>2.000 €</b></div>
+            <p class="cuotas">Precio fijo, sin comisión</p>
+          </div>
+          <p class="lim-t">Plazas limitadas para garantizar la calidad del servicio.</p>
+        </div>
+        <div class="vip-b">
+          <ul>
+            <li>Todo lo de Branded, SMS incluido</li>
+            <li>60 piezas de contenido orgánico para redes con copy al mes, en formato historia y feed</li>
+            <li>15 vídeos cortos con IA al mes</li>
+            <li>2 reuniones estratégicas al mes</li>
+            <li>Optimización del backend de Shopify: bundles, ofertas post-compra, upselling y optimización del carrito</li>
+          </ul>
+          <p class="setup">Pago por adelantado.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="carr">
+      <div class="carr-h"><h3>Diseños a medida · Campañas y flujos del plan Branded</h3><div class="carr-nav"><button type="button" id="carrPrev" aria-label="Diseño anterior">‹</button><button type="button" id="carrNext" aria-label="Diseño siguiente">›</button></div></div>
+      <p class="carr-n">Marcas de muestra. Toca un diseño para verlo entero.</p>
+      <div class="gal" id="gal" tabindex="0" aria-label="Diseños de muestra">
+        <figure><a href="img/d-brava.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-brava.webp" width="560" height="1789" alt="Carrito abandonado de Brava en estilo Retro"></a><figcaption><b>Brava</b> · Carrito abandonado · estilo Retro</figcaption></figure>
+        <figure><a href="img/d-hidra.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-hidra.webp" width="560" height="2151" alt="Bienvenida de Hidra en estilo Pulso"></a><figcaption><b>Hidra</b> · Bienvenida · estilo Pulso</figcaption></figure>
+        <figure><a href="img/d-huella.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-huella.webp" width="560" height="1798" alt="Post-compra de Huella en estilo Chill y divertido"></a><figcaption><b>Huella</b> · Post-compra · estilo Chill y divertido</figcaption></figure>
+        <figure><a href="img/d-kova.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-kova.webp" width="560" height="2166" alt="Campaña Black Friday de Kova en estilo Deporte"></a><figcaption><b>Kova</b> · Campaña Black Friday · estilo Deporte</figcaption></figure>
+        <figure><a href="img/d-lumen.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-lumen.webp" width="560" height="2097" alt="Producto visto de Lumen en estilo Clínico premium"></a><figcaption><b>Lumen</b> · Producto visto · estilo Clínico premium</figcaption></figure>
+        <figure><a href="img/d-nomada.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-nomada.webp" width="560" height="2106" alt="Lanzamiento de colección de Nómada en estilo Minimal"></a><figcaption><b>Nómada</b> · Lanzamiento de colección · estilo Minimal</figcaption></figure>
+        <figure><a href="img/d-olmo.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-olmo.webp" width="560" height="2181" alt="Campaña de Navidad de Olmo en estilo Editorial"></a><figcaption><b>Olmo</b> · Campaña de Navidad · estilo Editorial</figcaption></figure>
+        <figure><a href="img/d-oriel.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-oriel.webp" width="560" height="1768" alt="Reposición de Oriel en estilo Lujo"></a><figcaption><b>Oriel</b> · Reposición · estilo Lujo</figcaption></figure>
+        <figure><a href="img/d-pomelo.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-pomelo.webp" width="560" height="2171" alt="Recuperación de clientes de Pomelo en estilo Glossy"></a><figcaption><b>Pomelo</b> · Recuperación de clientes · estilo Glossy</figcaption></figure>
+        <figure><a href="img/d-tierra.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-tierra.webp" width="560" height="1723" alt="Checkout abandonado de Tierra en estilo Terroso"></a><figcaption><b>Tierra</b> · Checkout abandonado · estilo Terroso</figcaption></figure>
+        <figure><a href="img/d-volta.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-volta.webp" width="560" height="1817" alt="Campaña último día de Volta en estilo Afiche bold"></a><figcaption><b>Volta</b> · Campaña último día · estilo Afiche bold</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="invcard">
+      <p class="claim">Formación, inversión, crecimiento.</p>
+      <p class="inv">Invertimos <b>+ de 135.000 €</b> este año en desarrollo de servicio, formación de nuestro equipo y stack tecnológico.</p>
+    </div>
+  </section>
+
+  <section id="ejemplos">
+    <div class="sh">
+      <span class="eyebrow">Ejemplos</span>
+      <h2>Los flujos de una tienda con el plan Branded</h2>
+      <p>Elige un flujo para ver qué email recibe tu cliente en cada paso. Es la estructura de una tienda tipo; la adaptamos a tus productos y a tu oferta.</p>
+    </div>
+    <div class="ftabs" role="tablist" id="ftabs" aria-label="Flujos"></div>
+    <div class="fpanel" id="fpanel" role="tabpanel" aria-live="polite"></div>
+  </section>
+
+  <section id="proceso">
+    <div class="sh">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2>De la firma al primer envío</h2>
+    </div>
+    <ol class="steps">
+      <li><h3>Eliges tu plan</h3><p>Creamos un grupo de WhatsApp con parte de nuestro equipo y te pedimos los accesos necesarios.</p></li>
+      <li><h3>Set up de inicio</h3><p>Conectamos tu tienda con Klaviyo, configuramos el dominio y activamos los flujos.</p></li>
+      <li><h3>Calendario de campañas</h3><p>Proponemos tus campañas mensuales y te las presentamos para que puedas revisarlas.</p></li>
+      <li><h3>Optimización y KPI</h3><p>Conectamos tu cuenta por API con nuestro panel experto, y nuestro equipo analiza, optimiza y valora iteraciones de forma constante.</p></li>
+    </ol>
+  </section>
+
+  <section id="condiciones">
+    <div class="sh">
+      <span class="eyebrow">Condiciones</span>
+      <h2>Claro desde el principio</h2>
+    </div>
+    <dl class="conds">
+      <div><dt>La serie de bienvenida se descuenta de la comisión</dt><dd>Las ventas de tu serie de bienvenida no cuentan para la comisión. Solo cobramos sobre el resto de flujos y las campañas.</dd></div>
+      <div><dt>Sin permanencia</dt><dd>Puedes darte de baja cuando quieras.</dd></div>
+      <div><dt>Todo queda en tu cuenta</dt><dd>Flujos, plantillas y campañas están en tu Klaviyo y son tuyos, también si te vas.</dd></div>
+      <div><dt>Tu cuenta de Klaviyo</dt><dd>La cuenta es tuya y la licencia la pagas directamente a Klaviyo. Nosotros entramos como usuarios.</dd></div>
+      <div><dt>Facturación</dt><dd>El inicio se paga por adelantado. Essential y Branded se facturan a mes vencido con el reporte; VIP, por adelantado.</dd></div>
+      <div><dt>Envíos de SMS</dt><dd>En Branded y VIP, el coste de los SMS se carga a tu cuenta de Klaviyo.</dd></div>
+      <div><dt>Impuestos</dt><dd>Precios + IVA. A empresas de la UE con NIF-IVA intracomunitario se factura sin IVA.</dd></div>
+    </dl>
+  </section>
+
+  <section id="empezar">
+    <div class="fin">
+      <p>¿Quieres empezar? Dinos qué plan encaja contigo y te enviamos el onboarding para arrancar.</p>
+      <a class="btn" href="mailto:gerard@vexorconsulting.com?subject=Consulta%20desde%20la%20web%20de%20VEXOR%20Consulting">Escríbenos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    </div>
+  </section>
+  </main>
+
+  <footer>
+    <img class="logo logo-a" src="img/logo-fondo-claro.webp" alt="VEXOR" width="540" height="120" loading="lazy">
+    <img class="logo logo-b" src="img/logo-fondo-oscuro.webp" alt="VEXOR" width="540" height="120" loading="lazy">
+    <nav aria-label="Legal"><a href="../../aviso-legal/index.html">Aviso legal</a><a href="../../privacidad/index.html">Privacidad</a><a href="../../cookies/index.html">Cookies</a></nav>
+  </footer>
+</div>
+
+<script>
+/* Cuentas y flujos: los de la página de Carlos, sin cambiar una cifra. */
+const fmt=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,".")+" €";
+const ESC=[[15000,1500],[12000,1300],[10000,1200],[8000,1000],[6000,800],[4000,600]];
+function ess(v){for(const [d,c] of ESC)if(v>=d)return c;return Math.max(150,v*.15)}
+function bra(v){return Math.min(1500,Math.max(150,v<=4000?v*.15:v*.10))}
+/* potencial */
+(()=>{
+  const r=document.getElementById("r-fact");
+  const up=()=>{
+    const f=+r.value,x=f*.15,c=ess(x),c2=bra(x);
+    document.getElementById("v-fact").textContent=fmt(f);
+    document.getElementById("v-extra").innerHTML="+"+fmt(x)+"<small>/mes</small>";
+    document.getElementById("v-anual").textContent=fmt(x*12)+" más al año";
+    document.getElementById("v-com").textContent=(c===c2?"Con Essential o Branded, nuestra comisión sobre esas ventas sería de "+fmt(c)+": te quedas con "+fmt(Math.max(0,x-c))+".":"Nuestra comisión sobre esas ventas sería de "+fmt(c)+" con Essential o "+fmt(c2)+" con Branded: te quedas con la gran mayoría.");
+  };
+  r.addEventListener("input",up);up();
+})();
+/* flujos */
+const FL=[
+ {n:"Bienvenida",t:"Se activa cuando alguien se suscribe en el pop-up.",m:["Tu código de bienvenida, arriba de todo","Carta del fundador: por qué existe la marca","El motivo principal para comprar"]},
+ {n:"Navegación",t:"Visitó la tienda y se fue sin mirar ningún producto.",m:["Accesos a categorías y lo más vendido"]},
+ {n:"Colección vista",t:"Entró a una colección pero no abrió ningún producto.",m:["Lo más vendido de esa colección"]},
+ {n:"Producto visto",t:"Miró un producto y no lo añadió al carrito.",m:["El producto que miró, con reseñas","Preguntas frecuentes y opiniones","La oferta, con un regalo"]},
+ {n:"Carrito abandonado",t:"Añadió productos al carrito y no siguió.",m:["Tu pedido te espera, con código","Garantía y opiniones de clientes","Carta del fundador"]},
+ {n:"Checkout abandonado",t:"Empezó a pagar y no terminó.",m:["Termina tu pedido, con código","Garantía y opiniones de clientes","Último aviso: el código vence hoy"]},
+ {n:"Post-compra",t:"Se activa con cada compra, distinto para primera y segunda compra.",m:["Gracias del fundador","Cómo sacarle partido al producto","Lo que opinan otros clientes","Pide tu reseña con un regalo"]},
+ {n:"Reposición",t:"Cuando el producto está por acabarse, según lo que dura.",m:["Es hora de reponer, en un clic","Un regalo por tiempo limitado"]},
+ {n:"Recuperación",t:"Clientes que compraron y no han vuelto.",m:["Crédito para tu próxima compra","Un regalo con tu pedido","Tu crédito vence esta noche"]},
+ {n:"Limpieza de lista",t:"Suscriptores que dejaron de abrir tus emails.",m:["¿Seguimos en contacto? Botón para quedarse y regalo"]}
+];
+const SOBRE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 6 8-6"/></svg>';
+const tabs=document.getElementById("ftabs"),panel=document.getElementById("fpanel");
+function showF(i){
+  tabs.querySelectorAll(".ftab").forEach((b,j)=>b.setAttribute("aria-selected",i===j));
+  const f=FL[i];
+  panel.innerHTML=`<div class="fhead"><h3>${f.n}</h3><span class="pl">${f.m.length} ${f.m.length>1?"emails":"email"}</span><p>${f.t}</p></div>
+  <ol class="inbox">${f.m.map((x,k)=>`<li><span class="env" aria-hidden="true">${SOBRE}</span><span class="when">Email ${k+1}</span><span class="what">${x}</span></li>`).join("")}</ol>`;
+}
+FL.forEach((f,i)=>{const b=document.createElement("button");b.type="button";b.className="ftab";b.setAttribute("role","tab");b.innerHTML=`${f.n}<small>${f.m.length}</small>`;b.onclick=()=>{showF(i);b.scrollIntoView({block:"nearest",inline:"center",behavior:"smooth"})};tabs.appendChild(b)});
+showF(0);
+/* carrusel de diseños */
+const gal=document.getElementById("gal");
+const paso=()=>{const f=gal.querySelector("figure");return f?f.getBoundingClientRect().width+14:284};
+document.getElementById("carrPrev").onclick=()=>gal.scrollBy({left:-paso(),behavior:"smooth"});
+document.getElementById("carrNext").onclick=()=>gal.scrollBy({left:paso(),behavior:"smooth"});
+/* personas: se duplica cada fila para que la cinta no tenga corte; la copia no la leen los lectores de pantalla */
+if(matchMedia("(prefers-reduced-motion:no-preference)").matches){
+  document.querySelectorAll(".marq .set").forEach(s=>{const c=s.cloneNode(true);c.setAttribute("aria-hidden","true");c.querySelectorAll("a").forEach(a=>a.tabIndex=-1);s.parentNode.appendChild(c)});
+}
+</script>
+</body>
+</html>
