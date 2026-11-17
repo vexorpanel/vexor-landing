@@ -266,6 +266,27 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
 .pv .ver{margin-top:4px;font:600 12px/1 var(--display);color:var(--inkaccent)}
 @media (hover:hover){.pv:hover{transform:translateY(-2px)}}
 .rd h3.sub{font-size:20px;margin-top:10px}
+/* planes: 3 tarjetas, una sola vez; Branded en medio y destacada; el detalle se despliega dentro */
+.planes3{display:grid;gap:12px}
+.plc{border-radius:14px;background:var(--ink);color:var(--inkfg);border:1px solid #1d232c;scroll-margin-top:70px}
+.plc.bra{border:2px solid #1f6ff2;box-shadow:0 10px 30px rgba(31,111,242,.22)}
+.plc summary{list-style:none;cursor:pointer;display:grid;gap:12px;padding:18px 18px 16px}
+.plc summary::-webkit-details-marker{display:none}
+.plc summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:12px}
+.pc-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap-reverse}
+.pc-top b{font:700 24px/1.1 var(--display)}
+.pc-top .ch{font:600 10px/1.2 var(--display);letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:#1f6ff2;color:#fff}
+.pc-top .ch.lim{background:transparent;box-shadow:inset 0 0 0 1px #f2c94c;color:#f2c94c}
+.pc-fees{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pc-fees small{display:block;font-size:12px;color:var(--inkmuted)}
+.pc-fees strong{font:700 22px/1.15 var(--display);font-variant-numeric:tabular-nums}
+.plc .ver{display:flex;align-items:center;justify-content:space-between;min-height:44px;padding-top:10px;border-top:1px solid #232a36;font:600 14px/1 var(--display);color:var(--inkaccent)}
+.plc .ver::after{content:"";width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-3px);transition:transform .25s}
+.plc[open] .ver::after{transform:rotate(-135deg)}
+.pl-det{display:grid;gap:14px;padding:0 18px 20px}
+.pl-det .lead{color:var(--inkmuted)}
+.pl-det .mbody.plan{padding:0;border:0;background:none}
+#pl-branded .mbody{border:0}
 .sig{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px;padding:14px 16px;border-radius:12px;background:var(--accent);color:#fff;text-decoration:none;font:600 15.5px/1.3 var(--display)}
 .sig small{display:block;font:500 12px/1.3 var(--body);opacity:.85}
 .sig i{font-style:normal;font-size:22px;line-height:1}
@@ -321,9 +342,10 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
         <li><b>+7 años</b><span>en ecommerce</span></li>
       </ul>
     </section>
-    <section class="inbox" aria-labelledby="ih"><div class="ihead"><h2 id="ih">Bandeja de entrada</h2><span class="estado"><span class="count" id="unread">6</span><span id="estado">6 sin leer</span></span></div>
+    <section class="inbox" aria-labelledby="ih"><div class="ihead"><h2 id="ih">Bandeja de entrada</h2><span class="estado"><span class="count" id="unread">7</span><span id="estado">7 sin leer</span></span></div>
       <ul class="list" id="list">
         <li><a class="fila" href="#m-prueba"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><span class="ftxt"><span class="ffrom">Vexor · Confían en nosotros</span><span class="fsubj">Confían en nosotros</span><span class="fprev">Alejandro Rodríguez, Matias Cardozo, Andrés Caminos y 6 más</span></span><span class="dot" aria-hidden="true"></span></a></li>
+        <li><a class="fila" href="#m-flujos"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 12c5 0 5-6 10-6M7 12c5 0 5 6 10 6"/></svg></span><span class="ftxt"><span class="ffrom">Vexor · Ejemplos</span><span class="fsubj">Los flujos de una tienda con el plan Branded</span><span class="fprev">Elige un flujo para ver qué email recibe tu cliente en cada paso.</span></span><span class="dot" aria-hidden="true"></span></a></li>
         <li><a class="fila" href="#m-potencial"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M8 15l4-5 3 3 4-6"/></svg></span><span class="ftxt"><span class="ffrom">Vexor · Tu potencial</span><span class="fsubj">¿Cuánto más puede facturar tu tienda con email?</span><span class="fprev">Pon lo que factura tu tienda y mira lo que podría significar.</span></span><span class="dot" aria-hidden="true"></span></a></li>
         <li><a class="fila" href="#m-planes"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="9.5" y="4" width="5" height="16" rx="1.5"/><rect x="16" y="4" width="5" height="16" rx="1.5"/></svg></span><span class="ftxt"><span class="ffrom">Vexor · Planes</span><span class="fsubj">Los 3 planes, de un vistazo</span><span class="fprev">Todos los precios son + IVA y ninguno tiene permanencia.</span></span><span class="dot" aria-hidden="true"></span></a></li>
         <li><a class="fila" href="#m-proceso"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="ftxt"><span class="ffrom">Vexor · Cómo trabajamos</span><span class="fsubj">De la firma al primer envío</span><span class="fprev">Eliges tu plan · Set up de inicio · Calendario de campañas · Optimización y KPI</span></span><span class="dot" aria-hidden="true"></span></a></li>
@@ -356,12 +378,21 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
       <p class="inv">Invertimos <b>+ de 135.000 €</b> este año en desarrollo de servicio, formación de nuestro equipo y stack tecnológico.</p>
     </div>
 </div>
+<a class="sig" href="#m-flujos"><span><small>Siguiente</small>Los flujos de una tienda con el plan Branded</span><i aria-hidden="true">›</i></a>
+</article>
+<article class="mail rd" id="m-flujos" aria-labelledby="t-flujos"><header class="rd-h"><span class="ffrom">Vexor · Ejemplos</span><h2 id="t-flujos" tabindex="-1">Los flujos de una tienda con el plan Branded</h2></header>
+<div class="rd-in">
+<p class="lead">Elige un flujo para ver qué email recibe tu cliente en cada paso. Es la estructura de una tienda tipo; la adaptamos a tus productos y a tu oferta.</p>
+<div class="mbody">
+        <div class="ftabs" role="tablist" id="ftabs" aria-label="Flujos"></div>
+        <div class="fpanel" id="fpanel" role="tabpanel" aria-live="polite"></div>
+      </div>
+</div>
 <a class="sig" href="#m-potencial"><span><small>Siguiente</small>¿Cuánto más puede facturar tu tienda con email?</span><i aria-hidden="true">›</i></a>
 </article>
 <article class="mail rd" id="m-potencial" aria-labelledby="t-potencial"><header class="rd-h"><span class="ffrom">Vexor · Tu potencial</span><h2 id="t-potencial" tabindex="-1">¿Cuánto más puede facturar tu tienda con email?</h2></header>
 <div class="rd-in">
 <div class="mbody">
-        <p><b>¡Preferimos ser conservadores!</b> Nuestro objetivo con cada cliente es que el email sume <b>mínimo un 15 % real a su facturación</b>. Que sea una fuente de ingresos estable y predecible. Pon lo que factura tu tienda y mira lo que podría significar.</p>
         <div class="calc">
           <label for="r-fact">Facturación mensual de tu tienda</label>
           <div class="up-in" id="v-fact">10.000 €</div>
@@ -382,13 +413,12 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
 </article>
 <article class="mail rd" id="m-planes" aria-labelledby="t-planes"><header class="rd-h"><span class="ffrom">Vexor · Planes</span><h2 id="t-planes" tabindex="-1">Los 3 planes, de un vistazo</h2></header>
 <div class="rd-in">
-<div class="vistazo"><a class="pv" href="#pl-essential"><b>Essential</b><span>Fee de inicio</span><strong>150 €</strong><span>Mensual</span><strong>15 % → 10 %</strong><span class="ver">Ver ›</span></a><a class="pv bra" href="#pl-branded"><span class="ch">El más contratado</span><b>Branded</b><span>Fee de inicio</span><strong>400 €</strong><span>Mensual</span><strong>15 % · 10 %</strong><span class="ver">Ver ›</span></a><a class="pv" href="#pl-vip"><span class="ch lim">Plazas limitadas</span><b>VIP</b><span>Fee de inicio</span><strong>Incluido</strong><span>Mensual</span><strong>2.000 €</strong><span class="ver">Ver ›</span></a></div>
-<div class="pl" id="pl-essential"><h3 class="sub">Essential</h3>
+<div class="planes3">
+<details class="plc" id="pl-essential"><summary><span class="pc-top"><b>Essential</b></span><span class="pc-fees"><span><small>Fee de inicio</small><strong>150 €</strong></span><span><small>Mensual</small><strong>15 % → 10 %</strong></span></span><span class="ver">Ver qué incluye</span></summary>
+<div class="pl-det">
 <p class="lead">Comienza a delegar todo tu email marketing. Flujos automatizados que recuperan ventas, campañas gestionadas y optimización constante.</p>
 <div class="mbody plan">
         <div class="fees">
-          <div class="fee"><span>Fee de inicio</span><b>150 €</b></div>
-          <div class="fee"><span>Mensual</span><b>15 % → 10 %</b></div>
           <p class="cuotas">Comisión escalonada: cuanto más genera tu email, menor es el porcentaje.</p>
           <span class="wel">La serie de bienvenida se descuenta de la comisión</span>
         </div>
@@ -414,13 +444,12 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
         </ul>
         <p class="cuotas">Todos los precios son + IVA y ninguno tiene permanencia.</p>
       </div>
-</div>
-<div class="pl" id="pl-branded"><h3 class="sub">Branded</h3>
+</div></details>
+<details class="plc bra" id="pl-branded"><summary><span class="pc-top"><span class="ch">El más contratado</span><b>Branded</b></span><span class="pc-fees"><span><small>Fee de inicio</small><strong>400 €</strong></span><span><small>Mensual</small><strong>15 % · 10 %</strong></span></span><span class="ver">Ver qué incluye</span></summary>
+<div class="pl-det">
 <div class="tags"><span class="chip">El más contratado por nuestros clientes</span></div><p class="lead">Todo lo incluido en Essential, además de: creación de identidad de marca, diseños de emails y ángulos de venta personalizados, y flujos para fidelizar.</p>
 <div class="mbody plan">
         <div class="fees">
-          <div class="fee"><span>Fee de inicio</span><b>400 €</b></div>
-          <div class="fee"><span>Mensual</span><b>15 % · 10 %</b></div>
           <p class="cuotas">15 % hasta 4.000 € generados; desde 4.001 €, el 10 % de todo<br>Cuota mínima 150 € · Cuota máxima 1.500 €</p>
           <span class="wel">La serie de bienvenida se descuenta de la comisión</span>
         </div>
@@ -448,13 +477,12 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
         </div>
         <p class="cuotas">Todos los precios son + IVA y ninguno tiene permanencia.</p>
       </div>
-</div>
-<div class="pl" id="pl-vip"><h3 class="sub">VIP</h3>
+</div></details>
+<details class="plc" id="pl-vip"><summary><span class="pc-top"><span class="ch lim">Plazas limitadas</span><b>VIP</b></span><span class="pc-fees"><span><small>Fee de inicio</small><strong>Incluido</strong></span><span><small>Mensual</small><strong>2.000 €</strong></span></span><span class="ver">Ver qué incluye</span></summary>
+<div class="pl-det">
 <div class="tags"><span class="chip">Todo incluido</span><span class="chip lim">Plazas limitadas</span></div><p class="lead">Todo Branded, más contenido para redes, optimización de tu tienda y estrategia mensual.</p>
 <div class="mbody plan">
         <div class="fees">
-          <div class="fee"><span>Fee de inicio</span><b>Incluido</b></div>
-          <div class="fee"><span>Mensual</span><b>2.000 €</b></div>
           <p class="cuotas">Precio fijo, sin comisión</p>
         </div>
         <p class="lim-t">Plazas limitadas para garantizar la calidad del servicio.</p>
@@ -467,6 +495,7 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
         </ul>
         <p class="cuotas">Pago por adelantado.<br>Todos los precios son + IVA y ninguno tiene permanencia.</p>
       </div>
+</div></details>
 </div>
 </div>
 <a class="sig" href="#m-proceso"><span><small>Siguiente</small>De la firma al primer envío</span><i aria-hidden="true">›</i></a>
@@ -480,12 +509,6 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
           <li><h3>Calendario de campañas</h3><p>Proponemos tus campañas mensuales y te las presentamos para que puedas revisarlas.</p></li>
           <li><h3>Optimización y KPI</h3><p>Conectamos tu cuenta por API con nuestro panel experto, y nuestro equipo analiza, optimiza y valora iteraciones de forma constante.</p></li>
         </ol>
-      </div>
-<h3 class="sub">Los flujos de una tienda con el plan Branded</h3>
-<p class="lead">Elige un flujo para ver qué email recibe tu cliente en cada paso. Es la estructura de una tienda tipo; la adaptamos a tus productos y a tu oferta.</p>
-<div class="mbody">
-        <div class="ftabs" role="tablist" id="ftabs" aria-label="Flujos"></div>
-        <div class="fpanel" id="fpanel" role="tabpanel" aria-live="polite"></div>
       </div>
 </div>
 <a class="sig" href="#m-condiciones"><span><small>Siguiente</small>Claro desde el principio</span><i aria-hidden="true">›</i></a>
@@ -512,7 +535,7 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
 <p class="cierre-p">¿Quieres empezar? Dinos qué plan encaja contigo y te enviamos el onboarding para arrancar.</p>
 <span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-6.5"/></svg>Bandeja leída</span>
 </div>
-<a class="sig" href="#" data-fin><span>Volver a la bandeja</span><i aria-hidden="true">›</i></a>
+
 </article>
   </main>
   </div>
