@@ -321,9 +321,10 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
   .cols{display:grid;grid-template-columns:410px minmax(0,1fr);gap:28px;align-items:start}
   .app .hero h1{font-size:34px}
   .js .reader{position:sticky;top:16px;inset:auto;z-index:auto;height:calc(100dvh - 32px);visibility:visible;animation:none;background:var(--surface);border:1px solid var(--line);border-radius:16px}
-  .js .rd-top{padding:10px 26px}
-  .js .volver{visibility:hidden}
-  .js .rd{padding:26px 30px 34px}
+  /* P2 17-nov: el lector dejaba un hueco blanco arriba con solo «1 de 7» (el botón Bandeja, oculto, seguía ocupando 46 px) */
+  .js .rd-top{padding:10px 30px 0;border-bottom:0;justify-content:flex-end}
+  .js .volver{display:none}
+  .js .rd{padding:8px 30px 34px}
   .rd-h h2{font-size:32px}
   .js .pista{display:none}
 }
@@ -332,6 +333,10 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
   .fila.flash::after,.js .reader.open,.js .rd.on,.todo-leido .ok{animation:none}
   .fila,.dot,.pv{transition:none}
 }
+
+/* P2 17-nov: en «Confían en nosotros» las tarjetas de los bordes se veían cortadas; el borde se funde más (14 %)
+   para que se lea como una tira que se mueve y no como tarjetas partidas */
+.js .rd .marq .row{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
 </style>
 </head>
 <body>
