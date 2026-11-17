@@ -342,7 +342,7 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
         <li><b>+7 años</b><span>en ecommerce</span></li>
       </ul>
     </section>
-    <section class="inbox" aria-labelledby="ih"><div class="ihead"><h2 id="ih">Bandeja de entrada</h2><span class="estado"><span class="count" id="unread">7</span><span id="estado">7 sin leer</span></span></div>
+    <section class="inbox" aria-labelledby="ih"><div class="ihead"><h2 id="ih">Bandeja de entrada</h2><span class="estado"><span id="estado">7 sin leer</span></span></div>
       <ul class="list" id="list">
         <li><a class="fila" href="#m-prueba"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><span class="ftxt"><span class="ffrom">Vexor · Confían en nosotros</span><span class="fsubj">Confían en nosotros</span><span class="fprev">Alejandro Rodríguez, Matias Cardozo, Andrés Caminos y 6 más</span></span><span class="dot" aria-hidden="true"></span></a></li>
         <li><a class="fila" href="#m-flujos"><span class="av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 12c5 0 5-6 10-6M7 12c5 0 5 6 10 6"/></svg></span><span class="ftxt"><span class="ffrom">Vexor · Ejemplos</span><span class="fsubj">Los flujos de una tienda con el plan Branded</span><span class="fprev">Elige un flujo para ver qué email recibe tu cliente en cada paso.</span></span><span class="dot" aria-hidden="true"></span></a></li>
@@ -596,7 +596,7 @@ if(matchMedia("(prefers-reduced-motion:no-preference)").matches){
   const filas=$$(".fila"),rds=$$(".rd"),list=$("#list"),reader=$("#reader"),cnt=$("#unread"),est=$("#estado"),pos=$("#rdpos"),meter=$("#meter");
   if(!list||!reader||filas.length!==rds.length)return;
   const leidos=new Set();let cur=-1;
-  const cuenta=()=>{const n=filas.length-leidos.size;cnt.textContent=n||"✓";cnt.classList.toggle("ok",!n);est.textContent=n?(n===1?"1 sin leer":n+" sin leer"):"Bandeja leída";document.body.classList.toggle("todo-leido",!n)};
+  const cuenta=()=>{const n=filas.length-leidos.size;if(cnt){cnt.textContent=n||"✓";cnt.classList.toggle("ok",!n)}est.textContent=n?(n===1?"1 sin leer":n+" sin leer"):"Bandeja leída";document.body.classList.toggle("todo-leido",!n)};
   function abre(i,push){
     if(i<0||i>=rds.length)return;cur=i;
     rds.forEach((r,k)=>r.classList.toggle("on",k===i));
