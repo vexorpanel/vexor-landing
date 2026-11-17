@@ -612,3 +612,6 @@ nav[aria-label="Legal"] a,nav[aria-label="Legal"] button{display:inline-flex;ali
 .appbar{gap:12px}
 .btn-top{white-space:nowrap;min-height:44px;flex:none}
 @media (max-width:400px){.btn-largo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}}
+
+/* top-escalafy-18nov: en movil, «Como se mide» pasa a enlace de texto para que no compita con el boton principal (revisor-web, fallo 3) */
+@media (max-width:959px){.metric-how a{border:0;padding:0;border-radius:0;text-decoration:underline;text-underline-offset:3px;color:var(--light)}}
