@@ -600,3 +600,8 @@ html:not(.js) .reader{display:none}
 .area-link-rail{display:none}
 @media (min-width:960px){ .area-link-rail{display:flex;padding:0 12px;font-size:15px;margin-top:auto} .area-link-rail+.rail-meter{margin-top:0} }
 @media (max-width:959px){ body:not([data-view="bandeja"]) .appbar .area-link,body[data-scrolled] .appbar .area-link{display:none} }
+
+/* adaptativo-17nov · dianas táctiles de 44 px */
+.metric-how a{display:inline-flex;align-items:center;min-height:44px}
+@media (min-width:960px){a.rail-brand{display:flex;align-items:center;min-height:44px}}
+nav[aria-label="Legal"] a,nav[aria-label="Legal"] button{display:inline-flex;align-items:center;min-height:44px}

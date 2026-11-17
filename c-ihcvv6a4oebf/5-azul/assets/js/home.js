@@ -35,3 +35,24 @@
   }, { threshold: 0.6 });
   for (var c = 0; c < cifras.length; c++) { cio.observe(cifras[c]); }
 })();
+
+/* adaptativo-17nov · menú en móvil: abre y cierra con el botón, con Escape, al tocar fuera y al elegir una sección */
+(function () {
+  "use strict";
+  var btn = document.querySelector(".menu-btn"), nav = document.getElementById("menu-secciones");
+  if (!btn || !nav) { return; }
+  var cab = btn.closest("header");
+  function pon(abierto, foco) {
+    cab.classList.toggle("menu-abierto", abierto);
+    btn.setAttribute("aria-expanded", abierto ? "true" : "false");
+    btn.setAttribute("aria-label", btn.getAttribute(abierto ? "data-cerrar" : "data-abrir"));
+    if (abierto) { var a = nav.querySelector("a"); if (a) { a.focus(); } } else if (foco) { btn.focus(); }
+  }
+  btn.addEventListener("click", function () { pon(btn.getAttribute("aria-expanded") !== "true", false); });
+  nav.addEventListener("click", function (e) { if (e.target.closest("a")) { pon(false, false); } });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && cab.classList.contains("menu-abierto")) { pon(false, true); } });
+  document.addEventListener("click", function (e) { if (cab.classList.contains("menu-abierto") && !cab.contains(e.target)) { pon(false, false); } });
+  var mq = window.matchMedia("(min-width:900px)");
+  var al = function () { if (mq.matches) { pon(false, false); } };
+  if (mq.addEventListener) { mq.addEventListener("change", al); } else if (mq.addListener) { mq.addListener(al); }
+})();

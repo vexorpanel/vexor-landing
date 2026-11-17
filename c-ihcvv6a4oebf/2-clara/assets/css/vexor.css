@@ -475,3 +475,16 @@ h1 .h1b{color:var(--c-action)}
 }
 @media print{.h2 .pal{opacity:1!important;transform:none!important;transition:none!important}}
 
+/* adaptativo-17nov · menú en móvil y tableta (bajo 900 px la navegación se escondía y no había forma de abrirla) */
+.menu-btn{display:none}
+@media (max-width:899px){
+  .top__in{position:relative}
+  .menu-btn{display:inline-flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;margin-left:auto;padding:0;border:1px solid var(--c-line);border-radius:var(--r-pill);background:var(--c-white);color:var(--c-ink);cursor:pointer}
+  .menu-btn svg{width:22px;height:22px}
+  .menu-btn .i-cerrar,.top.menu-abierto .menu-btn .i-abrir{display:none}
+  .top.menu-abierto .menu-btn .i-cerrar{display:block}
+  .top .btn--sm{margin-left:0}
+  .top.menu-abierto .nav{display:flex;flex-direction:column;gap:2px;position:absolute;top:calc(100% + 8px);left:0;right:0;max-height:calc(100dvh - 110px);overflow-y:auto;padding:8px;border:1px solid var(--c-line);border-radius:var(--r-core);background:var(--c-white);box-shadow:var(--sh-2)}
+  .top.menu-abierto .nav a{display:flex;align-items:center;min-height:48px;padding:0 16px;border-radius:var(--r-sm);color:var(--c-ink);font:500 17px/1.2 var(--f-sans);text-decoration:none}
+  .top.menu-abierto .nav a:active{background:var(--c-paper)}
+}

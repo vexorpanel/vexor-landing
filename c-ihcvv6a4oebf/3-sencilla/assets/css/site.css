@@ -240,3 +240,13 @@ h3{font-size:var(--fs-h3);font-weight:600;line-height:1.3}
 .legal th,.legal td{padding:10px 12px;text-align:left;vertical-align:top;border:1px solid var(--line)}
 .legal th{background:var(--soft);font-weight:600;width:34%}
 @media (max-width:560px){.legal table,.legal tbody,.legal tr,.legal th,.legal td{display:block;width:100%}.legal th{border-bottom:0}.legal td{border-top:0}}
+
+/* adaptativo-17nov · dianas táctiles de 44 px (logo, idioma, enlaces del pie, volver, botón pequeño, correo suelto) */
+.brand{display:inline-flex;align-items:center;min-height:44px;line-height:normal}
+.lang a{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:0 12px}
+.foot-links a,.foot-links button{display:inline-flex;align-items:center;min-height:44px;padding:0}
+.foot-links{gap:0 20px}
+.legal .back{display:inline-flex;align-items:center;min-height:44px}
+.btn-sm{min-height:44px}
+.contact-mail a,.foot-data a{display:inline-flex;align-items:center;min-height:44px}
+.foot-data{gap:0}
