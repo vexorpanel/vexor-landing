@@ -629,3 +629,30 @@ nav[aria-label="Legal"] a,nav[aria-label="Legal"] button{display:inline-flex;ali
   .btn.compose{background:transparent;color:var(--text);border:1px solid var(--line2);box-shadow:none}
   .btn.compose:hover{background:var(--surface2)}
 }
+
+/* top3-escalafy-18nov · vuelta 3 (ultima) con los 5 cambios del revisor-web
+   1) «Marca de muestra» fuera de cada fila; lo dice una sola vez la cabecera de la bandeja (tambien en movil)
+   2) la fila cortada a 1440 venia de la vuelta 2: overflow:hidden en un hijo flex le quita la altura minima y recorta las filas 6-10.
+      Con overflow:clip las esquinas siguen redondeadas y la bandeja vuelve a medir sus 10 filas (se desplaza la columna, como antes)
+   3) rotulo del escenario a ~24 px del telefono (a 900 de alto el telefono acaba a 150 px del borde) y telefonos laterales con mas luz
+   4) barra de 3 px con el color de cada diseno (muestreado de su miniatura)
+   5) estados: hover/pulsado de 150-200 ms en filas y pestanas; flotado lento de 7 s y 8 px del telefono central */
+.inbox{overflow:clip}
+.row:not(.row-pin) .row-prev{display:none}
+.inbox-sub{display:block;text-align:left;margin-top:4px}
+.row{box-shadow:inset 3px 0 0 var(--acc,transparent);transition:background-color .2s ease}
+.row[data-from="Brava"]{--acc:#e27640}.row[data-from="Hidra"]{--acc:#ef746b}.row[data-from="Kova"]{--acc:#2d8261}
+.row[data-from="Lumen"]{--acc:#e6e7e9}.row[data-from="Nómada"]{--acc:#d0bfae}.row[data-from="Olmo"]{--acc:#efeee6}
+.row[data-from="Oriel"]{--acc:#ab614d}.row[data-from="Pisada"]{--acc:#3e5893}.row[data-from="Pomelo"]{--acc:#e74e8f}.row[data-from="Tierra"]{--acc:#b96443}
+.tab{transition:color .15s ease,transform .15s ease}
+.tab:active{transform:scale(.96)}
+@media (min-width:960px){
+  .inbox-sub{text-align:right;margin-top:0}
+  .stage-cap{bottom:max(26px,calc(50% - 358px))}
+  .phone-b1{filter:brightness(.78)}
+  .phone-b2{filter:brightness(.7)}
+}
+@media (min-width:960px) and (prefers-reduced-motion:no-preference){
+  .phone-main{animation:flota-18nov 7s ease-in-out infinite}
+}
+@keyframes flota-18nov{0%,100%{translate:0 0}50%{translate:0 -8px}}
