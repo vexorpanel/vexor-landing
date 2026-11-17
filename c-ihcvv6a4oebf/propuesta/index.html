@@ -164,7 +164,7 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:#1f6ff2;touch-act
 .gal figure{margin:0;flex:none;width:min(68vw,270px);scroll-snap-align:start;display:grid;gap:8px}
 .gal a{position:relative;display:block;aspect-ratio:560/940;overflow:hidden;border-radius:10px;background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.08),0 10px 26px rgba(0,0,0,.14)}
 .gal a::after{content:"";position:absolute;inset:auto 0 0 0;height:22%;background:linear-gradient(transparent,rgba(7,9,12,.55))}
-.gal img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.gal img{display:block;width:calc(100% * var(--z,1));max-width:none;height:auto;margin-left:calc((100% - 100% * var(--z,1)) / 2)}
 .gal figcaption{font-size:13px;line-height:1.35;color:var(--muted)}
 .gal figcaption b{color:var(--fg)}
 .invcard{margin-top:22px;background:#1f6ff2;color:#fff;border-radius:16px;padding:24px 20px;display:grid;gap:10px}
@@ -399,17 +399,17 @@ footer nav a{display:inline-flex;align-items:center;min-height:44px;font-size:14
       <div class="carr-h"><h3>Diseños a medida · Campañas y flujos del plan Branded</h3><div class="carr-nav"><button type="button" id="carrPrev" aria-label="Diseño anterior">‹</button><button type="button" id="carrNext" aria-label="Diseño siguiente">›</button></div></div>
       <p class="carr-n">Marcas de muestra. Toca un diseño para verlo entero.</p>
       <div class="gal" id="gal" tabindex="0" aria-label="Diseños de muestra">
-        <figure><a href="img/d-brava.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-brava.webp" width="560" height="1362" alt="Carrito abandonado de Brava en estilo Retro"></a><figcaption><b>Brava</b> · Carrito abandonado · estilo Retro</figcaption></figure>
+        <figure><a href="img/d-brava.webp" target="_blank" rel="noopener" style="--z:1.0491"><img loading="lazy" decoding="async" src="img/d-brava.webp" width="560" height="1362" alt="Carrito abandonado de Brava en estilo Retro"></a><figcaption><b>Brava</b> · Carrito abandonado · estilo Retro</figcaption></figure>
         <figure><a href="img/d-hidra.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-hidra.webp" width="560" height="1807" alt="Bienvenida de Hidra en estilo Pulso"></a><figcaption><b>Hidra</b> · Bienvenida · estilo Pulso</figcaption></figure>
         <figure><a href="img/d-pisada.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-pisada.webp" width="560" height="1421" alt="Post-compra de Pisada en estilo Chill y divertido"></a><figcaption><b>Pisada</b> · Post-compra · estilo Chill y divertido</figcaption></figure>
         <figure><a href="img/d-kova.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-kova.webp" width="560" height="1831" alt="Campaña Black Friday de Kova en estilo Deporte"></a><figcaption><b>Kova</b> · Campaña Black Friday · estilo Deporte</figcaption></figure>
         <figure><a href="img/d-lumen.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-lumen.webp" width="560" height="1705" alt="Producto visto de Lumen en estilo Clínico premium"></a><figcaption><b>Lumen</b> · Producto visto · estilo Clínico premium</figcaption></figure>
-        <figure><a href="img/d-nomada.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-nomada.webp" width="560" height="1722" alt="Lanzamiento de colección de Nómada en estilo Minimal"></a><figcaption><b>Nómada</b> · Lanzamiento de colección · estilo Minimal</figcaption></figure>
+        <figure><a href="img/d-nomada.webp" target="_blank" rel="noopener" style="--z:1.0086"><img loading="lazy" decoding="async" src="img/d-nomada.webp" width="560" height="1722" alt="Lanzamiento de colección de Nómada en estilo Minimal"></a><figcaption><b>Nómada</b> · Lanzamiento de colección · estilo Minimal</figcaption></figure>
         <figure><a href="img/d-olmo.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-olmo.webp" width="560" height="1809" alt="Campaña de Navidad de Olmo en estilo Editorial"></a><figcaption><b>Olmo</b> · Campaña de Navidad · estilo Editorial</figcaption></figure>
         <figure><a href="img/d-oriel.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-oriel.webp" width="560" height="1389" alt="Reposición de Oriel en estilo Lujo"></a><figcaption><b>Oriel</b> · Reposición · estilo Lujo</figcaption></figure>
         <figure><a href="img/d-pomelo.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-pomelo.webp" width="560" height="1807" alt="Recuperación de clientes de Pomelo en estilo Glossy"></a><figcaption><b>Pomelo</b> · Recuperación de clientes · estilo Glossy</figcaption></figure>
         <figure><a href="img/d-tierra.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-tierra.webp" width="560" height="1362" alt="Checkout abandonado de Tierra en estilo Terroso"></a><figcaption><b>Tierra</b> · Checkout abandonado · estilo Terroso</figcaption></figure>
-        <figure><a href="img/d-volta.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-volta.webp" width="560" height="1470" alt="Campaña último día de Volta en estilo Afiche bold"></a><figcaption><b>Volta</b> · Campaña último día · estilo Afiche bold</figcaption></figure>
+        <figure><a href="img/d-volta.webp" target="_blank" rel="noopener" style="--z:1.0043"><img loading="lazy" decoding="async" src="img/d-volta.webp" width="560" height="1470" alt="Campaña último día de Volta en estilo Afiche bold"></a><figcaption><b>Volta</b> · Campaña último día · estilo Afiche bold</figcaption></figure>
       </div>
     </div>
 
