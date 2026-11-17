@@ -67,3 +67,16 @@
     update();
   }
 })();
+
+/* pie-cookies-17nov: mientras el aviso de cookies se ve, el final de la página deja su alto libre para que no tape el pie */
+(function () {
+  var k = document.getElementById("cookie"); if (!k) { return; }
+  var b = document.body, base = parseFloat(getComputedStyle(b).paddingBottom) || 0;
+  var f = function () {
+    var v = !k.hidden && getComputedStyle(k).display !== "none";
+    b.style.paddingBottom = v ? (base + Math.ceil(window.innerHeight - k.getBoundingClientRect().top) + 16) + "px" : "";
+  };
+  if (window.MutationObserver) { new MutationObserver(f).observe(k, { attributes: true }); }
+  if (window.ResizeObserver) { new ResizeObserver(f).observe(k); }
+  window.addEventListener("resize", f); f();
+})();
