@@ -194,7 +194,13 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
 .mail,.bloque{margin-top:16px;padding:22px 20px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
 .mhead{display:grid;gap:10px;margin-bottom:18px}
 .ojo{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.estado{display:inline-flex;align-items:center;gap:6px;font:600 11px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+.estado{display:inline-flex;align-items:center;gap:6px;font:600 11px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);white-space:nowrap;transition:opacity .4s}
+.leido .estado{opacity:0}
+.dis{display:grid;gap:4px;padding-top:6px}
+.dis h3{font-size:18px}
+.nota{font-size:13px;color:var(--inkmuted)}
+.mail.plan .gal figcaption{color:var(--inkmuted)}
+.mail.plan .gal figcaption b{color:var(--inkfg)}
 .estado::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
 .leido .estado{color:var(--muted)}
 .leido .estado::before{background:transparent;box-shadow:inset 0 0 0 1.5px var(--muted)}
@@ -213,18 +219,9 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
 .fpanel{background:var(--bg)}
 .fin{border:0;background:transparent;padding:30px 0 0;gap:12px}
 .fin a{color:var(--accent);font-weight:600;text-underline-offset:4px}
-/* la barra de leídos: fina, arriba, solo cuando ya se ha bajado de la portada */
-.leidos{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;align-items:center;gap:12px;padding:max(8px,env(safe-area-inset-top,0px)) var(--pad) 8px;background:color-mix(in srgb,var(--bg) 92%,transparent);border-bottom:1px solid var(--line);transform:translateY(-110%);transition:transform .25s ease;font-size:12.5px;color:var(--muted)}
-.leidos.ver{transform:none}
-.leidos .bar2{flex:1;height:5px;border-radius:3px;background:var(--track);overflow:hidden;max-width:560px}
-.leidos .bar2 i{display:block;height:100%;width:0;background:var(--accent);border-radius:3px;transition:width .35s ease}
-.leidos b{font:600 12.5px/1 var(--display);color:var(--fg);white-space:nowrap;font-variant-numeric:tabular-nums}
-.leidos[hidden]{display:none}
-@media (prefers-reduced-motion:reduce){.leidos,.leidos .bar2 i{transition:none}}
 </style>
 </head>
 <body>
-<div class="leidos" id="leidos" hidden aria-live="polite"><span>Bandeja</span><span class="bar2"><i id="pbar"></i></span><b id="ptxt">0 de 8 leídos</b></div>
 <div class="wrap">
   <header class="bar"><img class="logo-oscuro" src="img/vexor-claro.webp" alt="VEXOR" width="560" height="126"><img class="logo-claro" src="img/vexor-oscuro.webp" alt="VEXOR" width="560" height="122"></header>
 
@@ -260,7 +257,7 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
 
 <main>
     <article class="mail" id="potencial">
-      <header class="mhead"><span class="ojo"><span class="kicker">Tu potencial</span><span class="estado">Sin leer</span></span>
+      <header class="mhead"><span class="ojo"><span class="kicker">Tu potencial</span><span class="estado">Nuevo</span></span>
         <h2>¿Cuánto más puede facturar tu tienda con email?</h2></header>
       <div class="mbody">
         <p><b>¡Preferimos ser conservadores!</b> Nuestro objetivo con cada cliente es que el email sume <b>mínimo un 15 % real a su facturación</b>. Que sea una fuente de ingresos estable y predecible. Pon lo que factura tu tienda y mira lo que podría significar.</p>
@@ -281,7 +278,7 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
       </div>
     </article>
     <article class="mail plan" id="essential">
-      <header class="mhead"><span class="ojo"><span class="kicker">Planes</span><span class="estado">Sin leer</span></span>
+      <header class="mhead"><span class="ojo"><span class="kicker">Planes</span><span class="estado">Nuevo</span></span>
         <h2>Essential</h2>
         <p class="lead">Comienza a delegar todo tu email marketing. Flujos automatizados que recuperan ventas, campañas gestionadas y optimización constante.</p></header>
       <div class="mbody">
@@ -315,7 +312,7 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
       </div>
     </article>
     <article class="mail plan" id="branded">
-      <header class="mhead"><span class="ojo"><span class="kicker">Planes</span><span class="estado">Sin leer</span></span>
+      <header class="mhead"><span class="ojo"><span class="kicker">Planes</span><span class="estado">Nuevo</span></span>
         <div class="tags"><span class="chip">El más contratado por nuestros clientes</span></div>
         <h2>Branded</h2>
         <p class="lead">Todo lo incluido en Essential, además de: creación de identidad de marca, diseños de emails y ángulos de venta personalizados, y flujos para fidelizar.</p></header>
@@ -334,14 +331,7 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
           <li>SMS marketing: flujos y campañas por SMS</li>
           <li>Reuniones con el equipo cuando las necesites</li>
         </ul>
-        <p class="cuotas">Todos los precios son + IVA y ninguno tiene permanencia.</p>
-      </div>
-    </article>
-    <article class="mail" id="disenos">
-      <header class="mhead"><span class="ojo"><span class="kicker">Ejemplos</span><span class="estado">Sin leer</span></span>
-        <h2>Diseños a medida</h2>
-        <p class="lead">Campañas y flujos del plan Branded. Marcas de muestra: toca un diseño para verlo entero.</p></header>
-      <div class="mbody">
+        <div class="dis"><h3>Diseños a medida · Campañas y flujos del plan Branded</h3><p class="nota">Marcas de muestra: toca un diseño para verlo entero.</p></div>
         <div class="gal" id="gal" tabindex="0" aria-label="Diseños de muestra">
           <figure><a href="img/d-brava.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-brava.webp" width="560" height="1789" alt="Carrito abandonado de Brava en estilo Retro"></a><figcaption><b>Brava</b> · Carrito abandonado · estilo Retro</figcaption></figure>
           <figure><a href="img/d-hidra.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-hidra.webp" width="560" height="2151" alt="Bienvenida de Hidra en estilo Pulso"></a><figcaption><b>Hidra</b> · Bienvenida · estilo Pulso</figcaption></figure>
@@ -355,10 +345,11 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
           <figure><a href="img/d-tierra.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-tierra.webp" width="560" height="1723" alt="Checkout abandonado de Tierra en estilo Terroso"></a><figcaption><b>Tierra</b> · Checkout abandonado · estilo Terroso</figcaption></figure>
           <figure><a href="img/d-volta.webp" target="_blank" rel="noopener"><img loading="lazy" decoding="async" src="img/d-volta.webp" width="560" height="1817" alt="Campaña último día de Volta en estilo Afiche bold"></a><figcaption><b>Volta</b> · Campaña último día · estilo Afiche bold</figcaption></figure>
         </div>
+        <p class="cuotas">Todos los precios son + IVA y ninguno tiene permanencia.</p>
       </div>
     </article>
     <article class="mail plan" id="vip">
-      <header class="mhead"><span class="ojo"><span class="kicker">Planes</span><span class="estado">Sin leer</span></span>
+      <header class="mhead"><span class="ojo"><span class="kicker">Planes</span><span class="estado">Nuevo</span></span>
         <div class="tags"><span class="chip">Todo incluido</span><span class="chip lim">Plazas limitadas</span></div>
         <h2>VIP</h2>
         <p class="lead">Todo Branded, más contenido para redes, optimización de tu tienda y estrategia mensual.</p></header>
@@ -386,7 +377,7 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
     </div>
 
     <article class="mail" id="flujos">
-      <header class="mhead"><span class="ojo"><span class="kicker">Ejemplos</span><span class="estado">Sin leer</span></span>
+      <header class="mhead"><span class="ojo"><span class="kicker">Ejemplos</span><span class="estado">Nuevo</span></span>
         <h2>Los flujos de una tienda con el plan Branded</h2>
         <p class="lead">Elige un flujo para ver qué email recibe tu cliente en cada paso. Es la estructura de una tienda tipo; la adaptamos a tus productos y a tu oferta.</p></header>
       <div class="mbody">
@@ -395,7 +386,7 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
       </div>
     </article>
     <article class="mail" id="proceso">
-      <header class="mhead"><span class="ojo"><span class="kicker">Cómo trabajamos</span><span class="estado">Sin leer</span></span>
+      <header class="mhead"><span class="ojo"><span class="kicker">Cómo trabajamos</span><span class="estado">Nuevo</span></span>
         <h2>De la firma al primer envío</h2></header>
       <div class="mbody">
         <ol class="steps">
@@ -407,7 +398,7 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
       </div>
     </article>
     <article class="mail" id="condiciones">
-      <header class="mhead"><span class="ojo"><span class="kicker">Condiciones</span><span class="estado">Sin leer</span></span>
+      <header class="mhead"><span class="ojo"><span class="kicker">Condiciones</span><span class="estado">Nuevo</span></span>
         <h2>Claro desde el principio</h2>
         <p class="lead">Todos los precios son + IVA y ninguno tiene permanencia.</p></header>
       <div class="mbody">
@@ -425,7 +416,6 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
 </main>
     <div class="fin">
       <p>¿Quieres empezar? Dinos qué plan encaja contigo y te enviamos el onboarding para arrancar.</p>
-      <a href="mailto:gerard@vexorconsulting.com?subject=Consulta%20desde%20la%20web%20de%20VEXOR%20Consulting">gerard@vexorconsulting.com</a>
     </div>
 
   <footer>
@@ -476,17 +466,11 @@ showF(0);
 if(matchMedia("(prefers-reduced-motion:no-preference)").matches){
   document.querySelectorAll(".marq .set").forEach(s=>{const c=s.cloneNode(true);c.setAttribute("aria-hidden","true");c.querySelectorAll("a").forEach(a=>a.tabIndex=-1);s.parentNode.appendChild(c)});
 }
-/* lo de bandeja, ligero: cada bloque se marca leído al verlo y la barra de arriba los cuenta */
-(()=>{
-  const correos=[...document.querySelectorAll(".mail")],barra=document.getElementById("leidos"),pbar=document.getElementById("pbar"),ptxt=document.getElementById("ptxt"),hero=document.querySelector(".hero");
-  if(!("IntersectionObserver" in window))return;
-  barra.hidden=false;
-  const cuenta=()=>{const n=correos.filter(c=>c.classList.contains("leido")).length;pbar.style.width=(100*n/correos.length)+"%";ptxt.textContent=n<correos.length?n+" de "+correos.length+" leídos":"Todo leído"};
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("leido");const s=e.target.querySelector(".estado");if(s)s.textContent="Leído";io.unobserve(e.target);cuenta()}}),{threshold:.45});
-  correos.forEach(c=>io.observe(c));
-  new IntersectionObserver(([e])=>barra.classList.toggle("ver",!e.isIntersecting&&e.boundingClientRect.top<0)).observe(hero);
-  cuenta();
-})();
+/* lo de bandeja, ligero: el punto «Nuevo» de cada bloque se apaga cuando se ve */
+if("IntersectionObserver" in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("leido");io.unobserve(e.target)}}),{threshold:.35});
+  document.querySelectorAll(".mail").forEach(c=>io.observe(c));
+}
 </script>
 </body>
 </html>
