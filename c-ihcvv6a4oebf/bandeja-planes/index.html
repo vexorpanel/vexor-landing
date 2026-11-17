@@ -267,7 +267,13 @@ input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--accent);tou
 @media (hover:hover){.pv:hover{transform:translateY(-2px)}}
 .rd h3.sub{font-size:20px;margin-top:10px}
 /* planes: 3 tarjetas, una sola vez; Branded en medio y destacada; el detalle se despliega dentro */
-.planes3{display:grid;gap:12px}
+/* 17-nov: grid de una columna con minmax(0,1fr) y min-width:0 en todo lo de dentro; sin esto, la galería de diseños
+   de Branded (fila de scroll lateral, ancho max-content) estiraba la tarjeta abierta a ~3.100 px (visto por el P2) */
+.planes3{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;min-width:0;max-width:100%}
+.plc,.plc summary,.pl-det,.pl-det>*{min-width:0;max-width:100%}
+.pl-det,.pl-det .mbody{grid-template-columns:minmax(0,1fr)}
+.pl-det .mbody>*{min-width:0;max-width:100%}
+.pl-det .gal{margin-inline:0;padding-inline:0;scroll-padding-inline:0}
 .plc{border-radius:14px;background:var(--ink);color:var(--inkfg);border:1px solid #1d232c;scroll-margin-top:70px}
 .plc.bra{border:2px solid #1f6ff2;box-shadow:0 10px 30px rgba(31,111,242,.22)}
 .plc summary{list-style:none;cursor:pointer;display:grid;gap:12px;padding:18px 18px 16px}
