@@ -10,7 +10,7 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const PC = matchMedia('(min-width: 960px)');
-  const VIEWS = ['bandeja', 'antes-despues', 'flujos', 'cifras', '72h', 'preguntas'];
+  const VIEWS = ['bandeja', 'flujos', 'cifras', '72h', 'preguntas'];
   const views = Object.fromEntries(VIEWS.map(v => [v, document.getElementById('v-' + v)]));
   const tabs = $$('.tab');
   const mails = $$('.mail');
