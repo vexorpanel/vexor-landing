@@ -286,3 +286,20 @@
   /* precarga suave de los tres primeros correos del lector cuando el navegador queda libre */
   (window.requestIdleCallback || (f => setTimeout(f, 900)))(() => { buildReader(); [0, 1, 2].forEach(loadPanel); });
 })();
+
+/* 18-nov · calculadora de Carlos (artefacto «Planes Vexor», bloque «Tu potencial»), fórmulas tal cual */
+(()=>{
+  const r=document.getElementById("r-fact"); if(!r) return;
+  const fmt=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,".")+"\u00a0€";
+  const ESC=[[15000,1500],[12000,1300],[10000,1200],[8000,1000],[6000,800],[4000,600]];
+  const ess=v=>{for(const [d,c] of ESC)if(v>=d)return c;return Math.max(150,v*.15)};
+  const bra=v=>Math.min(1500,Math.max(150,v<=4000?v*.15:v*.10));
+  const up=()=>{
+    const f=+r.value,x=f*.15,c=ess(x),c2=bra(x);
+    document.getElementById("v-fact").textContent=fmt(f);
+    document.getElementById("v-extra").innerHTML="+"+fmt(x)+"<small>/mes</small>";
+    document.getElementById("v-anual").textContent=fmt(x*12)+" más al año";
+    document.getElementById("v-com").textContent=(c===c2?"Con Essential o Branded, nuestra comisión sobre esas ventas sería de "+fmt(c)+": te quedas con "+fmt(Math.max(0,x-c))+".":"Nuestra comisión sobre esas ventas sería de "+fmt(c)+" con Essential o "+fmt(c2)+" con Branded: te quedas con la gran mayoría.");
+  };
+  r.addEventListener("input",up); up();
+})();

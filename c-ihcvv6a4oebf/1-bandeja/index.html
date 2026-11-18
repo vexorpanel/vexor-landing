@@ -14,7 +14,7 @@
      Qué es: la web como una bandeja de entrada (lista de diseños de muestra, lector con deslizamiento, carpetas = secciones).
      Entra: nada (HTML + v9.css + v9.js + img/ + fonts/). Se prueba: index.html y design/prueba_v9.py.
      Concepto y fuentes de cada técnica: ../design/CONCEPTO_V9.md. Sin JS se lee entera; con prefers-reduced-motion, quieta. -->
-<link rel="stylesheet" href="v9.css">
+<link rel="stylesheet" href="v9.css?v=18nov-carlos4">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -167,6 +167,19 @@
           <article class="fig"><p class="num">+85</p><p class="lab">tiendas online activas</p><p class="how"><b>Cómo se mide:</b> Cartera actual.</p></article>
           <article class="fig"><p class="num">+7</p><p class="lab">años en ecommerce</p><p class="how"><b>Cómo se mide:</b> Desde que el equipo empezó a llevar tiendas online.</p></article>
         </div>
+        <!-- Carlos, WA 17-nov 12:28: «me han dado permiso para añadir las ig». Cuentas y seguidores, tal cual de su artefacto «Planes Vexor» (17-nov 11:51). -->
+        <h3 class="h3 sub-t" id="ig-t">Confían en nosotros</h3>
+        <ul class="ig" aria-labelledby="ig-t">
+          <li><a href="https://www.instagram.com/arz.urus/" target="_blank" rel="noopener"><i aria-hidden="true">AR</i><span><b>Alejandro Rodríguez</b><em>@arz.urus</em><small>397K seguidores</small></span></a></li>
+          <li><a href="https://www.instagram.com/matiasscardozo/" target="_blank" rel="noopener"><i aria-hidden="true">MC</i><span><b>Matias Cardozo</b><em>@matiasscardozo</em><small>332K seguidores</small></span></a></li>
+          <li><a href="https://www.instagram.com/andrescaminos_/" target="_blank" rel="noopener"><i aria-hidden="true">AC</i><span><b>Andrés Caminos</b><em>@andrescaminos_</em><small>46K seguidores</small></span></a></li>
+          <li><a href="https://www.instagram.com/javier.sanchezecom/" target="_blank" rel="noopener"><i aria-hidden="true">JS</i><span><b>Javier Sánchez</b><em>@javier.sanchezecom</em><small>33K seguidores</small></span></a></li>
+          <li><a href="https://www.instagram.com/luiscamilo23/" target="_blank" rel="noopener"><i aria-hidden="true">LC</i><span><b>Luis Camilo Torres</b><em>@luiscamilo23</em><small>24K seguidores</small></span></a></li>
+          <li><a href="https://www.instagram.com/jordigarcia89/" target="_blank" rel="noopener"><i aria-hidden="true">JG</i><span><b>Jordi Garcia</b><em>@jordigarcia89</em><small>14K seguidores</small></span></a></li>
+          <li><a href="https://www.instagram.com/mentoriumecom8cifras/" target="_blank" rel="noopener"><i aria-hidden="true">ME</i><span><b>Mentorium Ecom 8 cifras</b><em>@mentoriumecom8cifras</em><small>13K seguidores</small></span></a></li>
+          <li><a href="https://www.instagram.com/tu.buyer/" target="_blank" rel="noopener"><i aria-hidden="true">TB</i><span><b>Tubuyer</b><em>@tu.buyer</em><small>5,1K seguidores</small></span></a></li>
+          <li><a href="https://www.instagram.com/vicky.ramnani.77/" target="_blank" rel="noopener"><i aria-hidden="true">VR</i><span><b>Vicky Ramnani</b><em>@vicky.ramnani.77</em><small>2,8K seguidores</small></span></a></li>
+        </ul>
       </div>
     </section>
 
@@ -175,6 +188,23 @@
       <div class="view-in">
         <p class="kicker">Planes</p>
         <h2 class="h2" id="pl-t">Los 3 planes, de un vistazo</h2>
+        <!-- Calculadora y textos tal cual del artefacto de Carlos «Planes Vexor» (WA 17-nov 11:51), bloque «Tu potencial». -->
+        <div class="calc">
+          <h3 class="h3">¿Cuánto más puede facturar tu tienda con email?</h3>
+          <p><b>¡Preferimos ser conservadores!</b> Nuestro objetivo con cada cliente es que el email sume <b>mínimo un 15&nbsp;% real a su facturación</b>. Que sea una fuente de ingresos estable y predecible. Pon lo que factura tu tienda y mira lo que podría significar.</p>
+          <label for="r-fact">Facturación mensual de tu tienda</label>
+          <output class="calc-v" id="v-fact" for="r-fact">10.000&nbsp;€</output>
+          <input type="range" id="r-fact" min="2000" max="100000" step="1000" value="10000">
+          <div class="calc-scale" aria-hidden="true"><span>2.000&nbsp;€</span><span>50.000&nbsp;€</span><span>100.000&nbsp;€</span></div>
+          <div class="calc-res" aria-live="polite">
+            <small>Escenario conservador · 15&nbsp;%</small>
+            <span>Ventas extra con email</span>
+            <b id="v-extra">+1.500&nbsp;€<small>/mes</small></b>
+            <em id="v-anual">18.000&nbsp;€ más al año</em>
+          </div>
+          <p class="calc-com" id="v-com">Con Essential o Branded, nuestra comisión sobre esas ventas sería de 225&nbsp;€: te quedas con 1.275&nbsp;€.</p>
+          <p class="note">Estimación orientativa, no una garantía. El resultado depende del país, el nicho, la oferta, el ticket medio, el tráfico y la base de suscriptores de cada negocio.</p>
+        </div>
         <div class="planes">
           <details class="plan"><summary><span class="plan-top"><b class="plan-n">Essential</b></span><span class="plan-fees"><span><small>Fee de inicio</small><strong>150&nbsp;€</strong></span><span><small>Mensual</small><strong>15&nbsp;% → 10&nbsp;%</strong></span></span><span class="plan-ver">Ver qué incluye</span></summary>
             <div class="plan-in">
@@ -330,6 +360,6 @@
 <p>Hoy esta web no mide tus visitas ni usa cookies de publicidad. Si algún día activamos la medición, será solo con tu permiso. Tu elección se guarda en este navegador.</p>
 <div class="acts"><button class="btn" data-consent="rechazar" type="button">Rechazar</button><button class="btn" data-consent="aceptar" type="button">Aceptar</button><a class="btn btn--ghost" data-dialog="d-cookies" href="#cookies">Más información</a></div>
 </div></dialog>
-<script src="v9.js"></script>
+<script src="v9.js?v=18nov-carlos4"></script>
 </body>
 </html>
