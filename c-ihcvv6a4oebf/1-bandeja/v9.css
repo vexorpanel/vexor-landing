@@ -708,3 +708,10 @@ nav[aria-label="Legal"] a,nav[aria-label="Legal"] button{display:inline-flex;ali
   .plan{transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s}
   .plan:hover{transform:translateY(-2px);box-shadow:0 10px 28px #00000059;border-color:var(--light)}
 }
+/* ---------- menos cargada (Carlos, WA 17-nov 12:28: «lo veo muy cargado») ---------- */
+.trio{display:flex;flex-wrap:wrap;gap:6px 22px;margin:14px 0 0;color:var(--muted);font-size:15px}
+.trio b{font:700 24px/1 var(--head);color:var(--text);margin-right:6px;font-variant-numeric:tabular-nums}
+.view-in{padding-top:34px;padding-bottom:48px}
+.pillars{margin-top:34px}
+.figs{margin-top:28px}
+@media (min-width:960px){ .view-in{padding-top:56px;padding-bottom:72px} .figs{grid-template-columns:repeat(2,minmax(0,360px))} }
