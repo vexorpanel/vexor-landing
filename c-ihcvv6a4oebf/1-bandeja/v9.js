@@ -10,7 +10,7 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const PC = matchMedia('(min-width: 960px)');
-  const VIEWS = ['bandeja', 'flujos', 'cifras', '72h', 'preguntas'];
+  const VIEWS = ['bandeja', 'flujos', 'cifras', 'planes', 'preguntas'];
   const views = Object.fromEntries(VIEWS.map(v => [v, document.getElementById('v-' + v)]));
   const tabs = $$('.tab');
   const mails = $$('.mail');
@@ -204,7 +204,7 @@
   });
 
   /* ---------------- deslizar de lado para cambiar de pestaña (táctil) ---------------- */
-  const SWIPE = ['bandeja', 'flujos', 'cifras', '72h', 'preguntas'];
+  const SWIPE = ['bandeja', 'flujos', 'cifras', 'planes', 'preguntas'];
   let sw = null;
   const mainEl = $('main');
   mainEl.addEventListener('touchstart', e => { const t = e.touches[0]; sw = e.target.closest('.ba, .ba-r, input, .strip') ? null : { x: t.clientX, y: t.clientY }; }, { passive: true });

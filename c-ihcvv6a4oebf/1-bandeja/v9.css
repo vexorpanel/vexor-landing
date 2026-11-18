@@ -667,3 +667,40 @@ nav[aria-label="Legal"] a,nav[aria-label="Legal"] button{display:inline-flex;ali
   .list:not(.arriving) .row:hover{transform:translateY(-2px);z-index:1;box-shadow:inset 3px 0 0 var(--acc,transparent),0 8px 22px rgba(3,6,14,.55)}
   .list:not(.arriving) .row.is-sel:hover{box-shadow:inset 4px 0 0 var(--acc,var(--light)),inset 0 0 0 1px var(--line2),0 8px 22px rgba(3,6,14,.55)}
 }
+
+/* ---------- 5 · planes (Carlos, WA 17-nov 12:28-12:31: «limpio, sencillo y transparente», «100 % pensado para el móvil») ---------- */
+.planes{display:grid;gap:12px;margin-top:18px}
+.plan{border:1px solid var(--line2);border-radius:14px;background:var(--surface)}
+.plan.dest{border-color:var(--light);box-shadow:0 0 0 1px #6ea0ff40}
+.plan>summary{list-style:none;display:grid;gap:12px;padding:16px;cursor:pointer;min-height:44px}
+.plan>summary::-webkit-details-marker{display:none}
+.plan-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.plan-n{font:700 26px/1 var(--head);text-transform:uppercase;letter-spacing:.3px}
+.plan-ch{font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--light);border:1px solid var(--line2);border-radius:999px;padding:5px 10px}
+.plan-fees{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.plan-fees small{display:block;color:var(--muted);font-size:13px}
+.plan-fees strong{display:block;font:700 22px/1.15 var(--head);color:var(--text);font-variant-numeric:tabular-nums;white-space:nowrap}
+.plan-ver{color:var(--light);font-size:15px;font-weight:600}
+.plan-ver::after{content:" +";}
+.plan[open] .plan-ver::after{content:" −";}
+.plan-in{padding:0 16px 16px;border-top:1px solid var(--line);color:var(--muted);font-size:16px}
+.plan-in p{margin:12px 0 0}
+.plan-in ul{margin:12px 0 0;padding-left:18px;display:grid;gap:6px;color:var(--text)}
+.tramos{margin-top:12px}
+.tramos>summary{color:var(--light);font-weight:600;cursor:pointer;min-height:44px;display:flex;align-items:center}
+.tramos ol{list-style:none;margin:6px 0 0;padding:0}
+.tramos li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);color:var(--text);font-variant-numeric:tabular-nums}
+.plan-iva{color:var(--muted);font-size:15px;margin-top:14px}
+.sub-t{font-size:22px;margin:34px 0 18px}
+.conds{display:grid;gap:0;margin:0}
+.conds>div{padding:12px 0;border-bottom:1px solid var(--line)}
+.conds dt{font-weight:600;color:var(--text)}
+.conds dd{margin:4px 0 0;color:var(--muted);font-size:16px}
+@media (min-width:960px){
+  .planes{grid-template-columns:repeat(3,1fr);align-items:start;gap:18px}
+  .plan>summary{padding:22px}
+  .plan-in{padding:0 22px 22px}
+  .conds{grid-template-columns:1fr 1fr;gap:0 56px}
+  .sub-t{font-size:26px;margin-top:48px}
+}
+@media (hover:hover){ .plan>summary:hover .plan-ver{text-decoration:underline} }
