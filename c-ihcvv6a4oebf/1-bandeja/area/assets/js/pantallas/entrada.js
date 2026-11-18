@@ -28,7 +28,7 @@
     return '<div class="entrada">' +
       '<section class="entrada-texto" aria-labelledby="titulo-pagina">' +
       '<a class="entrada-logo" href="../" aria-label="Vexor Consulting, volver a la web">' +
-      '<img src="assets/brand/vexor-logo.webp" width="520" height="179" alt="Vexor Consulting"></a>' +
+      '<img src="assets/brand/vexor-logo-light.webp" width="560" height="122" alt="Vexor Consulting"></a>' +
       '<p class="eyebrow">Área de clientes</p>' +
       '<h1 id="titulo-pagina" class="pag-titulo pag-titulo-grande" tabindex="-1">Tus envíos y tus resultados, siempre a mano</h1>' +
       '<p class="lead">Aquí verás qué enviamos y cuándo, qué necesitamos que apruebes y qué ha vendido el email.</p>' +

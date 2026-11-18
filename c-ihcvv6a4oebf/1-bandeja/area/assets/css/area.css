@@ -526,3 +526,35 @@ button.fila-enlace { width: 100%; border: 0; background: transparent; font: inhe
   .chip { border: 1px solid CanvasText; }
   .radio:has(input:checked) { outline: 2px solid Highlight; }
 }
+
+/* ───────── Misma marca que la web (18-nov) ─────────
+ * Logo claro y paleta oscura de la web ligera (v9.css: --bg #070b14, --surface #0d1424, --text #f4efe6,
+ * --muted #a9b4cc, --line #1f2a44, acción #1d4ed8, enlaces #6ea0ff) y su letra (Source y Barlow). */
+@font-face { font-family: "Source"; src: url("../fonts/source-sans-3-var-latin.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Barlow"; src: url("../fonts/barlow-condensed-700-latin.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+:root {
+  color-scheme: dark;
+  --ink: #f4efe6;  --on-ink: #070b14;
+  --soft: #070b14; --white: #0d1424;
+  --line: #1f2a44; --line-strong: #5a6a8c;
+  --muted: #a9b4cc;
+  --blue: #6ea0ff; --blue-deep: #6ea0ff; --blue-deep-hover: #9bbcff; --blue-soft: #131c30;
+  --ok-fg: #86efac;     --ok-bg: #0f2a1a;
+  --aviso-fg: #fcd34d;  --aviso-bg: #2a2108;
+  --neutro-fg: #cbd5e1; --neutro-bg: #1a2338;
+  --error-fg: #fca5a5;  --error-bg: #2a1010;
+  --sans: "Source", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+body { background: var(--soft); color: var(--ink); }
+.franja { background: #131c30; color: #a9b4cc; border-bottom: 1px solid var(--line); }
+.btn-primario, .btn-primario:hover { color: #fff; }
+.btn-primario { background: #1d4ed8; }
+.btn-primario:hover { background: #1e40af; }
+h1 { font-family: "Barlow", "Arial Narrow", sans-serif; font-weight: 700; letter-spacing: 0; }
+.cabecera-logo img { height: 28px; }
+.lateral-logo img { height: 30px; }
+.entrada-logo img { height: 34px; }
+.panel-doble { background: rgba(255, 255, 255, 0.02); }
+.panel-nucleo, .panel-doble > * { box-shadow: none; }
+.seg-opcion:hover { background: var(--blue-soft); }
+.vacio { background: var(--white); }

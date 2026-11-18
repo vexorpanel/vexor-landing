@@ -15,7 +15,7 @@
 })(typeof self !== 'undefined' ? self : this, function (c, rutas) {
   'use strict';
 
-  var LOGO = '<img src="assets/brand/vexor-logo.webp" width="520" height="179" alt="Vexor Consulting">';
+  var LOGO = '<img src="assets/brand/vexor-logo-light.webp" width="560" height="122" alt="Vexor Consulting">';
   var VOLVER_A_LA_WEB = '../';
   var EN_MAS = ['mas', 'facturas', 'equipo', 'ajustes'];
 
