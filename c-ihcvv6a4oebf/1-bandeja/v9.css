@@ -723,7 +723,7 @@ nav[aria-label="Legal"] a,nav[aria-label="Legal"] button{display:inline-flex;ali
 .ig li,.ig a{min-width:0}
 .ig span{display:flex;flex-direction:column;min-width:0}
 .ig b{font-weight:600;font-size:14px;line-height:1.2;overflow-wrap:anywhere}
-.ig em{font-style:normal;color:var(--light);font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ig em{font-style:normal;color:var(--light);font-size:12.5px;line-height:1.25;overflow-wrap:anywhere}
 .ig small{color:var(--muted);font-size:12px}
 @media (hover:hover){.ig a:hover{border-color:var(--line2);transform:translateY(-2px)}}
 .calc{margin:6px 0 26px;padding:18px;border:1px solid var(--line2);border-radius:14px;background:var(--surface)}
