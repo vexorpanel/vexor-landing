@@ -767,7 +767,7 @@ header .top{align-items:center}
   if (hero) { const h = document.createElement('span'); h.className = 'vx-halo'; h.setAttribute('aria-hidden','true'); hero.prepend(h); }
   if (quieto || !('IntersectionObserver' in window)) return;
   // 2 · las secciones entran al bajar
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vx-visto'); io.unobserve(e.target); } }), {threshold:.12});
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vx-visto'); io.unobserve(e.target); } }), {threshold:0, rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('main > section, body > .wrap > section, section').forEach(x => { x.classList.add('vx-in'); io.observe(x); });
   // 3 · las cifras cuentan al verse (el texto final es el de Carlos, tal cual)
   const contar = b => {
