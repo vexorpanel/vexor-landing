@@ -1,0 +1,788 @@
+<!doctype html><html lang="es"><head>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="favicon.png" type="image/png">
+<meta name="description" content="Email marketing para tiendas Shopify: planes, ejemplos de flujos y cómo trabajamos."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Vexor · Email marketing para tiendas Shopify</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Archivo+Black&display=swap">
+<style>
+/* Layout: columna centrada; cabecera con logo, 4 planes con su calculadora, ejemplos de flujos y mails, comparativa, pasos y condiciones */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --fg:#0c0f14; --muted:#5b6472; --line:#e1e5eb;
+  --accent:#1f6ff2; --accent-soft:#e7f0fe; --ink:#0c0f14; --on-ink:#ffffff; --track:#e9edf2;
+  --display:"Sora",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0b0e13; --surface:#141922; --fg:#eef1f5; --muted:#9aa4b2; --line:#252c38;
+  --accent:#5b9bff; --accent-soft:#16233a; --ink:#eef1f5; --on-ink:#0b0e13; --track:#232a36; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0b0e13; --surface:#141922; --fg:#eef1f5; --muted:#9aa4b2; --line:#252c38;
+  --accent:#5b9bff; --accent-soft:#16233a; --ink:#eef1f5; --on-ink:#0b0e13; --track:#232a36; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:400 15px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.015em}
+p{margin:0}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.eyebrow{font:600 11px/1 var(--display);letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--muted)}
+
+.logo{display:block;height:auto}
+.logo-claro{display:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .logo-oscuro{display:none}:root:not([data-theme="light"]) .logo-claro{display:block}}
+:root[data-theme="dark"] .logo-oscuro{display:none}
+:root[data-theme="dark"] .logo-claro{display:block}
+
+header{padding-block:28px 0}
+header .top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+header .logo{width:140px}
+header .tag{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.hero{padding-block:clamp(40px,7vw,80px) clamp(32px,5vw,56px);display:grid;gap:18px;max-width:780px}
+.hero h1{font-size:clamp(32px,5.4vw,54px);line-height:1.06;font-weight:700}
+.hero h1 span{color:var(--accent)}
+.hero p{font-size:17px;color:var(--muted);max-width:62ch}
+.hero p b{color:var(--fg);font-weight:600}
+
+section{padding-block:clamp(36px,6vw,64px);border-top:1px solid var(--line)}
+.sh{display:grid;gap:8px;margin-bottom:28px;max-width:660px}
+.sh h2{font-size:clamp(24px,3.2vw,32px);font-weight:700}
+.sh p{color:var(--muted)}
+
+/* potencial */
+.up{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.up-txt{display:grid;gap:14px}
+.up-txt h2{font-size:clamp(26px,3.6vw,38px);font-weight:700;line-height:1.1}
+.up-txt p{color:var(--muted);font-size:16px}
+.up-txt p b{color:var(--fg)}
+.up-calc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:clamp(20px,3vw,30px);display:grid;gap:10px}
+.up-calc label{font-weight:600;font-size:14px}
+.up-in{font:700 30px/1 var(--display);font-variant-numeric:tabular-nums}
+.up-calc input[type=range]{width:100%;accent-color:var(--accent);margin:0}
+.up-scale{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.up-res{margin-top:8px;padding:16px;border-radius:10px;background:var(--accent-soft);display:grid;gap:4px}
+.up-res span{font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+.up-res b{font:800 clamp(40px,6vw,56px)/1 var(--display);color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.up-res b small{font-size:18px;font-weight:600;margin-left:4px}
+.up-res em{font-style:normal;font-weight:600}
+.up-bars{display:grid;gap:6px;margin-top:6px}
+.up-bars div{display:grid;grid-template-columns:76px 1fr;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.up-bars div{grid-template-columns:76px auto auto 1fr}
+.up-bars i{display:block;height:12px;border-radius:3px}
+.up-bars .b1{width:clamp(14px,6vw,30px)}
+.up-bars .b0{width:clamp(90px,40vw,200px);max-width:100%;background:var(--fg);opacity:.85}
+.up-bars .b1{width:30px;background:var(--accent);border-radius:0 3px 3px 0;margin-left:-8px}
+.up-com{font-size:14px}
+.up-disc{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+@media (max-width:820px){.up{grid-template-columns:minmax(0,1fr)}}
+
+/* planes */
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px 20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.plan.vip{border:2px solid var(--accent)}
+.plan h3{font-size:19px;font-weight:700}
+.plan .for{font-size:13.5px}
+.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:14px}
+.plan li{display:flex;gap:8px}
+.plan li::before{content:"";flex:none;width:6px;height:6px;margin-top:8px;background:var(--accent);transform:skewX(-35deg)}
+.badge{align-self:flex-start;font:600 11px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;padding:6px 9px;border-radius:999px;background:var(--accent);color:#fff}
+.plan .setup{font-size:13px}
+.fees{display:grid;gap:6px;padding:12px 0;border-block:1px solid var(--line)}
+.fee{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.fee span{font-size:13.5px}
+.fee b{font:700 22px/1.1 var(--display);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cuotas{font-size:13px;line-height:1.45;margin-top:4px}
+.wel{display:block;margin-top:4px;font:600 12.5px/1.3 var(--body);color:var(--accent)}
+
+/* calculadora por plan */
+.mini{margin-top:auto;background:var(--bg);border-radius:10px;padding:14px;display:grid;gap:8px}
+.mini label{font-size:12.5px;color:var(--muted);font-weight:500}
+.mini .mv{font:700 20px/1 var(--display);font-variant-numeric:tabular-nums}
+.mini input[type=range]{width:100%;accent-color:var(--accent);margin:0}
+.split{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--track)}
+.split i{display:block;height:100%}
+.split .pay{background:var(--fg)}
+.split .keep{background:var(--accent)}
+.mr{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13px}
+.mr b{font:700 15px/1 var(--display);font-variant-numeric:tabular-nums;white-space:nowrap}
+.mr .dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;vertical-align:1px}
+.mini .note{font-size:12px;color:var(--muted);min-height:1.4em}
+
+.callout{display:flex;gap:20px;align-items:center;background:var(--accent-soft);border:1.5px solid var(--accent);border-radius:12px;padding:20px 24px;margin-top:16px}
+.callout-k{flex:none;font:700 clamp(36px,5vw,52px)/1 var(--display);color:var(--accent);font-variant-numeric:tabular-nums}
+.callout strong{display:block;font:700 clamp(18px,2.4vw,22px)/1.25 var(--display);margin-bottom:4px;text-wrap:balance}
+.callout p{color:var(--muted);font-size:14.5px}
+
+/* flujos */
+.ftabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.ftab{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:7px 13px;font-size:13.5px}
+.ftab[aria-selected="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.ftab small{font-size:11px;opacity:.65;margin-left:4px}
+.fpanel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:clamp(18px,3vw,28px)}
+.fhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;align-items:baseline;margin-bottom:20px}
+.fhead h3{font-size:20px}
+.fhead .pl{font:600 11px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:6px 9px;border-radius:999px}
+.fhead p{flex-basis:100%;color:var(--muted);font-size:14px}
+.tl{list-style:none;margin:0;padding:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);gap:0;overflow-x:auto;padding-bottom:4px}
+.tl li{position:relative;padding:28px 16px 0 0;min-width:0}
+.tl li::before{content:"";position:absolute;top:8px;left:0;right:0;height:2px;background:var(--line)}
+.tl li:last-child::before{right:auto;width:16px}
+.tl li::after{content:"";position:absolute;top:2px;left:0;width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--accent)}
+.tl .when{font:600 12px/1.2 var(--display);color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.tl .what{font-size:14.5px;margin-top:6px}
+.tl .num{font-size:12px;color:var(--muted);margin-top:4px}
+.ejbtns{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.ejbtn.alt{background:var(--fg);color:var(--bg)}
+.ejnota{font-size:13px;color:var(--muted);margin-top:10px;max-width:70ch}
+.gal .shot{width:330px;height:auto;display:block;border-radius:6px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 10px 30px rgba(0,0,0,.14)}
+.e-oriel .ben{display:flex;justify-content:space-around;padding:4px 14px 18px;font-size:10.5px}
+.e-oriel .ben span b{display:block;font:500 18px/1.1 "Fraunces",serif;color:#a85a44}
+.e-oriel .code span{display:block;font-size:11px}
+.e-kova .prod s{font-size:11px}
+.ejbtn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:13px 20px;font:600 15px/1 var(--display)}
+.ejbtn svg{width:18px;height:18px}
+
+/* galería de mails */
+dialog{border:0;padding:0;background:var(--bg);color:var(--fg);width:min(1180px,100vw);max-width:100vw;max-height:100dvh;border-radius:14px}
+dialog::backdrop{background:rgba(5,8,12,.6)}
+.dg-h{position:sticky;top:0;z-index:2;background:var(--bg);display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.dg-h h3{font-size:17px}
+.dg-h p{font-size:12.5px;color:var(--muted)}
+.dg-act{display:flex;gap:8px}
+.dg-act button{white-space:nowrap;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:8px;padding:8px 12px;font-size:13px}
+.gal{display:flex;align-items:flex-start;gap:20px;overflow-x:auto;overflow-y:hidden;padding:22px 20px 26px;scroll-snap-type:x mandatory}
+.gal figure{margin:0;flex:none;scroll-snap-align:center;display:grid;gap:8px}
+.gal figure[hidden]{display:none}
+.gal figcaption{font-size:13px;color:var(--muted)}
+.gal figcaption b{color:var(--fg)}
+
+/* mails de ejemplo: colores propios de cada marca, iguales en cualquier tema */
+.em{width:330px;border-radius:6px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.08),0 10px 30px rgba(0,0,0,.14);font:400 12.5px/1.5 "Inter",sans-serif;text-align:center}
+.em img{display:block;width:100%;height:auto}
+.em .top{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:7px;font-weight:700}
+.em .lg{padding:16px 0 14px}
+.em .pad{padding:0 24px}
+.em h4{margin:18px 24px 8px}
+.em p{margin:0 0 14px}
+.em .bt{display:inline-block;padding:12px 26px;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:22px}
+.em .stars{letter-spacing:2px}
+.em .rev{padding:18px 24px;font-size:12px}
+.em .rev q{display:block;font-style:italic;margin:6px 0 4px}
+.em .rev q::before,.em .rev q::after{content:""}
+.em .rev small{opacity:.7}
+.em .trust{display:grid;grid-template-columns:repeat(3,1fr);font-size:9.5px;font-weight:700;letter-spacing:.04em;padding:12px 8px;gap:6px}
+.em .ft{font-size:9.5px;padding:16px 20px;line-height:1.6;opacity:.8}
+.em .ft b{display:block;letter-spacing:.2em;margin-bottom:4px}
+.em .pl{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:0 18px 20px;text-align:left;font-size:10.5px}
+.em .pl b{display:block;font-size:11px}
+.em .pl s{opacity:.5;margin-right:4px}
+/* Oriel · cosmética */
+.e-oriel{background:#fbf6f3;color:#3b2a28}
+.e-oriel .top{background:#3b2a28;color:#f3e3dc}
+.e-oriel .lg{font:500 22px/1 "Fraunces",serif;letter-spacing:.35em;padding-left:.35em}
+.e-oriel h4{font:500 28px/1.08 "Fraunces",serif}
+.e-oriel h4 i{color:#a85a44}
+.e-oriel .code{margin:4px 24px 16px;border:1.5px dashed #a85a44;padding:12px;font-size:11px;background:#fff}
+.e-oriel .code b{display:block;font:700 22px/1.2 "Inter",sans-serif;letter-spacing:.14em;color:#a85a44}
+.e-oriel .bt{background:#3b2a28;color:#fbf6f3;border-radius:999px}
+.e-oriel .sec{background:#f3e3dc;padding:20px 0 2px}
+.e-oriel .sec h5{font:500 18px/1.2 "Fraunces",serif;margin:0 0 12px}
+.e-oriel .sec img{width:calc(100% - 36px);margin:0 18px 12px;border-radius:4px}
+.e-oriel .rev .stars{color:#a85a44}
+.e-oriel .ft{background:#3b2a28;color:#f3e3dc}
+/* Brava · café */
+.e-brava{background:#f6efe3;color:#1f1612}
+.e-brava .top{background:#e2672b;color:#fff}
+.e-brava .lg{font:400 24px/1 "Archivo Black",sans-serif;background:#1f1612;color:#f6efe3}
+.e-brava h4{font:400 25px/1.05 "Archivo Black",sans-serif;text-transform:uppercase}
+.e-brava .cart{margin:4px 18px 14px;background:#fff;border-radius:6px;padding:12px;text-align:left;display:grid;gap:10px}
+.e-brava .line{display:grid;grid-template-columns:78px 1fr auto;gap:12px;align-items:center}
+.e-brava .line img{border-radius:4px;aspect-ratio:1;object-fit:cover}
+.e-brava .line b{display:block;font-size:12.5px}
+.e-brava .line span{font-size:10.5px;opacity:.7}
+.e-brava .line strong{font-size:13px}
+.e-brava .tot{display:flex;justify-content:space-between;border-top:1px solid #eadfcc;padding-top:8px;font-size:11.5px}
+.e-brava .tot b{color:#e2672b}
+.e-brava .bt{background:#e2672b;color:#fff;border-radius:3px}
+.e-brava .story{background:#1f1612;color:#f6efe3;padding-bottom:16px}
+.e-brava .story p{padding:0 24px;margin:12px 0 0;font-size:12px}
+.e-brava .story h5{font:400 15px/1.2 "Archivo Black",sans-serif;text-transform:uppercase;margin:16px 24px 0;color:#e2672b}
+.e-brava .rev .stars{color:#e2672b}
+.e-brava .trust{background:#efe3cf}
+.e-brava .ft{background:#1f1612;color:#f6efe3}
+/* Nómada · moda */
+.e-nomada{background:#fff;color:#141414}
+.e-nomada .top{background:#141414;color:#e9dcc3}
+.e-nomada .lg{font:700 14px/1 "Sora",sans-serif;letter-spacing:.5em;padding-left:.5em}
+.e-nomada .hero{position:relative}
+.e-nomada .hero .ov{position:absolute;left:0;right:0;bottom:0;padding:44px 16px 16px;background:linear-gradient(transparent,rgba(0,0,0,.6));color:#fff}
+.e-nomada .hero small{display:block;font-size:10px;letter-spacing:.35em;font-weight:700}
+.e-nomada .hero b{display:block;font:800 52px/.95 "Sora",sans-serif;letter-spacing:-.03em}
+.e-nomada h4{font:700 19px/1.2 "Sora",sans-serif;letter-spacing:-.01em}
+.e-nomada .bt{background:#141414;color:#fff}
+.e-nomada .flat{padding:0 18px 12px}
+.e-nomada .flat img{border-radius:2px}
+.e-nomada .pl{grid-template-columns:1fr 1fr;padding:4px 18px 18px}
+.e-nomada .pl em{font-style:normal;color:#b23a1d;font-weight:700}
+.e-nomada .trust{background:#f3eee4}
+.e-nomada .ft{border-top:1px solid #eee}
+/* Kova · nutrición */
+.e-kova{background:#0f3d2e;color:#eaf5ec}
+.e-kova .top{background:#c8f169;color:#0f3d2e}
+.e-kova .lg{font:800 24px/1 "Sora",sans-serif;letter-spacing:-.04em;color:#c8f169}
+.e-kova h4{font:700 24px/1.1 "Sora",sans-serif;letter-spacing:-.02em}
+.e-kova .lvl{margin:0 50px 6px;height:8px;border-radius:4px;background:rgba(234,245,236,.18);overflow:hidden}
+.e-kova .lvl i{display:block;width:18%;height:100%;background:#c8f169}
+.e-kova .lt{font-size:10.5px;opacity:.8}
+.e-kova .prod{margin:0 18px 16px;background:#eaf5ec;color:#0f3d2e;border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center;text-align:left}
+.e-kova .prod b{display:block;font-size:12.5px}
+.e-kova .prod strong{font:700 17px/1 "Sora",sans-serif}
+.e-kova .bt{background:#c8f169;color:#0f3d2e;border-radius:999px}
+.e-kova .subs{background:#eaf5ec;color:#0f3d2e;padding-bottom:18px}
+.e-kova .subs h5{font:700 17px/1.2 "Sora",sans-serif;margin:16px 24px 6px}
+.e-kova .subs p{padding:0 24px;font-size:12px}
+.e-kova .subs .bt{background:#0f3d2e;color:#c8f169;margin:0}
+.e-kova .rev .stars{color:#c8f169}
+.e-kova .ft{background:#0a2c21}
+/* Huella · mascotas */
+.e-huella{background:#fffaf0;color:#1d2b53}
+.e-huella .top{background:#1d2b53;color:#ffd23f}
+.e-huella .lg{font:700 24px/1 "Fraunces",serif}
+.e-huella h4{font:700 23px/1.12 "Fraunces",serif}
+.e-huella .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 16px 18px}
+.e-huella .steps div{background:#fff;border-radius:8px;padding:8px 4px;font-size:9.5px;font-weight:600;box-shadow:inset 0 0 0 1px #f1e6c8}
+.e-huella .steps b{display:block;font:700 16px/1.1 "Fraunces",serif}
+.e-huella .steps i{display:block;height:5px;border-radius:3px;background:#f1e6c8;margin-top:6px;overflow:hidden}
+.e-huella .steps i::after{content:"";display:block;height:100%;width:var(--p);background:#ffb800}
+.e-huella .bt{background:#1d2b53;color:#ffd23f;border-radius:999px}
+.e-huella .up{background:#ffd23f;padding:18px 18px 4px;display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center;text-align:left}
+.e-huella .up img{border-radius:8px}
+.e-huella .up h5{font:700 16px/1.15 "Fraunces",serif;margin:0 0 4px}
+.e-huella .up p{font-size:11px;margin:0 0 8px}
+.e-huella .up strong{font-size:14px}
+.e-huella .up .bt{margin:10px 0 14px;padding:9px 16px;font-size:10.5px}
+.e-huella .rev .stars{color:#ffb800}
+.e-huella .ft{background:#1d2b53;color:#fffaf0}
+
+/* tabla */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th,td{padding:12px 14px;text-align:center;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+thead th{font:600 13px/1.2 var(--display);background:var(--bg)}
+tbody tr:last-child td{border-bottom:0}
+tr.grp td{font:600 11px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:var(--bg);text-align:left;padding-block:10px}
+.y{color:var(--accent);font-weight:700}
+.n0{color:var(--muted);opacity:.5}
+td small{color:var(--muted)}
+
+/* pasos */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;counter-reset:s;list-style:none;margin:0;padding:0}
+.steps li{display:grid;gap:6px;align-content:start;min-width:0}
+.steps li::before{counter-increment:s;content:counter(s);font:700 14px/1 var(--display);color:var(--accent);width:32px;height:32px;display:grid;place-items:center;border:1.5px solid var(--accent);border-radius:50%;margin-bottom:6px}
+.steps h3{font-size:16px}
+.steps p{font-size:14px;color:var(--muted)}
+
+.conds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;margin:0}
+.conds div{display:grid;gap:2px;padding-block:12px;border-bottom:1px solid var(--line)}
+.conds dt{font-weight:600}
+.conds dd{margin:0;color:var(--muted);font-size:14px}
+
+footer{padding-block:40px 56px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+footer .logo{width:110px}
+footer p{color:var(--muted);font-size:14px;max-width:52ch}
+
+@media (max-width:1040px){.plans{grid-template-columns:repeat(2,minmax(0,1fr))}.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){.conds{grid-template-columns:1fr}.callout{flex-direction:column;align-items:flex-start;gap:8px}}
+@media (max-width:560px){.plans,.steps{grid-template-columns:1fr}.dg-h{flex-wrap:wrap}}
+@media (prefers-reduced-motion:no-preference){.split i{transition:width .2s}}
+/* ronda 17-11 tarde */
+.proof{display:flex;flex-wrap:wrap;gap:14px 44px;margin-top:8px}
+.proof b{display:block;font:800 clamp(32px,4.4vw,46px)/1 var(--display);color:var(--accent);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.proof span{font-size:14px;color:var(--muted)}
+.cons{font-style:normal;justify-self:start;font:700 11px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--surface);background:var(--accent);padding:6px 9px;border-radius:999px;margin-bottom:4px}
+.plans{grid-template-columns:repeat(2,minmax(0,1fr))}
+.plan.vip{grid-column:1/-1;background:#07090c;color:#f2f4f7;border:1px solid #1d232c;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:start;padding:28px}
+.vip-a,.vip-b{display:flex;flex-direction:column;gap:14px;min-width:0}
+.vip-tags{display:flex;flex-wrap:wrap;gap:8px}
+.plan.vip .for,.plan.vip .cuotas,.plan.vip .setup{color:#a7b0bd}
+.plan.vip .fees{border-color:#262c36}
+.plan.vip li::before{background:#5b9bff}
+.badge.lim{background:transparent;border:1px solid #f2c94c;color:#f2c94c}
+.lim-t{font-size:13.5px;color:#f2c94c;font-weight:600}
+.plan.vip .mini{background:#141920;margin-top:0}
+.plan.vip .mini label,.plan.vip .mini .note{color:#a7b0bd}
+.plan.vip .split{background:#2a313c}
+.plan.vip .split .pay,.plan.vip .dot.dp{background:#ffffff}
+.plan.vip .split .keep,.plan.vip .dot.dk{background:#5b9bff}
+@media (max-width:1040px){.plans{grid-template-columns:repeat(2,minmax(0,1fr))}.plan.vip{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.plan.vip .mini{grid-column:1/-1}}
+@media (max-width:720px){.plans{grid-template-columns:1fr}.plan.vip{grid-template-columns:1fr;padding:22px 20px}}
+.proof b{display:flex;align-items:center;gap:8px}
+.proof .ico{width:.8em;height:.8em;flex:none}
+.invcard{margin-top:16px;background:#1f6ff2;color:#ffffff;border-radius:12px;padding:clamp(22px,3.4vw,34px) clamp(20px,3.4vw,36px);display:grid;gap:10px}
+.invcard .claim{font:700 clamp(20px,2.8vw,28px)/1.25 var(--display);text-wrap:balance;max-width:30ch}
+.invcard .inv{font-size:16px;color:rgba(255,255,255,.85)}
+.invcard .inv b{color:#ffffff;font-weight:800}
+.esc{margin-top:4px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.esc summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;padding:10px 12px;font-weight:600;font-size:13.5px;color:var(--accent)}
+.esc summary::-webkit-details-marker{display:none}
+.esc summary::after{content:"▾";font-size:16px;line-height:1;transition:transform .15s}
+.esc[open] summary::after{transform:rotate(180deg)}
+.esc ul{list-style:none;margin:0;padding:0 12px;display:block}
+.esc li::before{display:none!important}
+.esc li .t{flex:1;text-align:left}
+.esc li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:13.5px}
+.esc li .c{text-align:right;line-height:1.2}
+.esc li b{font:700 15px/1.2 var(--display);font-variant-numeric:tabular-nums}
+.esc li small{display:block;font-size:11px;color:var(--muted)}
+.esc li.on{color:var(--accent)}
+.esc li.on b{color:var(--accent)}
+.esc-pie{font-size:11.5px;color:var(--muted);padding:8px 12px 10px;border-top:1px solid var(--line)}
+
+.carr{margin-top:28px}
+.carr-h{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:6px}
+.carr-h h3{font-size:clamp(18px,2.2vw,22px)}
+.carr-nav{display:flex;gap:8px}
+.carr-nav button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--fg);font-size:22px;line-height:1}
+.carr .gal{padding:10px 2px 20px;margin:0 -2px}
+.plan.bra{border:2px solid var(--accent)}
+.plan.bra .bra-top{display:flex;flex-direction:column;gap:14px}
+.trust{display:grid;gap:12px;margin-top:10px}
+.trust-list{display:flex;flex-wrap:wrap;gap:12px}
+.person{display:flex;align-items:center;gap:12px;padding:10px 16px 10px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg);text-decoration:none;min-width:0}
+.person:hover{border-color:var(--accent)}
+.person img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none;box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--accent)}
+.person span{display:grid;line-height:1.25;min-width:0}
+.person b{font:700 15px/1.25 var(--display)}
+.person em{font-style:normal;color:var(--accent);font-weight:600;font-size:14px}
+.person small{color:var(--muted);font-size:12px}
+.trust-marq{display:grid;gap:4px;margin:0 calc(-1 * max(16px, env(safe-area-inset-left, 0px)))}
+.trust-marq .row{overflow:hidden;padding:8px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.trust-marq .track{display:flex;width:max-content;animation:marq 38s linear infinite}
+.trust-marq .r2 .track{animation-direction:reverse;animation-duration:42s}
+.trust-marq .set{display:flex;gap:12px;padding-right:12px}
+.trust-marq .row:hover .track{animation-play-state:paused}
+.trust-marq .person{flex:none;animation:flota 4.2s ease-in-out infinite}
+.trust-marq .person:nth-child(2n){animation-delay:-1.4s;animation-duration:4.8s}
+.trust-marq .person:nth-child(3n){animation-delay:-2.6s;animation-duration:3.9s}
+@keyframes marq{to{transform:translateX(-50%)}}
+@keyframes flota{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@media (max-width:560px){.trust-marq .person{padding:8px 14px 8px 8px;gap:10px}.trust-marq .person img{width:46px;height:46px}.trust-marq .person b{font-size:13.5px}.trust-marq .person em{font-size:12.5px}}
+@media (prefers-reduced-motion:reduce){.trust-marq{margin:0}.trust-marq .row{-webkit-mask-image:none;mask-image:none}.trust-marq .track,.trust-marq .person{animation:none}.trust-marq .track{width:auto}.trust-marq .set{flex-wrap:wrap;padding:0}.trust-marq .set[aria-hidden]{display:none}}
+.plan{background:#07090c;color:#f2f4f7;border:1px solid #1d232c}
+.plan .muted,.plan .for,.plan .cuotas,.plan .setup{color:#a7b0bd}
+.plan .fees{border-color:#262c36}
+.plan li::before{background:#5b9bff}
+.plan .wel{color:#5b9bff}
+.plan .esc{background:#11151b;border-color:#262c36}
+.plan .esc summary{color:#5b9bff}
+.plan .esc li{border-color:#262c36}
+.plan .esc li small,.plan .esc-pie{color:#a7b0bd}
+.plan .esc-pie{border-color:#262c36}
+.plan.bra{border:2px solid #1f6ff2}
+.plan.vip{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
+@media (max-width:720px){.plan.vip{grid-template-columns:1fr}}
+@media (max-width:420px){.plan .badge{font-size:9.5px;letter-spacing:.05em;padding:6px 8px;white-space:nowrap}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="top">
+      <img class="logo logo-oscuro" src="ig/01.png" alt="Vexor">
+      <img class="logo logo-claro" src="ig/02.png" alt="Vexor">
+      <span class="tag">Propuesta de servicios · Email marketing</span>
+    </div>
+    <div class="hero">
+      <span class="eyebrow">Para dueños de negocio de tiendas Shopify</span>
+      <h1>Tu email marketing, delegado y optimizado <span>de principio a fin.</span></h1>
+      <div class="proof">
+        <div><b><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v7h14v-7"/><path d="M10 20v-4h4v4"/></svg>+85</b><span>tiendas online activas</span></div>
+        <div><b>+7 años</b><span>en ecommerce</span></div>
+      </div>
+      <div class="trust">
+        <span class="eyebrow">Confían en nosotros</span>
+        <div class="trust-marq">
+          <div class="row r1"><div class="track">
+            <div class="set">
+              <a class="person" href="https://www.instagram.com/arz.urus/" target="_blank" rel="noopener">
+                <img src="ig/03.jpg" alt="Alejandro Rodríguez" width="56" height="56">
+                <span><b>Alejandro Rodríguez</b><em>@arz.urus</em><small>397K seguidores</small></span>
+              </a>
+              <a class="person" href="https://www.instagram.com/matiasscardozo/" target="_blank" rel="noopener">
+                <img src="ig/04.jpg" alt="Matias Cardozo" width="56" height="56">
+                <span><b>Matias Cardozo</b><em>@matiasscardozo</em><small>332K seguidores</small></span>
+              </a>
+              <a class="person" href="https://www.instagram.com/andrescaminos_/" target="_blank" rel="noopener">
+                <img src="ig/05.jpg" alt="Andrés Caminos" width="56" height="56">
+                <span><b>Andrés Caminos</b><em>@andrescaminos_</em><small>46K seguidores</small></span>
+              </a>
+              <a class="person" href="https://www.instagram.com/javier.sanchezecom/" target="_blank" rel="noopener">
+                <img src="ig/06.jpg" alt="Javier Sánchez" width="56" height="56">
+                <span><b>Javier Sánchez</b><em>@javier.sanchezecom</em><small>33K seguidores</small></span>
+              </a>
+              <a class="person" href="https://www.instagram.com/luiscamilo23/" target="_blank" rel="noopener">
+                <img src="ig/07.jpg" alt="Luis Camilo Torres" width="56" height="56">
+                <span><b>Luis Camilo Torres</b><em>@luiscamilo23</em><small>24K seguidores</small></span>
+              </a>
+            </div>
+            <div class="set" aria-hidden="true">
+              <a class="person" tabindex="-1" href="https://www.instagram.com/arz.urus/" target="_blank" rel="noopener">
+                <img src="ig/03.jpg" alt="" width="56" height="56">
+                <span><b>Alejandro Rodríguez</b><em>@arz.urus</em><small>397K seguidores</small></span>
+              </a>
+              <a class="person" tabindex="-1" href="https://www.instagram.com/matiasscardozo/" target="_blank" rel="noopener">
+                <img src="ig/04.jpg" alt="" width="56" height="56">
+                <span><b>Matias Cardozo</b><em>@matiasscardozo</em><small>332K seguidores</small></span>
+              </a>
+              <a class="person" tabindex="-1" href="https://www.instagram.com/andrescaminos_/" target="_blank" rel="noopener">
+                <img src="ig/05.jpg" alt="" width="56" height="56">
+                <span><b>Andrés Caminos</b><em>@andrescaminos_</em><small>46K seguidores</small></span>
+              </a>
+              <a class="person" tabindex="-1" href="https://www.instagram.com/javier.sanchezecom/" target="_blank" rel="noopener">
+                <img src="ig/06.jpg" alt="" width="56" height="56">
+                <span><b>Javier Sánchez</b><em>@javier.sanchezecom</em><small>33K seguidores</small></span>
+              </a>
+              <a class="person" tabindex="-1" href="https://www.instagram.com/luiscamilo23/" target="_blank" rel="noopener">
+                <img src="ig/07.jpg" alt="" width="56" height="56">
+                <span><b>Luis Camilo Torres</b><em>@luiscamilo23</em><small>24K seguidores</small></span>
+              </a>
+            </div>
+          </div></div>
+          <div class="row r2"><div class="track">
+            <div class="set">
+              <a class="person" href="https://www.instagram.com/jordigarcia89/" target="_blank" rel="noopener">
+                <img src="ig/08.jpg" alt="Jordi Garcia" width="56" height="56">
+                <span><b>Jordi Garcia</b><em>@jordigarcia89</em><small>14K seguidores</small></span>
+              </a>
+              <a class="person" href="https://www.instagram.com/mentoriumecom8cifras/" target="_blank" rel="noopener">
+                <img src="ig/09.jpg" alt="Mentorium Ecom 8 cifras" width="56" height="56">
+                <span><b>Mentorium Ecom 8 cifras</b><em>@mentoriumecom8cifras</em><small>13K seguidores</small></span>
+              </a>
+              <a class="person" href="https://www.instagram.com/tu.buyer/" target="_blank" rel="noopener">
+                <img src="ig/10.jpg" alt="Tubuyer" width="56" height="56">
+                <span><b>Tubuyer</b><em>@tu.buyer</em><small>5,1K seguidores</small></span>
+              </a>
+              <a class="person" href="https://www.instagram.com/vicky.ramnani.77/" target="_blank" rel="noopener">
+                <img src="ig/11.jpg" alt="Vicky Ramnani" width="56" height="56">
+                <span><b>Vicky Ramnani</b><em>@vicky.ramnani.77</em><small>2,8K seguidores</small></span>
+              </a>
+            </div>
+            <div class="set" aria-hidden="true">
+              <a class="person" tabindex="-1" href="https://www.instagram.com/jordigarcia89/" target="_blank" rel="noopener">
+                <img src="ig/08.jpg" alt="" width="56" height="56">
+                <span><b>Jordi Garcia</b><em>@jordigarcia89</em><small>14K seguidores</small></span>
+              </a>
+              <a class="person" tabindex="-1" href="https://www.instagram.com/mentoriumecom8cifras/" target="_blank" rel="noopener">
+                <img src="ig/09.jpg" alt="" width="56" height="56">
+                <span><b>Mentorium Ecom 8 cifras</b><em>@mentoriumecom8cifras</em><small>13K seguidores</small></span>
+              </a>
+              <a class="person" tabindex="-1" href="https://www.instagram.com/tu.buyer/" target="_blank" rel="noopener">
+                <img src="ig/10.jpg" alt="" width="56" height="56">
+                <span><b>Tubuyer</b><em>@tu.buyer</em><small>5,1K seguidores</small></span>
+              </a>
+              <a class="person" tabindex="-1" href="https://www.instagram.com/vicky.ramnani.77/" target="_blank" rel="noopener">
+                <img src="ig/11.jpg" alt="" width="56" height="56">
+                <span><b>Vicky Ramnani</b><em>@vicky.ramnani.77</em><small>2,8K seguidores</small></span>
+              </a>
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="potencial">
+    <div class="up">
+      <div class="up-txt">
+        <span class="eyebrow">Tu potencial</span>
+        <h2>¿Cuánto más puede facturar tu tienda con email?</h2>
+        <p><b>¡Preferimos ser conservadores!</b> Nuestro objetivo con cada cliente es que el email sume <b>mínimo un 15 % real a su facturación</b>. Que sea una fuente de ingresos estable y predecible. Pon lo que factura tu tienda y mira lo que podría significar.</p>
+      </div>
+      <div class="up-calc">
+        <label for="r-fact">Facturación mensual de tu tienda</label>
+        <div class="up-in" id="v-fact">10.000 €</div>
+        <input type="range" id="r-fact" min="2000" max="100000" step="1000" value="10000">
+        <div class="up-scale"><span>2.000 €</span><span>50.000 €</span><span>100.000 €</span></div>
+        <div class="up-res">
+          <i class="cons">Escenario conservador · 15 %</i>
+          <span>Ventas extra con email</span>
+          <b id="v-extra">+1.500 €<small>/mes</small></b>
+          <em id="v-anual">18.000 € más al año</em>
+        </div>
+        <div class="up-bars" aria-hidden="true">
+          <div><span>Hoy</span><i class="b0"></i></div>
+          <div><span>Con Vexor</span><i class="b0"></i><i class="b1"></i></div>
+        </div>
+        <p class="up-com" id="v-com">Con Essential o Branded, nuestra comisión sobre esas ventas sería de 225 €: te quedas con 1.275 €.</p>
+        <p class="up-disc">Estimación orientativa, no una garantía. El resultado depende del país, el nicho, la oferta, el ticket medio, el tráfico y la base de suscriptores de cada negocio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="planes">
+    <div class="sh">
+      <span class="eyebrow">Planes</span>
+      <h2>Planes</h2>
+      <p>Todos los precios son + IVA y ninguno tiene permanencia.</p>
+    </div>
+    <div class="plans">
+      <article class="plan">
+        <h3>Essential</h3>
+        <p class="for muted">Comienza a delegar todo tu email marketing. Flujos automatizados que recuperan ventas, campañas gestionadas y optimización constante.</p>
+        <div class="fees">
+          <div class="fee"><span>Fee de inicio</span><b>150 €</b></div>
+          <div class="fee"><span>Mensual</span><b>15 % → 10 %</b></div>
+          <p class="cuotas muted">Comisión escalonada: cuanto más genera tu email, menor es el porcentaje.</p>
+          <details class="esc">
+            <summary>Ver la comisión por tramos</summary>
+            <ul><li class="st" data-d="0"><span class="t">Hasta 3.999 €</span><span class="c"><b>15 %</b><small>mín. 150 €</small></span></li><li class="st" data-d="4000"><span class="t">4.000 – 5.999 €</span><span class="c"><b>600 €</b><small>15 % → 10 %</small></span></li><li class="st" data-d="6000"><span class="t">6.000 – 7.999 €</span><span class="c"><b>800 €</b><small>13,3 % → 10 %</small></span></li><li class="st" data-d="8000"><span class="t">8.000 – 9.999 €</span><span class="c"><b>1.000 €</b><small>12,5 % → 10 %</small></span></li><li class="st" data-d="10000"><span class="t">10.000 – 11.999 €</span><span class="c"><b>1.200 €</b><small>12 % → 10 %</small></span></li><li class="st" data-d="12000"><span class="t">12.000 – 14.999 €</span><span class="c"><b>1.300 €</b><small>10,8 % → 8,7 %</small></span></li><li class="st" data-d="15000"><span class="t">15.000 € o más</span><span class="c"><b>1.500 €</b><small>10 % o menos</small></span></li></ul>
+            <p class="esc-pie">Ventas generadas por email al mes, sin la serie de bienvenida.</p>
+          </details>
+          <span class="wel">La serie de bienvenida se descuenta de la comisión</span>
+        </div>
+        <ul>
+          <li>Puesta en marcha en 48-72 h</li>
+          <li>6 flujos automáticos (14 emails)</li>
+          <li>Pop-up de captación</li>
+          <li>Campañas del mes, diseñadas y enviadas</li>
+          <li>Segmentación, tests A/B y reporte mensual</li>
+        </ul>
+      </article>
+      <article class="plan bra">
+        <div class="bra-top">
+        <span class="badge">El más contratado por nuestros clientes</span>
+        <h3>Branded</h3>
+        <p class="for muted">Todo lo incluido en Essential, además de: creación de identidad de marca, diseños de emails y ángulos de venta personalizados, y flujos para fidelizar.</p>
+        <div class="fees">
+          <div class="fee"><span>Fee de inicio</span><b>400 €</b></div>
+          <div class="fee"><span>Mensual</span><b>15 % · 10 %</b></div>
+          <p class="cuotas muted">15 % hasta 4.000 € generados; desde 4.001 €, el 10 % de todo<br>Cuota mínima 150 € · Cuota máxima 1.500 €</p>
+          <span class="wel">La serie de bienvenida se descuenta de la comisión</span>
+        </div>
+        </div>
+        <ul>
+          <li>Todo lo de Essential</li>
+          <li>Diseño a medida con tu identidad</li>
+          <li>Estudio de tu cliente (voz del cliente)</li>
+          <li>10 flujos: suma post-compra, reposición, recuperación y limpieza</li>
+          <li>SMS marketing: flujos y campañas por SMS</li>
+          <li>Reuniones con el equipo cuando las necesites</li>
+        </ul>
+      </article>
+      <article class="plan vip">
+        <div class="vip-a">
+          <div class="vip-tags"><span class="badge">Todo incluido</span><span class="badge lim">Plazas limitadas</span></div>
+          <h3>VIP</h3>
+          <p class="for">Todo Branded, más contenido para redes, optimización de tu tienda y estrategia mensual.</p>
+          <div class="fees">
+            <div class="fee"><span>Fee de inicio</span><b>Incluido</b></div>
+            <div class="fee"><span>Mensual</span><b>2.000 €</b></div>
+            <p class="cuotas">Precio fijo, sin comisión</p>
+          </div>
+          <p class="lim-t">Plazas limitadas para garantizar la calidad del servicio.</p>
+        </div>
+        <div class="vip-b">
+          <ul>
+            <li>Todo lo de Branded, SMS incluido</li>
+            <li>60 piezas de contenido orgánico para redes con copy al mes, en formato historia y feed</li>
+            <li>15 vídeos cortos con IA al mes</li>
+            <li>2 reuniones estratégicas al mes</li>
+            <li>Optimización del backend de Shopify: bundles, ofertas post-compra, upselling y optimización del carrito</li>
+          </ul>
+          <p class="setup">Pago por adelantado.</p>
+        </div>
+      </article>
+    </div>
+    <div class="carr">
+      <div class="carr-h"><h3>Diseños a medida · Campañas y flujos del plan Branded</h3><div class="carr-nav"><button type="button" id="carrPrev" aria-label="Diseño anterior">‹</button><button type="button" id="carrNext" aria-label="Diseño siguiente">›</button></div></div>
+      <div class="gal" id="gal">
+    <figure data-g="brand"><img class="shot" loading="lazy" src="ig/12.jpg" alt="Carrito abandonado de Brava en estilo Retro"><figcaption><b>Brava</b> · Carrito abandonado · estilo Retro</figcaption></figure>
+    <figure data-g="brand"><img class="shot" loading="lazy" src="ig/13.jpg" alt="Bienvenida de Hidra en estilo Pulso"><figcaption><b>Hidra</b> · Bienvenida · estilo Pulso</figcaption></figure>
+    <figure data-g="brand"><img class="shot" loading="lazy" src="ig/14.jpg" alt="Post-compra de Huella en estilo Chill y divertido"><figcaption><b>Huella</b> · Post-compra · estilo Chill y divertido</figcaption></figure>
+    <figure data-g="brand"><img class="shot" loading="lazy" src="ig/15.jpg" alt="Campaña Black Friday de Kova en estilo Deporte"><figcaption><b>Kova</b> · Campaña Black Friday · estilo Deporte</figcaption></figure>
+    <figure data-g="brand"><img class="shot" loading="lazy" src="ig/16.jpg" alt="Producto visto de Lumen en estilo Clínico premium"><figcaption><b>Lumen</b> · Producto visto · estilo Clínico premium</figcaption></figure>
+    <figure data-g="brand"><img class="shot" loading="lazy" src="ig/17.jpg" alt="Lanzamiento de colección de Nómada en estilo Minimal"><figcaption><b>Nómada</b> · Lanzamiento de colección · estilo Minimal</figcaption></figure>
+    <figure data-g="brand"><img class="shot" loading="lazy" src="ig/18.jpg" alt="Campaña de Navidad de Olmo en estilo Editorial"><figcaption><b>Olmo</b> · Campaña de Navidad · estilo Editorial</figcaption></figure>
+    <figure data-g="brand"><img class="shot" loading="lazy" src="ig/19.jpg" alt="Reposición de Oriel en estilo Lujo"><figcaption><b>Oriel</b> · Reposición · estilo Lujo</figcaption></figure>
+    <figure data-g="brand"><img class="shot" loading="lazy" src="ig/20.jpg" alt="Recuperación de clientes de Pomelo en estilo Glossy"><figcaption><b>Pomelo</b> · Recuperación de clientes · estilo Glossy</figcaption></figure>
+    <figure data-g="brand"><img class="shot" loading="lazy" src="ig/21.jpg" alt="Checkout abandonado de Tierra en estilo Terroso"><figcaption><b>Tierra</b> · Checkout abandonado · estilo Terroso</figcaption></figure>
+    <figure data-g="brand"><img class="shot" loading="lazy" src="ig/22.jpg" alt="Campaña último día de Volta en estilo Afiche bold"><figcaption><b>Volta</b> · Campaña último día · estilo Afiche bold</figcaption></figure>
+  </div>
+    </div>
+    <div class="invcard">
+      <p class="claim">Formación, inversión, crecimiento.</p>
+      <p class="inv">Invertimos <b>+ de 135.000 €</b> este año en desarrollo de servicio, formación de nuestro equipo y stack tecnológico.</p>
+    </div>
+  </section>
+
+  <section id="ejemplos">
+    <div class="sh">
+      <span class="eyebrow">Ejemplos</span>
+      <h2>Los flujos de una tienda con el plan Branded</h2>
+      <p>Elige un flujo para ver qué email recibe tu cliente en cada paso. Es la estructura de una tienda tipo; la adaptamos a tus productos y a tu oferta.</p>
+    </div>
+    <div class="ftabs" role="tablist" id="ftabs" aria-label="Flujos"></div>
+    <div class="fpanel" id="fpanel" role="tabpanel"></div>
+  </section>
+
+  <section id="proceso">
+    <div class="sh">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2>De la firma al primer envío</h2>
+    </div>
+    <ol class="steps">
+      <li><h3>Eliges tu plan</h3><p>Creamos un grupo de WhatsApp con parte de nuestro equipo y te pedimos los accesos necesarios.</p></li>
+      <li><h3>Set up de inicio</h3><p>Conectamos tu tienda con Klaviyo, configuramos el dominio y activamos los flujos.</p></li>
+      <li><h3>Calendario de campañas</h3><p>Proponemos tus campañas mensuales y te las presentamos para que puedas revisarlas.</p></li>
+      <li><h3>Optimización y KPI</h3><p>Conectamos tu cuenta por API con nuestro panel experto, y nuestro equipo analiza, optimiza y valora iteraciones de forma constante.</p></li>
+    </ol>
+  </section>
+
+  <section id="condiciones">
+    <div class="sh">
+      <span class="eyebrow">Condiciones</span>
+      <h2>Claro desde el principio</h2>
+    </div>
+    <dl class="conds">
+      <div><dt>La serie de bienvenida se descuenta de la comisión</dt><dd>Las ventas de tu serie de bienvenida no cuentan para la comisión. Solo cobramos sobre el resto de flujos y las campañas.</dd></div>
+      <div><dt>Sin permanencia</dt><dd>Puedes darte de baja cuando quieras.</dd></div>
+      <div><dt>Todo queda en tu cuenta</dt><dd>Flujos, plantillas y campañas están en tu Klaviyo y son tuyos, también si te vas.</dd></div>
+      <div><dt>Tu cuenta de Klaviyo</dt><dd>La cuenta es tuya y la licencia la pagas directamente a Klaviyo. Nosotros entramos como usuarios.</dd></div>
+      <div><dt>Facturación</dt><dd>El inicio se paga por adelantado. Essential y Branded se facturan a mes vencido con el reporte; VIP, por adelantado.</dd></div>
+      <div><dt>Envíos de SMS</dt><dd>En Branded y VIP, el coste de los SMS se carga a tu cuenta de Klaviyo.</dd></div>
+      <div><dt>Impuestos</dt><dd>Precios + IVA. A empresas de la UE con NIF-IVA intracomunitario se factura sin IVA.</dd></div>
+    </dl>
+  </section>
+
+  <footer>
+    <img class="logo logo-oscuro" src="ig/01.png" alt="Vexor">
+    <img class="logo logo-claro" src="ig/02.png" alt="Vexor">
+    <p>¿Quieres empezar? Dinos qué plan encaja contigo y te enviamos el onboarding para arrancar.</p>
+  </footer>
+</div>
+
+
+<script>
+const fmt=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,".")+" €";
+/* calculadoras */
+const ESC=[[15000,1500],[12000,1300],[10000,1200],[8000,1000],[6000,800],[4000,600]];
+function ess(v){for(const [d,c] of ESC)if(v>=d)return c;return Math.max(150,v*.15)}
+function bra(v){return Math.min(1500,Math.max(150,v<=4000?v*.15:v*.10))}
+function pagar(plan,v){if(plan==="vip")return 2000;if(plan==="ess")return ess(v);return bra(v)}
+document.querySelectorAll(".mini").forEach(m=>{
+  const r=m.querySelector("input"),plan=m.dataset.plan;
+  const up=()=>{
+    const v=+r.value,p=pagar(plan,v),k=Math.max(0,v-p);
+    m.querySelector(".mv").textContent=fmt(v);
+    m.querySelector(".o-pay").textContent=fmt(p);
+    m.querySelector(".o-keep").textContent=fmt(k);
+    const tot=Math.max(v,p)||1;
+    m.querySelector(".pay").style.width=(p/tot*100)+"%";
+    m.querySelector(".keep").style.width=(k/tot*100)+"%";
+    let n="";
+    if(plan==="ess"){const sts=[...m.closest(".plan").querySelectorAll(".st")];let on=null;sts.forEach(s=>{s.classList.remove("on");if(v>=+s.dataset.d)on=s});on&&on.classList.add("on")}
+    if(plan!=="vip"&&p===150)n="Pagas la cuota mínima";
+    else if(plan!=="vip"&&p===1500)n="Pagas la cuota máxima: 1.500 €";
+    else if(v>0){n="La cuota es el "+(p/v*100).toLocaleString("es-ES",{maximumFractionDigits:1})+" % de lo que vendes"}
+    m.querySelector(".note").textContent=n;
+  };
+  r.addEventListener("input",up);up();
+});
+/* potencial */
+(()=>{
+  const r=document.getElementById("r-fact");
+  const up=()=>{
+    const f=+r.value,x=f*.15,c=ess(x),c2=bra(x);
+    document.getElementById("v-fact").textContent=fmt(f);
+    document.getElementById("v-extra").innerHTML="+"+fmt(x)+"<small>/mes</small>";
+    document.getElementById("v-anual").textContent=fmt(x*12)+" más al año";
+    document.getElementById("v-com").textContent=(c===c2?"Con Essential o Branded, nuestra comisión sobre esas ventas sería de "+fmt(c)+": te quedas con "+fmt(Math.max(0,x-c))+".":"Nuestra comisión sobre esas ventas sería de "+fmt(c)+" con Essential o "+fmt(c2)+" con Branded: te quedas con la gran mayoría.");
+  };
+  r.addEventListener("input",up);up();
+})();
+/* flujos */
+const FL=[
+ {n:"Bienvenida",t:"Se activa cuando alguien se suscribe en el pop-up.",m:["Tu código de bienvenida, arriba de todo","Carta del fundador: por qué existe la marca","El motivo principal para comprar"]},
+ {n:"Navegación",t:"Visitó la tienda y se fue sin mirar ningún producto.",m:["Accesos a categorías y lo más vendido"]},
+ {n:"Colección vista",t:"Entró a una colección pero no abrió ningún producto.",m:["Lo más vendido de esa colección"]},
+ {n:"Producto visto",t:"Miró un producto y no lo añadió al carrito.",m:["El producto que miró, con reseñas","Preguntas frecuentes y opiniones","La oferta, con un regalo"]},
+ {n:"Carrito abandonado",t:"Añadió productos al carrito y no siguió.",m:["Tu pedido te espera, con código","Garantía y opiniones de clientes","Carta del fundador"]},
+ {n:"Checkout abandonado",t:"Empezó a pagar y no terminó.",m:["Termina tu pedido, con código","Garantía y opiniones de clientes","Último aviso: el código vence hoy"]},
+ {n:"Post-compra",t:"Se activa con cada compra, distinto para primera y segunda compra.",m:["Gracias del fundador","Cómo sacarle partido al producto","Lo que opinan otros clientes","Pide tu reseña con un regalo"]},
+ {n:"Reposición",t:"Cuando el producto está por acabarse, según lo que dura.",m:["Es hora de reponer, en un clic","Un regalo por tiempo limitado"]},
+ {n:"Recuperación",t:"Clientes que compraron y no han vuelto.",m:["Crédito para tu próxima compra","Un regalo con tu pedido","Tu crédito vence esta noche"]},
+ {n:"Limpieza de lista",t:"Suscriptores que dejaron de abrir tus emails.",m:["¿Seguimos en contacto? Botón para quedarse y regalo"]}
+];
+const tabs=document.getElementById("ftabs"),panel=document.getElementById("fpanel");
+function showF(i){
+  tabs.querySelectorAll(".ftab").forEach((b,j)=>b.setAttribute("aria-selected",i===j));
+  const f=FL[i];
+  panel.innerHTML=`<div class="fhead"><h3>${f.n}</h3><span class="pl">${f.m.length} ${f.m.length>1?"emails":"email"}</span><p>${f.t}</p></div>
+  <ol class="tl">${f.m.map((x,k)=>`<li><div class="when">Email ${k+1}</div><div class="what">${x}</div></li>`).join("")}</ol>`;
+}
+FL.forEach((f,i)=>{const b=document.createElement("button");b.type="button";b.className="ftab";b.setAttribute("role","tab");b.innerHTML=`${f.n}<small>${f.m.length}</small>`;b.onclick=()=>showF(i);tabs.appendChild(b)});
+showF(0);
+/* carrusel de diseños */
+const gal=document.getElementById("gal");
+[...gal.children].sort(()=>Math.random()-.5).forEach(x=>gal.appendChild(x));
+const paso=()=>{const f=gal.querySelector("figure");return f?f.getBoundingClientRect().width+20:340};
+document.getElementById("carrPrev").onclick=()=>gal.scrollBy({left:-paso(),behavior:"smooth"});
+document.getElementById("carrNext").onclick=()=>gal.scrollBy({left:paso(),behavior:"smooth"});
+</script>
+
+<style id="vexor-efectos">
+/* Vexor 20-nov: botón al área y 5 efectos con medida (todo se apaga con «reducir movimiento») */
+header .top{align-items:center}
+.acceso{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--fg);font:600 14px/1 var(--body);text-decoration:none}
+.acceso:hover{border-color:var(--accent)}
+@media (max-width:560px){header .tag{display:none}}
+.vx-barra{position:fixed;inset:0 0 auto 0;height:3px;z-index:50;background:var(--accent);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+.hero{position:relative;isolation:isolate}
+@media (prefers-reduced-motion:no-preference){
+  .vx-halo{position:absolute;z-index:-1;inset:-10% auto auto -10%;width:min(620px,90vw);aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle,color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);filter:blur(20px);
+    animation:vx-halo 14s ease-in-out infinite alternate;pointer-events:none}
+  @keyframes vx-halo{to{transform:translate(18%,14%) scale(1.15)}}
+  .vx-in{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .vx-in.vx-visto{opacity:1;transform:none}
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .plan{position:relative;overflow:hidden}
+  .plan::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;
+    background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%)}
+  .plan:hover::after{opacity:1}
+}
+</style>
+<div class="vx-barra" aria-hidden="true"></div>
+<script id="vexor-efectos-js">
+(()=>{
+  const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // 1 · barra de lectura
+  const barra = document.querySelector('.vx-barra');
+  const leer = () => { const h = document.documentElement; const t = h.scrollHeight - h.clientHeight; barra.style.transform = 'scaleX(' + (t > 0 ? h.scrollTop / t : 0) + ')'; };
+  addEventListener('scroll', leer, {passive:true}); leer();
+  // 5 · halo detrás del titular
+  const hero = document.querySelector('.hero');
+  if (hero) { const h = document.createElement('span'); h.className = 'vx-halo'; h.setAttribute('aria-hidden','true'); hero.prepend(h); }
+  if (quieto || !('IntersectionObserver' in window)) return;
+  // 2 · las secciones entran al bajar
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vx-visto'); io.unobserve(e.target); } }), {threshold:.12});
+  document.querySelectorAll('main > section, body > .wrap > section, section').forEach(x => { x.classList.add('vx-in'); io.observe(x); });
+  // 3 · las cifras cuentan al verse (el texto final es el de Carlos, tal cual)
+  const contar = b => {
+    const n = [...b.childNodes].find(x => x.nodeType === 3 && /\d/.test(x.textContent)); if (!n) return;
+    const fin = n.textContent, m = fin.match(/(\d+)(?:,(\d+))?/); const dec = m[2] ? m[2].length : 0;
+    const objetivo = parseFloat(m[1] + '.' + (m[2] || '0')); const t0 = performance.now(), dur = 1200;
+    const paso = t => { const p = Math.min(1, (t - t0) / dur), v = objetivo * (1 - Math.pow(1 - p, 3));
+      n.textContent = p < 1 ? fin.replace(m[0], v.toFixed(dec).replace('.', ',')) : fin; if (p < 1) requestAnimationFrame(paso); };
+    requestAnimationFrame(paso);
+  };
+  const io2 = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('b').forEach(contar); io2.unobserve(e.target); } }), {threshold:.4});
+  document.querySelectorAll('.proof').forEach(p => io2.observe(p));
+  // 4 · luz que sigue al ratón en los planes
+  document.querySelectorAll('.plan').forEach(p => p.addEventListener('pointermove', e => {
+    const r = p.getBoundingClientRect(); p.style.setProperty('--mx', (e.clientX - r.left) + 'px'); p.style.setProperty('--my', (e.clientY - r.top) + 'px'); }));
+})();
+</script>
+</body></html>
