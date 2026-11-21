@@ -400,6 +400,8 @@ footer p{color:var(--muted);font-size:14px;max-width:52ch}
         <div><b><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v7h14v-7"/><path d="M10 20v-4h4v4"/></svg>+85</b><span>tiendas online activas</span></div>
         <div><b>+7 años</b><span>en ecommerce</span></div>
       </div>
+      <a class="vx-cta" href="#planes">Elegir mi plan</a>
+      <figure class="vx-hero-vis" aria-hidden="true"><img class="a" src="../carlos-scroll/ig/13.jpg" alt="" width="360" height="420" fetchpriority="high"><img class="b" src="../carlos-scroll/ig/17.jpg" alt="" width="360" height="420"></figure>
       <div class="trust">
         <span class="eyebrow">Confían en nosotros</span>
         <div class="trust-marq">
@@ -655,10 +657,15 @@ footer p{color:var(--muted);font-size:14px;max-width:52ch}
     </dl>
   </section>
 
+  <section class="vx-final" aria-labelledby="vx-final-t">
+    <p class="vx-final-t" id="vx-final-t">¿Quieres empezar?</p>
+    <p>Dinos qué plan encaja contigo y te enviamos el onboarding para arrancar.</p>
+    <a class="vx-cta" href="#planes">Elegir mi plan</a>
+  </section>
+
   <footer>
     <img class="logo logo-oscuro" src="../carlos-scroll/ig/01.png" alt="Vexor">
     <img class="logo logo-claro" src="../carlos-scroll/ig/02.png" alt="Vexor">
-    <p>¿Quieres empezar? Dinos qué plan encaja contigo y te enviamos el onboarding para arrancar.</p>
   </footer>
 </div>
 
@@ -744,14 +751,35 @@ header .top{align-items:center}
     background:radial-gradient(circle,color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);filter:blur(20px);
     animation:vx-halo 14s ease-in-out infinite alternate;pointer-events:none}
   @keyframes vx-halo{to{transform:translate(18%,14%) scale(1.15)}}
-  .vx-in{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
-  .vx-in.vx-visto{opacity:1;transform:none}
 }
 @media (hover:hover) and (prefers-reduced-motion:no-preference){
   .plan{position:relative;overflow:hidden}
   .plan::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;
     background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%)}
   .plan:hover::after{opacity:1}
+}
+/* 21-nov · arreglos de PC (Gerard: «se ve rara en PC, no es adaptativa») */
+section{padding-block:clamp(32px,4.5vw,52px)}
+.hero{padding-block:clamp(32px,5vw,56px) clamp(24px,3vw,40px)}
+.hero .trust{min-width:0}
+.trust-marq{margin:0}
+.vx-hero-vis{display:none}
+.vx-cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:12px;background:var(--accent);color:#fff;font:700 16px/1 var(--display);text-decoration:none;justify-self:start}
+.vx-cta:hover{filter:brightness(1.08)}
+.vx-cta:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.vx-final{display:grid;justify-items:center;text-align:center;gap:12px;padding-block:clamp(40px,6vw,72px)}
+.vx-final .vx-final-t{font:700 clamp(26px,3.4vw,36px)/1.15 var(--display);letter-spacing:-.015em;color:var(--fg)}
+.vx-final p{color:var(--muted);font-size:17px;max-width:52ch}
+.vx-final .vx-cta{justify-self:center;margin-top:6px}
+footer{padding-block:28px 40px}
+@media (min-width:1100px){
+  .hero{max-width:none;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);column-gap:56px;align-items:start}
+  .hero>*{grid-column:1}
+  .hero>.vx-hero-vis{grid-column:2;grid-row:1/span 4;display:block;position:relative;margin:0;height:460px;align-self:center}
+  .hero>.trust{grid-column:1/-1}
+  .vx-hero-vis img{position:absolute;width:60%;height:420px;object-fit:cover;object-position:top;border-radius:14px;border:1px solid var(--line);background:var(--surface);box-shadow:0 18px 44px rgba(12,15,20,.18)}
+  .vx-hero-vis .a{left:0;top:34px;transform:rotate(-3deg)}
+  .vx-hero-vis .b{right:0;top:0;transform:rotate(3deg)}
 }
 </style>
 <div class="vx-barra" aria-hidden="true"></div>
@@ -766,9 +794,7 @@ header .top{align-items:center}
   const hero = document.querySelector('.hero');
   if (hero) { const h = document.createElement('span'); h.className = 'vx-halo'; h.setAttribute('aria-hidden','true'); hero.prepend(h); }
   if (quieto || !('IntersectionObserver' in window)) return;
-  // 2 · las secciones entran al bajar
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vx-visto'); io.unobserve(e.target); } }), {threshold:0, rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('main > section, body > .wrap > section, section').forEach(x => { x.classList.add('vx-in'); io.observe(x); });
+  // 2 · (21-nov) quitado: el revelado al bajar dejaba secciones en blanco en capturas y al saltar con el teclado
   // 3 · las cifras cuentan al verse (el texto final es el de Carlos, tal cual)
   const contar = b => {
     const n = [...b.childNodes].find(x => x.nodeType === 3 && /\d/.test(x.textContent)); if (!n) return;
