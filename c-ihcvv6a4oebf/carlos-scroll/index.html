@@ -420,6 +420,11 @@ section{padding-block:clamp(32px,4.5vw,52px)}
 .vx-final .vx-final-t{font:700 clamp(26px,3.4vw,36px)/1.15 var(--display);letter-spacing:-.015em;color:var(--fg)}
 .vx-final p{color:var(--muted);font-size:17px;max-width:52ch}
 .vx-final .vx-cta{justify-self:center;margin-top:6px}
+.vx-final .vx-correo{font-size:15px}
+.vx-final .vx-correo a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.plan .vx-plan-cta{margin-top:auto;align-self:stretch;position:relative;z-index:1}
+.plan.vip .vx-plan-cta{margin-top:18px;align-self:start}
+@media (max-width:699px){.plan.vip .vx-plan-cta{display:flex;width:100%}}
 footer{padding-block:28px 40px}
 /* 21-nov (4) · Gerard 12:1x «rollo carrusel»: dos filas que se mueven solas en sentidos contrarios, se paran con el ratón
    o el foco y con los bordes difuminados (ningún nombre cortado en seco). Con «reducir movimiento» va igual, pero mucho más lento */
@@ -718,6 +723,7 @@ footer{padding-block:28px 40px}
           <li>Campañas del mes, diseñadas y enviadas</li>
           <li>Segmentación, tests A/B y reporte mensual</li>
         </ul>
+        <a class="vx-cta vx-plan-cta" href="mailto:gerard@vexorconsulting.com?subject=Quiero%20el%20plan%20Essential%20de%20Vexor&amp;body=Hola%2C%20tengo%20una%20tienda%20online%20y%20me%20interesa%20el%20plan%20Essential.%20Mi%20tienda%20es%3A%20">Quiero el plan Essential</a>
       </article>
       <article class="plan bra">
         <div class="bra-top">
@@ -739,6 +745,7 @@ footer{padding-block:28px 40px}
           <li>SMS marketing: flujos y campañas por SMS</li>
           <li>Reuniones con el equipo cuando las necesites</li>
         </ul>
+        <a class="vx-cta vx-plan-cta" href="mailto:gerard@vexorconsulting.com?subject=Quiero%20el%20plan%20Branded%20de%20Vexor&amp;body=Hola%2C%20tengo%20una%20tienda%20online%20y%20me%20interesa%20el%20plan%20Branded.%20Mi%20tienda%20es%3A%20">Quiero el plan Branded</a>
       </article>
       <article class="plan vip">
         <div class="vip-a">
@@ -761,6 +768,7 @@ footer{padding-block:28px 40px}
             <li>Optimización del backend de Shopify: bundles, ofertas post-compra, upselling y optimización del carrito</li>
           </ul>
           <p class="setup">Pago por adelantado.</p>
+          <a class="vx-cta vx-plan-cta" href="mailto:gerard@vexorconsulting.com?subject=Quiero%20el%20plan%20VIP%20de%20Vexor&amp;body=Hola%2C%20tengo%20una%20tienda%20online%20y%20me%20interesa%20el%20plan%20VIP.%20Mi%20tienda%20es%3A%20">Quiero el plan VIP</a>
         </div>
       </article>
     </div>
@@ -828,7 +836,8 @@ footer{padding-block:28px 40px}
   <section class="vx-final" aria-labelledby="vx-final-t">
     <p class="vx-final-t" id="vx-final-t">¿Quieres empezar?</p>
     <p>Dinos qué plan encaja contigo y te enviamos el onboarding para arrancar.</p>
-    <a class="vx-cta" href="#planes">Elegir mi plan</a>
+    <a class="vx-cta" href="mailto:gerard@vexorconsulting.com?subject=Quiero%20empezar%20con%20Vexor&amp;body=Hola%2C%20tengo%20una%20tienda%20online%20y%20quiero%20empezar%20con%20Vexor.%20Mi%20tienda%20es%3A%20">Escríbenos</a>
+    <p class="vx-correo">o escribe a <a href="mailto:gerard@vexorconsulting.com">gerard@vexorconsulting.com</a></p>
   </section>
 
   <footer>
