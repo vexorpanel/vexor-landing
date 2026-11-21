@@ -859,6 +859,28 @@ footer{padding-block:28px 40px}
 .trust-marq .person{flex:none;width:292px;box-sizing:border-box;animation:none}
 .trust-marq .person span{min-width:0}
 .trust-marq .person b,.trust-marq .person em{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 21-nov (5) · caza de fallos (Gerard 12:55, Chrome de Windows): sin barra de scroll gris en la galería, tarjetas enteras
+   (encajan justas y se alinean al borde, nada cortado a la izquierda), todas de la misma altura con los pies alineados */
+.gal{scrollbar-width:none;-ms-overflow-style:none}
+.gal::-webkit-scrollbar{display:none}
+.carr .gal{scroll-padding-inline:2px}
+.gal figure{scroll-snap-align:start;align-content:start}
+.gal .shot{height:600px;object-fit:cover;object-position:top}
+@media (min-width:700px){.gal figure{width:calc((100% - 40px) / 3)}.gal .shot{width:100%}}
+@media (min-width:500px) and (max-width:699px){.gal figure{width:calc((100% - 20px) / 2)}.gal .shot{width:100%}}
+@media (max-width:499px){.gal figure{width:100%}.gal .shot{width:100%;height:520px}}
+.gal figcaption{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.up{align-items:start}
+.up-txt{padding-top:clamp(0px,2vw,24px)}
+.tl{scrollbar-width:none}
+.tl::-webkit-scrollbar{display:none}
+@media (max-width:599px){
+  .tl{grid-auto-flow:row;grid-auto-columns:auto;overflow:visible;gap:16px}
+  .tl li{padding:0 0 0 30px}
+  .tl li::before{top:18px;bottom:-16px;left:6px;right:auto;width:2px;height:auto}
+  .tl li:last-child::before{display:none}
+  .tl li::after{top:2px;left:0}
+}
 .vx-conf-nav{display:flex;justify-content:flex-end;gap:8px;margin-top:6px}
 .vx-conf-nav button{cursor:pointer}
 .vx-conf-nav button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
