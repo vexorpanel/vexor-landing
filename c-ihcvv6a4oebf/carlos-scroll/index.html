@@ -387,13 +387,105 @@ footer p{color:var(--muted);font-size:14px;max-width:52ch}
 </style>
 
 <div class="wrap">
-  <header>
+  <style id="vexor-efectos">
+/* Vexor 20-nov: botón al área y 5 efectos con medida (todo se apaga con «reducir movimiento») */
+header .top{align-items:center}
+.acceso{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--fg);font:600 14px/1 var(--body);text-decoration:none}
+.acceso:hover{border-color:var(--accent)}
+@media (max-width:560px){header .tag{display:none}}
+.vx-barra{position:fixed;inset:0 0 auto 0;height:3px;z-index:50;background:var(--accent);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+.hero{position:relative;isolation:isolate}
+@media (prefers-reduced-motion:no-preference){
+  .vx-halo{position:absolute;z-index:-1;inset:-10% auto auto -10%;width:min(620px,90vw);aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle,color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);filter:blur(20px);
+    animation:vx-halo 14s ease-in-out infinite alternate;pointer-events:none}
+  @keyframes vx-halo{to{transform:translate(18%,14%) scale(1.15)}}
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .plan{position:relative;overflow:hidden}
+  .plan::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;
+    background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%)}
+  .plan:hover::after{opacity:1}
+}
+/* 21-nov · arreglos de PC (Gerard: «se ve rara en PC, no es adaptativa») */
+section{padding-block:clamp(32px,4.5vw,52px)}
+.hero{padding-block:clamp(32px,5vw,56px) clamp(24px,3vw,40px)}
+.hero .trust{min-width:0}
+.trust-marq{margin:0}
+.vx-hero-vis{display:none}
+.vx-cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:12px;background:var(--accent);color:#fff;font:700 16px/1 var(--display);text-decoration:none;justify-self:start}
+.vx-cta:hover{filter:brightness(1.08)}
+.vx-cta:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.vx-final{display:grid;justify-items:center;text-align:center;gap:12px;padding-block:clamp(40px,6vw,72px)}
+.vx-final .vx-final-t{font:700 clamp(26px,3.4vw,36px)/1.15 var(--display);letter-spacing:-.015em;color:var(--fg)}
+.vx-final p{color:var(--muted);font-size:17px;max-width:52ch}
+.vx-final .vx-cta{justify-self:center;margin-top:6px}
+footer{padding-block:28px 40px}
+/* 21-nov (4) · Gerard 12:1x «rollo carrusel»: dos filas que se mueven solas en sentidos contrarios, se paran con el ratón
+   o el foco y con los bordes difuminados (ningún nombre cortado en seco). Con «reducir movimiento» va igual, pero mucho más lento */
+@keyframes marq{to{transform:translateX(-25%)}}
+.trust-marq .row{overflow:hidden;padding:8px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.trust-marq .track{display:flex;width:max-content;animation:marq 60s linear infinite}
+.trust-marq .r2 .track{animation-direction:reverse;animation-duration:66s}
+.trust-marq .row:hover .track,.trust-marq .row:focus-within .track{animation-play-state:paused}
+.trust-marq .set,.trust-marq .set[aria-hidden]{display:flex;flex-wrap:nowrap;gap:12px;padding:0 12px 0 0}
+.trust-marq .person{flex:none;width:292px;box-sizing:border-box;animation:none}
+.trust-marq .person span{min-width:0}
+.trust-marq .person b,.trust-marq .person em{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 21-nov (5) · caza de fallos (Gerard 12:55, Chrome de Windows): sin barra de scroll gris en la galería, tarjetas enteras
+   (encajan justas y se alinean al borde, nada cortado a la izquierda), todas de la misma altura con los pies alineados */
+.gal{scrollbar-width:none;-ms-overflow-style:none}
+.gal::-webkit-scrollbar{display:none}
+.carr .gal{scroll-padding-inline:2px}
+.gal figure{scroll-snap-align:start;align-content:start}
+.gal .shot{height:600px;object-fit:cover;object-position:top}
+@media (min-width:700px){.gal figure{width:calc((100% - 40px) / 3)}.gal .shot{width:100%}}
+@media (min-width:500px) and (max-width:699px){.gal figure{width:calc((100% - 20px) / 2)}.gal .shot{width:100%}}
+@media (max-width:499px){.gal figure{width:100%}.gal .shot{width:100%;height:520px}}
+.gal figcaption{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.up{align-items:start}
+.up-txt{padding-top:clamp(0px,2vw,24px)}
+.tl{scrollbar-width:none}
+.tl::-webkit-scrollbar{display:none}
+@media (max-width:599px){
+  .tl{grid-auto-flow:row;grid-auto-columns:auto;overflow:visible;gap:16px}
+  .tl li{padding:0 0 0 30px}
+  .tl li::before{top:18px;bottom:-16px;left:6px;right:auto;width:2px;height:auto}
+  .tl li:last-child::before{display:none}
+  .tl li::after{top:2px;left:0}
+}
+@media (prefers-reduced-motion:reduce){.vx-halo{display:none}}
+/* fuentes de reserva con el mismo ancho (Sora = Arial al 113,5 %, Inter = Arial al 105,6 %, medido el 21-nov): al llegar la fuente buena el texto no salta de línea */
+@font-face{font-family:"Sora FB";src:local("Arial");size-adjust:113.5%}
+@font-face{font-family:"Inter FB";src:local("Arial");size-adjust:105.6%}
+:root{--display:"Sora","Sora FB",system-ui,sans-serif;--body:"Inter","Inter FB",system-ui,sans-serif}
+/* el titular de la portada ocupa 4 líneas con Sora en estos anchos (medido 320-1920): se reserva el sitio para que no empuje la página al llegar la fuente */
+@media (min-width:1100px){.hero h1{min-height:4lh}}
+@media (min-width:360px) and (max-width:413px){.hero h1{min-height:4lh}}
+.vx-conf-nav{display:flex;justify-content:flex-end;gap:8px;margin-top:6px}
+.vx-conf-nav button{cursor:pointer}
+.vx-conf-nav button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){
+  .trust-marq .track{animation-duration:150s}
+  .trust-marq .r2 .track{animation-duration:165s}
+}
+@media (min-width:1100px){
+  .hero{max-width:none;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);column-gap:56px;align-items:start}
+  .hero>*{grid-column:1}
+  .hero>.vx-hero-vis{grid-column:2;grid-row:1/span 4;display:block;position:relative;margin:0;height:460px;align-self:center}
+  .hero>.trust{grid-column:1/-1}
+  .vx-hero-vis img{position:absolute;width:60%;height:420px;object-fit:cover;object-position:top;border-radius:14px;border:1px solid var(--line);background:var(--surface);box-shadow:0 18px 44px rgba(12,15,20,.18)}
+  .vx-hero-vis .a{left:0;top:34px;transform:rotate(-3deg)}
+  .vx-hero-vis .b{right:0;top:0;transform:rotate(3deg)}
+}
+</style>
+<header>
     <div class="top">
       <img class="logo logo-oscuro" src="ig/01.png" alt="Vexor">
       <img class="logo logo-claro" src="ig/02.png" alt="Vexor">
       <span class="tag">Propuesta de servicios · Email marketing</span>
     </div>
-    <div class="hero">
+    <div class="hero"><span class="vx-halo" aria-hidden="true"></span>
       <span class="eyebrow">Para dueños de negocio de tiendas Shopify</span>
       <h1>Tu email marketing, delegado y optimizado <span>de principio a fin.</span></h1>
       <div class="proof">
@@ -814,90 +906,6 @@ document.getElementById("carrPrev").onclick=()=>gal.scrollBy({left:-paso(),behav
 document.getElementById("carrNext").onclick=()=>gal.scrollBy({left:paso(),behavior:"smooth"});
 </script>
 
-<style id="vexor-efectos">
-/* Vexor 20-nov: botón al área y 5 efectos con medida (todo se apaga con «reducir movimiento») */
-header .top{align-items:center}
-.acceso{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--fg);font:600 14px/1 var(--body);text-decoration:none}
-.acceso:hover{border-color:var(--accent)}
-@media (max-width:560px){header .tag{display:none}}
-.vx-barra{position:fixed;inset:0 0 auto 0;height:3px;z-index:50;background:var(--accent);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
-.hero{position:relative;isolation:isolate}
-@media (prefers-reduced-motion:no-preference){
-  .vx-halo{position:absolute;z-index:-1;inset:-10% auto auto -10%;width:min(620px,90vw);aspect-ratio:1;border-radius:50%;
-    background:radial-gradient(circle,color-mix(in srgb,var(--accent) 22%,transparent),transparent 65%);filter:blur(20px);
-    animation:vx-halo 14s ease-in-out infinite alternate;pointer-events:none}
-  @keyframes vx-halo{to{transform:translate(18%,14%) scale(1.15)}}
-}
-@media (hover:hover) and (prefers-reduced-motion:no-preference){
-  .plan{position:relative;overflow:hidden}
-  .plan::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;
-    background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%)}
-  .plan:hover::after{opacity:1}
-}
-/* 21-nov · arreglos de PC (Gerard: «se ve rara en PC, no es adaptativa») */
-section{padding-block:clamp(32px,4.5vw,52px)}
-.hero{padding-block:clamp(32px,5vw,56px) clamp(24px,3vw,40px)}
-.hero .trust{min-width:0}
-.trust-marq{margin:0}
-.vx-hero-vis{display:none}
-.vx-cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:12px;background:var(--accent);color:#fff;font:700 16px/1 var(--display);text-decoration:none;justify-self:start}
-.vx-cta:hover{filter:brightness(1.08)}
-.vx-cta:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
-.vx-final{display:grid;justify-items:center;text-align:center;gap:12px;padding-block:clamp(40px,6vw,72px)}
-.vx-final .vx-final-t{font:700 clamp(26px,3.4vw,36px)/1.15 var(--display);letter-spacing:-.015em;color:var(--fg)}
-.vx-final p{color:var(--muted);font-size:17px;max-width:52ch}
-.vx-final .vx-cta{justify-self:center;margin-top:6px}
-footer{padding-block:28px 40px}
-/* 21-nov (4) · Gerard 12:1x «rollo carrusel»: dos filas que se mueven solas en sentidos contrarios, se paran con el ratón
-   o el foco y con los bordes difuminados (ningún nombre cortado en seco). Con «reducir movimiento» va igual, pero mucho más lento */
-@keyframes marq{to{transform:translateX(-25%)}}
-.trust-marq .row{overflow:hidden;padding:8px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-.trust-marq .track{display:flex;width:max-content;animation:marq 60s linear infinite}
-.trust-marq .r2 .track{animation-direction:reverse;animation-duration:66s}
-.trust-marq .row:hover .track,.trust-marq .row:focus-within .track{animation-play-state:paused}
-.trust-marq .set,.trust-marq .set[aria-hidden]{display:flex;flex-wrap:nowrap;gap:12px;padding:0 12px 0 0}
-.trust-marq .person{flex:none;width:292px;box-sizing:border-box;animation:none}
-.trust-marq .person span{min-width:0}
-.trust-marq .person b,.trust-marq .person em{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* 21-nov (5) · caza de fallos (Gerard 12:55, Chrome de Windows): sin barra de scroll gris en la galería, tarjetas enteras
-   (encajan justas y se alinean al borde, nada cortado a la izquierda), todas de la misma altura con los pies alineados */
-.gal{scrollbar-width:none;-ms-overflow-style:none}
-.gal::-webkit-scrollbar{display:none}
-.carr .gal{scroll-padding-inline:2px}
-.gal figure{scroll-snap-align:start;align-content:start}
-.gal .shot{height:600px;object-fit:cover;object-position:top}
-@media (min-width:700px){.gal figure{width:calc((100% - 40px) / 3)}.gal .shot{width:100%}}
-@media (min-width:500px) and (max-width:699px){.gal figure{width:calc((100% - 20px) / 2)}.gal .shot{width:100%}}
-@media (max-width:499px){.gal figure{width:100%}.gal .shot{width:100%;height:520px}}
-.gal figcaption{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.up{align-items:start}
-.up-txt{padding-top:clamp(0px,2vw,24px)}
-.tl{scrollbar-width:none}
-.tl::-webkit-scrollbar{display:none}
-@media (max-width:599px){
-  .tl{grid-auto-flow:row;grid-auto-columns:auto;overflow:visible;gap:16px}
-  .tl li{padding:0 0 0 30px}
-  .tl li::before{top:18px;bottom:-16px;left:6px;right:auto;width:2px;height:auto}
-  .tl li:last-child::before{display:none}
-  .tl li::after{top:2px;left:0}
-}
-.vx-conf-nav{display:flex;justify-content:flex-end;gap:8px;margin-top:6px}
-.vx-conf-nav button{cursor:pointer}
-.vx-conf-nav button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){
-  .trust-marq .track{animation-duration:150s}
-  .trust-marq .r2 .track{animation-duration:165s}
-}
-@media (min-width:1100px){
-  .hero{max-width:none;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);column-gap:56px;align-items:start}
-  .hero>*{grid-column:1}
-  .hero>.vx-hero-vis{grid-column:2;grid-row:1/span 4;display:block;position:relative;margin:0;height:460px;align-self:center}
-  .hero>.trust{grid-column:1/-1}
-  .vx-hero-vis img{position:absolute;width:60%;height:420px;object-fit:cover;object-position:top;border-radius:14px;border:1px solid var(--line);background:var(--surface);box-shadow:0 18px 44px rgba(12,15,20,.18)}
-  .vx-hero-vis .a{left:0;top:34px;transform:rotate(-3deg)}
-  .vx-hero-vis .b{right:0;top:0;transform:rotate(3deg)}
-}
-</style>
 <div class="vx-barra" aria-hidden="true"></div>
 <script id="vexor-efectos-js">
 (()=>{
@@ -908,7 +916,7 @@ footer{padding-block:28px 40px}
   addEventListener('scroll', leer, {passive:true}); leer();
   // 5 · halo detrás del titular
   const hero = document.querySelector('.hero');
-  if (hero) { const h = document.createElement('span'); h.className = 'vx-halo'; h.setAttribute('aria-hidden','true'); hero.prepend(h); }
+  // (el halo ya viene en el HTML)
   // 6 · (21-nov) flechas del carrusel «Confían en nosotros»: avanzan o retroceden una tarjeta, con o sin «reducir movimiento»
   const marq = document.querySelector('.trust-marq');
   if (marq && document.getAnimations) {
