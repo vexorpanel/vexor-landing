@@ -859,6 +859,9 @@ footer{padding-block:28px 40px}
 .trust-marq .person{flex:none;width:292px;box-sizing:border-box;animation:none}
 .trust-marq .person span{min-width:0}
 .trust-marq .person b,.trust-marq .person em{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vx-conf-nav{display:flex;justify-content:flex-end;gap:8px;margin-top:6px}
+.vx-conf-nav button{cursor:pointer}
+.vx-conf-nav button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){
   .trust-marq .track{animation-duration:150s}
   .trust-marq .r2 .track{animation-duration:165s}
@@ -884,6 +887,21 @@ footer{padding-block:28px 40px}
   // 5 · halo detrás del titular
   const hero = document.querySelector('.hero');
   if (hero) { const h = document.createElement('span'); h.className = 'vx-halo'; h.setAttribute('aria-hidden','true'); hero.prepend(h); }
+  // 6 · (21-nov) flechas del carrusel «Confían en nosotros»: avanzan o retroceden una tarjeta, con o sin «reducir movimiento»
+  const marq = document.querySelector('.trust-marq');
+  if (marq && document.getAnimations) {
+    const nav = document.createElement('div'); nav.className = 'carr-nav vx-conf-nav';
+    nav.innerHTML = '<button type="button" aria-label="Anteriores">‹</button><button type="button" aria-label="Siguientes">›</button>';
+    marq.after(nav);
+    const mover = sentido => marq.querySelectorAll('.track').forEach(t => {
+      const a = t.getAnimations()[0]; if (!a) return;
+      const dur = a.effect.getTiming().duration, vuelta = t.scrollWidth * 0.25, tarjeta = 304, ms = 450;
+      const rate = (tarjeta / vuelta) * dur / ms;
+      a.playbackRate = sentido * rate; clearTimeout(t._vx); t._vx = setTimeout(() => { a.playbackRate = 1; }, ms);
+    });
+    nav.children[0].addEventListener('click', () => mover(-1));
+    nav.children[1].addEventListener('click', () => mover(1));
+  }
   if (quieto || !('IntersectionObserver' in window)) return;
   // 2 · (21-nov) quitado: el revelado al bajar dejaba secciones en blanco en capturas y al saltar con el teclado
   // 3 · las cifras cuentan al verse (el texto final es el de Carlos, tal cual)
